@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>This is the Front Page. [ CURRENT STAGE IS "{{ stage }}" ]</h1>
-    <h2>YES NOS GO !!!</h2>
+    <h2>YES NOS GO !!</h2>
+    <h2>{{ users }}</h2>
     <h3>Random dog of the day:</h3>
     <img :src="dog.url" alt="">
   </div>
