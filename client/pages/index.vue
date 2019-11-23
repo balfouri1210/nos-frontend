@@ -21,7 +21,10 @@ export default {
     const { data } = await axios.get(
       "https://api.thedogapi.com/v1/images/search?limit=1"
     );
-    return { dog: data[0] };
+
+    const users = await axios.get("https://api-dev.907degrees.com/users");
+
+    return { dog: data[0], users: users.toString() };
   }
 };
 </script>
