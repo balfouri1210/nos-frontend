@@ -1,12 +1,12 @@
-service: nos-frontend
+service: ${self:custom.serverlessEnv.APP_NAME}
 
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: ${self:custom.secrets.NODE_ENV}
-  region: ap-northeast-2
+  stage: ${self:custom.serverlessEnv.STAGE}
+  region: ${self:custom.serverlessEnv.REGION}
   environment:
-    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    STAGE: ${self:custom.serverlessEnv.STAGE}
 
 functions:
   nuxt:
@@ -20,12 +20,12 @@ plugins:
   - serverless-domain-manager
   
 custom:
-  secrets: ${file(secrets.json)}
+  serverlessEnv: ${file(./config/serverless-env-loader.js)}
   apigwBinary:
     types:
       - '*/*'
   customDomain:
-    domainName: ${self:custom.secrets.DOMAIN}
+    domainName: ${self:custom.serverlessEnv.DOMAIN}
     basePath: ''
-    stage: ${self:custom.secrets.NODE_ENV}
+    stage: ${self:custom.serverlessEnv.STAGE}
     createRoute53Record: true

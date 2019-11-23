@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>This is the Front Page.</h1>
+    <h1>This is the Front Page. [ CURRENT STAGE IS "{{ stage }}" ]</h1>
     <h3>Random dog of the day:</h3>
     <img :src="dog.url" alt="">
   </div>
@@ -10,8 +10,10 @@
 import axios from "axios";
 
 export default {
-  mounted() {
-    console.log(process.env.STAGE);
+  data() {
+    return {
+      stage: process.env.STAGE
+    };
   },
 
   async asyncData({ params }) {

@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+    - npm install --silent --no-progress -g npm
+    - npm install --silent --no-progress -g serverless
+  pre_build:
+    commands:
+    - npm install --silent --no-progress
+  build:
+    commands:
+    # - npm run-script lint
+    # - npm run test
+    # - mkdir -p target/stg
+    - mkdir target/dev
+    # - serverless package --package target/stg --stage stg -v -r eu-central-1
+    - STAGE=dev nuxt build
+  post_build:
+    commands:
+      - STAGE=dev sls deploy
+
+artifacts:
+  files:
+  - serverless.yml

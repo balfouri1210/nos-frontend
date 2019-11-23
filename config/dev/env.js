@@ -1,6 +1,5 @@
 const env = {
-  STAGE: 'dev',
-  LAMBDA: 'dev-lambda'
+  STAGE: 'dev'
 };
 
 module.exports = env;

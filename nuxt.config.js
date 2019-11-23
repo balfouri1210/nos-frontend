@@ -13,7 +13,7 @@ module.exports = {
 
   build: {
     vendor: ['axios'],
-    publicPath: `/${require('./secrets.json').NODE_ENV}/_nuxt/` // <= add the path to the cached files
+    publicPath: '/_nuxt/' // <= add the path to the cached files
   },
 
   srcDir: 'client/',
