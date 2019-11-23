@@ -17,10 +17,10 @@ phases:
     # - mkdir -p target/stg
     # - mkdir target/dev
     # - serverless package --package target/stg --stage stg -v -r eu-central-1
-    - STAGE=dev nuxt build
+    - nuxt build
   post_build:
     commands:
-      - STAGE=dev sls deploy
+      - sls deploy
 
 artifacts:
   files:
