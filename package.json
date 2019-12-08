@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js, .vue src",
     "serve": "nuxt",
     "build": "nuxt build",
     "deploy-dev": "STAGE=dev nuxt build && STAGE=dev sls deploy",
@@ -20,6 +21,9 @@
     "serverless-http": "^2.3.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.0",
+    "eslint-plugin-vue": "^6.0.1",
     "serverless-domain-manager": "^3.3.0"
   }
 }

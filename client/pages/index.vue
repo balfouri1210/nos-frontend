@@ -1,15 +1,20 @@
 <template>
   <div>
-    <h1>This is the Front Page. [ CURRENT STAGE IS "{{ stage }}" ]</h1>
-    <h2>YES NOS GO !!</h2>
-    <h2>{{ users }}</h2>
+    <h1>This is the Front Page. [ CURRENT STAGE IS '{{ stage }}' ]</h1>
+    <nuxt-link
+    :to="{
+      name: 'signup'
+    }">SIGNUP</nuxt-link>
+
+    {{ result }}
+
     <h3>Random dog of the day:</h3>
-    <img :src="dog.url" alt="">
+    <img :src='dog.url' alt=''>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   data() {
@@ -18,14 +23,14 @@ export default {
     };
   },
 
-  async asyncData({ params }) {
+  async asyncData() {
     const { data } = await axios.get(
-      "https://api.thedogapi.com/v1/images/search?limit=1"
+      'https://api.thedogapi.com/v1/images/search?limit=1'
     );
 
-    const users = await axios.get("https://api-dev.907degrees.com/users");
+    const result = await axios.get(process.env.NOS_API_URL);
 
-    return { dog: data[0], users: users.toString() };
+    return { dog: data[0], result: result.data };
   }
 };
 </script>
