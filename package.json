@@ -8,8 +8,7 @@
     "lint": "eslint --ext .js, .vue src",
     "serve": "nuxt",
     "build": "nuxt build",
-    "deploy-dev": "STAGE=dev nuxt build && STAGE=dev sls deploy",
-    "deploy-nos-frontend-prod": "STAGE=prod nuxt build && STAGE=prod sls deploy"
+    "deploy": "nuxt build && sls deploy"
   },
   "author": "",
   "license": "ISC",
