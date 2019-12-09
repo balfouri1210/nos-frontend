@@ -17,7 +17,7 @@ phases:
     # - mkdir -p target/stg
     # - mkdir target/dev
     # - serverless package --package target/stg --stage stg -v -r eu-central-1
-    - npm run deploy-dev
+    - npm run deploy
 
 artifacts:
   files:
