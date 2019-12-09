@@ -6,7 +6,7 @@
       name: 'signup'
     }">SIGNUP</nuxt-link>
 
-    {{ result }}
+    RESULT : {{ result }}
 
     <h3>Random dog of the day:</h3>
     <img :src='dog.url' alt=''>
