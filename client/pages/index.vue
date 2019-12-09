@@ -24,13 +24,17 @@ export default {
   },
 
   async asyncData() {
-    const { data } = await axios.get(
-      'https://api.thedogapi.com/v1/images/search?limit=1'
-    );
+    try {
+      const { data } = await axios.get(
+        'https://api.thedogapi.com/v1/images/search?limit=1'
+      );
 
-    const result = await axios.get(process.env.NOS_API_URL);
+      const result = await axios.get(process.env.NOS_API_URL);
 
-    return { dog: data[0], result: result.data };
+      return { dog: data[0], result: result.data };
+    } catch (err) {
+      throw err;
+    }
   }
 };
 </script>
