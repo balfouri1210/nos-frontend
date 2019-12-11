@@ -16,6 +16,7 @@
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "nuxt": "^2.10.2",
+    "nuxt-i18n": "^6.4.1",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-http": "^2.3.0"
   },

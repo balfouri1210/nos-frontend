@@ -26,6 +26,28 @@ module.exports = {
     base: `/`
   },
 
+  modules: [
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            code: 'en',
+            iso: 'en-US'
+          }, {
+            code: 'ko',
+            iso: 'ko-KR'
+          }
+        ],
+        defaultLocale: 'en',
+        vueI18n: {
+          fallbackLocale: 'en',
+        },
+        vueI18nLoader: true
+      }
+    ]
+  ],
+
   env: {
     ...env
   },

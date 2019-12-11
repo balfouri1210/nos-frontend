@@ -2,14 +2,27 @@
   <div>
     <h1>This is the Front Page. [ CURRENT STAGE IS '{{ stage }}' ]</h1>
     <nuxt-link
-    :to="{
-      name: 'signup'
-    }">SIGNUP</nuxt-link>
+      :to="localePath('signup')">
+      SIGNUP
+    </nuxt-link>
 
     RESULT : {{ result }}
 
-    <h3>Random dog of the day:</h3>
-    <img :src='dog.url' alt=''>
+    <div>
+      {{ $t('greeting') }}
+
+      <nuxt-link
+        :to="switchLocalePath('en')"
+      >
+        English
+      </nuxt-link>
+
+      <nuxt-link
+        :to="switchLocalePath('ko')"
+      >
+        한국어
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -25,16 +38,23 @@ export default {
 
   async asyncData() {
     try {
-      const { data } = await axios.get(
-        'https://api.thedogapi.com/v1/images/search?limit=1'
-      );
-
       const result = await axios.get(process.env.NOS_API_URL);
-
-      return { dog: data[0], result: result.data };
+      return { result: result.data };
     } catch (err) {
       throw err;
     }
   }
 };
 </script>
+
+<i18n>
+{
+  "en": {
+    "greeting": "Hi there!"
+  },
+
+  "ko": {
+    "greeting": "안녕하세요!"
+  }
+}
+</i18n>
