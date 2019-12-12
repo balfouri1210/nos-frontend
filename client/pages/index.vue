@@ -11,17 +11,15 @@
     <div>
       {{ $t('greeting') }}
 
-      <nuxt-link
-        :to="switchLocalePath('en')"
-      >
+      <button
+        @click="changeLocale('en')">
         English
-      </nuxt-link>
+      </button>
 
-      <nuxt-link
-        :to="switchLocalePath('ko')"
-      >
+      <button
+        @click="changeLocale('ko')">
         한국어
-      </nuxt-link>
+      </button>
     </div>
   </div>
 </template>
@@ -42,6 +40,12 @@ export default {
       return { result: result.data };
     } catch (err) {
       throw err;
+    }
+  },
+
+  methods: {
+    changeLocale(locale) {
+      this.$i18n._root._i18n.setLocale(locale);
     }
   }
 };

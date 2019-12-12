@@ -12,8 +12,11 @@ module.exports = {
   },
 
   build: {
+    // prevent duplicated import in component
     vendor: ['axios'],
-    publicPath: '/_nuxt/' // <= add the path to the cached files
+
+    // add the path to the cached files
+    publicPath: '/_nuxt/'
   },
 
   srcDir: 'client/',
@@ -25,6 +28,10 @@ module.exports = {
   router: {
     base: `/`
   },
+
+  plugins: [
+    { src: '~plugins/i18n.js' }
+  ],
 
   modules: [
     [
@@ -42,6 +49,11 @@ module.exports = {
         defaultLocale: 'en',
         vueI18n: {
           fallbackLocale: 'en',
+        },
+        detectBrowserLanguage: {
+          useCookie: true,
+          cookieKey: 'nos_lang',
+          alwaysRedirect: true
         },
         vueI18nLoader: true
       }
