@@ -1,7 +1,9 @@
 module.exports = {
   env: {
     "browser": true,
-    "node": true
+    "node": true,
+    "commonjs": true,
+    "es6": true
   },
 
   globals: {
@@ -14,15 +16,19 @@ module.exports = {
   // 추가적인 규칙들을 적용
   extends: [
     "eslint:recommended",
-    "plugin:vue/essential"
+    "plugin:vue/recommended"
+  ],
+
+  plugins: [
+    'vue',
   ],
 
   // 사용자 편의 규칙 추가
   rules: {
-    "commonjs": true,
     "quotes": [2, "single", {
       "avoidEscape": true
     }],
-    "no-console": process.env.STAGE === "prod" ? "error" : "off"
+    "no-console": process.env.STAGE === "prod" ? "error" : "warn",
+    "semi": [2, "always"]
   }
 };
