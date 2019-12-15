@@ -3,7 +3,7 @@
     <nuxt-link
       :to="localePath('index')"
     >
-      HOME
+      GO TO HOME!
     </nuxt-link>
   </header>
 </template>
