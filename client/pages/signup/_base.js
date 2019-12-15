@@ -5,23 +5,23 @@ export default {
     return {
       email: null,
       password: null
-    }
+    };
   },
 
   methods: {
-    // async signup() {
-    //   try {
-    //     const user = await axios.post(
-    //       `${process.env.NOS_API_URL}/users`, {
-    //         email: this.email,
-    //         password: this.password
-    //       }
-    //     );
+    async signup() {
+      try {
+        const user = await axios.post(
+          `${process.env.NOS_API_URL}/users`, {
+            email: this.email,
+            password: this.password
+          }
+        );
 
-    //     console.log(user);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // }
+        console.log(user);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
-}
+};

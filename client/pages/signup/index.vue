@@ -1,12 +1,6 @@
 <template>
   <div class="signup">
-    <form @submit="signup">
-      <input type="email" v-model="email">
-      <input type="password" v-model="password">
-      <button
-        type="submit"
-        @click.prevent="signup">SIGNUP</button>
-    </form>
+    {{ $t('signup') }}
   </div>
 </template>
 
@@ -20,3 +14,16 @@ export default {
 
 <style>
 </style>
+
+<i18n>
+{
+  "en": {
+    "signup": "Signup"
+  },
+
+  "ko": {
+    "signup": "회원가입"
+  }
+}
+</i18n>
+

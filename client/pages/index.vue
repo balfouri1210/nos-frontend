@@ -2,7 +2,8 @@
   <div>
     <h1>This is the Front Page. [ CURRENT STAGE IS '{{ stage }}' ]</h1>
     <nuxt-link
-      :to="localePath('signup')">
+      :to="localePath('signup')"
+    >
       SIGNUP
     </nuxt-link>
 
@@ -10,16 +11,6 @@
 
     <div>
       {{ $t('greeting') }}
-
-      <button
-        @click="changeLocale('en')">
-        English
-      </button>
-
-      <button
-        @click="changeLocale('ko')">
-        한국어
-      </button>
     </div>
   </div>
 </template>
@@ -28,25 +19,19 @@
 import axios from 'axios';
 
 export default {
-  data() {
-    return {
-      stage: process.env.STAGE
-    };
-  },
-
   async asyncData() {
     try {
       const result = await axios.get(process.env.NOS_API_URL);
       return { result: result.data };
     } catch (err) {
-      throw err;
+      console.error(err);
     }
   },
 
-  methods: {
-    changeLocale(locale) {
-      this.$i18n._root._i18n.setLocale(locale);
-    }
+  data() {
+    return {
+      stage: process.env.STAGE
+    };
   }
 };
 </script>
