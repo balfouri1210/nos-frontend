@@ -16,9 +16,6 @@
 
 <script>
 export default {
-  mounted() {
-    console.log(this.$i18n);
-  },
   methods: {
     changeLocale(locale) {
       this.$i18n.setLocale(locale);
@@ -27,5 +24,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $mobile-footer-height;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+@media only screen and (min-width: $mobile-width) {
+  footer {
+    height: $web-footer-height;
+  }
+}
 </style>

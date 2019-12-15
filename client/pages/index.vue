@@ -16,13 +16,11 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  async asyncData() {
+  async asyncData({ $axios }) {
     try {
-      const result = await axios.get(process.env.NOS_API_URL);
-      return { result: result.data };
+      const result = await $axios.$get('/');
+      return { result };
     } catch (err) {
       console.error(err);
     }
