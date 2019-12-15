@@ -26,7 +26,7 @@ module.exports = {
   },
 
   router: {
-    base: `/`
+    base: '/'
   },
 
   plugins: [
@@ -65,4 +65,4 @@ module.exports = {
   },
 
   dev: false
-}
+};
