@@ -12,9 +12,6 @@ module.exports = {
   },
 
   build: {
-    // prevent duplicated import in component
-    vendor: ['axios'],
-
     // add the path to the cached files
     publicPath: '/_nuxt/'
   },
@@ -26,14 +23,27 @@ module.exports = {
   },
 
   router: {
-    base: '/'
+    base: '/',
+    scrollBehavior() {
+      return { x: 0, y: 0 };
+    },
+    mode: 'history'
+  },
+
+  axios: {
+    https: true,
+    baseURL: env.NOS_API_URL
   },
 
   plugins: [
-    { src: '~plugins/i18n.js' }
+    { src: '~/plugins/i18n.js' },
+    { src: '~/plugins/axios' }
   ],
 
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+
     [
       'nuxt-i18n',
       {
@@ -64,5 +74,12 @@ module.exports = {
     ...env
   },
 
-  dev: false
+  dev: false,
+
+  styleResources: {
+    scss: [
+      '@/styles/_variable.scss',
+      '@/styles/_base.scss' // use underscore "_" & also file extension ".scss"
+    ]
+  }
 };
