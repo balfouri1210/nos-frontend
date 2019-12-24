@@ -16,6 +16,7 @@
     "@nuxtjs/axios": "^5.8.0",
     "@nuxtjs/moment": "^1.4.0",
     "@nuxtjs/style-resources": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.9.1",
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "nuxt": "^2.10.2",
@@ -26,7 +27,6 @@
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.9.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.0",
     "eslint-plugin-vue": "^6.0.1",
