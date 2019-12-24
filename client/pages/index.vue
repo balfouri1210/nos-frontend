@@ -19,7 +19,8 @@
 export default {
   async asyncData({ $axios }) {
     try {
-      const result = await $axios.$get('/api/user');
+      // const result = await $axios.$get('/api/user');
+      const result = 'foo';
       return { result };
     } catch (err) {
       console.error(err);

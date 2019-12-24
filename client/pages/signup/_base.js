@@ -1,10 +1,20 @@
 import axios from 'axios';
+import countries from '@/lib/country';
 
 export default {
   data() {
     return {
-      email: null,
-      password: null
+      errors: [],
+      userInfo: {
+        email: null,
+        password: null,
+        confirmPassword: null,
+        username: null,
+        countryId: null,
+        birth: null,
+        gender: null
+      },
+      countries
     };
   },
 
@@ -12,7 +22,7 @@ export default {
     async signup() {
       try {
         const user = await axios.post(
-          `${process.env.NOS_API_URL}/users`, {
+          '/api/users', {
             email: this.email,
             password: this.password
           }
@@ -22,6 +32,14 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+
+    onSubmit() {
+      console.log('Form has been submitted!');
+      console.log({
+        ...this.userInfo,
+        birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
+      });
     }
   }
 };

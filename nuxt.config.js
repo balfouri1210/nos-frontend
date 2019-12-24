@@ -13,7 +13,11 @@ module.exports = {
 
   build: {
     // add the path to the cached files
-    publicPath: '/_nuxt/'
+    publicPath: '/_nuxt/',
+
+    transpile: [
+      'vee-validate/dist/rules'
+    ],
   },
 
   srcDir: 'client/',
@@ -37,12 +41,17 @@ module.exports = {
 
   plugins: [
     { src: '~/plugins/i18n.js' },
-    { src: '~/plugins/axios' }
+    { src: '~/plugins/axios.js' },
+    { src: '~/plugins/validator.js' },
+    { src: '~/plugins/global-component.js' },
+    { src: '~/plugins/datepicker.js', ssr: false }
   ],
 
-  modules: [
+  buildModules: [
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/moment',
 
     [
       'nuxt-i18n',
