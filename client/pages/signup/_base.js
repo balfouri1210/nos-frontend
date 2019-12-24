@@ -35,7 +35,7 @@ export default {
     },
 
     onSubmit() {
-      console.log('Form has been submitted!');
+      alert('Form has been submitted!');
       console.log({
         ...this.userInfo,
         birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')

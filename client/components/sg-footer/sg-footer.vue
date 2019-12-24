@@ -6,6 +6,8 @@
       English
     </button>
 
+    <span>|</span>
+
     <button
       @click="changeLocale('ko')"
     >
@@ -32,6 +34,15 @@ footer {
   width: 100%;
   height: $mobile-footer-height;
   background: rgba(0, 0, 0, 0.8);
+
+  button {
+    color: white;
+    font-weight: 600;
+  }
+
+  span {
+    color: white;
+  }
 }
 
 @media only screen and (min-width: $mobile-width) {

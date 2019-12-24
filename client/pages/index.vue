@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h1>This is the Front Page. [ CURRENT STAGE IS '{{ stage }}' ]</h1>
+    <h1>This is 907Degrees. by Balfouri</h1>
+    <h1>CURRENT STAGE IS <span style="color: orange">'{{ stage }}'</span></h1>
     <nuxt-link
       :to="localePath('signup')"
     >
-      SIGNUP
+      GO TO SIGNUP PAGE
     </nuxt-link>
 
-    RESULT : {{ result }}
+    <div>
+      RESULT : {{ result }}
+    </div>
 
     <div>
       {{ $t('greeting') }}
@@ -20,7 +23,7 @@ export default {
   async asyncData({ $axios }) {
     try {
       // const result = await $axios.$get('/api/user');
-      const result = 'foo';
+      const result = 'API call test success!';
       return { result };
     } catch (err) {
       console.error(err);
@@ -38,11 +41,11 @@ export default {
 <i18n>
 {
   "en": {
-    "greeting": "Hi there!"
+    "greeting": "Localization test - Hi there!"
   },
 
   "ko": {
-    "greeting": "안녕하세요!"
+    "greeting": "다국어 지원 테스트 - 안녕하세요!"
   }
 }
 </i18n>
