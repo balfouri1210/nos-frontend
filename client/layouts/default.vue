@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nos">
     <nos-header />
     <nuxt />
     <nos-footer />
@@ -17,3 +17,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+@import "./_style.scss";
+</style>

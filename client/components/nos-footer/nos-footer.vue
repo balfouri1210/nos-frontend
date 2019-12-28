@@ -26,28 +26,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: $mobile-footer-height;
-  background: rgba(0, 0, 0, 0.8);
-
-  button {
-    color: white;
-    font-weight: 600;
-  }
-
-  span {
-    color: white;
-  }
-}
-
-@media only screen and (min-width: $mobile-width) {
-  footer {
-    height: $web-footer-height;
-  }
-}
+<style lang="scss" scoped>
+@import "./_style.scss";
 </style>

@@ -1,0 +1,23 @@
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $mobile-footer-height;
+  background: #505050;
+
+  button {
+    color: white;
+    font-weight: 600;
+  }
+
+  span {
+    color: white;
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  footer {
+    height: $web-footer-height;
+  }
+}

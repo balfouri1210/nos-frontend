@@ -89,9 +89,13 @@ video {
 
 html,
 body {
-  min-height: 100%;
-  margin-bottom: $mobile-footer-height;
+  height: 100%;
   background: rgb(255, 255, 255);
+}
+
+#__nuxt,
+#__layout {
+  height: 100%;
 }
 
 article,
@@ -164,6 +168,7 @@ button,
 select {
   box-sizing: border-box;
   font-family: 'Kanit', sans-serif;
+  font-style: italic;
   // font-family: 'Open Sans', sans-serif;
 }
 
@@ -186,12 +191,4 @@ select {
 
 strong {
   font-weight: 600;
-}
-
-
-@media only screen and (min-width: $mobile-width) {
-  html,
-  body {
-    margin-bottom: $web-footer-height;
-  }
 }

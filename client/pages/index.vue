@@ -23,7 +23,7 @@
 export default {
   async asyncData({ $axios }) {
     try {
-      const result = await $axios.$get('/api/users');
+      const result = (await $axios.$get('/api/users')) || null;
       // const result = 'API call test success!';
       return { result };
     } catch (err) {
