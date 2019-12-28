@@ -55,13 +55,12 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        // await this.$axios.post('/api/users', {
-        //   ...this.userInfo,
-        //   birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
-        // });
-        // this.$router.push(this.localePath('signup-complete'));
+        await this.$axios.post('/api/auth', {
+          ...this.userInfo
+        });
+        alert('login success');
       } catch (err) {
-        // console.error(err);
+        console.error(err);
       }
     }
   }
