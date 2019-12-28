@@ -1,19 +1,19 @@
 <template>
   <div>
-    <sg-header />
+    <nos-header />
     <nuxt />
-    <sg-footer />
+    <nos-footer />
   </div>
 </template>
 
 <script>
-import sgHeader from '@/components/sg-header/sg-header.vue';
-import sgFooter from '@/components/sg-footer/sg-footer.vue';
+import nosHeader from '@/components/nos-header/nos-header.vue';
+import nosFooter from '@/components/nos-footer/nos-footer.vue';
 
 export default {
   components: {
-    sgHeader,
-    sgFooter
+    nosHeader,
+    nosFooter
   }
 };
 </script>

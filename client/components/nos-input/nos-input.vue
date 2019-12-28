@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .nos-input {
   position: relative;
-  padding-bottom: 16px;
+  padding-bottom: 18px;
 
   input {
     width: 100%;

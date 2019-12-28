@@ -86,7 +86,7 @@ export default {
 <style lang="scss" scoped>
 .nos-select {
   position: relative;
-  padding-bottom: 16px;
+  padding-bottom: 18px;
 
   select {
     width: 100%;

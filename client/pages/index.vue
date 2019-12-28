@@ -2,6 +2,7 @@
   <div>
     <h1>This is 907Degrees. by Balfouri</h1>
     <h1>CURRENT STAGE IS <span style="color: orange">'{{ stage }}'</span></h1>
+
     <nuxt-link
       :to="localePath('signup')"
     >
@@ -22,8 +23,8 @@
 export default {
   async asyncData({ $axios }) {
     try {
-      // const result = await $axios.$get('/api/user');
-      const result = 'API call test success!';
+      const result = await $axios.$get('/api/users');
+      // const result = 'API call test success!';
       return { result };
     } catch (err) {
       console.error(err);

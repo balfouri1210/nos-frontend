@@ -88,7 +88,7 @@ module.exports = {
   styleResources: {
     scss: [
       '@/styles/_variable.scss',
-      '@/styles/_base.scss' // use underscore "_" & also file extension ".scss"
+      '@/styles/_main.scss' // use underscore "_" & also file extension ".scss"
     ]
   }
 };

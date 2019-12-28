@@ -5,8 +5,6 @@
     <validation-observer v-slot="{ handleSubmit }">
       <form
         id="app"
-        action="https://vuejs.org/"
-        method="post"
         @submit.prevent="handleSubmit(onSubmit)"
       >
         <div>
@@ -27,7 +25,7 @@
             id="password"
             type="password"
             name="password"
-            :rules="'required|min:8'"
+            :rules="'required|min:6'"
             :value="userInfo.password"
             @input="userInfo.password = $event"
           />
@@ -40,8 +38,8 @@
             type="password"
             name="confirmPassword"
             :rules="{ required: true, is: userInfo.password }"
-            :value="userInfo.confirmPassword"
-            @input="userInfo.confirmPassword = $event"
+            :value="confirmPassword"
+            @input="confirmPassword = $event"
           />
         </div>
 

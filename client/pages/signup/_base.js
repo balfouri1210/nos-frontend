@@ -1,4 +1,3 @@
-import axios from 'axios';
 import countries from '@/lib/country';
 
 export default {
@@ -8,38 +7,28 @@ export default {
       userInfo: {
         email: null,
         password: null,
-        confirmPassword: null,
         username: null,
         countryId: null,
         birth: null,
         gender: null
       },
+      confirmPassword: null,
       countries
     };
   },
 
   methods: {
-    async signup() {
+    async onSubmit() {
       try {
-        const user = await axios.post(
-          '/api/users', {
-            email: this.email,
-            password: this.password
-          }
-        );
+        await this.$axios.post('/api/users', {
+          ...this.userInfo,
+          birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
+        });
 
-        console.log(user);
+        this.$router.push(this.localePath('signup-complete'));
       } catch (err) {
         console.error(err);
       }
-    },
-
-    onSubmit() {
-      alert('Form has been submitted!');
-      console.log({
-        ...this.userInfo,
-        birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
-      });
     }
   }
 };
