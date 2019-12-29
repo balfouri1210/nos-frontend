@@ -27,15 +27,14 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 
 export default {
-  async asyncData({ $axios }) {
-    try {
-      const result = (await $axios.$get('/api/users')) || null;
-      // const result = 'API call test success!';
-      return { result };
-    } catch (err) {
-      console.error(err);
-    }
-  },
+  // async asyncData({ $axios }) {
+  //   try {
+  //     const result = (await $axios.$get('/api/users')) || null;
+  //     return { result };
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // },
 
   data() {
     return {
