@@ -9,8 +9,11 @@
       GO TO SIGNUP PAGE
     </nuxt-link>
 
-    <div>
-      RESULT : {{ result }}
+    <div
+      v-if="getJwt()"
+      style="color: hotpink"
+    >
+      Hello, {{ getEmail() }}
     </div>
 
     <div>
@@ -20,6 +23,9 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
+const { mapGetters } = createNamespacedHelpers('auth');
+
 export default {
   async asyncData({ $axios }) {
     try {
@@ -35,6 +41,10 @@ export default {
     return {
       stage: process.env.STAGE
     };
+  },
+
+  methods: {
+    ...mapGetters(['getJwt', 'getEmail'])
   }
 };
 </script>

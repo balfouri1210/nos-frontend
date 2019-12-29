@@ -47,7 +47,8 @@ module.exports = {
     { src: '~/plugins/axios.js' },
     { src: '~/plugins/validator.js' },
     { src: '~/plugins/global-component.js' },
-    { src: '~/plugins/datepicker.js', ssr: false }
+    { src: '~/plugins/datepicker.js', ssr: false },
+    { src: '~/plugins/logout.js', ssr: false }
   ],
 
   buildModules: [

@@ -25,9 +25,9 @@ export default {
           birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
         });
 
-        this.$router.push(this.localePath('signup-complete'));
+        // this.$router.push(this.localePath('signup-complete'));
       } catch (err) {
-        console.error(err);
+        console.error(err.response);
       }
     }
   }

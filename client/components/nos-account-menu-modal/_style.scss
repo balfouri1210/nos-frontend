@@ -1,4 +1,4 @@
-.nos-login-modal {
+.nos-account-menu-modal {
   position: absolute;
   top: 56px;
   right: 16px;
@@ -7,22 +7,9 @@
   border-radius: 6px;
   background: orange;
 
-  label {
-    color: white;
-  }
-
   button {
     width: 100%;
     background: white;
     border-radius: 6px;
-  }
-
-  ::v-deep input {
-    border-bottom: 1px solid white;
-    color: white;
-  }
-
-  ::v-deep .nos-input__error-message {
-    color: black;
   }
 }

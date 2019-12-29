@@ -42,6 +42,12 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+import { createNamespacedHelpers } from 'vuex';
+const { mapMutations } = createNamespacedHelpers('auth');
+import jwtDecode from 'jwt-decode';
+import { TOKEN_EXPIRES } from '@/lib/constants';
+
 export default {
   data() {
     return {
@@ -53,14 +59,24 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['mutateJwt', 'mutateEmail', 'mutateUsername']),
+
     async onSubmit() {
       try {
-        await this.$axios.post('/api/auth', {
+        const { data } = await this.$axios.post('/api/auth', {
           ...this.userInfo
         });
-        alert('login success');
+
+        this.mutateJwt(data.token);
+        Cookies.set('jwt', data.token, { expires: TOKEN_EXPIRES });
+
+        const decodedJwt = jwtDecode(data.token);
+        this.mutateEmail(decodedJwt.email);
+        this.mutateUsername(decodedJwt.username);
+
+        this.$emit('closeLoginModal');
       } catch (err) {
-        console.error(err);
+        console.error(err.response);
       }
     }
   }
