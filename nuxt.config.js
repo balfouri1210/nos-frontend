@@ -10,8 +10,9 @@ module.exports = {
       { hid: 'description', name: 'description', content: '907degrees' },
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit&display=swap'}
-    ]
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit&display=swap'},
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+    ],
   },
 
   build: {

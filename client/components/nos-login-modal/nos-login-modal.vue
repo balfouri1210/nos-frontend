@@ -32,12 +32,37 @@
         <div>
           <button
             type="submit"
+            class="nos-login-modal__submit"
           >
             Submit
           </button>
         </div>
       </form>
     </validation-observer>
+
+    <transition
+      name="fade"
+    >
+      <div
+        v-show="errorMessage"
+        class="nos-login-modal__error-message"
+      >
+        <div>
+          <i
+            class="material-icons nos-login-modal__error-icon"
+          >error</i>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <div>
+          <button @click="errorMessage = null">
+            <i
+              class="material-icons"
+            >close</i>
+          </button>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -54,12 +79,33 @@ export default {
       userInfo: {
         email: null,
         password: null
-      }
+      },
+
+      errorMessage: null
     };
   },
 
   methods: {
     ...mapMutations(['mutateJwt', 'mutateEmail', 'mutateUsername']),
+
+    makeLoginErrorMessage(err) {
+      switch (err.response.data.code) {
+        case 'u002':
+          this.errorMessage = this.$t('user_not_found');
+          break;
+
+        case 'u003':
+          this.errorMessage = this.$t('invalid_password');
+          break;
+
+        case 'u006':
+          this.errorMessage = this.$t('user_not_activated');
+          break;
+
+        default:
+          this.errorMessage = this.$t('login_failed');
+      }
+    },
 
     async onSubmit() {
       try {
@@ -76,7 +122,7 @@ export default {
 
         this.$emit('closeLoginModal');
       } catch (err) {
-        console.error(err.response);
+        this.makeLoginErrorMessage(err);
       }
     }
   }

@@ -1,10 +1,13 @@
 <template>
   <header class="nos-header">
-    <div>
+    <div class="nos-header__logo">
       <nuxt-link
         :to="localePath('index')"
       >
-        GO TO HOME!
+        <img
+          src="/logo.svg"
+          alt="logo"
+        >
       </nuxt-link>
     </div>
 

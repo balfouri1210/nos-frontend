@@ -1,7 +1,6 @@
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 html,
 body,
-div,
 span,
 applet,
 object,
@@ -172,6 +171,13 @@ select {
   // font-family: 'Open Sans', sans-serif;
 }
 
+// i태그를 따로 지정해주지 않으면 font-family가 위의 'Kanit'에 덮어쓰이게 되서
+// 아이콘이 나오지 않는다.
+i {
+  font-family: 'Material Icons';
+  font-style: normal;
+}
+
 button,
 select,
 input {
@@ -191,4 +197,13 @@ select {
 
 strong {
   font-weight: 600;
+}
+
+// Vue transition fade styles
+// https://kr.vuejs.org/v2/guide/transitions.html
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }

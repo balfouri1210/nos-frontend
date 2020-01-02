@@ -1,6 +1,6 @@
 .nos-login-modal {
   position: absolute;
-  top: 56px;
+  top: 52px;
   right: 16px;
   width: 280px;
   padding: 24px;
@@ -11,7 +11,7 @@
     color: white;
   }
 
-  button {
+  &__submit {
     width: 100%;
     background: white;
     border-radius: 6px;
@@ -24,5 +24,37 @@
 
   ::v-deep .nos-input__error-message {
     color: black;
+  }
+
+  &__error-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: darkred;
+    color: white;
+    font-size: 14px;
+    
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    i {
+      color: white;
+      vertical-align: middle;
+    }
+  }
+
+  &__error-icon {
+    margin-right: 4px;
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  .nos-login-modal {
+    top: 60px;
   }
 }
