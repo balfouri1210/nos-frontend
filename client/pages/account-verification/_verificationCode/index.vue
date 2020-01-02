@@ -17,6 +17,8 @@
 
 <script>
 export default {
+  layout: 'entry',
+
   data() {
     return {
       verificationCode: this.$route.params.verificationCode,

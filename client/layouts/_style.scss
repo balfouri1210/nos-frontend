@@ -5,6 +5,17 @@
   padding-bottom: $mobile-footer-height;
 }
 
+.nos-entry {
+  &__logo {
+    display: inline-block;
+    width: 300px;
+
+    a {
+      width: 100%;
+    }
+  }  
+}
+
 @media only screen and (min-width: $mobile-width) {
   .nos {
     padding-top: $web-header-height;
