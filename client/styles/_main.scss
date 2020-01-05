@@ -199,6 +199,7 @@ strong {
   font-weight: 600;
 }
 
+
 // Vue transition fade styles
 // https://kr.vuejs.org/v2/guide/transitions.html
 .fade-enter-active, .fade-leave-active {
@@ -213,4 +214,13 @@ strong {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+// Vue transition fade styles end
+
+
+.nos-basic-btn {
+  background: linear-gradient(-200deg, $nos-main-theme 35%, #ea5514 100%);
+  color: white;
+  border-radius: 4px;
+  padding: 8px 24px;
 }

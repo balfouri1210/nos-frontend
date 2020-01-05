@@ -3,7 +3,10 @@
     <h1>You've been signed up succeessfully!</h1>
     <h1>Please activate your account by email</h1>
 
-    <button @click="sendVerificationMailAgain">
+    <button
+      class="nos-basic-btn"
+      @click="sendVerificationMailAgain"
+    >
       Send verification email again
     </button>
   </div>

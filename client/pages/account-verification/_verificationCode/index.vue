@@ -2,27 +2,20 @@
   <div class="account-verification">
     <h1>Welcome to 907DEGREES!</h1>
 
-    <div v-if="isAccountActivated">
-      <p>Your account is activated Successfully!</p>
+    <p v-if="isAccountActivated">
+      Your account is activated Successfully!
+    </p>
+    <p v-if="isAccountActivationFailed">
+      Your account is activated already.
+    </p>
 
-      <nuxt-link
-        :to="localePath('index')"
-        class="account-verification__link"
-      >
-        Go to Main
-      </nuxt-link>
-    </div>
-
-    <div v-if="isAccountActivationFailed">
-      <p>Your account is activated already.</p>
-
-      <nuxt-link
-        :to="localePath('index')"
-        class="account-verification__link"
-      >
-        Go to Main
-      </nuxt-link>
-    </div>
+    <nuxt-link
+      v-if="verificationFinished"
+      :to="localePath('index')"
+      class="account-verification__link nos-basic-btn"
+    >
+      Go to Main
+    </nuxt-link>
   </div>
 </template>
 
@@ -36,7 +29,8 @@ export default {
     return {
       verificationCode: this.$route.params.verificationCode,
       isAccountActivated: false,
-      isAccountActivationFailed: false
+      isAccountActivationFailed: false,
+      verificationFinished: false
     };
   },
 
@@ -51,6 +45,8 @@ export default {
       if (err.response.data.code === errors.ALREADY_ACTIVATED_USER.code) {
         this.isAccountActivationFailed = true;
       }
+    } finally {
+      this.verificationFinished = true;
     }
   }
 };
