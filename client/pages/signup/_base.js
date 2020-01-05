@@ -25,7 +25,12 @@ export default {
           birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')
         });
 
-        this.$router.push(this.localePath('signup-complete'));
+        this.$router.push(this.localePath({
+          name: 'signup-complete-email',
+          params: {
+            email: this.userInfo.email
+          }
+        }));
       } catch (err) {
         console.error(err.response);
       }

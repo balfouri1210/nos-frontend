@@ -12,17 +12,31 @@
         Go to Main
       </nuxt-link>
     </div>
+
+    <div v-if="isAccountActivationFailed">
+      <p>Your account is activated already.</p>
+
+      <nuxt-link
+        :to="localePath('index')"
+        class="account-verification__link"
+      >
+        Go to Main
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
+import { errors } from '@/lib/constants';
+
 export default {
   layout: 'entry',
 
   data() {
     return {
       verificationCode: this.$route.params.verificationCode,
-      isAccountActivated: false
+      isAccountActivated: false,
+      isAccountActivationFailed: false
     };
   },
 
@@ -34,7 +48,9 @@ export default {
 
       this.isAccountActivated = true;
     } catch (err) {
-      console.error(err.response);
+      if (err.response.data.code === errors.ALREADY_ACTIVATED_USER.code) {
+        this.isAccountActivationFailed = true;
+      }
     }
   }
 };
