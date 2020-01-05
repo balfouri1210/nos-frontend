@@ -19,32 +19,32 @@
     <div>
       {{ $t('greeting') }}
     </div>
+
+    <ul>
+      <li
+        v-for="(player, index) in players"
+        :key="index"
+      >
+        <nuxt-link
+          :to="localePath({
+            path: `/player/${player.name}`
+          })"
+        >
+          {{ player.name }} / {{ player.team }}
+        </nuxt-link>
+      </li>
+    </ul>
+
+    <!-- Nuxt child for player modal -->
+    <nuxt-child />
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex';
-const { mapGetters } = createNamespacedHelpers('auth');
+import Base from './_base';
 
 export default {
-  // async asyncData({ $axios }) {
-  //   try {
-  //     const result = (await $axios.$get('/api/users')) || null;
-  //     return { result };
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // },
-
-  data() {
-    return {
-      stage: process.env.STAGE
-    };
-  },
-
-  methods: {
-    ...mapGetters(['getJwt', 'getEmail'])
-  }
+  mixins: [Base]
 };
 </script>
 
