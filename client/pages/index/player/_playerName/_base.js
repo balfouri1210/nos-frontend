@@ -72,6 +72,8 @@ export default {
         id: addedComment.data.id,
         username: this.getUsername(),
         content: this.newCommentContent,
+        vote_up: 0,
+        vote_down: 0,
         isReply: false,
         isNewReply: false,
         replyContent: ''
