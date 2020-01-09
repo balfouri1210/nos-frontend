@@ -11,6 +11,13 @@
           class="player-modal__content"
           @click.stop
         >
+          <header class="player-modal__header">
+            <nuxt-link :to="localePath('index')">
+              <i class="material-icon">arrow_back</i>
+              <span>BACK</span>
+            </nuxt-link>
+          </header>
+
           <h1>
             {{ $t('greeting') }}: {{ playerName }}
           </h1>

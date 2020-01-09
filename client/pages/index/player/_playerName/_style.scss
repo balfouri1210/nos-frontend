@@ -29,6 +29,20 @@
     overflow: auto;
   }
 
+  &__header {
+    margin-bottom: 16px;
+    color: $nos-main-theme;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+
+    i {
+      margin-right: 6px;
+    }
+  }
+
   &__comment-editor {
     display: flex;
     align-items: center;
