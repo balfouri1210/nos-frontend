@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       newCommentContent: '',
-      comments: null
+      comments: null,
+      // addedReply: {}
     };
   },
 
@@ -30,9 +31,9 @@ export default {
       try {
         const result = await this.$axios.get(`/api/comments/player/${this.playerId}`);
         result.data.forEach(comment => {
-          comment.isChildComment = false;
-          comment.isNewChildComment = false;
-          comment.childCommentContent = '';
+          comment.isReply = false;
+          comment.isNewReply = false;
+          comment.replyContent = '';
         });
         this.comments = result.data;
       } catch (err) {
@@ -40,12 +41,12 @@ export default {
       }
     },
 
-    async loadChildComments(parentComment) {
+    async loadReplies(parentComment) {
       try {
-        if (!parentComment.isChildComment) {
-          const result = await this.$axios.get(`/api/child-comments/player/${parentComment.id}`);
-          parentComment.childComments = result.data;
-          parentComment.isChildComment = true;
+        if (!parentComment.isReply) {
+          const result = await this.$axios.get(`/api/replies/player/${parentComment.id}`);
+          parentComment.replies = result.data;
+          parentComment.isReply = true;
         }
       } catch (err) {
         console.error(err);
@@ -53,9 +54,8 @@ export default {
     },
 
     async addComment() {
-      let addedComment;
       try {
-        addedComment = await this.$axios.post('/api/comments/player', {
+        let addedComment = await this.$axios.post('/api/comments/player', {
           userId: this.getId(),
           playerId: this.playerId,
           content: this.newCommentContent,
@@ -72,40 +72,42 @@ export default {
         id: addedComment.data.id,
         username: this.getUsername(),
         content: this.newCommentContent,
-        isChildComment: false,
-        isNewChildComment: false,
-        childCommentContent: ''
+        isReply: false,
+        isNewReply: false,
+        replyContent: ''
       });
     },
 
-    async addChildComment(parentComment) {
-      let addedChildComment;
+    async addReply(parentComment) {
       try {
-        addedChildComment = await this.$axios.post('/api/child-comments/player', {
+        const addReplyResult = await this.$axios.post('/api/replies/player', {
           userId: this.getId(),
           playerId: this.playerId,
-          content: parentComment.childCommentContent,
+          content: parentComment.replyContent,
           parentId: parentComment.id
         });
         
-        this.insertNewChildComment(parentComment, addedChildComment);
-        parentComment.childCommentContent = '';
+        this.showAddedReply(parentComment, addReplyResult);
       } catch (err) {
         console.error(err);
       }
     },
 
-    insertNewChildComment(parentComment, addedChildComment) {
-      if (!parentComment.childComments) parentComment.childComments = [];
-
-      parentComment.childComments.unshift({
-        id: addedChildComment.data.id,
+    showAddedReply(parentComment, addReplyResult) {
+      const addedReply = {
+        id: addReplyResult.data.id,
         username: this.getUsername(),
-        content: parentComment.childCommentContent
-      });
+        content: parentComment.replyContent
+      };
 
-      parentComment.isChildComment = true;
-      parentComment.child_comment_count = 1;
+      if (parentComment.isReply) {
+        parentComment.replies.unshift(addedReply);
+      }
+
+      parentComment.addedReply = addedReply;
+      parentComment.isNewReply = false;
+      parentComment.replyContent = '';
+      parentComment.reply_count ++;
     },
 
     voteUp() {
@@ -116,9 +118,9 @@ export default {
 
     },
 
-    cancelChildComment(comment) {
-      comment.isNewChildComment = false;
-      comment.childCommentContent = '';
+    cancelReply(comment) {
+      comment.isNewReply = false;
+      comment.replyContent = '';
     }
   }
 };

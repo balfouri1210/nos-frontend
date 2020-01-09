@@ -51,10 +51,22 @@
     }
   }
 
+  &__comments {
+    margin-top: 16px;
+
+    button, p, span, input, textarea {
+      font-family: 'Open Sans', sans-serif;
+    }
+  }
+
+  &__comment {
+    margin-bottom: 10px;
+  }
+
   &__comment-sub-action {
     display: flex;
     align-items: center;
-    color: rgba(0, 0, 0, 0.5);
+    color: #909090;
     font-size: 13px;
     font-style: normal;
 
@@ -70,11 +82,11 @@
     }
   }
 
-  &__add-child-comment {
+  &__add-reply {
 
   }
 
-  &__child-comment-editor {
+  &__reply-editor {
     input {
       width: 100%;
       border-bottom: 1px solid black;
@@ -82,8 +94,40 @@
     }
   }
 
-  &__child-comment-action {
+  &__reply-action {
+    margin-top: 4px;
     text-align: right;
+    font-size: 12px;
+
+    button {
+      margin-left: 4px;
+    }
+  }
+
+  &__load-reply {
+    margin-top: 4px;
+    color: $nos-main-theme;
+    font-size: 13px;
+
+    i {
+      margin-right: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__replies {
+    margin-top: 4px;
+    margin-left: 12px;
+    font-size: 13px;
+  }
+
+  &__reply {
+    margin-bottom: 4px;
   }
 }
 

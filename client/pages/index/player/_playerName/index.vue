@@ -15,6 +15,7 @@
             {{ $t('greeting') }}: {{ playerName }}
           </h1>
 
+          <!-- Add Comment Area -->
           <div class="player-modal__add-comment">
             <label for="Comment">Add a Comment</label>
 
@@ -39,13 +40,15 @@
 
           <hr>
 
+          <!-- Comment List Area -->
           <div class="player-modal__comments">
             <ul>
               <li
                 v-for="(comment, index) in comments"
                 :key="index"
+                class="player-modal__comment"
               >
-                {{ comment.username }} : {{ comment.content }}
+                <span>{{ comment.username }} : {{ comment.content }}</span>
 
                 <div class="player-modal__comment-sub-action">
                   <button @click="voteUp">
@@ -56,35 +59,38 @@
                     <i class="material-icon">thumb_down_alt</i>
                     <span>{{ comment.vote_down }}</span>
                   </button>
-                  <button @click="comment.isNewChildComment = !comment.isNewChildComment">
+                  <button @click="comment.isNewReply = !comment.isNewReply">
                     REPLY
                   </button>
                 </div>
 
-                <!-- Add new child comment -->
+                <!-- Add new reply -->
                 <div
-                  v-if="comment.isNewChildComment"
-                  class="player-modal__add-child-comment"
+                  v-if="comment.isNewReply"
+                  class="player-modal__add-reply"
                 >
-                  <div class="player-modal__child-comment-editor">
+                  <div class="player-modal__reply-editor">
                     <input
                       id="comment"
-                      v-model="comment.childCommentContent"
+                      v-model="comment.replyContent"
                       type="text"
                       name="comment"
                       :rules="'required'"
                       maxlength="100"
                     >
 
-                    <div class="player-modal__child-comment-action">
+                    <div class="player-modal__reply-action">
                       <button
-                        @click="cancelChildComment(comment)"
+                        class="nos-simple-white-btn"
+                        @click="cancelReply(comment)"
                       >
                         CANCEL
                       </button>
 
                       <button
-                        @click="addChildComment(comment)"
+                        class="nos-simple-black-btn"
+                        :disabled="!comment.replyContent.trim()"
+                        @click="addReply(comment)"
                       >
                         ADD
                       </button>
@@ -92,34 +98,50 @@
                   </div>
                 </div>
 
-                <button
-                  v-if="comment.child_comment_count"
-                  @click="loadChildComments(comment)"
-                >
-                  <span v-if="!comment.isChildComment">
-                    Load child {{ comment.child_comment_count }} comments
-                  </span>
-  
-                  <span v-if="comment.isChildComment">
+                <div class="player-modal__load-reply">
+                  <button
+                    v-if="comment.reply_count && !comment.isReply"
+                    @click="loadReplies(comment)"
+                  >
+                    <i class="material-icon">keyboard_arrow_down</i>
+                    Load {{ comment.reply_count }} replies
+                  </button>
+
+                  <button
+                    v-if="comment.isReply"
+                    @click="comment.isReply = false"
+                  >
+                    <i class="material-icon">keyboard_arrow_up</i>
                     Hide replies
-                  </span>
-                </button>
+                  </button>
+                </div>
                 
-                <!-- Load child comments -->
-                <div
-                  v-if="comment.isChildComment"
-                  class="player-modal__child-comments"
-                >
-                  <ul>
-                    <li
-                      v-for="(childComment, childIndex) in comment.childComments"
-                      :key="childIndex"
-                    >
-                      <p style="color: skyblue">
-                        {{ childComment.username }}: {{ childComment.content }}
-                      </p>
-                    </li>
-                  </ul>
+                <!-- Replies Area -->
+                <div class="player-modal__replies">
+                  <div
+                    v-if="comment.isReply"
+                  >
+                    <ul>
+                      <li
+                        v-for="(reply, replyIndex) in comment.replies"
+                        :key="replyIndex"
+                        class="player-modal__reply"
+                      >
+                        <p>
+                          {{ reply.username }}: {{ reply.content }}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div
+                    v-if="comment.addedReply && !comment.isReply"
+                    class="player-modal__added-reply"
+                  >
+                    <p>
+                      {{ comment.addedReply.username }}: {{ comment.addedReply.content }}
+                    </p>
+                  </div>
                 </div>
               </li>
             </ul>

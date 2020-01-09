@@ -187,6 +187,9 @@ input {
 button {
   background: transparent;
 }
+button:disabled {
+  cursor: not-allowed;
+}
 
 select {
   -webkit-appearance: none;
@@ -223,4 +226,17 @@ strong {
   color: white;
   border-radius: 4px;
   padding: 8px 24px;
+}
+
+.nos-simple-white-btn {
+  padding: 3px 8px;
+  border: 1px solid black;
+}
+
+.nos-simple-black-btn {
+  padding: 3px 8px;
+  background: black;
+  border: 1px solid black;
+  color: white;
+  font-weight: 800;
 }
