@@ -16,10 +16,12 @@ export default {
       stage: process.env.STAGE,
 
       players: [{
-        name: 'Lionel Messi',
+        id: 1,
+        name: 'lionel messi',
         team: 'FC Barcelona'
       }, {
-        name: 'Kangin Lee',
+        id: 7,
+        name: 'kangin lee',
         team: 'FC Valencia'
       }]
     };

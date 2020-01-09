@@ -18,6 +18,7 @@ export const actions = {
       commit('auth/mutateJwt', jwt);
       
       const decodedJwt = jwtDecode(jwt);
+      commit('auth/mutateId', decodedJwt.id);
       commit('auth/mutateEmail', decodedJwt.email);
       commit('auth/mutateUsername', decodedJwt.username);
     }

@@ -27,7 +27,7 @@
       >
         <nuxt-link
           :to="localePath({
-            path: `/player/${player.name}`
+            path: `/player/${player.name}-${player.id}`
           })"
         >
           {{ player.name }} / {{ player.team }}

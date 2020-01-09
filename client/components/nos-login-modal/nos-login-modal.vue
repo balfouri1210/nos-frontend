@@ -86,26 +86,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['mutateJwt', 'mutateEmail', 'mutateUsername']),
-
-    makeLoginErrorMessage(err) {
-      switch (err.response.data.code) {
-        case 'u002':
-          this.errorMessage = this.$t('user_not_found');
-          break;
-
-        case 'u003':
-          this.errorMessage = this.$t('invalid_password');
-          break;
-
-        case 'u006':
-          this.errorMessage = this.$t('user_not_activated');
-          break;
-
-        default:
-          this.errorMessage = this.$t('login_failed');
-      }
-    },
+    ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
 
     async onSubmit() {
       try {
@@ -117,12 +98,17 @@ export default {
         Cookies.set('jwt', data.token, { expires: TOKEN_EXPIRES });
 
         const decodedJwt = jwtDecode(data.token);
+        this.mutateId(decodedJwt.id);
         this.mutateEmail(decodedJwt.email);
         this.mutateUsername(decodedJwt.username);
 
         this.$emit('closeLoginModal');
       } catch (err) {
-        this.makeLoginErrorMessage(err);
+        if (err.response) {
+          this.errorMessage = this.$t(err.response.data.message.toLowerCase());
+        } else {
+          this.errorMessage = this.$t('server_error');
+        }
       }
     }
   }

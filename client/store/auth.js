@@ -1,5 +1,6 @@
 export const state = () => ({
   jwt: null,
+  id: null,
   email: null,
   username: null
 });
@@ -7,6 +8,10 @@ export const state = () => ({
 export const mutations = {
   mutateJwt(state, jwt) {
     state.jwt = jwt;
+  },
+
+  mutateId(state, id) {
+    state.id = id;
   },
 
   mutateEmail(state, email) {
@@ -19,6 +24,7 @@ export const mutations = {
 
   clearAuthStore(state) {
     state.jwt = null;
+    state.id = null;
     state.email = null;
     state.username = null;
   }
@@ -27,6 +33,10 @@ export const mutations = {
 export const getters = {
   getJwt(state) {
     return state.jwt;
+  },
+
+  getId(state) {
+    return state.id;
   },
 
   getEmail(state) {
