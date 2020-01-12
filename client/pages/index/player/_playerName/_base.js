@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    ...mapGetters(['getId', 'getUsername']),
+    ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
     closeModal() {
       this.$router.push(this.localePath('index'));
@@ -38,18 +38,17 @@ export default {
     async getComments() {
       try {
         const result = await this.$axios.get(`/api/comments/player/${this.playerId}`);
-        await this.getCommentVoteHistories();
+        if (this.getJwt()) await this.getCommentVoteHistories();
         
         result.data.forEach(comment => {
           comment.isReply = false;
           comment.isNewReply = false;
           comment.replyContent = '';
 
-          this.commentMappingWithVoteHistory(comment);
+          if (this.getJwt()) this.commentMappingWithVoteHistory(comment);
         });
 
         this.comments = result.data;
-        console.log(this.comments);
       } catch (err) {
         console.error(err);
       }
