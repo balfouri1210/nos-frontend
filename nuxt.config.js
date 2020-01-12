@@ -11,7 +11,9 @@ module.exports = {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit&display=swap'},
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+      { rel: 'icon', href: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' },
+      { rel: 'icon', href: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
   },
 

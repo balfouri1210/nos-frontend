@@ -16,7 +16,7 @@ export default {
     return {
       newCommentContent: '',
       comments: null,
-      // addedReply: {}
+      commentVoteHistories: null
     };
   },
 
@@ -27,15 +27,38 @@ export default {
       this.$router.push(this.localePath('index'));
     },
 
+    commentMappingWithVoteHistory(comment) {
+      this.commentVoteHistories.forEach(history => {
+        if (history.targetId === comment.id) {
+          comment.isVoted = history.vote;
+        }
+      });
+    },
+
     async getComments() {
       try {
         const result = await this.$axios.get(`/api/comments/player/${this.playerId}`);
+        await this.getCommentVoteHistories();
+        
         result.data.forEach(comment => {
           comment.isReply = false;
           comment.isNewReply = false;
           comment.replyContent = '';
+
+          this.commentMappingWithVoteHistory(comment);
         });
+
         this.comments = result.data;
+        console.log(this.comments);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    async getCommentVoteHistories() {
+      try {
+        const result = await this.$axios.get(`/api/vote-histories/player-comment/${this.getId()}`);
+        this.commentVoteHistories = result.data;
       } catch (err) {
         console.error(err);
       }
@@ -72,8 +95,8 @@ export default {
         id: addedComment.data.id,
         username: this.getUsername(),
         content: this.newCommentContent,
-        vote_up: 0,
-        vote_down: 0,
+        vote_up_count: 0,
+        vote_down_count: 0,
         isReply: false,
         isNewReply: false,
         replyContent: ''
@@ -112,12 +135,47 @@ export default {
       parentComment.reply_count ++;
     },
 
-    voteUp() {
-
+    async playerCommentVote(comment, action) {
+      if (!comment.isVoted) {
+        // 첫 투표
+        try {
+          await this.doVote(comment, action);
+          comment[`vote_${action}_count`] ++;
+          comment.isVoted = action;
+        } catch (err) {
+          console.error(err);
+        }
+      } else if (comment.isVoted === action) {
+        // 투표 취소
+        try {
+          await this.cancelVote(comment, action);
+          comment[`vote_${action}_count`] --;
+          comment.isVoted = null;
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        // 투표 반전
+        alert('You\'ve already voted!');
+      }
     },
 
-    voteDown() {
+    doVote(comment, action) {
+      return this.$axios.put('/api/vote', {
+        userId: this.getId(),
+        targetTable: 'player_comments',
+        targetId: comment.id,
+        action
+      });
+    },
 
+    cancelVote(comment, action) {
+      return this.$axios.put('/api/vote/cancel', {
+        userId: this.getId(),
+        targetTable: 'player_comments',
+        targetId: comment.id,
+        action
+      });
     },
 
     cancelReply(comment) {

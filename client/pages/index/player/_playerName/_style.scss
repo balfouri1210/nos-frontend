@@ -87,12 +87,21 @@
     button {
       display: flex;
       align-items: center;;
-      margin-right: 18px;
+      margin-right: 12px;
     }
 
     .material-icon {
       margin-right: 4px;
       font-size: 16px;
+    }
+    .material-icon:hover {
+      color: $nos-main-theme;
+    }
+  }
+
+  &--is-voted {
+    .material-icon {
+      color: $nos-main-theme;
     }
   }
 

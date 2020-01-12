@@ -35,6 +35,7 @@
                 rows="2"
                 :rules="'required'"
                 maxlength="100"
+                :placeholder="`How was ${playerName} this week?`"
               />
 
               <button
@@ -58,13 +59,19 @@
                 <span>{{ comment.username }} : {{ comment.content }}</span>
 
                 <div class="player-modal__comment-sub-action">
-                  <button @click="voteUp">
+                  <button
+                    :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
+                    @click="playerCommentVote(comment, 'up')"
+                  >
                     <i class="material-icon">thumb_up_alt</i>
-                    <span>{{ comment.vote_up }}</span>
+                    <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
                   </button>
-                  <button @click="voteDown">
+                  <button
+                    :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
+                    @click="playerCommentVote(comment, 'down')"
+                  >
                     <i class="material-icon">thumb_down_alt</i>
-                    <span>{{ comment.vote_down }}</span>
+                    <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
                   </button>
                   <button @click="comment.isNewReply = !comment.isNewReply">
                     REPLY
