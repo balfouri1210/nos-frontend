@@ -1,5 +1,6 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
+import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
 
 export default {
   asyncData({ params }) {
@@ -8,15 +9,19 @@ export default {
     return { playerName, playerId };
   },
 
+  components: {
+    nosSkeletonLoader
+  },
+
   created() {
-    this.getComments();
+    this.makeComments();
   },
 
   data() {
     return {
       newCommentContent: '',
       comments: null,
-      commentVoteHistories: null
+      isCommentsLoading: true
     };
   },
 
@@ -26,48 +31,57 @@ export default {
     closeModal() {
       this.$router.push(this.localePath('index'));
     },
-
-    commentMappingWithVoteHistory(comment) {
-      this.commentVoteHistories.forEach(history => {
-        if (history.targetId === comment.id) {
-          comment.isVoted = history.vote;
-        }
+    
+    commentMappingWithUiProperty(comments) {
+      comments.forEach(comment => {
+        comment.isReply = false;
+        comment.isNewReply = false;
+        comment.replyContent = '';
       });
     },
-
-    async getComments() {
-      try {
-        const result = await this.$axios.get(`/api/comments/player/${this.playerId}`);
-        if (this.getJwt()) await this.getCommentVoteHistories();
-        
-        result.data.forEach(comment => {
-          comment.isReply = false;
-          comment.isNewReply = false;
-          comment.replyContent = '';
-
-          if (this.getJwt()) this.commentMappingWithVoteHistory(comment);
+    
+    commentMappingWithVoteHistory(comments, commentVoteHistories) {
+      comments.forEach(comment => {
+        commentVoteHistories.forEach(history => {
+          if (history.targetId === comment.id) {
+            comment.isVoted = history.vote;
+          }
         });
-
-        this.comments = result.data;
+      });
+    },
+    
+    async makeComments() {
+      try {
+        // Get comments
+        this.comments = (await this.getComments()).data;
+        
+        // Get comment vote histories if logged in
+        if (this.getJwt()) {
+          const commentVoteHistories = (await this.getCommentVoteHistories()).data;
+          if (this.getJwt()) this.commentMappingWithVoteHistory(this.comments, commentVoteHistories);
+        }
+        
+        // Mapping with properties that using in UI
+        this.commentMappingWithUiProperty(this.comments);
+        // End comments loading UI (v-skeleton-loader)
+        this.isCommentsLoading = false;
       } catch (err) {
         console.error(err);
       }
     },
 
-    async getCommentVoteHistories() {
-      try {
-        const result = await this.$axios.get(`/api/vote-histories/player-comment/${this.getId()}`);
-        this.commentVoteHistories = result.data;
-      } catch (err) {
-        console.error(err);
-      }
+    getComments() {
+      return this.$axios.get(`/api/comments/player/${this.playerId}`);
+    },
+
+    getCommentVoteHistories() {
+      return this.$axios.get(`/api/vote-histories/player-comment/${this.getId()}`);
     },
 
     async loadReplies(parentComment) {
       try {
         if (!parentComment.isReply) {
-          const result = await this.$axios.get(`/api/replies/player/${parentComment.id}`);
-          parentComment.replies = result.data;
+          parentComment.replies = (await this.$axios.get(`/api/replies/player/${parentComment.id}`)).data;
           parentComment.isReply = true;
         }
       } catch (err) {
@@ -128,6 +142,7 @@ export default {
         parentComment.replies.unshift(addedReply);
       }
 
+      // Follow up after showing added reply
       parentComment.addedReply = addedReply;
       parentComment.isNewReply = false;
       parentComment.replyContent = '';
@@ -135,6 +150,8 @@ export default {
     },
 
     async playerCommentVote(comment, action) {
+      if (!this.getJwt()) return;
+
       if (!comment.isVoted) {
         // 첫 투표
         try {

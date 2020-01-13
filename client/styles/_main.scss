@@ -221,6 +221,14 @@ strong {
 // Vue transition fade styles end
 
 
+// Vuetify customizing
+.v-skeleton-loader__list-item-two-line {
+  height: unset;
+  padding: 0 !important;
+}
+// Vuetify customizing end
+
+
 .nos-basic-btn {
   background: linear-gradient(-200deg, $nos-main-theme 35%, #ea5514 100%);
   color: white;

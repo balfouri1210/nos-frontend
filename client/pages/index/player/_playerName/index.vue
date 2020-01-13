@@ -50,33 +50,41 @@
 
           <!-- Comment List Area -->
           <div class="player-modal__comments">
+            <nos-skeleton-loader
+              v-if="isCommentsLoading"
+              :line="4"
+            />
+
             <ul>
               <li
                 v-for="(comment, index) in comments"
                 :key="index"
                 class="player-modal__comment"
               >
-                <span>{{ comment.username }} : {{ comment.content }}</span>
+                <div>
+                  <span>{{ comment.username }} : {{ comment.content }}</span>
 
-                <div class="player-modal__comment-sub-action">
-                  <button
-                    :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
-                    @click="playerCommentVote(comment, 'up')"
-                  >
-                    <i class="material-icon">thumb_up_alt</i>
-                    <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
-                  </button>
-                  <button
-                    :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
-                    @click="playerCommentVote(comment, 'down')"
-                  >
-                    <i class="material-icon">thumb_down_alt</i>
-                    <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
-                  </button>
-                  <button @click="comment.isNewReply = !comment.isNewReply">
-                    REPLY
-                  </button>
+                  <div class="player-modal__comment-sub-action">
+                    <button
+                      :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
+                      @click="playerCommentVote(comment, 'up')"
+                    >
+                      <i class="material-icon">thumb_up_alt</i>
+                      <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
+                    </button>
+                    <button
+                      :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
+                      @click="playerCommentVote(comment, 'down')"
+                    >
+                      <i class="material-icon">thumb_down_alt</i>
+                      <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
+                    </button>
+                    <button @click="comment.isNewReply = !comment.isNewReply">
+                      REPLY
+                    </button>
+                  </div>
                 </div>
+
 
                 <!-- Add new reply -->
                 <div
