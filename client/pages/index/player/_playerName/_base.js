@@ -53,17 +53,18 @@ export default {
     async makeComments() {
       try {
         // Get comments
-        this.comments = (await this.getComments()).data;
+        const getCommentsResult = (await this.getComments()).data;
         
         // Get comment vote histories if logged in
         if (this.getJwt()) {
           const commentVoteHistories = (await this.getCommentVoteHistories()).data;
-          if (this.getJwt()) this.commentMappingWithVoteHistory(this.comments, commentVoteHistories);
+          if (this.getJwt()) this.commentMappingWithVoteHistory(getCommentsResult, commentVoteHistories);
         }
         
         // Mapping with properties that using in UI
-        this.commentMappingWithUiProperty(this.comments);
+        this.commentMappingWithUiProperty(getCommentsResult);
         // End comments loading UI (v-skeleton-loader)
+        this.comments = getCommentsResult;
         this.isCommentsLoading = false;
       } catch (err) {
         console.error(err);
