@@ -51,7 +51,6 @@
           <!-- Comment List Area -->
           <div class="player-modal__comments">
             <nos-skeleton-loader
-              v-if="isCommentsLoading"
               :line="4"
             />
 

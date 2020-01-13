@@ -7,7 +7,7 @@
       >
         <v-skeleton-loader
           :transition="'scale-transition'"
-          height="60"
+          height="50"
           type="list-item-two-line"
         />
       </li>
