@@ -21,7 +21,7 @@ export default {
     return {
       newCommentContent: '',
       comments: null,
-      isCommentsLoading: true
+      isCommentsLoading: true,
     };
   },
 
@@ -36,17 +36,8 @@ export default {
       comments.forEach(comment => {
         comment.isReply = false;
         comment.isNewReply = false;
+        comment.isRepliesLoading = true;
         comment.replyContent = '';
-      });
-    },
-    
-    commentMappingWithVoteHistory(comments, commentVoteHistories) {
-      comments.forEach(comment => {
-        commentVoteHistories.forEach(history => {
-          if (history.targetId === comment.id) {
-            comment.isVoted = history.vote;
-          }
-        });
       });
     },
     
@@ -54,13 +45,6 @@ export default {
       try {
         // Get comments
         const getCommentsResult = (await this.getComments()).data;
-        
-        // Get comment vote histories if logged in
-        if (this.getJwt()) {
-          const commentVoteHistories = (await this.getCommentVoteHistories()).data;
-          if (this.getJwt()) this.commentMappingWithVoteHistory(getCommentsResult, commentVoteHistories);
-        }
-        
         // Mapping with properties that using in UI
         this.commentMappingWithUiProperty(getCommentsResult);
         // End comments loading UI (v-skeleton-loader)
@@ -72,18 +56,20 @@ export default {
     },
 
     getComments() {
-      return this.$axios.get(`/api/comments/player/${this.playerId}`);
-    },
-
-    getCommentVoteHistories() {
-      return this.$axios.get(`/api/vote-histories/player-comment/${this.getId()}`);
+      return this.$axios.get(`/api/comments/player/${this.getId()}/${this.playerId}`);
     },
 
     async loadReplies(parentComment) {
       try {
         if (!parentComment.isReply) {
-          parentComment.replies = (await this.$axios.get(`/api/replies/player/${parentComment.id}`)).data;
           parentComment.isReply = true;
+
+          // this.$set makes 'replies' property REACTIVATE
+          // That means without it, you can't update the change of 'replies'
+          if (parentComment.isRepliesLoading) {
+            this.$set(parentComment, 'replies', (await this.$axios.get(`/api/replies/player/${this.getId()}/${parentComment.id}`)).data);
+            parentComment.isRepliesLoading = false;
+          }
         }
       } catch (err) {
         console.error(err);
@@ -150,24 +136,24 @@ export default {
       parentComment.reply_count ++;
     },
 
-    async playerCommentVote(comment, action) {
+    async playerOpinionVote(opinion, action) {
       if (!this.getJwt()) return;
 
-      if (!comment.isVoted) {
+      if (!opinion.isVoted) {
         // 첫 투표
         try {
-          await this.doVote(comment, action);
-          comment[`vote_${action}_count`] ++;
-          comment.isVoted = action;
+          await this.doVote(opinion, action);
+          opinion[`vote_${action}_count`] ++;
+          opinion.isVoted = action;
         } catch (err) {
           console.error(err);
         }
-      } else if (comment.isVoted === action) {
+      } else if (opinion.isVoted === action) {
         // 투표 취소
         try {
-          await this.cancelVote(comment, action);
-          comment[`vote_${action}_count`] --;
-          comment.isVoted = null;
+          await this.cancelVote(opinion, action);
+          opinion[`vote_${action}_count`] --;
+          opinion.isVoted = null;
         } catch (err) {
           console.error(err);
         }
@@ -177,20 +163,20 @@ export default {
       }
     },
 
-    doVote(comment, action) {
+    doVote(opinion, action) {
       return this.$axios.put('/api/vote', {
         userId: this.getId(),
-        targetTable: 'player_comments',
-        targetId: comment.id,
+        targetOpinion: opinion.parent_id ? 'player_replies' : 'player_comments',
+        targetId: opinion.id,
         action
       });
     },
 
-    cancelVote(comment, action) {
+    cancelVote(opinion, action) {
       return this.$axios.put('/api/vote/cancel', {
         userId: this.getId(),
-        targetTable: 'player_comments',
-        targetId: comment.id,
+        targetOpinion: opinion.parent_id ? 'player_replies' : 'player_comments',
+        targetId: opinion.id,
         action
       });
     },

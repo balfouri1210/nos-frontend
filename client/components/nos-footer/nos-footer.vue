@@ -1,7 +1,7 @@
 <template>
   <footer>
     <button
-      @click="changeLocale('en')"
+      @click="$i18n.setLocale('en')"
     >
       English
     </button>
@@ -9,7 +9,7 @@
     <span>|</span>
 
     <button
-      @click="changeLocale('ko')"
+      @click="$i18n.setLocale('ko')"
     >
       한국어
     </button>
@@ -17,13 +17,7 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    changeLocale(locale) {
-      this.$i18n.setLocale(locale);
-    }
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

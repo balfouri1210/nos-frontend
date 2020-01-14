@@ -57,24 +57,24 @@
 
             <ul>
               <li
-                v-for="(comment, index) in comments"
-                :key="index"
+                v-for="(comment, commentIndex) in comments"
+                :key="commentIndex"
                 class="player-modal__comment"
               >
                 <div>
-                  <span>{{ comment.username }} : {{ comment.content }}</span>
+                  <p>{{ comment.username }} : {{ comment.content }}</p>
 
                   <div class="player-modal__comment-sub-action">
                     <button
                       :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
-                      @click="playerCommentVote(comment, 'up')"
+                      @click="playerOpinionVote(comment, 'up')"
                     >
                       <i class="material-icon">thumb_up_alt</i>
                       <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
                     </button>
                     <button
                       :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
-                      @click="playerCommentVote(comment, 'down')"
+                      @click="playerOpinionVote(comment, 'down')"
                     >
                       <i class="material-icon">thumb_down_alt</i>
                       <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
@@ -143,15 +143,35 @@
                   <div
                     v-if="comment.isReply"
                   >
+                    <nos-skeleton-loader
+                      v-if="comment.isRepliesLoading"
+                      :line="2"
+                    />
+
                     <ul>
                       <li
                         v-for="(reply, replyIndex) in comment.replies"
                         :key="replyIndex"
                         class="player-modal__reply"
                       >
-                        <p>
-                          {{ reply.username }}: {{ reply.content }}
-                        </p>
+                        <p>{{ reply.username }}: {{ reply.content }}</p>
+
+                        <div class="player-modal__comment-sub-action">
+                          <button
+                            :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
+                            @click="playerOpinionVote(reply, 'up')"
+                          >
+                            <i class="material-icon">thumb_up_alt</i>
+                            <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
+                          </button>
+                          <button
+                            :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
+                            @click="playerOpinionVote(reply, 'down')"
+                          >
+                            <i class="material-icon">thumb_down_alt</i>
+                            <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
+                          </button>
+                        </div>
                       </li>
                     </ul>
                   </div>

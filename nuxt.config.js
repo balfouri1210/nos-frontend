@@ -81,7 +81,8 @@ module.exports = {
           cookieKey: 'nos_lang',
           alwaysRedirect: true
         },
-        vueI18nLoader: true
+        vueI18nLoader: true,
+        strategy: 'prefix_except_default'
       }
     ]
   ],
