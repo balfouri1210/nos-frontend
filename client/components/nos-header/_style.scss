@@ -21,16 +21,21 @@
 
   &__logo {
     display: inline-flex;
-    width: 200px;
 
     a {
-      display: inline-flex;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+      background-image: url('/logo_short2.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
     }
 
-    img {
-      width: 100%;
-      vertical-align: middle;
-    }
+    // img {
+    //   width: 100%;
+    //   vertical-align: middle;
+    // }
   }
 
   &__functions {
@@ -94,6 +99,14 @@
 
     &__content {
       padding: 0;
+    }
+
+    &__logo {
+      a {
+        width: 180px;
+        height: 30px;
+         background-image: url('/logo2.svg');
+      }
     }
   }
 }

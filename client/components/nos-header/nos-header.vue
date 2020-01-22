@@ -4,12 +4,7 @@
       <div class="nos-header__logo">
         <nuxt-link
           :to="localePath('index')"
-        >
-          <img
-            src="/logo2.svg"
-            alt="logo"
-          >
-        </nuxt-link>
+        />
       </div>
 
       <div class="nos-header__functions">
