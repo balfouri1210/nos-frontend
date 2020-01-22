@@ -25,7 +25,10 @@
     "nuxt-i18n": "^6.4.1",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-http": "^2.3.0",
+    "v-click-outside": "^3.0.0",
     "vee-validate": "^3.2.1",
+    "vue-click-outside": "^1.0.7",
+    "vue-spinner": "^1.0.3",
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {

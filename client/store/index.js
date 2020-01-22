@@ -1,10 +1,17 @@
 export const state = () => ({
+  isLoading: false
 });
 
 export const mutations = {
+  mutateIsLoading(state, isLoading) {
+    state.isLoading = isLoading;
+  }
 };
 
 export const getters = {
+  getIsLoading(state) {
+    return state.isLoading;
+  }
 };
 
 import U from '../lib/util';

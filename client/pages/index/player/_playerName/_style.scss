@@ -54,13 +54,14 @@
       height: 100%;
       border: 1px solid black;
       font-size: 13px;
+      resize: none;
     }
 
     button {
       width: 80px;
       height: 100%;
       margin-left: 6px;
-      background: black;
+      background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
       color: white;
     }
   }
@@ -74,33 +75,114 @@
   }
 
   &__comment {
-    margin-bottom: 10px;
+    p {
+      margin-bottom: 4px;
+    }
+
+    &-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: -4px;
+
+      .v-icon {
+        font-size: 18px;
+      }
+    }
+
+    &-username {
+      margin-right: 4px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    &-moment {
+      color: #909090;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    &-content {
+      padding-right: 40px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    margin-bottom: 16px;
+  }
+
+  &__edit-comment {
+    input {
+      width: 100%;
+      border-bottom: 1px solid black;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    &-action {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 4px;
+
+      button {
+        width: 66px;
+        height: 28px;
+        margin-left: 4px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+    }
   }
 
   &__comment-sub-action {
     display: flex;
     align-items: center;
-    color: #909090;
-    font-size: 13px;
     font-style: normal;
-
+    
     button {
       display: flex;
       align-items: center;;
-      margin-right: 12px;
+      color: #909090;
+      font-size: 13px;
     }
 
-    .material-icon {
-      margin-right: 4px;
-      font-size: 16px;
+    button:first-of-type {
+      margin-right: 16px;
     }
-    .material-icon:hover {
+    button:nth-of-type(2) {
+      margin-right: 8px;
+    }
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 15px;
+    }
+    .v-icon:hover {
       color: black;
     }
   }
 
+  &__more-menu {
+    font-size: 13px;
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 18px;
+    }
+
+    .v-list-item {
+      min-width: 110px;
+      font-size: 15px;
+    }
+
+    .v-list-item__title {
+      font-size: unset;
+    }
+  }
+
   &--is-voted {
-    .material-icon {
+    .v-icon {
       color: $nos-main-theme;
     }
   }
@@ -118,17 +200,22 @@
   }
 
   &__reply-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     margin-top: 4px;
-    text-align: right;
-    font-size: 12px;
 
     button {
+      width: 66px;
+      height: 28px;
       margin-left: 4px;
+      font-size: 12px;
+      font-weight: 800;
     }
   }
 
   &__load-reply {
-    margin-top: 4px;
+    margin: 6px 0;
     color: $nos-main-theme;
     font-size: 13px;
 
@@ -145,12 +232,25 @@
 
   &__replies {
     margin-top: 4px;
-    margin-left: 12px;
+    margin-left: 18px;
     font-size: 13px;
   }
 
   &__reply {
-    margin-bottom: 4px;
+    p {
+      margin-bottom: 2px;
+    }
+
+    margin-bottom: 13px;
+  }
+
+  &__reply-username {
+    margin-right: 4px;
+    font-weight: 800;
+  }
+
+  &__reply-content {
+    font-weight: 400;
   }
 }
 
@@ -167,6 +267,27 @@
       width: 100%;
       height: 100%;
       border-radius: 4px;
+    }
+
+    &__comment {
+      &-username {
+        font-size: 14px;
+      }
+
+      &-moment {
+        font-size: 13px;
+      }
+
+      &-content {
+        font-size: 15px;
+      }
+    }
+
+    &__edit-comment-action,
+    &__reply-action {
+      button {
+        font-size: 13px;
+      }
     }
   }
 }

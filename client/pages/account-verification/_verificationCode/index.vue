@@ -36,13 +36,13 @@ export default {
 
   async mounted() {
     try {
-      await this.$axios.put('/api/auth/account-verification', {
+      await this.$axios.$put('/api/auth/account-verification', {
         verificationCode: this.verificationCode
       });
 
       this.isAccountActivated = true;
     } catch (err) {
-      if (err.response.data.code === errors.ALREADY_ACTIVATED_USER.code) {
+      if (err.response.code === errors.ALREADY_ACTIVATED_USER.code) {
         this.isAccountActivationFailed = true;
       }
     } finally {

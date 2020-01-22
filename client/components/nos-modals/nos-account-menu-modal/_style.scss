@@ -1,0 +1,13 @@
+.nos-account-menu-modal {
+  button {
+    width: 100%;
+    background: white;
+    border-radius: 6px;
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  .nos-account-menu-modal {
+    top: 60px;
+  }
+}

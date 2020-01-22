@@ -29,6 +29,9 @@ module.exports = {
       "avoidEscape": true
     }],
     "no-console": process.env.STAGE === "prod" ? "error" : "warn",
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "keyword-spacing": ["error", {
+      "after": true
+    }]
   }
 };

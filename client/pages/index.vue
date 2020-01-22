@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1>This is 907Degrees. by Balfouri</h1>
     <h1>CURRENT STAGE IS <span style="color: orange">'{{ stage }}'</span></h1>
 
@@ -47,6 +47,10 @@ export default {
   mixins: [Base]
 };
 </script>
+
+<style lang="scss" scoped>
+@import "./_style.scss";
+</style>
 
 <i18n>
 {

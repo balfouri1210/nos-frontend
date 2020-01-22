@@ -1,22 +1,89 @@
 .nos-header {
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   top: 0;
   width: 100%;
   height: $mobile-header-height;
-  padding: 16px;
   border-bottom: 1px solid #e4e4e4;
   background: white;
   z-index: 100;
 
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: $web-header-content-width;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
   &__logo {
+    display: inline-flex;
     width: 200px;
+
+    a {
+      display: inline-flex;
+    }
 
     img {
       width: 100%;
       vertical-align: middle;
+    }
+  }
+
+  &__functions {
+    display: flex;
+    align-items: center;
+
+    div {
+      position: relative;
+    }
+
+    button {
+      display: inline-flex;
+      margin-left: 16px;
+    }
+
+    button:hover {
+      color: $nos-main-theme;
+
+      .v-icon {
+        color: $nos-main-theme;
+      }
+
+      .nos-header--accented {
+        color: #c77506;
+      }
+    }
+  }
+
+  &__notification-btn {
+    ::v-deep .v-badge__badge {
+      border: 1px solid $nos-main-theme !important;
+
+      span {
+        display: block;
+        margin-top: -1px;
+        font-weight: 800;
+        color: black;
+      }
+    }
+
+    .nos-header--accented {
+      color: $nos-main-theme;
+    }
+  }
+
+  .v-chip {
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 15px;
     }
   }
 }
@@ -24,5 +91,9 @@
 @media only screen and (min-width: $mobile-width) {
   .nos-header {
     height: $web-header-height;
+
+    &__content {
+      padding: 0;
+    }
   }
 }

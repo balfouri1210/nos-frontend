@@ -222,10 +222,33 @@ strong {
 
 
 // Vuetify customizing
+.v-application {
+  line-height: unset;
+  
+  a {
+    color: unset;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .v-skeleton-loader__list-item-two-line {
   height: unset !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+.v-btn {
+  letter-spacing: unset;
+  text-indent: unset;
+}
+
+.v-list-item__title {
+  display: flex;
+  align-items: center;;
 }
 // Vuetify customizing end
 

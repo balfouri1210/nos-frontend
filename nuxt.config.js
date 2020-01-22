@@ -37,7 +37,8 @@ module.exports = {
     scrollBehavior() {
       return { x: 0, y: 0 };
     },
-    mode: 'history'
+    mode: 'history',
+    middleware: 'router-hook'
   },
 
   axios: {
@@ -51,7 +52,8 @@ module.exports = {
     { src: '~/plugins/validator.js' },
     { src: '~/plugins/global-component.js' },
     { src: '~/plugins/datepicker.js', ssr: false },
-    { src: '~/plugins/logout.js', ssr: false }
+    { src: '~/plugins/logout.js', ssr: false },
+    { src: '~/plugins/vue-spinner.js', ssr: false }
   ],
 
   buildModules: [
@@ -98,5 +100,10 @@ module.exports = {
       '@/styles/_variable.scss',
       '@/styles/_main.scss' // use underscore "_" & also file extension ".scss"
     ]
+  },
+
+  loading: {
+    color: '#f4991e',
+    failedColor: 'black'
   }
 };

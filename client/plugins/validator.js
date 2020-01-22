@@ -25,9 +25,9 @@ export default function({ $axios }) {
 
 
   extend('available_email', value => {
-    return $axios.get(`/api/auth/verifyEmail/${value}`).then((res) => {
+    return $axios.$get(`/api/auth/verifyEmail/${value}`).then((res) => {
       return {
-        valid: res.data.errorCode !== 'error_000001'
+        valid: res.errorCode !== 'error_000001'
       };
     });
   });

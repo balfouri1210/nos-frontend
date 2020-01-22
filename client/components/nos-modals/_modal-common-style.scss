@@ -1,0 +1,20 @@
+.nos-modal {
+  position: absolute;
+  top: 52px;
+  right: 6px;
+  width: 280px;
+  padding: 12px 10px;
+  border-radius: 10px;
+  background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
+
+  &__body {
+    position: relative;
+    margin-top: 12px;
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  .nos-modal {
+    right: 0;
+  }
+}

@@ -39,6 +39,7 @@
               />
 
               <button
+                :disabled="!newCommentContent.trim()"
                 @click="addComment"
               >
                 ADD
@@ -49,12 +50,14 @@
           <hr>
 
           <!-- Comment List Area -->
-          <div class="player-modal__comments">
-            <nos-skeleton-loader
-              v-if="isCommentsLoading"
-              :line="4"
-            />
+          <pulse-loader
+            v-if="isCommentAdding"
+            :color="'#808080'"
+            :size="'6px'"
+            :style="{ 'margin': '16px 0' }"
+          />
 
+          <div class="player-modal__comments">
             <ul>
               <li
                 v-for="(comment, commentIndex) in comments"
@@ -62,26 +65,124 @@
                 class="player-modal__comment"
               >
                 <div>
-                  <p>{{ comment.username }} : {{ comment.content }}</p>
+                  <div class="player-modal__comment-meta">
+                    <div>
+                      <span class="player-modal__comment-username">{{ comment.username }}</span>
+                      <span class="player-modal__comment-moment">{{ $moment(comment.created_at).fromNow() }}</span>
+                    </div>
 
+                    <!-- Comment more menu -->
+                    <v-menu
+                      :content-class="'player-modal__more-menu'"
+                      transition="slide-y-transition"
+                      bottom
+                      left
+                      :offset-y="true"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          text
+                          icon
+                          v-on="on"
+                        >
+                          <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                      </template>
+
+                      <v-list v-if="comment.users_id === getId()">
+                        <v-list-item @click="editComment(comment)">
+                          <v-list-item-title>
+                            <v-icon>mdi-pencil</v-icon>Edit
+                          </v-list-item-title>
+                        </v-list-item>
+
+                        <v-list-item @click="deleteComment(comment)">
+                          <v-list-item-title>
+                            <v-icon>mdi-delete</v-icon>Delete
+                          </v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+
+                      <v-list v-else>
+                        <v-list-item @click="reportComment(comment)">
+                          <v-list-item-title>
+                            <v-icon>mdi-alert</v-icon>Report
+                          </v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </div>
+
+                  <!-- Comment content -->
+                  <div>
+                    <p
+                      v-if="!comment.isEditing"
+                      class="player-modal__comment-content"
+                    >
+                      {{ comment.content }}
+                    </p>
+
+                    <div
+                      v-else
+                      class="player-modal__edit-comment"
+                    >
+                      <input
+                        id="comment"
+                        v-model="comment.content"
+                        type="text"
+                        name="edit-comment"
+                        :rules="'required'"
+                        maxlength="100"
+                      >
+
+                      <div class="player-modal__edit-comment-action">
+                        <button
+                          class="nos-simple-white-btn"
+                          @click="cancelEditComment(comment)"
+                        >
+                          CANCEL
+                        </button>
+
+                        <button
+                          class="nos-simple-black-btn"
+                          :disabled="!comment.content.trim()"
+                          @click="saveEditComment(comment)"
+                        >
+                          <pulse-loader
+                            v-if="comment.isEditCommentSaving"
+                            :color="'white'"
+                            :size="'4px'"
+                          />
+                          <span v-else>SAVE</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Comment sub action -->
                   <div class="player-modal__comment-sub-action">
                     <button
                       :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
                       @click="playerOpinionVote(comment, 'up')"
                     >
-                      <i class="material-icon">thumb_up_alt</i>
+                      <v-icon>mdi-thumb-up</v-icon>
                       <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
                     </button>
                     <button
                       :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
                       @click="playerOpinionVote(comment, 'down')"
                     >
-                      <i class="material-icon">thumb_down_alt</i>
+                      <v-icon>mdi-thumb-down</v-icon>
                       <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
                     </button>
-                    <button @click="comment.isNewReply = !comment.isNewReply">
+                    <!-- <button>REPLY</button> -->
+                    <v-btn
+                      x-small
+                      text
+                      @click="comment.isNewReply = !comment.isNewReply"
+                    >
                       REPLY
-                    </button>
+                    </v-btn>
                   </div>
                 </div>
 
@@ -114,12 +215,18 @@
                         :disabled="!comment.replyContent.trim()"
                         @click="addReply(comment)"
                       >
-                        ADD
+                        <pulse-loader
+                          v-if="comment.isReplySaving"
+                          :color="'white'"
+                          :size="'4px'"
+                        />
+                        <span v-else>ADD</span>
                       </button>
                     </div>
                   </div>
                 </div>
 
+                <!-- Load replies -->
                 <div class="player-modal__load-reply">
                   <button
                     v-if="comment.reply_count && !comment.isReply"
@@ -137,7 +244,8 @@
                     Hide replies
                   </button>
                 </div>
-                
+
+
                 <!-- Replies Area -->
                 <div class="player-modal__replies">
                   <div
@@ -145,7 +253,7 @@
                   >
                     <nos-skeleton-loader
                       v-if="comment.isRepliesLoading"
-                      :line="2"
+                      :line="replyCountForSkeletonLoader(comment.reply_count)"
                     />
 
                     <ul>
@@ -154,21 +262,24 @@
                         :key="replyIndex"
                         class="player-modal__reply"
                       >
-                        <p>{{ reply.username }}: {{ reply.content }}</p>
+                        <p>
+                          <span class="player-modal__reply-username">{{ reply.username }}</span>
+                          <span class="player-modal__reply-content">{{ reply.content }}</span>
+                        </p>
 
                         <div class="player-modal__comment-sub-action">
                           <button
                             :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
                             @click="playerOpinionVote(reply, 'up')"
                           >
-                            <i class="material-icon">thumb_up_alt</i>
+                            <v-icon>mdi-thumb-up</v-icon>
                             <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
                           </button>
                           <button
                             :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
                             @click="playerOpinionVote(reply, 'down')"
                           >
-                            <i class="material-icon">thumb_down_alt</i>
+                            <v-icon>mdi-thumb-down</v-icon>
                             <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
                           </button>
                         </div>
@@ -181,7 +292,8 @@
                     class="player-modal__added-reply"
                   >
                     <p>
-                      {{ comment.addedReply.username }}: {{ comment.addedReply.content }}
+                      <span class="player-modal__reply-username">{{ comment.addedReply.username }}</span>
+                      <span class="player-modal__reply-content">{{ comment.addedReply.content }}</span>
                     </p>
                   </div>
                 </div>

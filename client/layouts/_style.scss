@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100%;
   padding-top: $mobile-header-height;
-  padding-bottom: $mobile-footer-height;
+  // padding-bottom: $mobile-footer-height;
 }
 
 .nos-entry {
@@ -19,6 +19,6 @@
 @media only screen and (min-width: $mobile-width) {
   .nos {
     padding-top: $web-header-height;
-    padding-bottom: $web-footer-height;
+    // padding-bottom: $web-footer-height;
   }
 }

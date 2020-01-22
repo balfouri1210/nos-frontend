@@ -1,8 +1,10 @@
 <template>
   <div class="nos">
-    <nos-header />
-    <nuxt />
-    <nos-footer />
+    <v-app>
+      <nos-header />
+      <nuxt />
+      <nos-footer />
+    </v-app>
   </div>
 </template>
 
