@@ -1,13 +1,13 @@
 <template>
   <div class="signup">
-    {{ $t('signup') }}
+    <h1>{{ $t('signup') }}</h1>
 
     <validation-observer v-slot="{ handleSubmit }">
       <form
         id="app"
         @submit.prevent="handleSubmit(onSubmit)"
       >
-        <div>
+        <div class="signup__property">
           <label for="email">Email</label>
           <nos-input
             id="email"
@@ -19,7 +19,7 @@
           />
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="password">Password</label>
           <nos-input
             id="password"
@@ -31,7 +31,7 @@
           />
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="confirmPassword">Confirm Password</label>
           <nos-input
             id="confirmPassword"
@@ -43,7 +43,7 @@
           />
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="username">Username</label>
           <nos-input
             id="username"
@@ -55,7 +55,7 @@
           />
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="birth">Birth</label>
           <client-only>
             <validation-provider
@@ -78,7 +78,7 @@
           </client-only>
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="gender">Gender</label>
           <nos-select
             id="gender"
@@ -90,7 +90,7 @@
           />
         </div>
 
-        <div>
+        <div class="signup__property">
           <label for="country">Country</label>
           <nos-select
             id="countryId"
@@ -105,6 +105,7 @@
         <div>
           <button
             type="submit"
+            class="nos-basic-btn"
           >
             Submit
           </button>

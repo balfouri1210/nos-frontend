@@ -1,8 +1,11 @@
 .nos {
   position: relative;
   min-height: 100%;
-  padding-top: $mobile-header-height;
-  // padding-bottom: $mobile-footer-height;
+
+  .v-application--wrap {
+    padding-top: $mobile-header-height;
+    padding-bottom: $mobile-footer-height;
+  }
 }
 
 .nos-entry {
@@ -16,9 +19,21 @@
   }  
 }
 
+.nos-layout-default {
+  width: 100%;
+  max-width: $web-body-content-width;
+  margin: 0 auto;
+}
+
+.nos-layout-wide {
+  width: 100%;
+}
+
 @media only screen and (min-width: $mobile-width) {
   .nos {
-    padding-top: $web-header-height;
-    // padding-bottom: $web-footer-height;
+    .v-application--wrap {
+      padding-top: $web-header-height;
+      padding-bottom: $web-footer-height;
+    }
   }
 }

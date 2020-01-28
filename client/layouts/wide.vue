@@ -2,7 +2,7 @@
   <div class="nos">
     <v-app>
       <nos-header />
-      <nuxt class="nos-layout-default" />
+      <nuxt class="nos-layout-wide" />
       <nos-footer />
     </v-app>
   </div>

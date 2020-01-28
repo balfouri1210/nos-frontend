@@ -211,20 +211,13 @@ strong {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 // Vue transition fade styles end
 
 
 // Vuetify customizing
 .v-application {
   line-height: unset;
-  
+
   a {
     color: unset;
   }
@@ -254,10 +247,30 @@ strong {
 
 
 .nos-basic-btn {
-  background: linear-gradient(-200deg, $nos-main-theme 35%, #ea5514 100%);
-  color: white;
+  position: relative;
+  background: linear-gradient(160deg, #ffb859 30%, #c33d02 90%);
+  color: white !important;
   border-radius: 4px;
   padding: 8px 24px;
+  z-index: 1;
+}
+
+.nos-basic-btn::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 4px;
+  background: linear-gradient(160deg, #f4991e 30%, #ea5514 90%);
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  z-index: -1;
+}
+
+.nos-basic-btn:hover::before {
+  opacity: 1;
 }
 
 .nos-simple-white-btn {
@@ -271,4 +284,11 @@ strong {
   border: 1px solid black;
   color: white;
   font-weight: 800;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

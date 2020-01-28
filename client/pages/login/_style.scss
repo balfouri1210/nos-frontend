@@ -1,0 +1,17 @@
+.login {
+  margin-top: 32px;
+
+  h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  ::v-deep input {
+    border-bottom: 1px solid black;
+  }
+
+  button {
+    margin-top: 16px;
+    width: 100%;
+  }
+}

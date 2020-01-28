@@ -1,20 +1,17 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
+import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-request-login-popup.vue';
 
 export default {
-  async asyncData({ params, $axios, store }) {
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
+
+  async asyncData({ params, $axios }) {
     function getComments (playerId) {
       return $axios.$get(`/api/comments/player/${playerId}`);
-    }
-    
-    function commentMappingWithUiProperty(comments) {
-      comments.forEach(comment => {
-        comment.isReply = false;
-        comment.isNewReply = false;
-        comment.isRepliesLoading = true;
-        comment.replyContent = '';
-      });
     }
 
     try {
@@ -22,7 +19,6 @@ export default {
       playerId = parseInt(playerId);
 
       let comments = await getComments(playerId);
-      commentMappingWithUiProperty(comments);
       return { playerName, playerId, comments };
     } catch (err) {
       console.error(err);
@@ -30,21 +26,42 @@ export default {
   },
 
   components: {
-    nosSkeletonLoader
+    nosSkeletonLoader,
+    nosRequestLoginPopup
   },
 
   data() {
     return {
+      commentPage: 1,
+      playerCommentsCount: null,
+      commentSortType: 'date',
       newCommentContent: '',
-      isCommentAdding: false
+      isCommentsLoading: false,
+      isMoreCommentsLoading: false,
+      isCommentAdding: false,
+      isCommentMalfunction: false,
+
+      isRequestLoginPopup: false
     };
   },
 
   computed: {
-    replyCountForSkeletonLoader() {
-      return (reply_count) => {
-        return reply_count < 5 ? reply_count : 5;
+    isReadyForMoreRepliesButton() {
+      return (comment) => {
+        return comment.reply_count > comment.replies.length
+        && comment.reply_count > 10
+        && comment.isRepliesLoaded
+        && !comment.isMoreRepliesLoading;
       };
+    }
+  },
+
+  async created() {
+    try {
+      this.playerCommentsCount = (await this.getPlayerCommentsCount()).playerCommentsCount;
+      this.commentMappingWithUiProperty(this.comments);
+    } catch (err) {
+      console.error(err);
     }
   },
 
@@ -55,27 +72,41 @@ export default {
       this.$router.push(this.localePath('index'));
     },
 
-    async loadReplies(parentComment) {
-      try {
-        if (!parentComment.isReply) {
-          parentComment.isReply = true;
+    getPlayerCommentsCount() {
+      return this.$axios.$get(`/api/comments/count/player/${this.playerId}`);
+    },
 
-          // this.$set makes 'replies' property REACTIVATE
-          // That means without it, you can't update the change of 'replies'
-          if (parentComment.isRepliesLoading) {
-            this.$set(parentComment, 'replies', await this.$axios.$get(`/api/replies/player/${this.getId()}/${parentComment.id}`));
-            parentComment.isRepliesLoading = false;
-          }
-        }
+    commentMappingWithUiProperty(comments) {
+      comments.forEach(comment => {
+        this.$set(comment, 'isReply', false);
+        this.$set(comment, 'isNewReply', false);
+        this.$set(comment, 'replies', []);
+        this.$set(comment, 'replyContent', '');
+        this.$set(comment, 'replyPage', 1);
+        this.$set(comment, 'isRepliesLoaded', false);
+      });
+    },
+
+    async getReplies(parentComment) {
+      parentComment.replies = [];
+      parentComment.replyPage = 1;
+      parentComment.isReply = true;
+      parentComment.isRepliesLoaded = false;
+
+      try {
+        parentComment.replies = await this.$axios.$get(`/api/replies/player/${parentComment.id}`);
+        parentComment.isRepliesLoaded = true;
       } catch (err) {
+        this.isCommentMalfunction = true;
         console.error(err);
       }
     },
 
     async addComment() {
-      this.isCommentAdding = true;
+      if (!this.checkIsLoggedIn()) return;
 
       try {
+        this.isCommentAdding = true;
         let addedComment = await this.$axios.$post('/api/comments/player', {
           userId: this.getId(),
           playerId: this.playerId,
@@ -84,7 +115,9 @@ export default {
         this.insertNewComment(addedComment);
         this.newCommentContent = '';
         this.isCommentAdding = false;
+        this.playerCommentsCount ++;
       } catch (err) {
+        this.isCommentMalfunction = true;
         console.error(err);
       }
     },
@@ -92,25 +125,27 @@ export default {
     insertNewComment(addedComment) {
       addedComment.isReply = false;
       addedComment.isNewReply = false;
-      addedComment.isRepliesLoading = true;
       addedComment.replyContent = '';
       this.comments.unshift(addedComment);
     },
 
     async addReply(parentComment) {
+      if (!this.checkIsLoggedIn()) return;
+
       try {
         this.$set(parentComment, 'isReplySaving', true);
         const addReplyResult = await this.$axios.$post('/api/replies/player', {
           userId: this.getId(),
           playerId: this.playerId,
           content: parentComment.replyContent,
-          parentCommentId: parentComment.id,
+          parentCommentsId: parentComment.id,
           parentAuthorId: parentComment.users_id
         });
-        
+
         this.showAddedReply(parentComment, addReplyResult);
         parentComment.isReplySaving = false;
       } catch (err) {
+        this.isCommentMalfunction = true;
         console.error(err);
       }
     },
@@ -119,12 +154,14 @@ export default {
       const addedReply = {
         id: addReplyResult.id,
         username: this.getUsername(),
-        content: parentComment.replyContent
+        content: parentComment.replyContent,
+        parent_comments_id: parentComment.id,
+        created_at: new Date(),
+        vote_up_count: 0,
+        vote_down_count: 0
       };
 
-      if (parentComment.isReply) {
-        parentComment.replies.unshift(addedReply);
-      }
+      if (parentComment.isReply) parentComment.replies.unshift(addedReply);
 
       // Follow up after showing added reply
       parentComment.addedReply = addedReply;
@@ -133,8 +170,14 @@ export default {
       parentComment.reply_count ++;
     },
 
+    cancelReply(comment) {
+      comment.isNewReply = false;
+      comment.replyContent = '';
+    },
+
+
     async playerOpinionVote(opinion, action) {
-      if (!this.getJwt()) alert('login please');
+      if (!this.checkIsLoggedIn()) return;
 
       if (!opinion.isVoted) {
         // 첫 투표
@@ -180,11 +223,8 @@ export default {
       });
     },
 
-    cancelReply(comment) {
-      comment.isNewReply = false;
-      comment.replyContent = '';
-    },
 
+    // Related to Edit & Delete Comment
     editComment(comment) {
       this.$set(comment, 'isEditing', true);
     },
@@ -202,6 +242,7 @@ export default {
         targetComment.isEditing = false;
         targetComment.isEditCommentSaving = false;
       } catch (err) {
+        this.isCommentMalfunction = true;
         console.error(err);
       }
     },
@@ -215,13 +256,147 @@ export default {
           return comment.id === targetComment.id;
         });
         if (idx > -1) this.comments.splice(idx, 1);
+        this.playerCommentsCount --;
       } catch (err) {
+        this.isCommentMalfunction = true;
         console.error(err);
       }
     },
 
     reportComment(comment) {
       alert('신고했다!');
+    },
+
+
+    // Related to Edit & Delete Comment
+    editReply(reply) {
+      this.$set(reply, 'isEditing', true);
+    },
+
+    cancelEditReply(reply) {
+      reply.isEditing = false;
+    },
+
+    async saveEditReply(targetReply) {
+      try {
+        this.$set(targetReply, 'isEditCommentSaving', true);
+        await this.$axios.$put(`/api/replies/player/${targetReply.id}`, {
+          newContent: targetReply.content
+        });
+        targetReply.isEditing = false;
+        targetReply.isEditCommentSaving = false;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
+    },
+
+    async deleteReply(parentComment, targetReply) {
+      try {
+        await this.$axios.$delete(`/api/replies/player/${targetReply.id}`, {
+          params: {
+            parentCommentsId: parentComment.id
+          }
+        });
+        alert('삭제됐다!');
+
+        const idx = parentComment.replies.findIndex((reply) => {
+          return reply.id === targetReply.id;
+        });
+        if (idx > -1) parentComment.replies.splice(idx, 1);
+        parentComment.reply_count --;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
+    },
+
+    reportReply(reply) {
+      alert('신고했다!');
+    },
+
+
+
+    initiateCommentStateBeforeSortChange() {
+      this.comments = [];
+      this.commentPage = 1;
+    },
+
+    async sortCommentBy(sortType) {
+      this.initiateCommentStateBeforeSortChange();
+      this.isCommentsLoading = true;
+      this.commentSortType = sortType;
+
+      try {
+        switch (sortType) {
+          case 'date' :
+            this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+              params: { sortType: 'date' }
+            });
+            this.commentMappingWithUiProperty(this.comments);
+            break;
+            
+          case 'like' :
+          default :
+            this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+              params: { sortType: 'like' }
+            });
+            this.commentMappingWithUiProperty(this.comments);
+            break;
+        }
+        this.isCommentsLoading = false;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
+    },
+
+    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.loadMoreComments();
+      }
+    },
+
+    async loadMoreComments() {
+      if (this.playerCommentsCount <= this.comments.length) return;
+      try {
+        this.isMoreCommentsLoading = true;
+        const moreComments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+          params: {
+            sortType: this.commentSortType,
+            page: ++ this.commentPage
+          }
+        });
+        this.commentMappingWithUiProperty(moreComments);
+        this.comments = this.comments.concat(moreComments);
+        this.isMoreCommentsLoading = false;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
+    },
+
+    async loadMoreReplies(parentComment) {
+      if (parentComment.reply_count <= parentComment.replies.length) return;
+      this.$set(parentComment, 'isMoreRepliesLoading', true);
+      try {
+        const moreReplise = await this.$axios.$get(`/api/replies/player/${parentComment.id}`, {
+          params: { page: ++ parentComment.replyPage }
+        });
+        parentComment.replies = parentComment.replies.concat(moreReplise);
+        parentComment.isMoreRepliesLoading = false;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
+    },
+
+    checkIsLoggedIn() {
+      if (!this.getJwt()) {
+        this.isRequestLoginPopup = true;
+      } else {
+        return true;
+      }
     }
   }
 };

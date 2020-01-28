@@ -1,12 +1,26 @@
 .signup {
-  max-width: 240px;
+  width: 100%;
+  max-width: 340px;
+  margin: 40px auto 120px;
+  padding: 0 16px;
+
+  h1 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  &__property {
+    margin-bottom: 8px;
+  }
 
   ::v-deep input {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
   }
 
   ::v-deep select {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    border-radius: unset;
   }
 
   &__datepicker {
@@ -24,5 +38,16 @@
     left: 0;
     color: $form-warning-color;
     font-size: 13px;
+  }
+
+  .nos-basic-btn {
+    width: 100%;
+    margin-top: 16px;
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  .signup {
+    margin: 80px auto 150px;
   }
 }
