@@ -126,7 +126,7 @@
                 <div>
                   <div class="player-modal__comment-meta">
                     <span class="player-modal__comment-username">{{ comment.username }}</span>
-                    <span class="player-modal__comment-moment">{{ $moment(comment.created_at).fromNow() }}</span>
+                    <span class="player-modal__comment-moment">{{ $moment(comment.created_at).fromNow().replace(/ /, '') }}</span>
                   </div>
 
                   <!-- Comment content -->
@@ -323,7 +323,7 @@
                       >
                         <div class="player-modal__reply-meta">
                           <span class="player-modal__reply-username">{{ reply.username }}</span>
-                          <span class="player-modal__reply-moment">{{ $moment(reply.created_at).fromNow() }}</span>
+                          <span class="player-modal__reply-moment">{{ $moment(reply.created_at).fromNow().replace(/ /, '') }}</span>
                         </div>
 
                         <div

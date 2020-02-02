@@ -90,7 +90,7 @@
     position: relative;
     min-height: 400px;
 
-    button, p, span, input, textarea {
+    p, span, input, textarea {
       font-family: 'Open Sans', sans-serif;
     }
   }
@@ -109,6 +109,7 @@
     &-moment {
       color: #909090;
       font-size: 12px;
+      font-family: 'Kanit', sans-serif !important;
     }
 
     &-content {
@@ -160,7 +161,7 @@
     display: flex;
     align-items: center;
     font-style: normal;
-    
+
     button {
       display: flex;
       align-items: center;;
@@ -268,6 +269,7 @@
     &-moment {
       color: #909090;
       font-size: 12px;
+      font-family: 'Kanit', sans-serif !important;
     }
 
     &-username {
