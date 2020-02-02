@@ -104,7 +104,7 @@
 
     ::v-deep input {
       height: 40px;
-      border: 1px solid $color-fail;
+      border: 1px solid $color-fail !important;
       color: $color-fail;
     }
 
