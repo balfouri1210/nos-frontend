@@ -5,20 +5,6 @@
       <div class="settings__profile-title">
         <h1>Profile</h1>
 
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              v-on="on"
-            >
-              <v-icon color="grey">
-                mdi-help-circle
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>Minimum term is 30days</span>
-        </v-tooltip>
-
         <v-chip
           v-if="!isProfileUpdating && isProfileUpdateFailed"
           color="red darken-3"

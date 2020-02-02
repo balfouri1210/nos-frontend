@@ -34,7 +34,7 @@ export default {
       isProfileUpdateFailed: false,
 
       isPasswordUpdating: false,
-      isPasswordUpdateCompleted: true,
+      isPasswordUpdateCompleted: false,
       isPasswordUpdateFailed: false,
 
       isDeleteForm: false,
