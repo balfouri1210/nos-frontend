@@ -48,6 +48,7 @@ export default {
     display: inline-block;
     margin-top: 32px;
     padding: 12px;
+    height: 40px;
   }
 }
 </style>
