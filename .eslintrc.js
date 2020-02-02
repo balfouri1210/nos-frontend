@@ -32,6 +32,7 @@ module.exports = {
     "semi": [2, "always"],
     "keyword-spacing": ["error", {
       "after": true
-    }]
+    }],
+    "indent": ["error", 2]
   }
 };

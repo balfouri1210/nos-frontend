@@ -28,20 +28,18 @@
               id="password"
               type="password"
               name="password"
-              :rules="'required|min:6'"
+              :rules="'required'"
               :value="userInfo.password"
               @input="userInfo.password = $event"
             />
           </div>
 
-          <div>
-            <button
-              type="submit"
-              class="nos-login-modal__submit"
-            >
-              Submit
-            </button>
-          </div>
+          <button
+            type="submit"
+            class="nos-login-modal__submit"
+          >
+            Login
+          </button>
         </form>
       </validation-observer>
 
@@ -68,6 +66,24 @@
           </div>
         </div>
       </transition>
+
+      <div>
+        <nuxt-link
+          :to="localePath('account-password-reset')"
+          class="nos-login-modal__forgot-password"
+          @click.native="$emit('closeModal')"
+        >
+          Forgot Password?
+        </nuxt-link>
+
+        <nuxt-link
+          :to="localePath('signup')"
+          class="nos-login-modal__signup"
+          @click.native="$emit('closeModal')"
+        >
+          Signup
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -97,6 +113,10 @@ export default {
   },
 
   methods: {
+    fuck() {
+      console.log('fuck');
+    },
+
     ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
 
     async onSubmit() {

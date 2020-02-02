@@ -1,0 +1,126 @@
+.settings {
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto 120px;
+  padding: 0 16px;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .nos-basic-btn {
+    width: 100%;
+    height: 42px;
+  }
+
+  &__profile {
+    margin-bottom: 64px;
+
+    .settings__item {
+      margin-bottom: 18px;
+    }
+
+    ::v-deep input,
+    ::v-deep select {
+      height: 40px;
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+
+      .v-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__password {
+    margin-bottom: 64px;
+
+    .settings__item {
+      margin-bottom: 8px;
+    }
+
+    ::v-deep input {
+      height: 40px;
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    &-desc {
+      margin-bottom: 12px;
+
+      span {
+        color: $nos-main-theme;
+      }
+    }
+  }
+
+  &__update-completed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba($nos-main-theme, 0.1);
+    border: 1px solid $nos-main-theme;
+    border-radius: 6px;
+
+    .v-icon {
+      margin-right: 16px;
+      font-size: 36px;
+      color: $nos-main-theme;
+    }
+  }
+
+  &__failed {
+    margin-top: 8px;
+    color: #C62828;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  &__label {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+
+  &__delete-account {
+    &-title {
+      margin-bottom: 24px;
+      color: $color-fail;
+
+      p {
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.78);
+      }
+    }
+
+    ::v-deep input {
+      height: 40px;
+      border: 1px solid $color-fail;
+      color: $color-fail;
+    }
+
+    button {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      border-radius: 4px;
+      background: $color-fail;
+      color: white;
+    }
+    button:last-of-type {
+      margin-top: 8px;
+    }
+    button:disabled {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+}

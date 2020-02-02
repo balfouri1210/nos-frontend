@@ -1,8 +1,16 @@
 .nos-account-menu-modal {
-  button {
+  button, a {
     width: 100%;
     background: white;
     border-radius: 6px;
+  }
+
+  button {
+    margin-bottom: 8px;
+  }
+
+  button:last-of-type {
+    margin: 0;
   }
 }
 

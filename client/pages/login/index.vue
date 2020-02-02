@@ -40,6 +40,16 @@
               Login
             </button>
           </div>
+
+          <div>
+            <nuxt-link
+              :to="localePath('account-password-reset')"
+              class="login__forgot-password"
+              @click.native="$emit('closeModal')"
+            >
+              Forgot Password?
+            </nuxt-link>
+          </div>
         </form>
       </validation-observer>
 
@@ -48,11 +58,11 @@
       >
         <div
           v-show="errorMessage"
-          class="nos-login-modal__error-message"
+          class="login__error-message"
         >
           <div>
             <i
-              class="material-icons nos-login-modal__error-icon"
+              class="material-icons login__error-icon"
             >error</i>
             <span>{{ errorMessage }}</span>
           </div>
@@ -73,7 +83,7 @@
 <script>
 import Cookies from 'js-cookie';
 import { createNamespacedHelpers } from 'vuex';
-const { mapMutations } = createNamespacedHelpers('auth');
+const { mapMutations, mapActions } = createNamespacedHelpers('auth');
 import jwtDecode from 'jwt-decode';
 import { TOKEN_EXPIRES } from '@/lib/constants';
 
@@ -93,6 +103,7 @@ export default {
 
   methods: {
     ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
+    ...mapActions(['mutateUnreadNotificationCountAction']),
 
     async onSubmit() {
       try {
@@ -107,6 +118,7 @@ export default {
         this.mutateId(decodedJwt.id);
         this.mutateEmail(decodedJwt.email);
         this.mutateUsername(decodedJwt.username);
+        await this.mutateUnreadNotificationCountAction();
         this.$router.push(this.localePath('index'));
       } catch (err) {
         console.error(err);

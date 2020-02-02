@@ -1,25 +1,49 @@
 <template>
   <div class="nos-entry">
-    <div class="centered">
-      <nuxt-link
-        :to="localePath('index')"
-        class="nos-entry__logo"
-      >
-        <img
-          src="/logo.svg"
-          alt="logo"
+    <v-app>
+      <div class="nos-entry__inner">
+        <nuxt-link
+          class="nos-entry__go-back"
+          :to="localePath('index')"
         >
-      </nuxt-link>
+          <v-chip
+            color="#f4991e"
+            text-color="#f4991e"
+            outlined
+            :ripple="true"
+          >
+            Go Home
+          </v-chip>
+        </nuxt-link>
 
-      <nuxt />
-    </div>
+        <nuxt-link
+          :to="localePath('index')"
+          class="nos-entry__logo"
+        >
+          <img
+            src="/logo2.svg"
+            alt="logo"
+          >
+        </nuxt-link>
+
+        <nuxt />
+      </div>
+
+      <nos-footer />
+    </v-app>
   </div>
 </template>
 
 <script>
-export default {};
+import nosFooter from '@/components/nos-footer/nos-footer.vue';
+
+export default {
+  components: {
+    nosFooter
+  }
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./_style.scss";
 </style>

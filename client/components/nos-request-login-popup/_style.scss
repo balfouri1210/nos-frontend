@@ -41,16 +41,10 @@
       border-radius: 4px;
       text-align: center;
     }
-  }
 
-  &__signup-btn {
-    border: 2px solid $nos-main-theme;
-    color: white !important;
-    transition: all 0.3s ease-out;
-  }
-
-  &__signup-btn:hover {
-    background: rgba($nos-main-theme, 0.5);
+    .nos-basic-outlined-btn {
+      color: white;
+    }
   }
 
   &__do-it-later {

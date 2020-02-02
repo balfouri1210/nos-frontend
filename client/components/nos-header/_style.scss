@@ -80,17 +80,6 @@
       color: $nos-main-theme;
     }
   }
-
-  .v-chip {
-    padding: 0 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    .v-icon {
-      margin-right: 4px;
-      font-size: 15px;
-    }
-  }
 }
 
 @media only screen and (min-width: $mobile-width) {

@@ -3,6 +3,10 @@
     <nos-modal-header @closeModal="$emit('closeModal')" />
 
     <div class="nos-modal__body">
+      <button @click="goToSettings">
+        Settings
+      </button>
+
       <button @click="logout">
         Logout
       </button>
@@ -22,6 +26,12 @@ export default {
     logout() {
       this.$store.$logout();
       this.$emit('logoutSuccess');
+      this.$router.push(this.localePath('index'));
+    },
+
+    goToSettings() {
+      this.$emit('closeModal');
+      this.$router.push(this.localePath('settings'));
     }
   }
 };

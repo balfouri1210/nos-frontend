@@ -17,17 +17,29 @@ export default {
 
       players: [{
         id: 1,
-        name: 'lionel messi',
-        team: 'FC Barcelona'
+        name: 'Lionel Messii',
+        team: 'FC Barcelona',
+        imgSrc: '/messi.png'
       }, {
-        id: 7,
-        name: 'kangin lee',
-        team: 'FC Valencia'
+        id: 2,
+        name: 'Paulo Dybala',
+        team: 'FC Juventus',
+        imgSrc: '/dybala.jpg'
+      }, {
+        id: 3,
+        name: 'Marco Reus',
+        team: 'Borussia Dortmund',
+        imgSrc: '/reus.png'
+      }, {
+        id: 4,
+        name: 'Kangin Lee',
+        team: 'FC Valencia',
+        imgSrc: '/kangin.png'
       }]
     };
   },
 
   methods: {
-    ...mapGetters(['getJwt', 'getEmail'])
+    ...mapGetters(['getJwt', 'getUsername'])
   }
 };

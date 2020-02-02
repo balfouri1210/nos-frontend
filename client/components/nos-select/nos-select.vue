@@ -1,5 +1,8 @@
 <template>
-  <div class="nos-select">
+  <div
+    class="nos-select"
+    :class="{ 'nos-select--outlined': outlined }"
+  >
     <validation-provider
       v-slot="{ errors }"
       :rules="rules"
@@ -66,6 +69,11 @@ export default {
     rules: {
       type: [Object, String],
       default: null
+    },
+
+    outlined: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -96,8 +104,27 @@ export default {
     position: absolute;
     bottom: 0;
     left: 0;
-    color: $form-warning-color;
+    color: $color-warning;
     font-size: 13px;
+  }
+
+  &--outlined {
+    select {
+      padding: 0 8px;
+      border: 1px solid $nos-main-theme;
+      border-radius: 4px;
+    }
+
+    select:disabled {
+      border: 1px solid black !important;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .nos-select__error-message {
+      top: 42px;
+      left: 8px;
+      color: #c62828;
+    }
   }
 }
 </style>

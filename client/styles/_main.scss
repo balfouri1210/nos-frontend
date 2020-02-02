@@ -215,6 +215,10 @@ strong {
 
 
 // Vuetify customizing
+.theme--light.v-application {
+  background: none;
+}
+
 .v-application {
   line-height: unset;
 
@@ -243,15 +247,22 @@ strong {
   display: flex;
   align-items: center;;
 }
+
+.v-chip {
+  padding: 0 12px !important;
+}
 // Vuetify customizing end
 
 
 .nos-basic-btn {
   position: relative;
-  background: linear-gradient(160deg, #ffb859 30%, #c33d02 90%);
-  color: white !important;
+  width: 100%;
+  padding: 8px 0;
   border-radius: 4px;
-  padding: 8px 24px;
+  background: linear-gradient(160deg, #f4991e 30%, #c33d02 90%);
+  color: white !important;
+  text-align: center;
+  // box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -272,6 +283,29 @@ strong {
 .nos-basic-btn:hover::before {
   opacity: 1;
 }
+
+.nos-basic-btn:disabled {
+  background: rgba(#c33d02, 0.7);
+}
+.nos-basic-btn:disabled:hover::before {
+  opacity: 0;
+}
+
+
+.nos-basic-outlined-btn {
+  position: relative;
+  width: 100%;
+  padding: 8px 0;
+  border: 2px solid $nos-main-theme;
+  border-radius: 4px;
+  color: black;
+  transition: all 0.3s ease-out;
+}
+
+.nos-basic-outlined-btn:hover {
+  background: rgba($nos-main-theme, 0.5);
+}
+
 
 .nos-simple-white-btn {
   padding: 3px 8px;

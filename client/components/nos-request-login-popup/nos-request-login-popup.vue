@@ -28,7 +28,7 @@
 
       <div>
         <nuxt-link
-          class="nos-request-login-popup__signup-btn"
+          class="nos-basic-outlined-btn"
           :to="localePath('signup')"
         >
           Signup

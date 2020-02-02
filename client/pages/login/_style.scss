@@ -1,17 +1,45 @@
 .login {
   margin-top: 32px;
 
-  h1 {
-    font-size: 20px;
-    text-align: center;
-  }
-
   ::v-deep input {
     border-bottom: 1px solid black;
   }
 
-  button {
+  .nos-basic-btn {
     margin-top: 16px;
     width: 100%;
+  }
+
+  &__error-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: darkred;
+    color: white;
+    font-size: 14px;
+    
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    i {
+      color: white;
+      vertical-align: middle;
+    }
+  }
+
+  &__error-icon {
+    margin-right: 4px;
+  }
+
+  &__forgot-password {
+    display: block;
+    padding: 4px 0;
+    font-size: 12px;
+    text-align: right;
   }
 }

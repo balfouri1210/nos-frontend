@@ -10,15 +10,9 @@ export default {
   },
 
   async asyncData({ params, $axios }) {
-    function getComments (playerId) {
-      return $axios.$get(`/api/comments/player/${playerId}`);
-    }
-
     try {
       let [playerName, playerId] = params.playerName.split('-');
-      playerId = parseInt(playerId);
-
-      let comments = await getComments(playerId);
+      let comments = await $axios.$get(`/api/comments/player/${playerId}`);
       return { playerName, playerId, comments };
     } catch (err) {
       console.error(err);
@@ -49,9 +43,9 @@ export default {
     isReadyForMoreRepliesButton() {
       return (comment) => {
         return comment.reply_count > comment.replies.length
-        && comment.reply_count > 10
-        && comment.isRepliesLoaded
-        && !comment.isMoreRepliesLoading;
+          && comment.reply_count > 10
+          && comment.isRepliesLoaded
+          && !comment.isMoreRepliesLoading;
       };
     }
   },
@@ -123,6 +117,7 @@ export default {
     },
 
     insertNewComment(addedComment) {
+      addedComment.replies = [];
       addedComment.isReply = false;
       addedComment.isNewReply = false;
       addedComment.replyContent = '';
@@ -329,20 +324,20 @@ export default {
 
       try {
         switch (sortType) {
-          case 'date' :
-            this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
-              params: { sortType: 'date' }
-            });
-            this.commentMappingWithUiProperty(this.comments);
-            break;
+        case 'date' :
+          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+            params: { sortType: 'date' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
             
-          case 'like' :
-          default :
-            this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
-              params: { sortType: 'like' }
-            });
-            this.commentMappingWithUiProperty(this.comments);
-            break;
+        case 'like' :
+        default :
+          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+            params: { sortType: 'like' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
         }
         this.isCommentsLoading = false;
       } catch (err) {

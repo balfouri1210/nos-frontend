@@ -1,15 +1,22 @@
 <template>
-  <div class="nos-input">
+  <div
+    class="nos-input"
+    :class="{ 'nos-input--outlined': outlined }"
+  >
     <validation-provider
       v-slot="{ errors }"
       :rules="rules"
       :name="name"
+      :debounce="debounce"
     >
       <input
         :id="id"
         v-model="inputVal"
         :type="type"
         :required="required"
+        :placeholder="placeholder"
+        :autocomplete="autocomplete"
+        :disabled="disabled"
       >
 
       <p class="nos-input__error-message">
@@ -37,6 +44,11 @@ export default {
       default: null
     },
 
+    placeholder: {
+      type: String,
+      default: null
+    },
+
     type: {
       type: String,
       default: 'text'
@@ -50,6 +62,26 @@ export default {
     rules: {
       type: [Object, String],
       default: null
+    },
+
+    debounce: {
+      type: Number,
+      default: 0
+    },
+
+    autocomplete: {
+      type: String,
+      default: null
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+
+    outlined: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -78,10 +110,30 @@ export default {
 
   &__error-message {
     position: absolute;
-    bottom: 0;
+    top: 26px;
     left: 0;
-    color: $form-warning-color;
+    color: $color-warning;
     font-size: 13px;
+    line-height: 1.2;
+  }
+
+  &--outlined {
+    input {
+      padding: 0 8px;
+      border: 1px solid $nos-main-theme;
+      border-radius: 4px;
+    }
+
+    input:disabled {
+      border: 1px solid black !important;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .nos-input__error-message {
+      top: 42px;
+      left: 8px;
+      color: #c62828;
+    }
   }
 }
 </style>

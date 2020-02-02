@@ -1,0 +1,16 @@
+.account-activation {
+  margin-top: 32px;
+  text-align: center;
+
+  .v-icon {
+    margin-bottom: 16px;
+    color: $nos-main-theme;
+    font-size: 46px;
+  }
+
+  &__link {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 12px 32px;
+  }
+}

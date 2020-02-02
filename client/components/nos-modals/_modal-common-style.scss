@@ -2,7 +2,8 @@
   position: absolute;
   top: 52px;
   right: 6px;
-  width: 280px;
+  max-width: 280px;
+  width: 100%;
   padding: 12px 10px;
   border-radius: 10px;
   background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
@@ -10,6 +11,10 @@
   &__body {
     position: relative;
     margin-top: 12px;
+
+    button, a {
+      padding: 10px 0;
+    }
   }
 }
 

@@ -3,34 +3,37 @@
     <h1>This is 907Degrees. by Balfouri</h1>
     <h1>CURRENT STAGE IS <span style="color: orange">'{{ stage }}'</span></h1>
 
-    <nuxt-link
-      :to="localePath('signup')"
-    >
-      GO TO SIGNUP PAGE
-    </nuxt-link>
-
     <div
       v-if="getJwt()"
       style="color: hotpink"
     >
-      Hello, {{ getEmail() }}
+      Hello, {{ getUsername() }}
     </div>
 
     <div>
       {{ $t('greeting') }}
     </div>
 
-    <ul>
+    <ul class="players">
       <li
         v-for="(player, index) in players"
         :key="index"
+        class="player"
       >
         <nuxt-link
           :to="localePath({
             path: `/player/${player.name}-${player.id}`
           })"
+          :style="{
+            backgroundImage: `url(${player.imgSrc})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center'
+          }"
         >
-          {{ player.name }} / {{ player.team }}
+          <p class="player__meta">
+            {{ player.name }} / {{ player.team }}
+          </p>
         </nuxt-link>
       </li>
     </ul>

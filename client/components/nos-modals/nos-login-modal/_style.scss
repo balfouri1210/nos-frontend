@@ -1,12 +1,21 @@
 .nos-login-modal {
+  .nos-modal__body {
+    padding: 24px 32px 32px;
+  }
+  
   label {
     color: white;
   }
 
   &__submit {
+    margin-top: 4px;
+  }
+
+  &__submit,
+  &__signup {
     width: 100%;
     background: white;
-    border-radius: 6px;
+    border-radius: 10px;
   }
 
   ::v-deep input {
@@ -34,6 +43,10 @@
       align-items: center;
     }
 
+    button {
+      padding: 0;
+    }
+
     i {
       color: white;
       vertical-align: middle;
@@ -42,6 +55,19 @@
 
   &__error-icon {
     margin-right: 4px;
+  }
+
+  &__forgot-password {
+    display: block;
+    padding: 4px 0 !important;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  &__signup {
+    display: block;
+    margin-top: 24px;
+    text-align: center;
   }
 }
 

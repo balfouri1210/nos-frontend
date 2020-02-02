@@ -1,1 +1,51 @@
-.home {}
+.home {
+  .players {
+    display: grid;
+    grid-gap: 1px;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .player {
+    width: 100%;
+    height: 190px;
+
+    a {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__meta {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2px 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 200;
+    }
+  }
+}
+
+@media only screen and (min-width: $mobile-width) {
+  .home {
+    .players {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .player {
+      height: 370px;
+
+      &__meta {
+        padding: 4px 8px;
+        font-size: 13px;
+      }
+    }
+  }
+}
