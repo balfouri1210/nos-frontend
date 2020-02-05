@@ -19,7 +19,7 @@ export default {
       confirmNewPassword: null,
 
       isPasswordResetting: false,
-      isPasswordResetCompleted: true,
+      isPasswordResetCompleted: false,
       isPasswordResetFailed: false
     };
   },

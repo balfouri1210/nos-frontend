@@ -35,7 +35,7 @@
                 cols="30"
                 rows="2"
                 :rules="'required'"
-                maxlength="100"
+                maxlength="300"
                 :placeholder="`How was ${playerName} this week?`"
               />
 
@@ -190,7 +190,7 @@
                         type="text"
                         name="edit-comment"
                         :rules="'required'"
-                        maxlength="100"
+                        maxlength="300"
                       >
 
                       <div class="player-modal__edit-opinion-action">
@@ -258,7 +258,7 @@
                       type="text"
                       name="comment"
                       :rules="'required'"
-                      maxlength="100"
+                      maxlength="300"
                     >
 
                     <div class="player-modal__reply-action">
@@ -385,7 +385,7 @@
                             type="text"
                             name="edit-reply"
                             :rules="'required'"
-                            maxlength="100"
+                            maxlength="300"
                           >
 
                           <div class="player-modal__edit-opinion-action">

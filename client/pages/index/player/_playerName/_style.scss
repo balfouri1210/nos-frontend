@@ -45,14 +45,11 @@
     }
   }
 
-  &__add-comment {
-    margin-bottom: 8px;
-  }
-
   &__comment-editor {
     display: flex;
     align-items: center;
     height: 50px;
+    margin-top: 8px;
 
     textarea {
       width: 100%;
@@ -63,6 +60,7 @@
       font-size: 13px;
       resize: none;
       outline: none;
+      line-height: 1.5;
     }
 
     button {
@@ -118,9 +116,7 @@
     }
 
     &-content {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      position: relative;
       margin-bottom: -4px;
       font-size: 14px;
       font-weight: 400;
@@ -129,6 +125,12 @@
         display: block;
         margin: 6px 0;
         padding-right: 40px;
+      }
+
+      .v-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
       }
 
       .v-icon {
@@ -243,7 +245,7 @@
   }
 
   &__load-reply {
-    margin: 6px 0;
+    margin: 2px 0 6px;
     color: $nos-main-theme;
     font-size: 13px;
 

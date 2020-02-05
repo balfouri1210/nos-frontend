@@ -97,6 +97,7 @@ export default {
     },
 
     async addComment() {
+      // const numberOfLineBreak = (this.newCommentContent.match(/\n/g)||[]).length;
       if (!this.checkIsLoggedIn()) return;
 
       try {
