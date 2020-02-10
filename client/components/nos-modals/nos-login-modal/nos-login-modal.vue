@@ -113,10 +113,6 @@ export default {
   },
 
   methods: {
-    fuck() {
-      console.log('fuck');
-    },
-
     ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
 
     async onSubmit() {

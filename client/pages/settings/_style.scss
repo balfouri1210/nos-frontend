@@ -24,15 +24,19 @@
     ::v-deep select {
       height: 40px;
     }
+  }
 
-    &-title {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
+  &__profile-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
 
-      .v-icon {
-        font-size: 20px;
-      }
+    .v-chip {
+      margin-left: 12px;
+    }
+
+    .v-icon {
+      font-size: 20px;
     }
   }
 
@@ -47,18 +51,26 @@
       height: 40px;
     }
 
-    &-title {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
     &-desc {
       margin-bottom: 12px;
 
       span {
         color: $nos-main-theme;
       }
+    }
+  }
+
+  &__password-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .v-chip {
+      margin-left: 12px;
+    }
+
+    .v-icon {
+      font-size: 20px;
     }
   }
 

@@ -27,25 +27,34 @@
           <div class="player-modal__add-comment">
             <label for="Comment">Add a Comment</label>
 
-            <div class="player-modal__comment-editor">
-              <textarea
-                id="comment"
-                v-model="newCommentContent"
+            <validation-observer ref="addCommentRef">
+              <validation-provider
+                v-slot="{ errors, invalid }"
+                :rules="'required|newline_limit:10'"
                 name="comment"
-                cols="30"
-                rows="2"
-                :rules="'required'"
-                maxlength="300"
-                :placeholder="`How was ${playerName} this week?`"
-              />
-
-              <button
-                :disabled="!newCommentContent.trim()"
-                @click="addComment"
               >
-                ADD
-              </button>
-            </div>
+                <div class="player-modal__comment-editor">
+                  <textarea
+                    v-model="newCommentContent"
+                    cols="30"
+                    rows="2"
+                    maxlength="300"
+                    :placeholder="`How was ${playerName} this week?`"
+                  />
+
+                  <button
+                    :disabled="invalid"
+                    @click="addComment"
+                  >
+                    ADD
+                  </button>
+                </div>
+
+                <p class="player-modal__add-comment-error">
+                  {{ errors[0] }}
+                </p> 
+              </validation-provider>
+            </validation-observer>
           </div>
 
 
@@ -133,9 +142,13 @@
                   <div>
                     <div
                       v-if="!comment.isEditing"
-                      class="player-modal__comment-content"
+                      class="player-modal__comment-body"
                     >
-                      <p v-html="comment.content.replace(/\n/g, '<br>')" />
+                      <p
+                        class="player-modal__comment-content"
+                        :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
+                        v-html="comment.content.replace(/\n/g, '<br>')"
+                      />
 
                       <!-- Comment more menu -->
                       <v-menu
@@ -184,37 +197,55 @@
                       v-else
                       class="player-modal__edit-opinion"
                     >
-                      <input
-                        id="comment"
-                        v-model="comment.content"
-                        type="text"
-                        name="edit-comment"
-                        :rules="'required'"
-                        maxlength="300"
+                      <validation-provider
+                        v-slot="{ errors, invalid }"
+                        :rules="'required|max:300|newline_limit:10'"
+                        name="comment"
                       >
+                        <textarea
+                          id="comment"
+                          v-model="comment.editCommentContent"
+                          name="edit-comment"
+                          :rows="calculateRowsOfEditCommentTextarea(comment)"
+                        />
 
-                      <div class="player-modal__edit-opinion-action">
-                        <button
-                          class="nos-simple-white-btn"
-                          @click="cancelEditComment(comment)"
-                        >
-                          CANCEL
-                        </button>
+                        <div class="player-modal__opinion-action">
+                          <button
+                            class="nos-simple-white-btn"
+                            @click="cancelEditComment(comment)"
+                          >
+                            CANCEL
+                          </button>
 
-                        <button
-                          class="nos-simple-black-btn"
-                          :disabled="!comment.content.trim()"
-                          @click="saveEditComment(comment)"
-                        >
-                          <pulse-loader
-                            v-if="comment.isEditCommentSaving"
-                            :color="'white'"
-                            :size="'4px'"
-                          />
-                          <span v-else>SAVE</span>
-                        </button>
-                      </div>
+                          <button
+                            class="nos-simple-black-btn"
+                            :disabled="invalid"
+                            @click="saveEditComment(comment)"
+                          >
+                            <pulse-loader
+                              v-if="comment.isEditCommentSaving"
+                              :color="'white'"
+                              :size="'4px'"
+                            />
+                            <span v-else>SAVE</span>
+                          </button>
+                        </div>
+
+                        <p class="player-modal__edit-comment-error">
+                          {{ errors[0] }}
+                        </p>
+                      </validation-provider>
                     </div>
+                  </div>
+
+                  <div
+                    v-if="comment.needReadMore"
+                    class="player-modal__comment-read-more"
+                  >
+                    <button @click="comment.expanded = !comment.expanded">
+                      <span v-if="!comment.expanded">Read more</span>
+                      <span v-else>Show less</span>
+                    </button>
                   </div>
 
                   <!-- Comment sub action -->
@@ -261,7 +292,7 @@
                       maxlength="300"
                     >
 
-                    <div class="player-modal__reply-action">
+                    <div class="player-modal__opinion-action">
                       <button
                         class="nos-simple-white-btn"
                         @click="cancelReply(comment)"
@@ -328,9 +359,11 @@
 
                         <div
                           v-if="!reply.isEditing"
-                          class="player-modal__reply-content"
+                          class="player-modal__reply-body"
                         >
-                          <p>{{ reply.content }}</p>
+                          <p class="player-modal__reply-content">
+                            {{ reply.content }}
+                          </p>
 
                           <!-- Reply more menu -->
                           <v-menu
@@ -381,14 +414,14 @@
                         >
                           <input
                             id="reply"
-                            v-model="reply.content"
+                            v-model="reply.editReplyContent"
                             type="text"
                             name="edit-reply"
                             :rules="'required'"
                             maxlength="300"
                           >
 
-                          <div class="player-modal__edit-opinion-action">
+                          <div class="player-modal__opinion-action">
                             <button
                               class="nos-simple-white-btn"
                               @click="cancelEditReply(reply)"
@@ -411,7 +444,7 @@
                           </div>
                         </div>
 
-                        <div class="player-modal__comment-sub-action">
+                        <div class="player-modal__reply-sub-action">
                           <button
                             :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
                             @click="playerOpinionVote(reply, 'up')"

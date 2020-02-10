@@ -1,7 +1,7 @@
 // axios interceptor 필요할 때 쓸 것. Sodagift에서 가져옴 (20191215)
 // https://axios.nuxtjs.org/extend
 
-export default function({ $axios, store, redirect, app }) {
+export default function({ $axios, store, redirect, app, error }) {
   $axios.onRequest(config => {
     config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
     store.commit('mutateIsLoading', true);
@@ -20,10 +20,8 @@ export default function({ $axios, store, redirect, app }) {
     }
 
     // 기타 서버에러는 에러 페이지로
-    if (code === 500) {
-      return redirect(app.localePath({
-        name: 'sorry'
-      }));
+    else if (code === 500) {
+      error({ statusCode: 500, message: 'Server error' });
     }
 
     return Promise.reject(error);

@@ -45,6 +45,9 @@
     }
   }
 
+
+  // COMMENT
+
   &__comment-editor {
     display: flex;
     align-items: center;
@@ -70,6 +73,15 @@
       background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
       color: white;
     }
+    button:disabled {
+      background: rgba(#c33d02, 0.7);
+    }
+  }
+
+  &__add-comment-error {
+    margin-left: 12px;
+    color: $color-fail;
+    font-size: 12px;
   }
 
   &__comment-option {
@@ -97,10 +109,6 @@
   }
 
   &__comment {
-    &-meta {
-      margin-bottom: -6px;
-    }
-
     &-username {
       margin-right: 4px;
       font-size: 13px;
@@ -115,17 +123,10 @@
       letter-spacing: -0.2;
     }
 
-    &-content {
+    &-body {
       position: relative;
-      margin-bottom: -4px;
       font-size: 14px;
       font-weight: 400;
-
-      p {
-        display: block;
-        margin: 6px 0;
-        padding-right: 40px;
-      }
 
       .v-btn {
         position: absolute;
@@ -138,31 +139,56 @@
       }
     }
 
+    &-content {
+      display: block;
+      max-height: 5.6rem;
+      padding-right: 40px;
+      line-height: 1.4rem;
+      font-size: 14px;
+      overflow: hidden;
+    }
+    &-content--expanded {
+      max-height: unset;
+      overflow: visible;
+    }
+
     margin-bottom: 10px;
   }
 
   &__edit-opinion {
+    position: relative;
+
+    textarea {
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid black;
+      font-size: 14px;
+      font-weight: 400;
+      resize: none;
+      outline: none;
+      line-height: 1.4rem;
+    }
+
     input {
       width: 100%;
       border-bottom: 1px solid black;
       font-size: 14px;
       font-weight: 400;
+      line-height: 1.4rem;
     }
+  }
 
-    &-action {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 4px;
+  &__edit-comment-error {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    color: $color-fail;
+    font-size: 12px;
+  }
 
-      button {
-        width: 66px;
-        height: 28px;
-        margin-left: 4px;
-        font-size: 12px;
-        font-weight: 800;
-      }
-    }
+  &__comment-read-more {
+    font-size: 12px;
+    color: #606060;
   }
 
   &__comment-sub-action {
@@ -217,9 +243,8 @@
     }
   }
 
-  &__add-reply {
 
-  }
+  // REPLY 
 
   &__reply-editor {
     input {
@@ -229,18 +254,17 @@
     }
   }
 
-  &__reply-action {
+  &__opinion-action {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 4px;
+    margin-top: 8px;
 
     button {
       width: 66px;
       height: 28px;
-      margin-left: 4px;
+      margin-left: 8px;
       font-size: 12px;
-      font-weight: 800;
     }
   }
 
@@ -270,11 +294,6 @@
   &__reply {
     margin-bottom: 13px;
 
-    &-meta {
-      line-height: 24px;
-      margin-bottom: -4px;
-    }
-
     &-moment {
       color: #909090;
       font-size: 12px;
@@ -287,26 +306,48 @@
       margin-right: 4px;
       font-weight: 800;
     }
-  
-    &-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: -10px 0 -4px;
+
+    &-body {
+      position: relative;
       font-size: 14px;
       font-weight: 400;
   
-      p {
-        display: block;
-        margin: 8px 0;
-        padding-right: 40px;
+      .v-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
       }
   
       .v-icon {
         font-size: 18px;
       }
     }
+
+    &-content {
+      display: block;
+      padding-right: 40px;
+      line-height: 1.4rem;
+    }
   }
+
+  &__reply-sub-action {
+    display: flex;
+    align-items: center;
+    font-style: normal;
+
+    button:first-of-type {
+      margin-right: 16px;
+    }
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 15px;
+    }
+    .v-icon:active {
+      color: $nos-main-theme;
+    }
+  }
+
 
 
   &__more-replies-btn {
@@ -357,13 +398,12 @@
         font-size: 13px;
       }
 
-      &-content {
+      &-body {
         font-size: 15px;
       }
     }
 
-    &__edit-opinion-action,
-    &__reply-action {
+    &__opinion-action {
       button {
         font-size: 13px;
       }

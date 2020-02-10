@@ -311,6 +311,11 @@ strong {
 .nos-simple-white-btn {
   padding: 3px 8px;
   border: 1px solid black;
+  font-weight: 500;
+
+  span {
+    font-weight: 500;
+  }
 }
 
 .nos-simple-black-btn {
@@ -318,7 +323,11 @@ strong {
   background: black;
   border: 1px solid black;
   color: white;
-  font-weight: 800;
+  font-weight: 700;
+
+  span {
+    font-weight: 700;
+  }
 }
 
 .centered {

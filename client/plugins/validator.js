@@ -38,6 +38,14 @@ export default function({ $axios }) {
     ...length,
     message: 'This field should be {length} long'
   });
+  extend('newline_limit', {
+    validate: (value, args) => {
+      const numberOfLineBreak = (value.match(/\n/g)||[]).length;
+      return numberOfLineBreak < args.length;
+    },
+    params: ['length'],
+    message: 'This field may not be greater than {length} newlines'
+  });
 
   extend('available_email', {
     validate: async (value) => {
@@ -48,7 +56,7 @@ export default function({ $axios }) {
         if (err.response.status === 400)
           return 'This email is already taken';
       }
-    },
+    }
   });
   
   extend('available_username', {
@@ -60,7 +68,7 @@ export default function({ $axios }) {
         if (err.response.status === 400)
           return 'This username is already taken';
       }
-    },
+    }
   });
 
   // v => {

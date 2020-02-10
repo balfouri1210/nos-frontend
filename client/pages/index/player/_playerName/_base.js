@@ -9,8 +9,10 @@ export default {
     mode: 'out-in'
   },
 
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, error }) {
     try {
+      error({ statusCode: 500, message: 'Post not found' });
+
       let [playerName, playerId] = params.playerName.split('-');
       let comments = await $axios.$get(`/api/comments/player/${playerId}`);
       return { playerName, playerId, comments };
@@ -47,6 +49,12 @@ export default {
           && comment.isRepliesLoaded
           && !comment.isMoreRepliesLoading;
       };
+    },
+
+    calculateRowsOfEditCommentTextarea() {
+      return (comment) => {
+        return (comment.editCommentContent.match(/\n/g)||[]).length + 1;
+      };
     }
   },
 
@@ -78,6 +86,9 @@ export default {
         this.$set(comment, 'replyContent', '');
         this.$set(comment, 'replyPage', 1);
         this.$set(comment, 'isRepliesLoaded', false);
+
+        this.$set(comment, 'needReadMore', this.isNewLineExceed(comment.content));
+        this.$set(comment, 'expanded', false);
       });
     },
 
@@ -97,7 +108,6 @@ export default {
     },
 
     async addComment() {
-      // const numberOfLineBreak = (this.newCommentContent.match(/\n/g)||[]).length;
       if (!this.checkIsLoggedIn()) return;
 
       try {
@@ -111,6 +121,7 @@ export default {
         this.newCommentContent = '';
         this.isCommentAdding = false;
         this.playerCommentsCount ++;
+        this.$refs.addCommentRef.reset();
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
@@ -223,6 +234,7 @@ export default {
     // Related to Edit & Delete Comment
     editComment(comment) {
       this.$set(comment, 'isEditing', true);
+      this.$set(comment, 'editCommentContent', comment.content);
     },
 
     cancelEditComment(comment) {
@@ -233,10 +245,13 @@ export default {
       try {
         this.$set(targetComment, 'isEditCommentSaving', true);
         await this.$axios.$put(`/api/comments/player/${targetComment.id}`, {
-          newContent: targetComment.content
+          newContent: targetComment.editCommentContent
         });
+
+        targetComment.content = targetComment.editCommentContent;
         targetComment.isEditing = false;
         targetComment.isEditCommentSaving = false;
+        targetComment.needReadMore = this.isNewLineExceed(targetComment.editCommentContent);
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
@@ -267,6 +282,7 @@ export default {
     // Related to Edit & Delete Comment
     editReply(reply) {
       this.$set(reply, 'isEditing', true);
+      this.$set(reply, 'editReplyContent', reply.content);
     },
 
     cancelEditReply(reply) {
@@ -277,8 +293,9 @@ export default {
       try {
         this.$set(targetReply, 'isEditCommentSaving', true);
         await this.$axios.$put(`/api/replies/player/${targetReply.id}`, {
-          newContent: targetReply.content
+          newContent: targetReply.editReplyContent
         });
+        targetReply.content = targetReply.editReplyContent;
         targetReply.isEditing = false;
         targetReply.isEditCommentSaving = false;
       } catch (err) {
@@ -354,9 +371,11 @@ export default {
     },
 
     async loadMoreComments() {
-      if (this.playerCommentsCount <= this.comments.length) return;
+      if (this.isMoreCommentsLoading) { return; }
+      else if (this.playerCommentsCount <= this.comments.length) { return; }
+
+      this.isMoreCommentsLoading = true;
       try {
-        this.isMoreCommentsLoading = true;
         const moreComments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
           params: {
             sortType: this.commentSortType,
@@ -365,10 +384,11 @@ export default {
         });
         this.commentMappingWithUiProperty(moreComments);
         this.comments = this.comments.concat(moreComments);
-        this.isMoreCommentsLoading = false;
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
+      } finally {
+        this.isMoreCommentsLoading = false;
       }
     },
 
@@ -393,6 +413,10 @@ export default {
       } else {
         return true;
       }
+    },
+
+    isNewLineExceed(content) {
+      return (content.match(/\n/g)||[]).length >= 4;
     }
   }
 };

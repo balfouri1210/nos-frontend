@@ -11,7 +11,7 @@ module.exports = {
       { name: 'theme-color', content: '#000000' }
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit:300,300i,400,400i,500,500i&display=swap'},
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap'},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
       { rel: 'icon', href: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' },
       { rel: 'icon', href: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -35,9 +35,6 @@ module.exports = {
 
   router: {
     base: '/',
-    scrollBehavior() {
-      return { x: 0, y: 0 };
-    },
     mode: 'history',
     middleware: 'router-hook'
   },
