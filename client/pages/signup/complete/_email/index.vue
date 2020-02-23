@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Base from './_base';
+import Base from './base';
 
 export default {
   layout: 'entry',
