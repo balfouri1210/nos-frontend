@@ -206,6 +206,9 @@ strong {
 
 // Vue transition fade styles
 // https://kr.vuejs.org/v2/guide/transitions.html
+.fade {
+  transition: all 0.25s;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;
 }
@@ -256,6 +259,7 @@ strong {
 
 
 .nos-basic-btn {
+  display: inline-block;
   position: relative;
   width: 100%;
   padding: 8px 0;
@@ -294,12 +298,14 @@ strong {
 
 
 .nos-basic-outlined-btn {
+  display: inline-block;
   position: relative;
   width: 100%;
   padding: 8px 0;
   border: 2px solid $nos-main-theme;
   border-radius: 4px;
   color: black;
+  text-align: center;
   transition: all 0.3s ease-out;
 }
 

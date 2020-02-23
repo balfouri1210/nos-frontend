@@ -7,6 +7,7 @@
 
     <button
       class="nos-basic-btn"
+      :disabled="signupEmailResending"
       @click="sendVerificationMailAgain"
     >
       <v-progress-circular
@@ -18,7 +19,7 @@
         indeterminate
       />
       <span v-else>
-        Send verification email again
+        Resend verification email
       </span>
     </button>
   </div>
@@ -47,7 +48,7 @@ export default {
   .nos-basic-btn {
     display: inline-block;
     margin-top: 32px;
-    padding: 12px;
+    padding: 0 12px;
     height: 40px;
   }
 }

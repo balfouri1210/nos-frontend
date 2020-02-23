@@ -25,7 +25,7 @@
       </div>
 
       <div v-else>
-        <validation-observer v-slot="{ handleSubmit }">
+        <validation-observer v-slot="{ handleSubmit, invalid }">
           <form
             id="app"
             @submit.prevent="handleSubmit(resetPassword)"
@@ -65,6 +65,7 @@
             <button
               type="submit"
               class="nos-basic-btn"
+              :disabled="invalid"
             >
               <v-progress-circular
                 v-if="isPasswordResetting"

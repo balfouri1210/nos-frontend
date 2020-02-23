@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  transition: 'fade',
   props: {
     error: {
       type: Object,
@@ -12,13 +13,10 @@ export default {
   },
 
   created() {
-    console.log('error called');
     if (this.error.statusCode === 404) {
-      console.log('error: 404');
-      this.$router.push(this.localePath('page-not-found'));
+      this.$router.replace(this.localePath('page-not-found'));
     } else if (this.error.statusCode === 500) {
-      console.log('error: 500');
-      this.$router.push(this.localePath('bugs'));
+      this.$router.replace(this.localePath('bugs'));
     }
   }
 };

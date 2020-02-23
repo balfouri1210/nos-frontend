@@ -269,7 +269,7 @@
 </template>
 
 <script>
-import Base from './_base';
+import Base from './base';
 
 export default {
   mixins: [Base]

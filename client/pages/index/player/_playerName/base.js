@@ -11,10 +11,17 @@ export default {
 
   async asyncData({ params, $axios, error }) {
     try {
-      error({ statusCode: 500, message: 'Post not found' });
-
       let [playerName, playerId] = params.playerName.split('-');
-      let comments = await $axios.$get(`/api/comments/player/${playerId}`);
+      let comments = await $axios.$get(`/api/comments/player/${playerId}`, {
+        params: {
+          sortType: 'like'
+        }
+      });
+
+      if (!comments.length) {
+        console.log('Get previous comments');
+      }
+
       return { playerName, playerId, comments };
     } catch (err) {
       console.error(err);
@@ -28,9 +35,8 @@ export default {
 
   data() {
     return {
-      commentPage: 1,
       playerCommentsCount: null,
-      commentSortType: 'date',
+      commentSortType: 'like',
       newCommentContent: '',
       isCommentsLoading: false,
       isMoreCommentsLoading: false,
@@ -45,7 +51,6 @@ export default {
     isReadyForMoreRepliesButton() {
       return (comment) => {
         return comment.reply_count > comment.replies.length
-          && comment.reply_count > 10
           && comment.isRepliesLoaded
           && !comment.isMoreRepliesLoading;
       };
@@ -84,7 +89,6 @@ export default {
         this.$set(comment, 'isNewReply', false);
         this.$set(comment, 'replies', []);
         this.$set(comment, 'replyContent', '');
-        this.$set(comment, 'replyPage', 1);
         this.$set(comment, 'isRepliesLoaded', false);
 
         this.$set(comment, 'needReadMore', this.isNewLineExceed(comment.content));
@@ -94,7 +98,6 @@ export default {
 
     async getReplies(parentComment) {
       parentComment.replies = [];
-      parentComment.replyPage = 1;
       parentComment.isReply = true;
       parentComment.isRepliesLoaded = false;
 
@@ -328,11 +331,8 @@ export default {
       alert('신고했다!');
     },
 
-
-
     initiateCommentStateBeforeSortChange() {
       this.comments = [];
-      this.commentPage = 1;
     },
 
     async sortCommentBy(sortType) {
@@ -365,7 +365,7 @@ export default {
     },
 
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
-      if (scrollTop + clientHeight >= scrollHeight) {
+      if (this.comments.length && !this.isMoreCommentsLoading && scrollTop + clientHeight >= scrollHeight) {
         this.loadMoreComments();
       }
     },
@@ -374,12 +374,18 @@ export default {
       if (this.isMoreCommentsLoading) { return; }
       else if (this.playerCommentsCount <= this.comments.length) { return; }
 
+      const previousCommentsIdList = this.comments.map((comment) => {
+        return comment.id;
+      });
+
       this.isMoreCommentsLoading = true;
       try {
         const moreComments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
           params: {
             sortType: this.commentSortType,
-            page: ++ this.commentPage
+            minId: this.comments[this.comments.length - 1].id,
+            minPoint: this.comments[this.comments.length - 1].point,
+            previousCommentsIdList
           }
         });
         this.commentMappingWithUiProperty(moreComments);
@@ -397,7 +403,9 @@ export default {
       this.$set(parentComment, 'isMoreRepliesLoading', true);
       try {
         const moreReplise = await this.$axios.$get(`/api/replies/player/${parentComment.id}`, {
-          params: { page: ++ parentComment.replyPage }
+          params: {
+            maxId: parentComment.replies[parentComment.replies.length - 1].id
+          }
         });
         parentComment.replies = parentComment.replies.concat(moreReplise);
         parentComment.isMoreRepliesLoading = false;
@@ -418,5 +426,17 @@ export default {
     isNewLineExceed(content) {
       return (content.match(/\n/g)||[]).length >= 4;
     }
+  },
+
+  // Body scroll lock
+  beforeRouteEnter(to, from, next) {
+    if (process.client) document.documentElement.style.overflow = 'hidden';
+    next();
+  },
+
+  // Body scroll release
+  beforeRouteLeave(to, from ,next) {
+    if (process.client) document.documentElement.style.overflow = 'auto';
+    next();
   }
 };
