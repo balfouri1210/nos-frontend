@@ -2,7 +2,8 @@
   position: relative;
   min-height: 100%;
 
-  .v-application--wrap {
+  .nos-layout-default,
+  .nos-layout-wide {
     padding-top: $mobile-header-height;
     padding-bottom: $mobile-footer-height;
   }

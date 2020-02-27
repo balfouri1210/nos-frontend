@@ -1,4 +1,4 @@
-import countries from '@/lib/country';
+import countries from '@/lib/countries';
 import nosUserVerifier from '@/components/nos-user-verifier/nos-user-verifier.vue';
 
 export default {

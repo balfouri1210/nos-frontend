@@ -19,7 +19,7 @@ export default {
       });
 
       if (!comments.length) {
-        console.log('Get previous comments');
+        console.log('There is no comment');
       }
 
       return { playerName, playerId, comments };
@@ -43,7 +43,8 @@ export default {
       isCommentAdding: false,
       isCommentMalfunction: false,
 
-      isRequestLoginPopup: false
+      isRequestLoginPopup: false,
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 
@@ -371,10 +372,10 @@ export default {
     },
 
     async loadMoreComments() {
-      if (this.isMoreCommentsLoading) { return; }
-      else if (this.playerCommentsCount <= this.comments.length) { return; }
+      if (this.isMoreCommentsLoading) return;
+      else if (this.playerCommentsCount <= this.comments.length) return;
 
-      const previousCommentsIdList = this.comments.map((comment) => {
+      const previousCommentIdList = this.comments.map((comment) => {
         return comment.id;
       });
 
@@ -384,8 +385,7 @@ export default {
           params: {
             sortType: this.commentSortType,
             minId: this.comments[this.comments.length - 1].id,
-            minPoint: this.comments[this.comments.length - 1].point,
-            previousCommentsIdList
+            previousCommentIdList
           }
         });
         this.commentMappingWithUiProperty(moreComments);

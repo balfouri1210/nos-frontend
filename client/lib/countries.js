@@ -521,7 +521,7 @@ export default [
   },
   {
     'id': 105,
-    'name': 'Iran, Islamic Republic of',
+    'name': 'Iran',
     'code': 'IR'
   },
   {

@@ -1,4 +1,4 @@
-import countries from '@/lib/country';
+import countries from '@/lib/countries';
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapMutations } = createNamespacedHelpers('auth');
 import jwtDecode from 'jwt-decode';
