@@ -10,19 +10,28 @@ export default {
   },
 
   async asyncData({ params, $axios, error }) {
-    try {
-      let [playerName, playerId] = params.playerName.split('-');
-      let comments = await $axios.$get(`/api/comments/player/${playerId}`, {
+    const [playerName, playerId] = params.playerName.split('_');
+
+    function getPlayer() {
+      return $axios.$get(`/api/players/${playerId}`);
+    }
+
+    function getComments() {
+      return $axios.$get(`/api/comments/player/${playerId}`, {
         params: {
           sortType: 'like'
         }
       });
+    }
+
+    try {
+      const [player, comments] = await Promise.all([getPlayer(), getComments()]);
 
       if (!comments.length) {
         console.log('There is no comment');
       }
 
-      return { playerName, playerId, comments };
+      return { playerName, playerId, player, comments };
     } catch (err) {
       console.error(err);
     }
@@ -438,5 +447,12 @@ export default {
   beforeRouteLeave(to, from ,next) {
     if (process.client) document.documentElement.style.overflow = 'auto';
     next();
+  },
+
+
+
+
+  votePlayer(type) {
+    console.log('vote : ' + type);
   }
 };

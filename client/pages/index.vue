@@ -3,37 +3,40 @@
     id="home"
     class="home"
   >
-    <div>
-      <ul
-        class="player-list"
+    <ul
+      class="player-list"
+    >
+      <li
+        v-for="(player, index) in playerList"
+        :key="index"
+        class="player"
       >
-        <li
-          v-for="(player, index) in playerList"
-          :key="index"
-          class="player"
+        <nuxt-link
+          :to="localePath({
+            path: `/player/${player.known_as}_${player.id}`
+          })"
         >
-          <nuxt-link
-            :to="localePath({
-              path: `/player/${player.known_as}-${player.id}`
-            })"
-          >
-            <div
-              class="player__image"
-              :style="{
-                backgroundImage: `url(${player.imgSrc}), url(/player_default.png)`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center'
-              }"
-            />
-            <div class="player__meta">
-              <p>{{ player.known_as }} / {{ player.position }}</p>
-              <p>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</p>
-            </div>
-          </nuxt-link>
-        </li>
-      </ul>
-    </div>
+          <div
+            class="player__image"
+            :style="{
+              backgroundImage: `url(${player.imgSrc}), url(/player_default.png)`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center'
+            }"
+          />
+          <div class="player__meta">
+            <p>
+              <img
+                :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                alt="flag"
+              ><span>{{ player.known_as }}</span>
+            </p>
+            <p>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</p>
+          </div>
+        </nuxt-link>
+      </li>
+    </ul>
 
     <div
       v-if="isMorePlayersLoading"
@@ -57,13 +60,13 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 
 export default {
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, error }) {
     try {
       const playerList = await $axios.$get('/api/players');
       return { playerList };
     } catch (err) {
       console.error(err);
-      return this.$nuxt.error({ statusCode: 500 });
+      return error({ statusCode: 500 });
     }
   },
 
@@ -78,10 +81,15 @@ export default {
       return this.playerList.map(player => {
         return player.id;
       });
+    },
+
+    scrollOffsetToLoadMorePlayer() {
+      return window.screen.width < 875 ? 50 : 100;
     }
   },
 
   mounted() {
+    // Infinite player loading (until 100)
     window.onscroll = () => {
       let bottomOfWindow =
         Math.max(
@@ -89,8 +97,9 @@ export default {
           document.documentElement.scrollTop,
           document.body.scrollTop
         ) +
-          window.innerHeight ===
-        document.getElementById('home').offsetHeight;
+          window.innerHeight >
+        document.getElementById('home').offsetHeight -
+          this.scrollOffsetToLoadMorePlayer;
 
       if (bottomOfWindow) {
         this.loadMorePlayers();

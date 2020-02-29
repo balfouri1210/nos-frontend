@@ -31,12 +31,16 @@
   }
 
   &__header {
-    margin-bottom: 16px;
-    color: $nos-main-theme;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
 
     a {
       display: flex;
       align-items: center;
+      font-size: 12px;
+      color: $nos-main-theme;
     }
 
     i {
@@ -44,51 +48,22 @@
     }
   }
 
-  // PLAYER
-  .player {
-    display: flex;
-    align-items: flex-start;
-
-    &__image {
-      max-width: 140px;
-      width: 100%;
-    }
-
-    &__image:before {
-      display: inline-block;
-      width: 100%;
-      height: 0;
-      padding-bottom: calc(100% / (1 / 1.47));
-      content: "";
-    }
-
-    &__meta {
-      width: 100%;
-      padding: 12px;
-
-      p {
-        display: flex;
-        align-items: center;
-      }
-
-      img {
-        width: 22px;
-        height: 15px;
-      }
-    }
-  }
-
-
   // COMMENT
   .comment {
-    padding: 16px;
+    padding: 4px 12px;
+  }
+
+  &__add-comment {
+    label {
+      font-size: 14px;
+    }
   }
 
   &__comment-editor {
     display: flex;
     align-items: center;
     height: 50px;
-    margin-top: 8px;
+    margin-top: 4px;
 
     textarea {
       width: 100%;
@@ -106,18 +81,12 @@
       width: 80px;
       height: 100%;
       margin-left: 6px;
-      background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
+      background: $nos-main-theme;
       color: white;
     }
     button:disabled {
       background: rgba(#c33d02, 0.7);
     }
-  }
-
-  &__add-comment-error {
-    margin-left: 12px;
-    color: $color-fail;
-    font-size: 12px;
   }
 
   &__comment-option {
@@ -136,20 +105,20 @@
   }
 
   &__no-comments {
-    max-width: 320px;
-    width: 100%;
-    margin-top: 36px;
+    margin: 36px 0 60px;
     color: rgba(0, 0, 0, 0.78);
+    text-align: center;
 
     &-header {
       display: flex;
       align-items: center;
-      font-size: 26px;
+      justify-content: center;
+      font-size: 18px;
 
       .v-icon {
         margin-right: 8px;
         color: rgba(0, 0, 0, 0.78);
-        font-size: 30px;
+        font-size: 24px;
       }
 
       * {
@@ -182,7 +151,6 @@
 
   &__comments {
     position: relative;
-    min-height: 400px;
 
     p, span, input, textarea {
       font-family: 'Open Sans', sans-serif;
@@ -458,16 +426,35 @@
 @media only screen and (min-width: $mobile-width) {
   .player-modal {
     &__inner {
-      max-width: 1110px;
+      max-width: 830px;
       width: 95%;
       height: 80%;
-      // padding: 0 16px;
     }
-
+    
     &__content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
       width: 100%;
       height: 100%;
-      // border-radius: 4px;
+    }
+
+    &__left {
+      flex: auto;
+    }
+
+    &__right {
+      flex-basis: 320px;
+    }
+
+    &__header {
+      display: none;
+    }
+
+    &__add-comment {
+      label {
+        font-size: 15px;
+      }
     }
 
     &__comment {

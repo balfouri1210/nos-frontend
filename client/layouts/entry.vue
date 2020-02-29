@@ -21,7 +21,7 @@
           class="nos-entry__logo"
         >
           <img
-            src="/logo2.svg"
+            src="/logos/logo2.svg"
             alt="logo"
           >
         </nuxt-link>

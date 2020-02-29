@@ -2,7 +2,7 @@
   <div class="nos-modal-header">
     <img
       class="nos-modal-header__logo"
-      src="/logo_short_white2.svg"
+      src="/logos/logo_short_white2.svg"
       alt="logo"
     >
 

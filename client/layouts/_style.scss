@@ -57,7 +57,8 @@
 
 @media only screen and (min-width: $mobile-width) {
   .nos {
-    .v-application--wrap {
+    .nos-layout-default,
+    .nos-layout-wide {
       padding-top: $web-header-height;
       padding-bottom: $web-footer-height;
     }
