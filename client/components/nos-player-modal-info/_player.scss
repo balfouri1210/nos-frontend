@@ -23,7 +23,7 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 12px;
+    padding: 12px 12px 6px;
   }
   &__meta {
   }
@@ -132,6 +132,7 @@
 @media only screen and (min-width: $mobile-width) {
   .player {
     height: 271px;
+    border: 0;
 
     &__meta-wrapper {
       padding: 28px 28px 12px;

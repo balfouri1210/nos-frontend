@@ -44,14 +44,16 @@
       font-weight: 400;
 
       p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
       }
 
       img {
-        width: 18px;
-        height: 12px;
+        width: 15px;
+        height: 10px;
         margin-right: 8px;
       }
 
@@ -59,6 +61,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        word-break: break-all;
       }
     }
   }

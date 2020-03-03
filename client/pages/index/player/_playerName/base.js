@@ -2,6 +2,8 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
 import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-request-login-popup.vue';
+import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
+import Cookies from 'js-cookie';
 
 export default {
   transition: {
@@ -34,17 +36,18 @@ export default {
       return { playerName, playerId, player, comments };
     } catch (err) {
       console.error(err);
+      error({ statusCode: 500 });
     }
   },
 
   components: {
     nosSkeletonLoader,
-    nosRequestLoginPopup
+    nosRequestLoginPopup,
+    nosPlayerModalInfo
   },
 
   data() {
     return {
-      playerCommentsCount: null,
       commentSortType: 'like',
       newCommentContent: '',
       isCommentsLoading: false,
@@ -75,22 +78,50 @@ export default {
 
   async created() {
     try {
-      this.playerCommentsCount = (await this.getPlayerCommentsCount()).playerCommentsCount;
       this.commentMappingWithUiProperty(this.comments);
     } catch (err) {
       console.error(err);
     }
   },
 
+  mounted() {
+    this.manipulateHits();
+  },
+
   methods: {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
-    closeModal() {
-      this.$router.push(this.localePath('index'));
+    async manipulateHits() {
+      let hitsList;
+      const datetime = new Date();
+
+      try {
+        if (Cookies.get('nos-hl')) {
+          hitsList = Cookies.get('nos-hl').split(',');
+  
+          if (hitsList.indexOf(this.playerId) !== -1) {
+            return;
+          } else {
+            hitsList.push(this.playerId);
+            Cookies.set('nos-hl', hitsList.join(','), { expires: new Date(datetime.setHours(datetime.getHours() + 3)) });
+            await this.increasePlayerHits();
+          }
+        } else {
+          Cookies.set('nos-hl', this.playerId, { expires: new Date(datetime.setHours(datetime.getHours() + 3)) });
+          await this.increasePlayerHits();
+        }
+      } catch (err) {
+        console.error(err);
+        this.$nuxt.error({ statusCode: 500 });
+      }
     },
 
-    getPlayerCommentsCount() {
-      return this.$axios.$get(`/api/comments/count/player/${this.playerId}`);
+    increasePlayerHits() {
+      return this.$axios.$put(`/api/players/hits/${this.playerId}`);
+    },
+
+    closeModal() {
+      this.$router.push(this.localePath('index'));
     },
 
     commentMappingWithUiProperty(comments) {
@@ -133,7 +164,7 @@ export default {
         this.insertNewComment(addedComment);
         this.newCommentContent = '';
         this.isCommentAdding = false;
-        this.playerCommentsCount ++;
+        this.player.comment_count ++;
         this.$refs.addCommentRef.reset();
       } catch (err) {
         this.isCommentMalfunction = true;
@@ -199,32 +230,28 @@ export default {
     async playerOpinionVote(opinion, action) {
       if (!this.checkIsLoggedIn()) return;
 
-      if (!opinion.isVoted) {
-        // 첫 투표
-        try {
+      try {
+        if (!opinion.isVoted) {
           opinion.isVoted = action;
-          opinion[`vote_${action}_count`] ++;
           await this.doVote(opinion, action);
-        } catch (err) {
-          console.error(err);
-        }
-      } else if (opinion.isVoted === action) {
-        // 투표 취소
-        try {
+          opinion[`vote_${action}_count`] ++;
+        } else if (opinion.isVoted === action) {
+          // 투표 취소
+          await this.cancelVote(opinion, action);
           opinion[`vote_${action}_count`] --;
           opinion.isVoted = null;
-          await this.cancelVote(opinion, action);
-        } catch (err) {
-          console.error(err);
+        } else {
+          // 투표 반전
+          alert('이미 투표했다 :(');
         }
-      } else {
-        // 투표 반전
-        alert('이미 투표했다 :(');
+      } catch (err) {
+        console.error(err);
+        this.$nuxt.error({ statusCode: 500 });
       }
     },
 
     doVote(opinion, action) {
-      return this.$axios.$put('/api/vote', {
+      return this.$axios.$put('/api/vote/opinion', {
         targetAuthorId: opinion.users_id,
         targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
         targetOpinionId: opinion.id,
@@ -234,7 +261,7 @@ export default {
     },
 
     cancelVote(opinion, action) {
-      return this.$axios.$put('/api/vote/cancel', {
+      return this.$axios.$put('/api/vote/opinion/cancel', {
         targetAuthorId: opinion.users_id,
         targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
         targetOpinionId: opinion.id,
@@ -273,14 +300,14 @@ export default {
 
     async deleteComment(targetComment) {
       try {
-        await this.$axios.$delete(`/api/comments/player/${targetComment.id}`);
+        await this.$axios.$delete(`/api/comments/player/${this.playerId}/${targetComment.id}`);
         alert('삭제됐다!');
 
         const idx = this.comments.findIndex((comment) => {
           return comment.id === targetComment.id;
         });
         if (idx > -1) this.comments.splice(idx, 1);
-        this.playerCommentsCount --;
+        this.player.comment_count --;
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
@@ -374,15 +401,9 @@ export default {
       }
     },
 
-    onScroll ({ target: { scrollTop, clientHeight, scrollHeight }}) {
-      if (this.comments.length && !this.isMoreCommentsLoading && scrollTop + clientHeight >= scrollHeight) {
-        this.loadMoreComments();
-      }
-    },
-
     async loadMoreComments() {
       if (this.isMoreCommentsLoading) return;
-      else if (this.playerCommentsCount <= this.comments.length) return;
+      else if (this.player.comment_count <= this.comments.length) return;
 
       const previousCommentIdList = this.comments.map((comment) => {
         return comment.id;
@@ -447,12 +468,5 @@ export default {
   beforeRouteLeave(to, from ,next) {
     if (process.client) document.documentElement.style.overflow = 'auto';
     next();
-  },
-
-
-
-
-  votePlayer(type) {
-    console.log('vote : ' + type);
   }
 };

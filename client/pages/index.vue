@@ -30,7 +30,7 @@
               <img
                 :src="`/flags/${player.country_code.toLowerCase()}.png`"
                 alt="flag"
-              ><span>{{ player.known_as }}</span>
+              >{{ player.known_as }}
             </p>
             <p>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</p>
           </div>
@@ -89,22 +89,7 @@ export default {
   },
 
   mounted() {
-    // Infinite player loading (until 100)
-    window.onscroll = () => {
-      let bottomOfWindow =
-        Math.max(
-          window.pageYOffset,
-          document.documentElement.scrollTop,
-          document.body.scrollTop
-        ) +
-          window.innerHeight >
-        document.getElementById('home').offsetHeight -
-          this.scrollOffsetToLoadMorePlayer;
-
-      if (bottomOfWindow) {
-        this.loadMorePlayers();
-      }
-    };
+    window.addEventListener('scroll', this.detectScroll);
   },
 
   methods: {
@@ -134,7 +119,29 @@ export default {
 
     cut100PlayerList() {
       this.playerList = this.playerList.slice(1, 100);
+    },
+
+    detectScroll() {
+      let bottomOfWindow =
+        Math.max(
+          window.pageYOffset,
+          document.documentElement.scrollTop,
+          document.body.scrollTop
+        ) +
+          window.innerHeight >=
+        document.getElementById('home').offsetHeight -
+          this.scrollOffsetToLoadMorePlayer;
+
+      if (bottomOfWindow) {
+        this.loadMorePlayers();
+      }
     }
+  },
+
+  // Onscroll release
+  beforeRouteLeave(to, from, next) {
+    window.removeEventListener('scroll', this.detectScroll);
+    next();
   }
 };
 </script>

@@ -1,8 +1,11 @@
 .settings {
   width: 100%;
   max-width: 400px;
-  margin: 40px auto 120px;
-  padding: 48px 16px 0;
+  padding-top: 48px;
+
+  &__content {
+    margin: 50px 0 120px;
+  }
 
   h1 {
     font-size: 24px;
@@ -134,5 +137,11 @@
     button:disabled {
       background: rgba(0, 0, 0, 0.7);
     }
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .settings {
+    padding-top: 56px;
   }
 }

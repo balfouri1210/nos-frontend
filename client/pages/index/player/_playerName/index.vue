@@ -10,7 +10,6 @@
         <div
           class="player-modal__content"
           @click.stop
-          @scroll="onScroll"
         >
           <div class="player-modal__left">
             <header class="player-modal__header">
@@ -20,78 +19,8 @@
               </nuxt-link>
             </header>
 
-            <div class="player">
-              <div
-                class="player__image"
-                :style="{
-                  backgroundImage: `url(${nosImageUrl}/players/david_beckham.jpg), url(/player_default.png)`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center'
-                }"
-              />
-
-              <div class="player__meta-wrapper">
-                <div class="player__meta">
-                  <p class="player__meta-header">
-                    <img
-                      class="player__meta-flag"
-                      :src="`/flags/${player.country_code.toLowerCase()}.png`"
-                      :alt="player.country_code"
-                    >
-                    <span class="player__meta-name">{{ playerName }}</span>
-                  </p>
-                  <p class="player__meta-item">
-                    <span>Date of birth</span>
-                    <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
-                  </p>
-                  <p class="player__meta-item">
-                    <span>Height</span>
-                    <span>{{ player.height }} cm</span>
-                  </p>
-                  <p class="player__meta-item">
-                    <span>League</span>
-                    <span>
-                      <img
-                        :src="`/leagues/${player.league_id}.png`"
-                        alt="league"
-                      >
-                    </span>
-                  </p>
-                  <p class="player__meta-item">
-                    <span>Team</span>
-                    <span><img
-                      :src="player.club_image"
-                      alt="club"
-                      style="margin-right: 4px"
-                    > {{ player.club_name }}</span>
-                  </p>
-                  <p class="player__meta-item">
-                    <span>Position</span>
-                    <span>{{ player.position }}</span>
-                  </p>
-                </div>
-
-                <div class="player__vote">
-                  <button
-                    class="player__vote-down-btn"
-                    @click="votePlayer('up')"
-                  >
-                    <v-icon>mdi-thumb-down</v-icon>
-                    <span>{{ player.vote_down_count }}</span>
-                  </button>
-
-                  <button
-                    class="player__vote-up-btn"
-                    @click="votePlayer('down')"
-                  >
-                    <v-icon>mdi-thumb-up</v-icon>
-                    <span>{{ player.vote_up_count }}</span>
-                  </button>
-                </div>
-              </div>
-            </div> 
-
+            <!-- Player basic info -->
+            <nos-player-modal-info :player="player" />
 
             <!-- Add Comment Area -->
             <div class="comment">
@@ -132,7 +61,7 @@
               >
                 <div>
                   <v-icon>mdi-message-reply-text</v-icon>
-                  <span>{{ playerCommentsCount }}</span>
+                  <span>{{ player.comment_count }}</span>
                 </div>
 
                 <v-menu
@@ -594,14 +523,20 @@
                 </div>
 
                 <div
-                  v-if="comments.length && isMoreCommentsLoading"
-                  class="player-modal__more-comment-loading"
+                  v-if="comments.length && (player.comment_count > comments.length)"
+                  class="player-modal__more-comment-btn"
                 >
-                  <pulse-loader
-                    :color="'#808080'"
-                    :size="'6px'"
-                    :style="{ 'margin': '16px 0' }"
-                  />
+                  <button
+                    @click="loadMoreComments"
+                  >
+                    <pulse-loader
+                      v-if="isMoreCommentsLoading"
+                      :color="'#808080'"
+                      :size="'6px'"
+                    />
+
+                    <span v-else>Load More Comments</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -637,6 +572,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "./_style.scss";
-@import "./_player.scss";
 @import "./_youtube.scss";
 </style>
