@@ -11,35 +11,6 @@ export default {
     mode: 'out-in'
   },
 
-  async asyncData({ params, $axios, error }) {
-    const [playerName, playerId] = params.playerName.split('_');
-
-    function getPlayer() {
-      return $axios.$get(`/api/players/${playerId}`);
-    }
-
-    function getComments() {
-      return $axios.$get(`/api/comments/player/${playerId}`, {
-        params: {
-          sortType: 'like'
-        }
-      });
-    }
-
-    try {
-      const [player, comments] = await Promise.all([getPlayer(), getComments()]);
-
-      if (!comments.length) {
-        console.log('There is no comment');
-      }
-
-      return { playerName, playerId, player, comments };
-    } catch (err) {
-      console.error(err);
-      error({ statusCode: 500 });
-    }
-  },
-
   components: {
     nosSkeletonLoader,
     nosRequestLoginPopup,
@@ -98,8 +69,9 @@ export default {
       try {
         if (Cookies.get('nos-hl')) {
           hitsList = Cookies.get('nos-hl').split(',');
+          console.log(hitsList);
   
-          if (hitsList.indexOf(this.playerId) !== -1) {
+          if (hitsList.indexOf(this.playerId.toString()) !== -1) {
             return;
           } else {
             hitsList.push(this.playerId);
@@ -157,7 +129,6 @@ export default {
       try {
         this.isCommentAdding = true;
         let addedComment = await this.$axios.$post('/api/comments/player', {
-          userId: this.getId(),
           playerId: this.playerId,
           content: this.newCommentContent,
         });
@@ -186,7 +157,6 @@ export default {
       try {
         this.$set(parentComment, 'isReplySaving', true);
         const addReplyResult = await this.$axios.$post('/api/replies/player', {
-          userId: this.getId(),
           playerId: this.playerId,
           content: parentComment.replyContent,
           parentCommentsId: parentComment.id,
@@ -227,49 +197,34 @@ export default {
     },
 
 
-    async playerOpinionVote(opinion, action) {
+    async votePlayerOpinion(opinion, vote) {
       if (!this.checkIsLoggedIn()) return;
 
       try {
-        if (!opinion.isVoted) {
-          opinion.isVoted = action;
-          await this.doVote(opinion, action);
-          opinion[`vote_${action}_count`] ++;
-        } else if (opinion.isVoted === action) {
-          // 투표 취소
-          await this.cancelVote(opinion, action);
-          opinion[`vote_${action}_count`] --;
-          opinion.isVoted = null;
+        const voteOpinionResult = await this.$axios.$put('/api/vote/opinion', {
+          targetAuthorId: opinion.users_id,
+          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+          targetOpinionId: opinion.id,
+          userId: this.getId(),
+          vote
+        });
+
+        if (voteOpinionResult === 'voted') {
+          opinion.isVoted = vote;
+          opinion[`vote_${vote}_count`] ++;
         } else {
-          // 투표 반전
-          alert('이미 투표했다 :(');
+          opinion.isVoted = null;
+          opinion[`vote_${vote}_count`] --;
         }
       } catch (err) {
-        console.error(err);
-        this.$nuxt.error({ statusCode: 500 });
+        if (err.response.data.code === 'o003') {
+          alert('Already voted!');
+        } else {
+          console.error(err);
+          this.$nuxt.error({ statusCode: 500 });
+        }
       }
     },
-
-    doVote(opinion, action) {
-      return this.$axios.$put('/api/vote/opinion', {
-        targetAuthorId: opinion.users_id,
-        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
-        targetOpinionId: opinion.id,
-        userId: this.getId(),
-        action
-      });
-    },
-
-    cancelVote(opinion, action) {
-      return this.$axios.$put('/api/vote/opinion/cancel', {
-        targetAuthorId: opinion.users_id,
-        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
-        targetOpinionId: opinion.id,
-        userId: this.getId(),
-        action
-      });
-    },
-
 
     // Related to Edit & Delete Comment
     editComment(comment) {
@@ -293,8 +248,8 @@ export default {
         targetComment.isEditCommentSaving = false;
         targetComment.needReadMore = this.isNewLineExceed(targetComment.editCommentContent);
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
 
@@ -309,15 +264,10 @@ export default {
         if (idx > -1) this.comments.splice(idx, 1);
         this.player.comment_count --;
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
-
-    reportComment(comment) {
-      alert('신고했다!');
-    },
-
 
     // Related to Edit & Delete Comment
     editReply(reply) {
@@ -339,8 +289,8 @@ export default {
         targetReply.isEditing = false;
         targetReply.isEditCommentSaving = false;
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
 
@@ -359,21 +309,13 @@ export default {
         if (idx > -1) parentComment.replies.splice(idx, 1);
         parentComment.reply_count --;
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
 
-    reportReply(reply) {
-      alert('신고했다!');
-    },
-
-    initiateCommentStateBeforeSortChange() {
-      this.comments = [];
-    },
-
     async sortCommentBy(sortType) {
-      this.initiateCommentStateBeforeSortChange();
+      this.comments = [];
       this.isCommentsLoading = true;
       this.commentSortType = sortType;
 
@@ -385,7 +327,7 @@ export default {
           });
           this.commentMappingWithUiProperty(this.comments);
           break;
-            
+
         case 'like' :
         default :
           this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
@@ -396,8 +338,8 @@ export default {
         }
         this.isCommentsLoading = false;
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
 
@@ -421,8 +363,8 @@ export default {
         this.commentMappingWithUiProperty(moreComments);
         this.comments = this.comments.concat(moreComments);
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       } finally {
         this.isMoreCommentsLoading = false;
       }
@@ -440,8 +382,8 @@ export default {
         parentComment.replies = parentComment.replies.concat(moreReplise);
         parentComment.isMoreRepliesLoading = false;
       } catch (err) {
-        this.isCommentMalfunction = true;
         console.error(err);
+        this.isCommentMalfunction = true;
       }
     },
 
@@ -455,7 +397,23 @@ export default {
 
     isNewLineExceed(content) {
       return (content.match(/\n/g)||[]).length >= 4;
-    }
+    },
+
+    async reportOpinion(opinion) {
+      try {
+        const type = opinion.parent_comments_id ? 'replies' : 'comments';
+
+        await this.$axios.$post('/api/report', {
+          type: type,
+          subject: 'player',
+          targetId: opinion.id
+        });
+        alert('Reported! This opinion will be penalized according to policy after review.');
+      } catch (err) {
+        console.error(err);
+        this.$nuxt.error({ statusCode: 500 });
+      }
+    },
   },
 
   // Body scroll lock

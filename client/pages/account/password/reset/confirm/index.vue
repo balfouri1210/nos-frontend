@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/password-reset-confirm/_base';
 
 export default {
   layout: 'entry',

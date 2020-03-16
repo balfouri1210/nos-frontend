@@ -8,14 +8,22 @@
       </div>
 
       <div class="nos-header__functions">
+        <!-- Not logged in -->
+        <nuxt-link :to="localePath('histories')">
+          <button>
+            <v-icon>mdi-history</v-icon>
+          </button>
+        </nuxt-link>
+
         <button
           v-if="!isLoggedIn"
           ref="login-button"
           @click="isLoginModal = true"
         >
-          Login
+          <v-icon>mdi-login-variant</v-icon>
         </button>
 
+        <!-- Logged in -->
         <button
           v-if="isLoggedIn"
           ref="notification-button"

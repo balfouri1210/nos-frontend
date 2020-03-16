@@ -33,6 +33,9 @@ export const actions = {
           commit('auth/mutateEmail', decodedJwt.email);
           commit('auth/mutateUsername', decodedJwt.username);
         }
+
+        commit('player/mutatePlayerId', cookie.playerId);
+        commit('player/mutatePlayerName', cookie.playerName);
       }
     } catch (err) {
       console.error(err);

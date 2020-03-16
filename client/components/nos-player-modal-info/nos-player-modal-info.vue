@@ -50,11 +50,16 @@
             <span>Position</span>
             <span>{{ player.position }}</span>
           </p>
+          <!-- <p class="player__meta-item">
+            <span>Degrees</span>
+            <span>{{ player.position }}</span>
+          </p> -->
         </div>
 
         <div class="player__vote">
           <button
             class="player__vote-down-btn"
+            :disabled="disabled"
             @click="votePlayer('down')"
           >
             <v-icon>mdi-thumb-down</v-icon>
@@ -63,6 +68,7 @@
 
           <button
             class="player__vote-up-btn"
+            :disabled="disabled"
             @click="votePlayer('up')"
           >
             <v-icon>mdi-thumb-up</v-icon>
@@ -85,6 +91,11 @@ export default {
       default() {
         return {};
       }
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -105,30 +116,28 @@ export default {
       }
     },
 
-    async votePlayer(voteAction) {
+    async votePlayer(vote) {
       if (!this.checkIsLoggedIn()) return;
+      if (this.$route.name.indexOf('history') !== -1) return;
 
       try {
-        if (!this.player.isVoted) {
-          await this.$axios.$put('/api/vote/player', {
-            playerId: this.player.id,
-            action: voteAction
-          });
-          this.player[`vote_${voteAction}_count`]++;
-          this.player.isVoted = voteAction;
-        } else if (this.player.isVoted === voteAction) {
-          await this.$axios.$put('/api/vote/player/cancel', {
-            playerId: this.player.id,
-            action: voteAction
-          });
-          this.player[`vote_${voteAction}_count`]--;
-          this.player.isVoted = null;
+        const votePlayerResult = await this.$axios.$put('/api/vote/player', {
+          playerId: this.player.id,
+          vote
+        });
+
+        if (votePlayerResult === 'voted') {
+          this.player[`vote_${vote}_count`]++;
         } else {
-          alert('Already voted!');
+          this.player[`vote_${vote}_count`]--;
         }
       } catch (err) {
-        console.error(err);
-        this.$nuxt.error({ statusCode: 500 });
+        if (err.response.data.code === 'p010') {
+          alert('Already voted!');
+        } else {
+          console.error(err);
+          this.$nuxt.error({ statusCode: 500 });
+        }
       }
     }
   }
@@ -136,5 +145,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./_player.scss";
+@import "./_style.scss";
 </style>

@@ -39,7 +39,7 @@
                         cols="30"
                         rows="2"
                         maxlength="300"
-                        :placeholder="`How was ${playerName} this week?`"
+                        :placeholder="`How was ${$store.getters['player/getPlayerName']} this week?`"
                       />
 
                       <button
@@ -178,6 +178,7 @@
 
                             <!-- Comment more menu -->
                             <v-menu
+                              v-if="getJwt()"
                               :content-class="'player-modal__v-menu'"
                               transition="slide-y-transition"
                               bottom
@@ -209,7 +210,7 @@
                               </v-list>
 
                               <v-list v-else>
-                                <v-list-item @click="reportComment(comment)">
+                                <v-list-item @click="reportOpinion(comment)">
                                   <v-list-item-title>
                                     <v-icon>mdi-alert</v-icon>Report
                                   </v-list-item-title>
@@ -278,7 +279,7 @@
                         <div class="player-modal__comment-sub-action">
                           <button
                             :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
-                            @click="playerOpinionVote(comment, 'up')"
+                            @click="votePlayerOpinion(comment, 'up')"
                           >
                             <v-icon>mdi-thumb-up</v-icon>
                             <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
@@ -286,7 +287,7 @@
 
                           <button
                             :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
-                            @click="playerOpinionVote(comment, 'down')"
+                            @click="votePlayerOpinion(comment, 'down')"
                           >
                             <v-icon>mdi-thumb-down</v-icon>
                             <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
@@ -424,7 +425,7 @@
                                   </v-list>
 
                                   <v-list v-else>
-                                    <v-list-item @click="reportReply(reply)">
+                                    <v-list-item @click="reportOpinion(reply)">
                                       <v-list-item-title>
                                         <v-icon>mdi-alert</v-icon>Report
                                       </v-list-item-title>
@@ -473,14 +474,14 @@
                               <div class="player-modal__reply-sub-action">
                                 <button
                                   :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
-                                  @click="playerOpinionVote(reply, 'up')"
+                                  @click="votePlayerOpinion(reply, 'up')"
                                 >
                                   <v-icon>mdi-thumb-up</v-icon>
                                   <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
                                 </button>
                                 <button
                                   :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
-                                  @click="playerOpinionVote(reply, 'down')"
+                                  @click="votePlayerOpinion(reply, 'down')"
                                 >
                                   <v-icon>mdi-thumb-down</v-icon>
                                   <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
@@ -563,14 +564,42 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/player/_base';
 
 export default {
-  mixins: [Base]
+  mixins: [Base],
+
+  async asyncData({ store, $axios, error }) {
+    const playerId = store.getters['player/getPlayerId'];
+
+    function getPlayer() {
+      return $axios.$get(`/api/players/${playerId}`);
+    }
+
+    function getComments() {
+      return $axios.$get(`/api/comments/player/${playerId}`, {
+        params: {
+          sortType: 'like'
+        }
+      });
+    }
+
+    try {
+      const [player, comments] = await Promise.all([
+        getPlayer(),
+        getComments()
+      ]);
+
+      return { playerId, player, comments };
+    } catch (err) {
+      console.error(err);
+      error({ statusCode: 500 });
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
-@import "./_youtube.scss";
+@import "@/page-resources/player/_style.scss";
+@import "@/page-resources/player/_youtube.scss";
 </style>

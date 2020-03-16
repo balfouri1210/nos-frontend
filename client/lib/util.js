@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Cookies from 'js-cookie';
 
 export default {
   ..._,
@@ -11,5 +12,10 @@ export default {
         return prev;
       }, {});
     }
+  },
+
+  savePlayerInfoToCookie(playerId, playerName) {
+    Cookies.set('playerId', playerId);
+    Cookies.set('playerName', playerName);
   }
 };

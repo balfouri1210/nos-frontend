@@ -6,24 +6,6 @@ import Cookies from 'js-cookie';
 import { TOKEN_EXPIRES } from '@/lib/constants';
 
 export default {
-  middleware: 'authenticated',
-  
-  async asyncData({ $axios, store }) {
-    try {
-      const user = await $axios.$get(`/api/users/${store.getters['auth/getId']}`);
-      const userInfo = {
-        username: user.username,
-        countryId: user.country_id,
-        oldPassword: null,
-        newPassword: null,
-        confirmNewPassword: null
-      };
-      return { userInfo };
-    } catch (err) {
-      console.error(err);
-    }
-  },
-
   data() {
     return {
       errors: [],

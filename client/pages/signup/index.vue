@@ -160,7 +160,7 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/signup/_base';
 
 export default {
   mixins: [Base]
@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
+@import "@/page-resources/signup/_style.scss";
 </style>
 
 <i18n>

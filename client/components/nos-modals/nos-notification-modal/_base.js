@@ -26,12 +26,12 @@ export default {
         this.notifications = await this.$axios.$get(`/api/notifications/${this.getId()}`);
         this.notifications.forEach((noti) => {
           switch (noti.type) {
-            case 'reply':
-              noti.text = `${noti.username} add ${noti.type} to your comment: "${noti.content}"`;
-              break;
+          case 'reply':
+            noti.text = `${noti.username} add ${noti.type} to your comment: "${noti.content}"`;
+            break;
 
-            case 'vote_up':
-              noti.text = `Your comment got ${noti.value} Likes!`;
+          case 'vote_up':
+            noti.text = `Your comment got ${noti.content} Likes!`;
           }
         });
         this.mutateUnreadNotificationCount(0);

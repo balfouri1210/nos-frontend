@@ -26,46 +26,13 @@
 </template>
 
 <script>
-import { errors } from '@/lib/constants';
+import Base from '@/page-resources/index/_base';
 
 export default {
-  layout: 'entry',
-
-  async asyncData({ $axios, route }) {
-    let isAccountActivated,
-      isAccountAlreadyActivated,
-      isAccountActivationFailed,
-      verificationFinished;
-    try {
-      await $axios.$put('/api/auth/account-activation', {
-        verificationCode: route.params.verificationCode
-      });
-
-      isAccountActivated = true;
-    } catch (err) {
-      switch (err.response.data.code) {
-      case errors.ALREADY_ACTIVATED_USER.code:
-        isAccountAlreadyActivated = true;
-        break;
-
-      case errors.USER_NOT_FOUND.code:
-        isAccountActivationFailed = true;
-        break;
-      }
-    } finally {
-      verificationFinished = true;
-    }
-
-    return {
-      isAccountActivated,
-      isAccountAlreadyActivated,
-      isAccountActivationFailed,
-      verificationFinished
-    };
-  }
+  mixins: [Base]
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
+@import "@/page-resources/index/_style.scss";
 </style>

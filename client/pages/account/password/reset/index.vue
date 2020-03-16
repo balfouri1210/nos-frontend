@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/password-reset/_base';
 
 export default {
   mixins: [Base]

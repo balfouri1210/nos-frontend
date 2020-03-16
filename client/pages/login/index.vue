@@ -134,5 +134,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
+@import "@/page-resources/login/_style.scss";
 </style>

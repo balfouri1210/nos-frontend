@@ -271,13 +271,32 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/settings/_base';
 
 export default {
-  mixins: [Base]
+  middleware: 'authenticated',
+  mixins: [Base],
+
+  async asyncData({ $axios, store }) {
+    try {
+      const user = await $axios.$get(
+        `/api/users/${store.getters['auth/getId']}`
+      );
+      const userInfo = {
+        username: user.username,
+        countryId: user.country_id,
+        oldPassword: null,
+        newPassword: null,
+        confirmNewPassword: null
+      };
+      return { userInfo };
+    } catch (err) {
+      console.error(err);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
+@import "@/page-resources/settings/_style.scss";
 </style>

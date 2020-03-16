@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Base from './base';
+import Base from '@/page-resources/signup-complete/_base';
 
 export default {
   layout: 'entry',
