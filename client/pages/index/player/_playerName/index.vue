@@ -39,7 +39,7 @@
                         cols="30"
                         rows="2"
                         maxlength="300"
-                        :placeholder="`How was ${$store.getters['player/getPlayerName']} this week?`"
+                        :placeholder="`How was ${player.known_as} this week?`"
                       />
 
                       <button
@@ -100,18 +100,24 @@
 
 
               <!-- COMMENT LIST AREA -->
-              <div class="player-modal__comments">
+              <div
+                class="player-modal__comments"
+                :class="{'player-modal__comments--changing': isCommentsLoading}"
+              >
                 <!-- COMMENT MALFUNCTION UI -->
                 <div
                   v-if="isCommentMalfunction"
                   class="player-modal__error-occured centered"
                 >
-                  COMMENT MALFUNCTION OCCURED
+                  <p class="centered">
+                    Something wrong!<br>
+                    Please refresh the page or try again after few minutes.
+                  </p>
                 </div>
 
                 <!-- NO COMMENT UI -->
                 <div
-                  v-if="!comments.length && !isCommentsLoading"
+                  v-if="!comments.length && !isCommentAdding"
                   class="player-modal__no-comments"
                 >
                   <p class="player-modal__no-comments-header">
@@ -145,14 +151,14 @@
                   />
 
                   <pulse-loader
-                    v-if="!comments.length && isCommentsLoading"
+                    v-if="isCommentsLoading"
                     class="centered"
-                    :color="'#808080'"
+                    :color="'white'"
                     :size="'6px'"
-                    :style="{ 'margin': '16px 0' }"
+                    :style="{ 'margin': '16px 0', 'z-index': 20 }"
                   />
 
-                  <ul>
+                  <ul class="player-modal__comments">
                     <li
                       v-for="(comment, commentIndex) in comments"
                       :key="commentIndex"

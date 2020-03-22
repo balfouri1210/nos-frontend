@@ -157,6 +157,26 @@
     }
   }
 
+  &__comments--changing {
+    .player-modal__comments {
+      opacity: 0.4;
+    }
+  }
+
+  &__error-occured {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+
+    p {
+      width: 100%;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
   &__comment {
     &-username {
       margin-right: 4px;

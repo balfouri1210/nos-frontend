@@ -11,7 +11,8 @@ export default {
     return {
       isLoginModal: false,
       isAccountMenuModal: false,
-      isNotificationModal: false
+      isNotificationModal: false,
+      isSearchModal: false
     };
   },
 
@@ -56,6 +57,7 @@ export default {
       this.isLoginModal = false;
       this.isAccountMenuModal = false;
       this.isNotificationModal = false;
+      this.isSearchModal = false;
     }
   }
 };

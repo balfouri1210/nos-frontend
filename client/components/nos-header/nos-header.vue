@@ -58,6 +58,13 @@
         >
           <v-icon>mdi-account-circle</v-icon>
         </button>
+
+        <button
+          ref="search-button"
+          @click="isSearchModal = true"
+        >
+          <v-icon>mdi-magnify</v-icon>
+        </button>
       </div>
 
       <nos-login-modal
@@ -77,10 +84,15 @@
       <nos-notification-modal
         v-if="isNotificationModal"
         v-click-outside="clickOutsideHandler"
-        @closeNotificationModal="closeNotificationModal"
         @closeModal="isNotificationModal = false"
       />
     </div>
+
+    <nos-search-modal
+      v-if="isSearchModal"
+      v-click-outside="clickOutsideHandler"
+      @closeModal="isSearchModal = false"
+    />
   </header>
 </template>
 
@@ -89,12 +101,14 @@ import Base from './_base';
 import nosLoginModal from '@/components/nos-modals/nos-login-modal/nos-login-modal.vue';
 import nosAccountMenuModal from '@/components/nos-modals/nos-account-menu-modal/nos-account-menu-modal.vue';
 import nosNotificationModal from '@/components/nos-modals/nos-notification-modal/nos-notification-modal.vue';
+import nosSearchModal from '@/components/nos-modals/nos-search-modal/nos-search-modal.vue';
 
 export default {
   components: {
     nosLoginModal,
     nosAccountMenuModal,
-    nosNotificationModal
+    nosNotificationModal,
+    nosSearchModal
   },
 
   mixins: [Base]

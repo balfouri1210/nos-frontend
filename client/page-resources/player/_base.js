@@ -164,10 +164,11 @@ export default {
         });
 
         this.showAddedReply(parentComment, addReplyResult);
-        parentComment.isReplySaving = false;
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
+      } finally {
+        parentComment.isReplySaving = false;
       }
     },
 
@@ -315,7 +316,7 @@ export default {
     },
 
     async sortCommentBy(sortType) {
-      this.comments = [];
+      // this.comments = [];
       this.isCommentsLoading = true;
       this.commentSortType = sortType;
 

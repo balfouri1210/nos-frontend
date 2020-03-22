@@ -9,15 +9,16 @@ export default {
     nosPlayerModalInfo
   },
 
-  async asyncData({ store, $axios, error }) {
+  async asyncData({ store, $axios, error, params }) {
+    const historyId = params.historyId;
     const playerId = store.getters['player/getPlayerId'];
 
-    function getPlayer() {
-      return $axios.$get(`/api/players/${playerId}`);
+    function getPlayerHistory() {
+      return $axios.$get(`/api/histories/${historyId}/player/${playerId}`);
     }
 
-    function getComments() {
-      return $axios.$get(`/api/comments/player/${playerId}`, {
+    function getCommentHistories() {
+      return $axios.$get(`/api/histories/${historyId}/player/${playerId}/comments`, {
         params: {
           sortType: 'like'
         }
@@ -26,11 +27,11 @@ export default {
 
     try {
       const [player, comments] = await Promise.all([
-        getPlayer(),
-        getComments()
+        getPlayerHistory(),
+        getCommentHistories()
       ]);
 
-      return { playerId, player, comments };
+      return { historyId, playerId, player, comments };
     } catch (err) {
       console.error(err);
       error({ statusCode: 500 });
@@ -74,22 +75,6 @@ export default {
       this.$router.go(-1);
     },
 
-    async getReplies(parentComment) {
-      parentComment.replies = [];
-      parentComment.isReply = true;
-      parentComment.isRepliesLoaded = false;
-
-      try {
-        parentComment.replies = await this.$axios.$get(
-          `/api/replies/player/${parentComment.id}`
-        );
-        parentComment.isRepliesLoaded = true;
-      } catch (err) {
-        this.isCommentMalfunction = true;
-        console.error(err);
-      }
-    },
-
     commentMappingWithUiProperty(comments) {
       comments.forEach(comment => {
         this.$set(comment, 'isReply', false);
@@ -109,13 +94,92 @@ export default {
       return (content.match(/\n/g) || []).length >= 4;
     },
 
+    async sortCommentBy(sortType) {
+      // this.comments = [];
+      this.isCommentsLoading = true;
+      this.commentSortType = sortType;
+
+      try {
+        switch (sortType) {
+        case 'date' :
+          this.comments = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/comments`, {
+            params: { sortType: 'date' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
+
+        case 'like' :
+        default :
+          this.comments = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/comments`, {
+            params: { sortType: 'like' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
+        }
+        this.isCommentsLoading = false;
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      }
+    },
+
+    async loadMoreComments() {
+      if (this.isMoreCommentsLoading) return;
+      else if (this.player.comment_count <= this.comments.length) return;
+
+      const previousCommentIdList = this.comments.map((comment) => {
+        return comment.id;
+      });
+
+      this.isMoreCommentsLoading = true;
+      try {
+        const moreComments = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/comments`, {
+          params: {
+            sortType: this.commentSortType,
+            minId: this.comments[this.comments.length - 1].id,
+            previousCommentIdList
+          }
+        });
+        this.commentMappingWithUiProperty(moreComments);
+        this.comments = this.comments.concat(moreComments);
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      } finally {
+        this.isMoreCommentsLoading = false;
+      }
+    },
+
+
+    async getReplies(parentComment) {
+      parentComment.replies = [];
+      parentComment.isReply = true;
+      parentComment.isRepliesLoaded = false;
+
+      try {
+        parentComment.replies = await this.$axios.$get(
+          `/api/histories/${this.historyId}/player/${this.playerId}/replies`, {
+            params: {
+              parentCommentsId: parentComment.id
+            }
+          }
+        );
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      } finally {
+        parentComment.isRepliesLoaded = true;
+      }
+    },
+
     async loadMoreReplies(parentComment) {
       if (parentComment.reply_count <= parentComment.replies.length) return;
       this.$set(parentComment, 'isMoreRepliesLoading', true);
       try {
-        const moreReplise = await this.$axios.$get(`/api/replies/player/${parentComment.id}`, {
+        const moreReplise = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/replies`, {
           params: {
-            maxId: parentComment.replies[parentComment.replies.length - 1].id
+            maxId: parentComment.replies[parentComment.replies.length - 1].id,
+            parentCommentsId: parentComment.id
           }
         });
         parentComment.replies = parentComment.replies.concat(moreReplise);
