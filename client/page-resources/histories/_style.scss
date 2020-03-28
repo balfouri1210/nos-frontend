@@ -1,15 +1,90 @@
 .histories {
-  .history {
-  }
+  &__mobile { display: block; }
+  &__desktop { display: none; }
 
   &__link {
-    display: block;
-    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px 0;
     border-bottom: 1px solid #e4e4e4;
     text-align: center;
   }
 
-  &__link:hover {
-    color: $nos-main-theme;
+  &__mobile-period {
+    margin-bottom: 8px;
+  }
+
+  &__top5Players {
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    .histories__flag {
+      width: 17px;
+      margin-right: 8px;
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    .histories__club {
+      margin: 0 8px;
+      width: 14px;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__load-more {
+    text-align: center;
+
+    button {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .histories {
+    padding: 0 16px;
+
+    &__mobile { display: none; }
+    &__desktop { display: block; }
+
+    &__item {
+      padding: 0 16px;
+      cursor: pointer;
+    }
+    &__item:hover {
+      background: rgba($nos-main-theme, 0.1);
+    }
+
+    &__period {
+      display: inline-block;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    &__load-more {
+      margin-top: 12px;
+
+      button {
+        max-width: 300px;
+        border-radius: 6px;
+      }
+    }
   }
 }

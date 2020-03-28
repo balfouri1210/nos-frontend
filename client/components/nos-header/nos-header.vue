@@ -61,7 +61,7 @@
 
         <button
           ref="search-button"
-          @click="isSearchModal = true"
+          @click="isSearchModal = !isSearchModal"
         >
           <v-icon>mdi-magnify</v-icon>
         </button>

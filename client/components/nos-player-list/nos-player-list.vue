@@ -19,7 +19,7 @@
           <div class="player-top__meta-content">
             <img
               :src="`/flags/${topPlayer.country_code.toLowerCase()}.png`"
-              alt="flag"
+              :alt="topPlayer.country_code"
             >
             <p>{{ topPlayer.known_as }}<span>-</span><br>{{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}</p>
           </div>
@@ -71,7 +71,7 @@
             <p>
               <img
                 :src="`/flags/${player.country_code.toLowerCase()}.png`"
-                alt="flag"
+                :alt="player.country_code"
               >{{ player.known_as }}
             </p>
             <p>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}<span v-if="player.height > 0"> / {{ player.height }}cm</span></p>

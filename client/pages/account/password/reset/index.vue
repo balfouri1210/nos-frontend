@@ -15,7 +15,7 @@
             :rules="'required'"
             :value="email"
             :placeholder="'Email address'"
-            :autocomplete="'new password'"
+            :autocomplete="'new-password'"
             :disabled="isResetPwdEmailSendCompleted || isResetPwdEmailSendFailed"
             @input="email = $event"
           />

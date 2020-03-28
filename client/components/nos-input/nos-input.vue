@@ -18,11 +18,31 @@
         :autocomplete="autocomplete"
         :disabled="disabled"
       >
-
+      
       <p class="nos-input__error-message">
         {{ errors[0] }}
       </p>
     </validation-provider>
+
+    <div
+      v-if="clearable || isLoading"
+      class="nos-input__extra"
+    >
+      <v-icon
+        v-show="clearable && !isLoading"
+        @click="inputVal = ''"
+      >
+        mdi-close
+      </v-icon>
+
+      <v-progress-circular
+        v-show="isLoading"
+        :size="20"
+        :width="2"
+        color="#808080"
+        indeterminate
+      />
+    </div> 
   </div>
 </template>
 
@@ -82,6 +102,16 @@ export default {
     outlined: {
       type: Boolean,
       default: false
+    },
+
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+
+    isLoading: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -102,7 +132,14 @@ export default {
 <style lang="scss" scoped>
 .nos-input {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-bottom: 18px;
+
+  span {
+    width: 100%;
+  }
 
   input {
     width: 100%;
@@ -134,6 +171,13 @@ export default {
       left: 8px;
       color: #c62828;
     }
+  }
+
+  &__extra {
+    display: flex;
+    justify-content: flex-start;
+    width: 24px;
+    margin-right: 12px;
   }
 }
 </style>

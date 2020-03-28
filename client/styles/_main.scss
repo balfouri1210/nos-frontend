@@ -188,9 +188,6 @@ input {
 button {
   background: transparent;
 }
-button:disabled {
-  cursor: not-allowed;
-}
 
 select {
   -webkit-appearance: none;
