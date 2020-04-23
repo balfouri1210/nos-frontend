@@ -83,7 +83,7 @@ export const actions = {
     let durationToEvent;
 
     // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
-    if (this.$moment.utc().day() === 2) {
+    if (this.$moment.utc().day() === 5) {
       const now = this.$moment.utc();
       const seasonEnd = `${now.format('YYYYMMDD')}1800`;
       const seasonStart = `${now.format('YYYYMMDD')}0000`;
@@ -95,7 +95,7 @@ export const actions = {
         durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;
   
         if (durationToEvent < 1000 * 60 * 60 * 12) {
-          // 시즌종료까지 남은시간이 6시간 이내일 경우
+          // 시즌종료까지 남은시간이 12시간 이내일 경우
           commit('mutateAppStatus', 'lastStage');
           commit('mutateSeasonEnd', seasonEndMoment);
           commit('mutateSeasonStart', null);
