@@ -1,6 +1,7 @@
 <template>
   <div
     class="nos-search-modal"
+    :class="{'nos-search-modal--preseason': $store.getters.getAppStatus === 'preseason'}"
   >
     <div class="nos-search-modal__inner">
       <validation-observer v-slot="{ handleSubmit }">
@@ -84,7 +85,16 @@ export default {
       this.$store.commit('player/mutatePlayerName', item.known_as);
       U.savePlayerInfoToCookie(item.id, item.known_as);
       this.$emit('closeModal');
-      this.$router.push(`/player/${item.known_as}`);
+
+      // 평상시
+      this.$router.push(
+        this.localePath({
+          name: 'index-player-playerName',
+          params: {
+            playerName: item.known_as
+          }
+        })
+      );
     }
   }
 };

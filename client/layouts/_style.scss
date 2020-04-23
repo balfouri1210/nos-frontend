@@ -7,6 +7,10 @@
     padding-top: $mobile-header-height;
     padding-bottom: $mobile-footer-height;
   }
+
+  .nos-layout-preseason {
+    padding-top: $mobile-header-height;
+  }
 }
 
 .nos-entry {
@@ -61,6 +65,10 @@
     .nos-layout-wide {
       padding-top: $web-header-height;
       padding-bottom: $web-footer-height;
+    }
+
+    .nos-layout-preseason {
+      padding-top: $web-header-height;
     }
   }
 

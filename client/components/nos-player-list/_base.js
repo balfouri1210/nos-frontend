@@ -2,6 +2,23 @@ import U from '@/lib/util';
 import { PLAYER_LIST_MAX } from '@/lib/constants';
 
 export default {
+  props: {
+    initialPlayerList: {
+      type: Array,
+      default: () => []
+    },
+
+    isHistorical: {
+      type: Boolean,
+      default: false
+    },
+
+    historyId: {
+      type: Number,
+      default: null
+    }
+  },
+
   data() {
     return {
       topPlayer: this.initialPlayerList[0],
@@ -42,27 +59,32 @@ export default {
   },
 
   methods: {
-    selectPlayer(player) {
-      this.$store.commit('player/mutatePlayerId', player.id);
-      this.$store.commit('player/mutatePlayerName', player.known_as);
-      U.savePlayerInfoToCookie(player.id, player.known_as);
+    async selectPlayer(player) {
+      try {
+        this.$store.commit('player/mutatePlayerId', player.id);
+        this.$store.commit('player/mutatePlayerName', player.known_as);
+        U.savePlayerInfoToCookie(player.id, player.known_as);
 
-      if (this.$route.name.indexOf('history') !== -1) {
-        this.$router.push(`/history/${this.$route.params.historyId}/player/${player.known_as}`);
-      } else {
-        this.$router.push(`/player/${player.known_as}`);
+        if (this.isHistorical) {
+          // History 페이지에서 선수를 클릭했을 때
+          this.$router.push(`/history/${this.$route.params.historyId}/player/${player.known_as}`);
+        } else {
+          // Main 페이지에서 선수를 클릭했을 때
+          this.$router.push(`/player/${player.known_as}`);
+        }
+      } catch (err) {
+        console.error(err);
+        return this.$nuxt.error({ statusCode: 500 });
       }
     },
 
     async loadMorePlayers() {
       if (this.isMorePlayersLoading || this.playerList.length >= PLAYER_LIST_MAX - 1) return;
 
-      let apiUrl = '/api/players';
-      if (this.$route.name.indexOf('history') !== -1) apiUrl = `/api/histories/player/${this.$route.params.historyId}`;
-
       try {
         this.isMorePlayersLoading = true;
 
+        const apiUrl = this.isHistorical ? `/api/histories/player/${this.$route.params.historyId || this.historyId}` : '/api/players';
         const loadedPlayers = await this.$axios.$get(apiUrl, {
           params: {
             previousPlayerIdList: this.previousPlayerIdList

@@ -3,22 +3,41 @@ const { mapGetters } = createNamespacedHelpers('auth');
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
 import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-request-login-popup.vue';
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
+import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
+import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import Cookies from 'js-cookie';
 
 export default {
-  transition: {
-    name: 'fade',
-    mode: 'out-in'
+  props: {
+    playerId: {
+      type: Number,
+      default: 0
+    },
+
+    player: {
+      type: Object,
+      default: {}
+    },
+
+    initialComments: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
 
   components: {
     nosSkeletonLoader,
     nosRequestLoginPopup,
-    nosPlayerModalInfo
+    nosPlayerModalInfo,
+    nosYoutubeArea,
+    nosYoutubePlayer
   },
 
   data() {
     return {
+      comments: null,
       commentSortType: 'like',
       newCommentContent: '',
       isCommentsLoading: false,
@@ -27,7 +46,10 @@ export default {
       isCommentMalfunction: false,
 
       isRequestLoginPopup: false,
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      nosImageUrl: process.env.NOS_IMAGE_URL,
+
+      isYoutubePlayer: false,
+      selectedYoutubeVideoId: null
     };
   },
 
@@ -47,12 +69,9 @@ export default {
     }
   },
 
-  async created() {
-    try {
-      this.commentMappingWithUiProperty(this.comments);
-    } catch (err) {
-      console.error(err);
-    }
+  created() {
+    this.comments = this.initialComments.slice();
+    if (this.comments) this.commentMappingWithUiProperty(this.comments);
   },
 
   mounted() {
@@ -69,7 +88,6 @@ export default {
       try {
         if (Cookies.get('nos-hl')) {
           hitsList = Cookies.get('nos-hl').split(',');
-          console.log(hitsList);
   
           if (hitsList.indexOf(this.playerId.toString()) !== -1) {
             return;
@@ -84,7 +102,7 @@ export default {
         }
       } catch (err) {
         console.error(err);
-        this.$nuxt.error({ statusCode: 500 });
+        return this.$nuxt.error({ statusCode: 500 });
       }
     },
 
@@ -93,7 +111,8 @@ export default {
     },
 
     closeModal() {
-      this.$router.push(this.localePath('index'));
+      // this.$router.push(this.localePath('index'));
+      this.$router.back();
     },
 
     commentMappingWithUiProperty(comments) {
@@ -222,7 +241,7 @@ export default {
           alert('Already voted!');
         } else {
           console.error(err);
-          this.$nuxt.error({ statusCode: 500 });
+          return this.$nuxt.error({ statusCode: 500 });
         }
       }
     },
@@ -412,20 +431,13 @@ export default {
         alert('Reported! This opinion will be penalized according to policy after review.');
       } catch (err) {
         console.error(err);
-        this.$nuxt.error({ statusCode: 500 });
+        return this.$nuxt.error({ statusCode: 500 });
       }
     },
-  },
 
-  // Body scroll lock
-  beforeRouteEnter(to, from, next) {
-    if (process.client) document.documentElement.style.overflow = 'hidden';
-    next();
-  },
-
-  // Body scroll release
-  beforeRouteLeave(to, from ,next) {
-    if (process.client) document.documentElement.style.overflow = 'auto';
-    next();
+    selectYoutubeVideoHandler(videoId) {
+      this.selectedYoutubeVideoId = videoId;
+      this.isYoutubePlayer = true;
+    }
   }
 };

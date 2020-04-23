@@ -1,10 +1,10 @@
 .settings {
   width: 100%;
   max-width: 400px;
-  padding: 48px 16px 0;
+  padding: 48px 16px $mobile-footer-height;
 
   &__content {
-    margin: 50px 0 120px;
+    margin: 50px 0 60px;
   }
 
   h1 {
@@ -143,5 +143,10 @@
 @media screen and (min-width: $mobile-width) {
   .settings {
     padding-top: 56px;
+    padding-bottom: $web-footer-height;
+
+    &__content {
+      margin-bottom: 60px
+    }
   }
 }

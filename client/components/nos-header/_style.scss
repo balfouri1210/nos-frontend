@@ -85,6 +85,26 @@
   }
 }
 
+.nos-header--preseason {
+  border-bottom: 1px solid rgba(white, 0.4);
+  background: transparent;
+
+  .nos-header__logo {
+    a {
+      background-image: url('/logos/logo_short_white2.svg');
+    }
+  }
+
+  .nos-header__functions {
+    button {
+      .v-icon {
+        color: white;
+      }
+    }
+  }
+}
+
+
 @media only screen and (min-width: $mobile-width) {
   .nos-header {
     height: $web-header-height;
@@ -98,6 +118,14 @@
         width: 166px;
         height: 30px;
          background-image: url('/logos/logo2.svg');
+      }
+    }
+  }
+  
+  .nos-header--preseason {
+    .nos-header__logo {
+      a {
+        background-image: url('/logos/logo_white2.svg');
       }
     }
   }

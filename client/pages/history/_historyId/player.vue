@@ -6,7 +6,10 @@
         <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>
       </div>
 
-      <nos-player-list :initial-player-list="playerHistories" />
+      <nos-player-list
+        :initial-player-list="playerHistories"
+        :is-historical="true"
+      />
 
       <!-- Nuxt child for player modal -->
       <nuxt-child />
@@ -46,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 .history {
   &__period {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     padding: 8px;
     background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
     text-align: center;

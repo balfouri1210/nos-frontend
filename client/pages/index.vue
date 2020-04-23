@@ -1,10 +1,20 @@
 <template>
-  <div
-    id="home"
-    class="home"
-  >
-    <nos-player-list :initial-player-list="initialPlayerList" />
- 
+  <div class="home">
+    <nos-preseason-ui v-if="$store.getters.getAppStatus === 'preseason'" />
+
+    <div
+      v-else
+      :class="{'home--lastStage': $store.getters.getAppStatus === 'lastStage'}"
+    >
+      <client-only v-if="$store.getters.getAppStatus === 'lastStage'">
+        <nos-countdown @seasonEnd="seasonEndHandler">
+          <p>LEADERBOARD RESET IN</p>
+        </nos-countdown>
+      </client-only>
+
+      <nos-player-list :initial-player-list="initialPlayerList" />
+    </div>
+
     <!-- Nuxt child for player modal -->
     <nuxt-child />
   </div>
@@ -15,18 +25,7 @@ import Base from '@/page-resources/index/_base';
 
 export default {
   layout: 'wide',
-
-  mixins: [Base],
-
-  async asyncData({ $axios, error }) {
-    try {
-      const initialPlayerList = await $axios.$get('/api/players');
-      return { initialPlayerList };
-    } catch (err) {
-      console.error(err);
-      return error({ statusCode: 500 });
-    }
-  }
+  mixins: [Base]
 };
 </script>
 

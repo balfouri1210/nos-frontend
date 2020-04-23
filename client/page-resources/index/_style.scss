@@ -1,2 +1,13 @@
 .home {
+  position: relative;
+}
+
+.home--lastStage {
+  margin-top: 33px;
+}
+
+@media screen and (min-width: $mobile-width) {
+  .home--lastStage {
+    margin-top: 42px;
+  }
 }

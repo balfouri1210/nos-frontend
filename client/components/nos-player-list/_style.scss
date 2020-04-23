@@ -47,6 +47,10 @@
       box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.15);
     }
 
+    p {
+      text-align: left;
+    }
+
     span {
       display: none;
     }
@@ -93,6 +97,7 @@
     padding: 0 6px;
     font-size: 13px;
     font-weight: 600;
+    z-index: 10;
   }
 
   &--degrees-over-0 { color: #eeff00; }

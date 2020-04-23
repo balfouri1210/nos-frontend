@@ -44,12 +44,16 @@
     }
 
     button {
+      display: flex;
       padding: 0;
     }
 
     i {
       color: white;
-      vertical-align: middle;
+    }
+
+    span {
+      text-transform: capitalize;
     }
   }
 

@@ -1,5 +1,12 @@
 <template>
-  <header class="nos-header">
+  <header
+    class="nos-header"
+    :class="{
+      'nos-header--preseason':
+        $store.getters.getAppStatus === 'preseason'
+        && $route.name.indexOf('index') !== -1
+    }"
+  >
     <div class="nos-header__content">
       <div class="nos-header__logo">
         <nuxt-link
@@ -8,7 +15,6 @@
       </div>
 
       <div class="nos-header__functions">
-        <!-- Not logged in -->
         <nuxt-link :to="localePath('histories')">
           <button>
             <v-icon>mdi-history</v-icon>
@@ -23,7 +29,6 @@
           <v-icon>mdi-login-variant</v-icon>
         </button>
 
-        <!-- Logged in -->
         <button
           v-if="isLoggedIn"
           ref="notification-button"

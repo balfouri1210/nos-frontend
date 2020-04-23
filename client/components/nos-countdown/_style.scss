@@ -1,0 +1,74 @@
+.nos-countdown {
+  position: relative;
+  z-index: 99;
+
+  &__timer-container {
+    margin-bottom: 2px;
+    padding: 4px 16px;
+    color: white;
+  }
+
+  &--lastStage {
+    position: fixed;
+    top: $mobile-header-height;
+    left: 0;
+    width: 100%;
+    background: black;
+
+    .nos-countdown__timer-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nos-countdown__slot {
+      margin-right: 8px;
+
+      ::v-deep * {
+        font-size: 14px;
+        font-weight: 800;
+      }
+    }
+
+    .nos-countdown__timer {
+      font-size: 14px;
+      font-weight: 800;
+    }
+  }
+
+  &--preseason {
+    background: transparent;
+
+    .nos-countdown__slot {
+      ::v-deep * {
+        font-size: 20px;
+        font-weight: 800;
+      }
+    }
+
+    .nos-countdown__timer {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 50px;
+    }
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .nos-countdown {
+    &--lastStage {
+      top: $web-header-height;
+      padding: 6px 16px;
+
+      .nos-countdown__slot {
+        ::v-deep * {
+          font-size: 18px;
+        }
+      }
+  
+      .nos-countdown__timer {
+        font-size: 18px;
+      }
+    }
+  }
+}

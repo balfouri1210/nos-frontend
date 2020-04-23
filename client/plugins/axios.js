@@ -3,11 +3,14 @@
 
 export default function({ $axios, store, redirect, app, error }) {
   $axios.onRequest(config => {
-    config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
+    if (store.state.auth.jwt && config.url.indexOf('youtube') === -1)
+      config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
+ 
     store.commit('mutateIsLoading', true);
   });
 
   $axios.onError(error => {
+    store.commit('mutateIsLoading', false);
     const code = parseInt(error.response && error.response.status);
 
     // Token 만료 등의 권한 에러시 자동 로그아웃

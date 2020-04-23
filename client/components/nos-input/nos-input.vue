@@ -39,7 +39,7 @@
         v-show="isLoading"
         :size="20"
         :width="2"
-        color="#808080"
+        :color="progressCircularColor"
         indeterminate
       />
     </div> 
@@ -112,6 +112,11 @@ export default {
     isLoading: {
       type: Boolean,
       default: false
+    },
+
+    progressCircularColor: {
+      type: String,
+      default: '#808080'
     }
   },
 

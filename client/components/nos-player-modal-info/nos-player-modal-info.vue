@@ -136,7 +136,7 @@ export default {
           alert('Already voted!');
         } else {
           console.error(err);
-          this.$nuxt.error({ statusCode: 500 });
+          return this.$nuxt.error({ statusCode: 500 });
         }
       }
     }

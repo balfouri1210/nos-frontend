@@ -2,11 +2,15 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
+import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
+import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 
 export default {
   components: {
     nosSkeletonLoader,
-    nosPlayerModalInfo
+    nosPlayerModalInfo,
+    nosYoutubeArea,
+    nosYoutubePlayer
   },
 
   async asyncData({ store, $axios, error, params }) {
@@ -44,7 +48,10 @@ export default {
       isCommentsLoading: false,
       isMoreCommentsLoading: false,
 
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      nosImageUrl: process.env.NOS_IMAGE_URL,
+
+      isYoutubePlayer: false,
+      selectedYoutubeVideoId: null
     };
   },
 
@@ -72,7 +79,12 @@ export default {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
     closeModal() {
-      this.$router.go(-1);
+      this.$router.push(this.localePath({
+        name: 'history-historyId-player',
+        params: {
+          historyId: this.$route.params.historyId
+        }
+      }));
     },
 
     commentMappingWithUiProperty(comments) {
@@ -188,6 +200,11 @@ export default {
         console.error(err);
         this.isCommentMalfunction = true;
       }
+    },
+
+    selectYoutubeVideoHandler(videoId) {
+      this.selectedYoutubeVideoId = videoId;
+      this.isYoutubePlayer = true;
     }
   },
 

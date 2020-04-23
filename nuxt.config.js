@@ -53,7 +53,8 @@ module.exports = {
     { src: '~/plugins/datepicker.js', ssr: false },
     { src: '~/plugins/logout.js', ssr: false },
     { src: '~/plugins/vue-spinner.js', ssr: false },
-    { src: '~/plugins/vue-countdown.js', ssr: false }
+    { src: '~/plugins/vue-countdown.js', ssr: false },
+    { src: '~/plugins/moment.js' }
   ],
 
   buildModules: [

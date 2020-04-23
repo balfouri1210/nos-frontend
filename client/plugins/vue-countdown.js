@@ -1,4 +1,4 @@
 import Vue from 'vue';
-import VueCountdown from '@chenfengyuan/vue-countdown';
+import vueAwesomeCountdown from 'vue-awesome-countdown';
 
-Vue.component(VueCountdown.name, VueCountdown);
+Vue.use(vueAwesomeCountdown, 'vac');
