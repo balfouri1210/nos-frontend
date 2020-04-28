@@ -13,7 +13,7 @@
       class="nos-request-login-popup__content centered"
     >
       <img
-        src="/logos/logo_white2.svg"
+        src="https://images.907degrees.com/logos/logo_white2.svg"
         alt="logo"
       >
 

@@ -5,6 +5,15 @@
       @click="closeModal"
     >
       <div
+        class="player-modal__close-btn"
+        @click.stop
+      >
+        <button @click="closeModal">
+          <v-icon>close</v-icon>
+        </button>
+      </div>
+
+      <div
         class="player-modal__inner centered"
       >
         <div

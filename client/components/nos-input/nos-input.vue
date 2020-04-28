@@ -11,6 +11,7 @@
     >
       <input
         :id="id"
+        ref="nosInput"
         v-model="inputVal"
         :type="type"
         :required="required"
@@ -24,13 +25,15 @@
       </p>
     </validation-provider>
 
+    <!-- v-if를 쓰지 않은 이유 : v-if로 구현하면 v-click-outside에 걸리기 때문에 -->
+    <!-- close버튼을 눌렀을 때 검색어만 지워지는게 아니라 search modal 자체가 사라진다 -->
     <div
-      v-if="clearable || isLoading"
+      v-show="clearable || isLoading"
       class="nos-input__extra"
     >
       <v-icon
-        v-show="clearable && !isLoading"
-        @click="inputVal = ''"
+        v-show="inputVal && !isLoading"
+        @click="clearInputVal"
       >
         mdi-close
       </v-icon>
@@ -129,6 +132,13 @@ export default {
       set(newValue) {
         this.$emit('input', newValue);
       }
+    }
+  },
+
+  methods: {
+    clearInputVal() {
+      this.inputVal = '';
+      this.$refs.nosInput.focus();
     }
   }
 };

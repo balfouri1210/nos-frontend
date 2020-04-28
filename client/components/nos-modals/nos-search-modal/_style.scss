@@ -46,6 +46,7 @@
       button {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 6px 0;
         width: 100%;
       }
@@ -54,19 +55,27 @@
         width: 17px;
         margin-right: 8px;
       }
-
-      span {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        word-break: break-all;
-        line-height: normal;
-      }
     }
 
     li:hover {
       background: rgba(0, 0, 0, 0.05);
     }
+  }
+  &__suggestion-name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      line-height: normal;
+    }
+  }
+  &__suggestion-info {
+    display: none;
   }
 }
 
@@ -103,7 +112,7 @@
       margin: 0 auto;
     }
 
-    .nos-input, button {
+    .nos-input {
       line-height: 64px;
     }
 
@@ -127,6 +136,15 @@
           padding: 8px 0;
         }
       }
+    }
+    &__suggestion-name {
+      width: auto;
+    }
+    &__suggestion-info {
+      display: block;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
     }
   }
 

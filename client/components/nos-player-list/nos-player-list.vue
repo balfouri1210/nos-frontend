@@ -27,7 +27,7 @@
       </div> 
 
       <img
-        src="/logos/logo.svg"
+        src="https://images.907degrees.com/logos/logo.svg"
         alt="logo"
         class="player-top__logo"
       >

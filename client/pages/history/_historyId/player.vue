@@ -48,19 +48,31 @@ export default {
 
 <style lang="scss" scoped>
 .history {
+  padding-top: 60px;
+
   &__period {
+    position: fixed;
+    top: $mobile-header-height;
+    left: 0;
+    width: 100%;
+    height: 58px;
     margin-bottom: 2px;
     padding: 8px;
     background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
     text-align: center;
     font-size: 14px;
     color: white;
+    z-index: 50;
   }
 }
 
 @media screen and (min-width: $mobile-width) {
   .history {
     margin-bottom: 80px;
+
+    &__period {
+      top: $web-header-height;
+    }
   }
 }
 </style>

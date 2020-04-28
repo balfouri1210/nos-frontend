@@ -4,7 +4,7 @@
       <div class="youtube-area__search-form">
         <validation-observer v-slot="{ handleSubmit }">
           <form
-            id="app"
+            id="youtubeSearchForm"
             @submit.prevent="handleSubmit(searchYoutube)"
           >
             <div class="youtube-area__input">
@@ -118,7 +118,7 @@
               v-html="video.title"
             />
             <span>{{ video.channelTitle }} | {{ $moment(video.publishedAt).fromNow() }}</span>
-            <span>Hits: {{ video.viewCount }}</span>
+            <span>Hits: {{ video.viewCount | abbrNum(1) }}</span>
           </div>
         </button>
       </li>

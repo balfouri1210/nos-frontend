@@ -105,10 +105,25 @@
   }
 
   &__ment {
-    margin-top: 12px;
+    margin: 16px 0 6px;
     color: white;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    border: 2px solid white;
+    border-radius: 6px;
+    background: rgba(white, 0.8);
+    line-height: 40px;
+    text-align: center;
+    transition: all 0.3s ease-out;
+  }
+  &__link:hover {
+    background: rgba(white, 0.9);
   }
 }
 

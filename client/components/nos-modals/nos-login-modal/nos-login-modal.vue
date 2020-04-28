@@ -1,6 +1,7 @@
 <template>
   <div
     class="nos-modal nos-login-modal"
+    :class="{'nos-modal--greyscale': isGreyScale}"
   >
     <nos-modal-header @closeModal="$emit('closeModal')" />
 
@@ -36,7 +37,7 @@
 
           <button
             type="submit"
-            class="nos-login-modal__submit"
+            class="nos-login-modal__submit nos-modal__button"
           >
             Login
           </button>
@@ -58,7 +59,10 @@
           </div>
 
           <div>
-            <button @click="errorMessage = null">
+            <button
+              class="nos-login-modal__error-close"
+              @click="errorMessage = null"
+            >
               <i
                 class="material-icons"
               >close</i>
@@ -110,6 +114,15 @@ export default {
 
       errorMessage: null
     };
+  },
+
+  computed: {
+    isGreyScale() {
+      return (
+        this.$store.getters.getAppStatus === 'preseason' &&
+        this.$route.name.indexOf('index') !== -1
+      );
+    }
   },
 
   methods: {

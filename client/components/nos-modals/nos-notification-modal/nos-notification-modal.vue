@@ -1,6 +1,7 @@
 <template>
   <div
     class="nos-modal nos-notification-modal"
+    :class="{'nos-modal--greyscale': isGreyScale}"
   >
     <div class="nos-notification">
       <nos-modal-header @closeModal="$emit('closeModal')" />
@@ -11,7 +12,7 @@
           class="centered"
           :size="30"
           :width="3"
-          color="rgb(255, 255, 255)"
+          :color="progressCircularColor"
           indeterminate
         />
 
@@ -28,7 +29,7 @@
             :key="index"
             class="nos-notification__item"
           >
-            <button>
+            <button class="nos-modal__button">
               <span>{{ noti.text }}</span>
             </button>
           </li>
@@ -42,7 +43,21 @@
 import Base from './_base';
 
 export default {
-  mixins: [Base]
+  mixins: [Base],
+
+  computed: {
+    isGreyScale() {
+      return (
+        this.$store.getters.getAppStatus === 'preseason' &&
+        this.$route.name.indexOf('index') !== -1
+      );
+    },
+
+    progressCircularColor() {
+      const result = this.isGreyScale ? '#f4991e' : 'rgb(255, 255, 255)';
+      return result;
+    }
+  }
 };
 </script>
 

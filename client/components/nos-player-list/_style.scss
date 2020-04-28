@@ -156,11 +156,14 @@
 
 
 @media screen and (min-width: $mobile-width) {
+  #player-list-wrapper {
+    margin-top: 18px;
+  }
+
   .player-top {
     &__div {
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 12px;
-      margin-top: 18px;
     }
 
     &__meta {

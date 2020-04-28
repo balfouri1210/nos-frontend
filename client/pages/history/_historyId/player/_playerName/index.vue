@@ -284,5 +284,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/page-resources/history/player/playerName/_style.scss";
+@import "@/components/nos-player-modal/_style.scss";
 </style>

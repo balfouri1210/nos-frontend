@@ -48,10 +48,6 @@
       padding: 0;
     }
 
-    i {
-      color: white;
-    }
-
     span {
       text-transform: capitalize;
     }
@@ -59,6 +55,14 @@
 
   &__error-icon {
     margin-right: 4px;
+  }
+
+  &__error-close {
+    background: none !important;
+
+    i {
+      color: white;
+    }
   }
 
   &__forgot-password {

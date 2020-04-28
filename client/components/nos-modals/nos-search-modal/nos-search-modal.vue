@@ -6,7 +6,7 @@
     <div class="nos-search-modal__inner">
       <validation-observer v-slot="{ handleSubmit }">
         <form
-          id="app"
+          id="playerSearchForm"
           @submit.prevent="handleSubmit(search)"
         >
           <div class="nos-search-modal__form">
@@ -33,11 +33,17 @@
             :key="index"
           >
             <button @click="selectSearchItem(item)">
-              <img
-                :src="item.club_image"
-                alt="club"
-              >
-              <span>{{ item.known_as }}</span>
+              <p class="nos-search-modal__suggestion-name">
+                <img
+                  :src="item.club_image"
+                  alt="club"
+                >
+                <span>{{ item.known_as }}</span>
+              </p>
+
+              <span class="nos-search-modal__suggestion-info">
+                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }} / {{ item.height }}cm / {{ item.position }}
+              </span>
             </button>
           </li>
         </ul>

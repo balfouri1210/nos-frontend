@@ -1,9 +1,15 @@
 <template>
-  <div class="nos-modal nos-account-menu-modal">
+  <div
+    class="nos-modal nos-account-menu-modal"
+    :class="{'nos-modal--greyscale': isGreyScale}"
+  >
     <nos-modal-header @closeModal="$emit('closeModal')" />
 
     <div class="nos-modal__body">
-      <button @click="goToSettings">
+      <button
+        class="nos-modal__button"
+        @click="goToSettings"
+      >
         Settings
       </button>
 
@@ -20,6 +26,15 @@ import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
 export default {
   components: {
     nosModalHeader
+  },
+
+  computed: {
+    isGreyScale() {
+      return (
+        this.$store.getters.getAppStatus === 'preseason' &&
+        this.$route.name.indexOf('index') !== -1
+      );
+    }
   },
 
   methods: {

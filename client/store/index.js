@@ -85,11 +85,10 @@ export const actions = {
     // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
     if (this.$moment.utc().day() === 5) {
       const now = this.$moment.utc();
-      const seasonEnd = `${now.format('YYYYMMDD')}1800`;
-      const seasonStart = `${now.format('YYYYMMDD')}0000`;
-
-      const seasonEndMoment = this.$moment.utc(seasonEnd, 'YYYYMMDDHHmm');
-      const seasonStartMoment = this.$moment.utc(seasonStart, 'YYYYMMDDHHmm').add(1, 'days');
+      const criterionTime = `${now.format('YYYYMMDD')}1800`;
+      
+      const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
+      const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');
 
       if (now.isBefore(seasonEndMoment)) {
         durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;

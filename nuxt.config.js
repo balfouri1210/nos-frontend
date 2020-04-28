@@ -17,6 +17,16 @@ module.exports = {
       { rel: 'icon', href: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico?v=2'}
     ],
+    script: [
+      { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${env.GA_TRACKING_ID}` },
+      {
+        type: 'text/javascript',
+        innerHTML: `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164815160-1');`
+      }
+    ]
   },
 
   build: {
@@ -54,7 +64,8 @@ module.exports = {
     { src: '~/plugins/logout.js', ssr: false },
     { src: '~/plugins/vue-spinner.js', ssr: false },
     { src: '~/plugins/vue-countdown.js', ssr: false },
-    { src: '~/plugins/moment.js' }
+    { src: '~/plugins/moment.js' },
+    { src: '~/plugins/filter.js' }
   ],
 
   buildModules: [

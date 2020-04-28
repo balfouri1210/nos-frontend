@@ -23,9 +23,9 @@
                   </v-icon>
                 </template>
                 <span>
-                  New leaderboard will be opened at {{ $moment($store.getters.getSeasonStart).format('YYYY. MM. DD HH:mm') }}.<br>
-                  You can search player and leave opinion and vote.
-                  907 calculates all the data and give you new leaderboard.
+                  New leaderboard will be opened at {{ $moment.utc($store.getters.getSeasonStart).format('YYYY. MM. DD HH:mm') }} (UTC).<br>
+                  You can search player, leave opinion and vote.
+                  907 calculates all the data and opens you new leaderboard.
                 </span>
               </v-tooltip>
             </p>
@@ -34,6 +34,10 @@
       </client-only>
 
       <div class="preseason__content">
+        <p class="preseason__ment">
+          Search players and Leave a opinion
+        </p>
+
         <div :style="{ position: 'relative' }">
           <validation-observer v-slot="{ handleSubmit }">
             <form
@@ -77,8 +81,15 @@
         </div>
 
         <p class="preseason__ment">
-          Search players and leave a opinion
+          Want to check previous leaderboard?
         </p>
+
+        <nuxt-link
+          class="preseason__link"
+          :to="localePath('histories')"
+        >
+          Go to Histories
+        </nuxt-link>
       </div>
     </div>
   </div>
