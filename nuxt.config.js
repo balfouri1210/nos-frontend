@@ -84,17 +84,18 @@ module.exports = {
           {
             code: 'en',
             iso: 'en-US'
-          }, {
-            code: 'ko',
-            iso: 'ko-KR'
           }
+          // ,{
+          //   code: 'ko',
+          //   iso: 'ko-KR'
+          // }
         ],
         defaultLocale: 'en',
         vueI18n: {
           fallbackLocale: 'en',
         },
         detectBrowserLanguage: {
-          useCookie: true,
+          useCookie: false,
           cookieKey: 'nos_lang',
           alwaysRedirect: true
         },
