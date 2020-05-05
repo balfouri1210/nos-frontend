@@ -1,33 +1,35 @@
 <template>
   <div class="histories">
-    <div class="histories__year">
-      <button
-        v-if="selectedYear > 2020"
-        @click="decreaseYear"
-      >
-        <v-icon>mdi-chevron-left</v-icon>
-      </button>
-      <h1>{{ selectedYear }}</h1>
-      <button @click="increaseYear">
-        <v-icon>mdi-chevron-right</v-icon>
-      </button>
-    </div>
-
-    <div class="histories__month-wrapper">
-      <ul class="histories__month-list">
-        <li
-          v-for="(month, index) in months"
-          :key="index"
+    <div class="histories__header">
+      <div class="histories__year">
+        <button
+          v-if="selectedYear > 2020"
+          @click="decreaseYear"
         >
-          <button
-            class="histories__month"
-            :class="{'histories__month--selected': isMonthSelected(month)}"
-            @click="selectMonth(month)"
+          <v-icon>mdi-chevron-left</v-icon>
+        </button>
+        <h1>{{ selectedYear }}</h1>
+        <button @click="increaseYear">
+          <v-icon>mdi-chevron-right</v-icon>
+        </button>
+      </div>
+
+      <div class="histories__month-wrapper">
+        <ul class="histories__month-list">
+          <li
+            v-for="(month, index) in months"
+            :key="index"
           >
-            <span>{{ month.name }}</span>
-          </button>
-        </li>
-      </ul>
+            <button
+              class="histories__month"
+              :class="{'histories__month--selected': isMonthSelected(month)}"
+              @click="selectMonth(month)"
+            >
+              {{ month.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div
@@ -136,6 +138,7 @@
 import Base from '@/page-resources/histories/_base';
 
 export default {
+  layout: 'wide',
   mixins: [Base]
 };
 </script>
