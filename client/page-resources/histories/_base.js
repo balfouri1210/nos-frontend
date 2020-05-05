@@ -29,10 +29,6 @@ export default {
     };
   },
 
-  created() {
-    console.log(this.selectedYear, this.selectedMonth);
-  },
-
   computed: {
     isMonthSelected() {
       return month => {
