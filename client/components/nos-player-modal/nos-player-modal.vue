@@ -573,10 +573,10 @@
 
             <!-- YOUTUBE AREA -->
             <div class="player-modal__right ">
-              <!-- <nos-youtube-area
+              <nos-youtube-area
                 :search-keyword="$route.params.playerName"
                 @selectYoutubeVideo="selectYoutubeVideoHandler"
-              /> -->
+              />
             </div>
           </div>
         </div>
