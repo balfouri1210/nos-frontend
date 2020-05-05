@@ -1,23 +1,72 @@
-footer {
+.footer {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   height: $mobile-footer-height;
   background: #505050;
+  color: white;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 16px;
+  }
+
+  &__logo {
+    display: inline-flex;
+
+    a {
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+      background-image: url('https://images.907degrees.com/logos/logo_short_white2.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
+    }
+  }
+
+  &__right {
+    p {
+      font-size: 13px;
+      text-align: right;
+      line-height: 16px;
+    }
+  }
+
+  &__copyright { font-weight: 300; }
+  &__contact { font-weight: 600; }
 
   button {
     color: white;
     font-weight: 600;
   }
-
-  span {
-    color: white;
-  }
 }
 
 @media only screen and (min-width: $mobile-width) {
-  footer {
+  .footer {
     height: $web-footer-height;
+
+    &__wrapper {
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+
+    &__logo {
+      a {
+        width: 140px;
+        background-image: url('https://images.907degrees.com/logos/logo_white2.svg');
+      }
+    }
+
+    &__right {
+      p {
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
   }
 }

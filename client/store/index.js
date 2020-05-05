@@ -6,7 +6,10 @@ export const state = () => ({
   appStatus: 'season',
   seasonEnd: null,
   seasonStart: null,
-  durationToEvent: 0
+  durationToEvent: 0,
+
+  historyYear: null,
+  historyMonth: null
 });
 
 export const mutations = {
@@ -28,6 +31,15 @@ export const mutations = {
 
   mutateDurationToEvent(state, duration) {
     state.durationToEvent = duration;
+  },
+
+
+  mutateHistoryYear(state, year) {
+    state.historyYear = year;
+  },
+
+  mutateHistoryMonth(state, month) {
+    state.historyMonth = month;
   }
 };
 
@@ -50,6 +62,19 @@ export const getters = {
 
   getDurationToEvent(state) {
     return state.durationToEvent;
+  },
+
+  // getIsModalGreyScale(state, getters, rootState) {
+  //   return getters.getAppStatus !== 'season' && rootState.route.name.indexOf('index') !== -1;
+  // }
+  
+  
+  getHistoryYear(state) {
+    return state.historyYear;
+  },
+
+  getHistoryMonth(state) {
+    return state.historyMonth;
   }
 };
 
@@ -64,15 +89,18 @@ export const actions = {
         const jwt = cookie.jwt;
         if (jwt) {
           commit('auth/mutateJwt', jwt);
-          
+
           const decodedJwt = jwtDecode(jwt);
           commit('auth/mutateId', decodedJwt.id);
           commit('auth/mutateEmail', decodedJwt.email);
           commit('auth/mutateUsername', decodedJwt.username);
         }
 
-        commit('player/mutatePlayerId', parseInt(cookie.playerId));
-        commit('player/mutatePlayerName', cookie.playerName);
+        if (cookie.playerId) commit('player/mutatePlayerId', parseInt(cookie.playerId));
+        if (cookie.playerName) commit('player/mutatePlayerName', cookie.playerName);
+
+        if (cookie.historyYear) commit('mutateHistoryYear', parseInt(cookie.historyYear));
+        if (cookie.historyMonth) commit('mutateHistoryMonth', parseInt(cookie.historyMonth));
       }
     } catch (err) {
       console.error(err);

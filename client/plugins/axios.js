@@ -15,8 +15,6 @@ export default function({ $axios, store, redirect, app, error }) {
 
     // Token 만료 등의 권한 에러시 자동 로그아웃
     if ([401, 403].includes(code)) {
-      app.$logout();
-
       return redirect(app.localePath({
         name: 'login'
       }));

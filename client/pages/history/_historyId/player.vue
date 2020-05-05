@@ -2,8 +2,15 @@
   <div>
     <div class="history">
       <div class="history__period">
-        <p>Previous Leaderboard</p>
-        <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>
+        <div class="history__period-content">
+          <nuxt-link :to="localePath('histories')">
+            <v-icon>mdi-keyboard-backspace</v-icon>
+            <span>Back to Histories</span>
+          </nuxt-link>
+
+          <p>Previous Leaderboard</p>
+          <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>
+        </div>
       </div>
 
       <nos-player-list
@@ -58,20 +65,53 @@ export default {
     height: 58px;
     margin-bottom: 2px;
     padding: 8px;
-    background: linear-gradient(320deg, $nos-main-theme 30%, #ea5514 80%);
+    background: #d57c59;
     text-align: center;
     font-size: 14px;
     color: white;
     z-index: 50;
+  }
+
+  &__period-content {
+    position: relative;
+    max-width: $web-body-content-width;
+    margin: 0 auto;
+
+    a {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 8px;
+      left: 4px;
+      color: white;
+
+      span {
+        display: none;
+      }
+    }
+
+    .v-icon {
+      margin-right: 8px;
+      color: white;
+    }
   }
 }
 
 @media screen and (min-width: $mobile-width) {
   .history {
     margin-bottom: 80px;
+    padding-top: 58px;
 
     &__period {
       top: $web-header-height;
+    }
+
+    &__period-content {
+      a {
+        span {
+          display: inline-block;
+        }
+      }
     }
   }
 }

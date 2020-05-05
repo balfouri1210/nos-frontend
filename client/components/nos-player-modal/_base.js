@@ -5,7 +5,7 @@ import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-reque
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 export default {
   props: {
@@ -49,7 +49,14 @@ export default {
       nosImageUrl: process.env.NOS_IMAGE_URL,
 
       isYoutubePlayer: false,
-      selectedYoutubeVideoId: null
+      selectedYoutubeVideoId: null,
+
+      hitsList: [],
+      now: this.$moment.utc(),
+
+      reportTargetObject: null,
+      isReportDialog: false,
+      reportReason: null
     };
   },
 
@@ -66,6 +73,12 @@ export default {
       return (comment) => {
         return (comment.editCommentContent.match(/\n/g)||[]).length + 1;
       };
+    },
+
+    hitIndex() {
+      return this.hitsList.findIndex((item) => {
+        return item.id === this.playerId;
+      });
     }
   },
 
@@ -82,28 +95,39 @@ export default {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
     async manipulateHits() {
-      let hitsList;
-      const datetime = new Date();
+      if (window.localStorage.getItem('nos-hitsList')) {
+        this.hitsList = window.localStorage.getItem('nos-hitsList').split('_').map(item => {
+          return JSON.parse(item);
+        });
+      }
+
+      this.filteredExpiredHit();
 
       try {
-        if (Cookies.get('nos-hl')) {
-          hitsList = Cookies.get('nos-hl').split(',');
-  
-          if (hitsList.indexOf(this.playerId.toString()) !== -1) {
-            return;
-          } else {
-            hitsList.push(this.playerId);
-            Cookies.set('nos-hl', hitsList.join(','), { expires: new Date(datetime.setHours(datetime.getHours() + 3)) });
-            await this.increasePlayerHits();
-          }
-        } else {
-          Cookies.set('nos-hl', this.playerId, { expires: new Date(datetime.setHours(datetime.getHours() + 3)) });
+        if (this.hitIndex === -1) {
+          this.hitsList.push({
+            id: this.playerId,
+            expires: this.$moment.utc().add(3, 'hours')
+          });
           await this.increasePlayerHits();
         }
+
+        this.hitsList = this.hitsList.map(item => {
+          return JSON.stringify(item);
+        });
+        window.localStorage.setItem('nos-hitsList', this.hitsList.join('_'));
       } catch (err) {
         console.error(err);
         return this.$nuxt.error({ statusCode: 500 });
       }
+    },
+
+    filteredExpiredHit() {
+      this.hitsList.forEach((item, index, obj) => {
+        if (this.$moment.utc(item.expires).isBefore(this.now)) {
+          obj.splice(index, 1);
+        }
+      });
     },
 
     increasePlayerHits() {
@@ -111,8 +135,9 @@ export default {
     },
 
     closeModal() {
-      // this.$router.push(this.localePath('index'));
-      this.$router.back();
+      // this.$router.back();
+      // this.$router.go(-1);
+      history.back();
     },
 
     commentMappingWithUiProperty(comments) {
@@ -419,19 +444,27 @@ export default {
       return (content.match(/\n/g)||[]).length >= 4;
     },
 
-    async reportOpinion(opinion) {
-      try {
-        const type = opinion.parent_comments_id ? 'replies' : 'comments';
 
+    openReportDialog(opinion) {
+      this.isReportDialog = true;
+      this.reportTargetObject = opinion;
+    },
+
+    async saveReport() {
+      try {
+        const type = this.reportTargetObject.parent_comments_id ? 'replies' : 'comments';
+  
         await this.$axios.$post('/api/report', {
-          type: type,
-          subject: 'player',
-          targetId: opinion.id
+          object: `player_${type}`,
+          targetId: this.reportTargetObject.id,
+          reason: this.reportReason
         });
+
         alert('Reported! This opinion will be penalized according to policy after review.');
       } catch (err) {
-        console.error(err);
-        return this.$nuxt.error({ statusCode: 500 });
+        alert('Sorry, There is some problem. Please refresh page or try again few minutes later.');
+      } finally {
+        this.isReportDialog = false;
       }
     },
 

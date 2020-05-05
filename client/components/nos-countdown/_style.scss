@@ -3,8 +3,6 @@
   z-index: 99;
 
   &__timer-container {
-    margin-bottom: 2px;
-    padding: 4px 16px;
     color: white;
   }
 
@@ -13,7 +11,9 @@
     top: $mobile-header-height;
     left: 0;
     width: 100%;
-    background: black;
+    padding: 0 16px;
+    background: $nos-main-gradient;
+    line-height: 36px;
 
     .nos-countdown__timer-container {
       display: flex;
@@ -58,7 +58,7 @@
   .nos-countdown {
     &--lastStage {
       top: $web-header-height;
-      padding: 6px 16px;
+      line-height: 42px;
 
       .nos-countdown__slot {
         ::v-deep * {

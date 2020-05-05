@@ -16,6 +16,7 @@ export default {
   async asyncData({ $axios, error, store }) {
     if (store.getters.getAppStatus === 'preseason') {
       return;
+    // } else if () {
     } else {
       let initialPlayerList = [];
     

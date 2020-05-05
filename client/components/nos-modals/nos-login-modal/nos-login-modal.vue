@@ -119,7 +119,7 @@ export default {
   computed: {
     isGreyScale() {
       return (
-        this.$store.getters.getAppStatus === 'preseason' &&
+        this.$store.getters.getAppStatus !== 'season' &&
         this.$route.name.indexOf('index') !== -1
       );
     }

@@ -9,7 +9,7 @@
         @click.stop
       >
         <button @click="closeModal">
-          <v-icon>close</v-icon>
+          <span />
         </button>
       </div>
 
@@ -237,7 +237,7 @@
                                 </v-list>
 
                                 <v-list v-else>
-                                  <v-list-item @click="reportOpinion(comment)">
+                                  <v-list-item @click="openReportDialog(comment)">
                                     <v-list-item-title>
                                       <v-icon>mdi-alert</v-icon>Report
                                     </v-list-item-title>
@@ -452,7 +452,7 @@
                                     </v-list>
 
                                     <v-list v-else>
-                                      <v-list-item @click="reportOpinion(reply)">
+                                      <v-list-item @click="openReportDialog(reply)">
                                         <v-list-item-title>
                                           <v-icon>mdi-alert</v-icon>Report
                                         </v-list-item-title>
@@ -573,16 +573,18 @@
 
             <!-- YOUTUBE AREA -->
             <div class="player-modal__right ">
-              <nos-youtube-area
+              <!-- <nos-youtube-area
                 :search-keyword="$route.params.playerName"
                 @selectYoutubeVideo="selectYoutubeVideoHandler"
-              />
+              /> -->
             </div>
           </div>
         </div>
       </div>
     </div>
 
+
+    <!-- LOGIN POPUP (for Guest) -->
     <transition
       name="fade"
     >
@@ -591,6 +593,60 @@
         @closeRequestLoginPopup="isRequestLoginPopup = false"
       />
     </transition>
+
+
+    <!-- OPINION REPORT DIALOG -->
+    <v-dialog
+      v-model="isReportDialog"
+      scrollable
+      max-width="400px"
+    >
+      <v-card>
+        <v-card-title>Report</v-card-title>
+        <v-divider />
+        <v-card-text>
+          <v-radio-group
+            v-model="reportReason"
+            column
+          >
+            <v-radio
+              label="선수, 다른 유저에 대한 심한 모욕, 폭언"
+              value="abuse"
+              color="#f4991e"
+            />
+            <v-radio
+              label="인종, 민족, 국적, 종교, 장애, 성별, 연령 차별"
+              value="discrimination"
+              color="#f4991e"
+            />
+            <v-radio
+              label="게시물 도배"
+              value="plastered"
+              color="#f4991e"
+            />
+          </v-radio-group>
+        </v-card-text>
+        <v-divider />
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="#f4991e"
+            text
+            @click="isReportDialog = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            color="#f4991e"
+            text
+            :disabled="!reportReason"
+            @click="saveReport"
+          >
+            Report
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 

@@ -1,24 +1,99 @@
 .histories {
-  &__mobile { display: block; }
-  &__desktop { display: none; }
+  min-height: 100%;
+
+  &__year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
+
+    h1 {
+      margin: 0 16px;
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .v-icon {
+      font-size: 26px;
+      color: black;
+    }
+  }
+
+  &__month-wrapper {
+    padding: 0 12px;
+  }
+
+  &__month-list {
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2px;
+  }
+  &__month {
+    border: 1px solid rgba(black, 0.3);
+    width: 100%;
+    padding: 8px 0;
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s ease-out;
+  }
+  &__month:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &__month--selected {
+    border: 1px solid $nos-main-theme !important;
+    background: rgba($nos-main-theme, 0.1);
+    color: $nos-main-theme !important;
+  }
+  &__month--selected:hover {
+    background: rgba($nos-main-theme, 0.1) !important;
+  }
+
+  &__empty {
+    h1 {
+      font-size: 26px;
+    }
+  }
+
+  &__content {
+    margin: 16px 0 36px;
+  }
+
+  &__item {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 24px 0;
+  }
+  &__item:last-of-type {
+    border: none;
+  }
 
   &__link {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 16px 0;
-    border-bottom: 1px solid #e4e4e4;
     text-align: center;
   }
 
-  &__mobile-period {
+  &__period {
     margin-bottom: 8px;
+    font-size: 18px;
+
+    span {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.6);
+    }
   }
 
   &__top5Players {
+    max-width: 320px;
+    width: 100%;
+
     li {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
 
     p {
@@ -45,7 +120,6 @@
     span {
       display: flex;
       align-items: center;
-      margin-left: 16px;
       font-size: 12px;
       font-weight: 300;
       color: rgba(0, 0, 0, 0.7);
@@ -58,19 +132,35 @@
     button {
       width: 100%;
       border-radius: 0;
+      height: 42px;
     }
   }
 }
 
 @media screen and (min-width: $mobile-width) {
   .histories {
-    padding: 0 16px;
+    &__year {
+      padding: 40px 0 32px;
 
-    &__mobile { display: none; }
-    &__desktop { display: block; }
+      h1 {
+        margin: 0 24px;
+        font-size: 36px;
+      }
+
+      .v-icon {
+        font-size: 30px;
+      }
+    }
+
+    &__content {
+      margin: 24px 0 140px;
+      padding: 0 16px;
+    }
 
     &__item {
-      padding: 0 16px;
+      padding: 32px 0 40px;
+      border: 0;
+      border-radius: 6px;
       transition: all 0.3s ease-out;
       cursor: pointer;
     }
@@ -78,24 +168,32 @@
       background: rgba($nos-main-theme, 0.1);
     }
 
-    &__period {
-      display: inline-block;
-      text-align: center;
-      font-size: 18px;
+    &__link {
+      flex-direction: row;
+      justify-content: center;
     }
 
-    &__top5Players {
-      p {
-        max-width: 260px;
+    &__period {
+      display: inline-block;
+      margin-right: 80px;
+      text-align: center;
+      font-size: 22px;
+
+      span {
+        font-size: 16px;
       }
     }
 
-    &__load-more {
-      margin: 12px 0 120px;
+    &__top5Players {
+      max-width: 380px;
 
-      button {
-        max-width: 300px;
-        border-radius: 6px;
+      p {
+        max-width: 220px;
+        font-size: 18px;
+      }
+
+      span {
+        font-size: 15px;
       }
     }
   }

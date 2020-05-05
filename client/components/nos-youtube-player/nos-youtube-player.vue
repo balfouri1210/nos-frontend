@@ -89,6 +89,7 @@ export default {
   padding-bottom: 56%;
   z-index: 100;
   background: black;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
 
   iframe {
     position: absolute;
@@ -101,7 +102,7 @@ export default {
   &__view-on-app-btn,
   &__close-btn {
     position: absolute;
-    bottom: -37px;
+    bottom: -38px;
     display: flex;
     flex-direction: column;
     align-items: center;

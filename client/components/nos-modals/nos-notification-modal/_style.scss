@@ -1,6 +1,4 @@
 .nos-notification {
-  text-align: center;
-
   .nos-modal__body {
     min-height: 48px;
   }
@@ -25,6 +23,12 @@
 
   &__item:last-of-type {
     margin-bottom: 0;
+  }
+
+  &__desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 

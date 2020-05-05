@@ -4,6 +4,15 @@
       class="player-modal__backdrop"
       @click="closeModal"
     >
+      <div
+        class="player-modal__close-btn"
+        @click.stop
+      >
+        <button @click="closeModal">
+          <span />
+        </button>
+      </div>
+
       <div class="player-modal__inner centered">
         <div
           class="player-modal__content-container"
@@ -139,19 +148,21 @@
 
                           <!-- Comment sub action -->
                           <div class="player-modal__comment-sub-action">
-                            <span
+                            <button
                               :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
+                              style="cursor: default"
                             >
                               <v-icon>mdi-thumb-up</v-icon>
                               <span v-if="comment.vote_up_count > 0">{{ comment.vote_up_count }}</span>
-                            </span>
+                            </button>
 
-                            <span
+                            <button
                               :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
+                              style="cursor: default"
                             >
                               <v-icon>mdi-thumb-down</v-icon>
                               <span v-if="comment.vote_down_count > 0">{{ comment.vote_down_count }}</span>
-                            </span>
+                            </button>
                           </div>
                         </div>
 
@@ -204,14 +215,20 @@
                                 </div>
 
                                 <div class="player-modal__reply-sub-action">
-                                  <span :class="{'player-modal--is-voted': reply.isVoted === 'up'}">
+                                  <button
+                                    :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
+                                    style="cursor: default"
+                                  >
                                     <v-icon>mdi-thumb-up</v-icon>
                                     <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
-                                  </span>
-                                  <span :class="{'player-modal--is-voted': reply.isVoted === 'down'}">
+                                  </button>
+                                  <button
+                                    :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
+                                    style="cursor: default"
+                                  >
                                     <v-icon>mdi-thumb-down</v-icon>
                                     <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
-                                  </span>
+                                  </button>
                                 </div>
                               </li>
                             </ul>

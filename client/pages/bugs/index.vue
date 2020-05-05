@@ -16,7 +16,7 @@
         Feel free to report a problem with us.<br>It’ll help us improve 907.
       </p>
       <a
-        href="mailto:admin@907degrees.com"
+        href="mailto:907degrees@gmail.com"
         class="bugs__report-btn"
       >Report a Problem</a>
     </div>

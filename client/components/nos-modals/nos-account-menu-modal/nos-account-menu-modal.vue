@@ -13,7 +13,10 @@
         Settings
       </button>
 
-      <button @click="logout">
+      <button
+        class="nos-modal__button"
+        @click="logout"
+      >
         Logout
       </button>
     </div>
@@ -31,7 +34,7 @@ export default {
   computed: {
     isGreyScale() {
       return (
-        this.$store.getters.getAppStatus === 'preseason' &&
+        this.$store.getters.getAppStatus !== 'season' &&
         this.$route.name.indexOf('index') !== -1
       );
     }

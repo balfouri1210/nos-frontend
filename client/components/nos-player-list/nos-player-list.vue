@@ -8,7 +8,7 @@
         <div
           class="player-top__image"
           :style="{
-            backgroundImage: `url(${topPlayer.imgSrc}), url(/player_default_small.png)`,
+            backgroundImage: `url(${topPlayer.imgSrc}), url(${nosImageUrl}/players/default.png)`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center center'
@@ -61,7 +61,7 @@
           <div
             class="player__image"
             :style="{
-              backgroundImage: `url(${player.imgSrc}), url(/player_default_small.png)`,
+              backgroundImage: `url(${player.imgSrc}), url(${nosImageUrl}/players/default.png)`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
               backgroundPosition: 'center center'

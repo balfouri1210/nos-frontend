@@ -54,7 +54,6 @@ export default {
     },
 
     clickOutsideHandler() {
-      console.log('fuck');
       this.isLoginModal = false;
       this.isAccountMenuModal = false;
       this.isNotificationModal = false;

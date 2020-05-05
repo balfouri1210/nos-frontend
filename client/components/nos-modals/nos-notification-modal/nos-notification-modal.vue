@@ -29,8 +29,12 @@
             :key="index"
             class="nos-notification__item"
           >
-            <button class="nos-modal__button">
-              <span>{{ noti.text }}</span>
+            <button
+              class="nos-modal__button"
+              @click="selectNoti(noti)"
+            >
+              <p>{{ noti.object_name }}</p>
+              <span class="nos-notification__desc">{{ noti.text }}</span>
             </button>
           </li>
         </ul>
@@ -43,21 +47,7 @@
 import Base from './_base';
 
 export default {
-  mixins: [Base],
-
-  computed: {
-    isGreyScale() {
-      return (
-        this.$store.getters.getAppStatus === 'preseason' &&
-        this.$route.name.indexOf('index') !== -1
-      );
-    },
-
-    progressCircularColor() {
-      const result = this.isGreyScale ? '#f4991e' : 'rgb(255, 255, 255)';
-      return result;
-    }
-  }
+  mixins: [Base]
 };
 </script>
 

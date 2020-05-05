@@ -4,7 +4,7 @@
       <div
         class="player__image"
         :style="{
-          backgroundImage: `url(${nosImageUrl}/players/david_beckham.jpg), url(/player_default.png)`,
+          backgroundImage: `url(${nosImageUrl}/players/david_beckham.jpg), url(${nosImageUrl}/players/default.png)`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
@@ -50,29 +50,27 @@
             <span>Position</span>
             <span>{{ player.position }}</span>
           </p>
-          <!-- <p class="player__meta-item">
-            <span>Degrees</span>
-            <span>{{ player.position }}</span>
-          </p> -->
         </div>
 
         <div class="player__vote">
           <button
-            class="player__vote-down-btn"
-            :disabled="disabled"
-            @click="votePlayer('down')"
-          >
-            <v-icon>mdi-thumb-down</v-icon>
-            <span>{{ player.vote_down_count }}</span>
-          </button>
-
-          <button
-            class="player__vote-up-btn"
+            class="player__vote-btn"
+            :class="{'player__vote--voted': player.vote === 'up'}"
             :disabled="disabled"
             @click="votePlayer('up')"
           >
             <v-icon>mdi-thumb-up</v-icon>
             <span>{{ player.vote_up_count }}</span>
+          </button>
+
+          <button
+            class="player__vote-btn"
+            :class="{'player__vote--voted': player.vote === 'down'}"
+            :disabled="disabled"
+            @click="votePlayer('down')"
+          >
+            <v-icon>mdi-thumb-down</v-icon>
+            <span>{{ player.vote_down_count }}</span>
           </button>
         </div>
       </div>
@@ -127,8 +125,10 @@ export default {
         });
 
         if (votePlayerResult === 'voted') {
+          this.player.vote = vote;
           this.player[`vote_${vote}_count`]++;
         } else {
+          this.player.vote = null;
           this.player[`vote_${vote}_count`]--;
         }
       } catch (err) {

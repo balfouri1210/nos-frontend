@@ -8,6 +8,7 @@ export default {
       isAccountAlreadyActivated,
       isAccountActivationFailed,
       verificationFinished;
+
     try {
       await $axios.$put('/api/auth/account-activation', {
         verificationCode: route.params.verificationCode

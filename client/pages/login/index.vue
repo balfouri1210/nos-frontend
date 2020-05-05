@@ -101,6 +101,10 @@ export default {
     };
   },
 
+  created() {
+    this.$logout();
+  },
+
   methods: {
     ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
     ...mapActions(['mutateUnreadNotificationCountAction']),
@@ -123,9 +127,11 @@ export default {
       } catch (err) {
         console.error(err);
         if (err.response) {
-          this.errorMessage = this.$t(err.response.data.message.toLowerCase());
+          this.errorMessage = err.response.data.message
+            .toLowerCase()
+            .replace(/_/g, ' ');
         } else {
-          this.errorMessage = this.$t('server_error');
+          this.errorMessage = 'Server Error';
         }
       }
     }

@@ -1,0 +1,33 @@
+.about {
+  margin: $mobile-header-height 0 $mobile-footer-height;
+  padding: 0 16px;
+
+  &__header {
+    padding: 36px 0;
+
+    h2 {
+      font-size: 26px;
+      font-weight: 300;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .about {
+    margin: $web-header-height 0 $web-footer-height;
+
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+
+    &__desc {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+  }
+}

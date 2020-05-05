@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Base from '@/page-resources/index/_base';
+import Base from '@/page-resources/account-activation/_base';
 
 export default {
   mixins: [Base]
@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/page-resources/index/_style.scss";
+@import "@/page-resources/account-activation/_style.scss";
 </style>

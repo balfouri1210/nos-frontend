@@ -85,6 +85,7 @@ export default {
           historyId: this.$route.params.historyId
         }
       }));
+      // this.$router.go(-1);
     },
 
     commentMappingWithUiProperty(comments) {

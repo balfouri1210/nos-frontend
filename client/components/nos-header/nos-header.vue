@@ -8,27 +8,19 @@
     }"
   >
     <div class="nos-header__content">
-      <div class="nos-header__logo">
-        <nuxt-link
-          :to="localePath('index')"
-        />
+      <div class="nos-header__left">
+        <div class="nos-header__logo">
+          <nuxt-link
+            :to="localePath('index')"
+          />
+        </div>
+
+        <nuxt-link :to="localePath('about')">
+          <v-icon>mdi-information-outline</v-icon>
+        </nuxt-link>
       </div>
 
-      <div class="nos-header__functions">
-        <nuxt-link :to="localePath('histories')">
-          <button>
-            <v-icon>mdi-history</v-icon>
-          </button>
-        </nuxt-link>
-
-        <button
-          v-if="!isLoggedIn"
-          ref="login-button"
-          @click="isLoginModal = true"
-        >
-          <v-icon>mdi-login-variant</v-icon>
-        </button>
-
+      <div class="nos-header__right">
         <button
           v-if="isLoggedIn"
           ref="notification-button"
@@ -56,19 +48,33 @@
           </v-badge>
         </button>
 
-        <button
-          v-if="isLoggedIn"
-          ref="account-menu-button"
-          @click="isAccountMenuModal = true"
-        >
-          <v-icon>mdi-account-circle</v-icon>
-        </button>
+        <nuxt-link :to="localePath('histories')">
+          <button>
+            <v-icon>mdi-history</v-icon>
+          </button>
+        </nuxt-link>
 
         <button
           ref="search-button"
           @click="isSearchModal = !isSearchModal"
         >
           <v-icon>mdi-magnify</v-icon>
+        </button>
+
+        <button
+          v-if="!isLoggedIn"
+          ref="login-button"
+          @click="isLoginModal = true"
+        >
+          <v-icon>mdi-login-variant</v-icon>
+        </button>
+
+        <button
+          v-if="isLoggedIn"
+          ref="account-menu-button"
+          @click="isAccountMenuModal = true"
+        >
+          <v-icon>mdi-account-circle</v-icon>
         </button>
       </div>
 

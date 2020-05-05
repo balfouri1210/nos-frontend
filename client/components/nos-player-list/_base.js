@@ -24,7 +24,8 @@ export default {
       topPlayer: this.initialPlayerList[0],
       topScore: this.initialPlayerList[0].score,
       playerList: this.initialPlayerList.slice(1),
-      isMorePlayersLoading: false
+      isMorePlayersLoading: false,
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 

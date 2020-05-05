@@ -97,28 +97,34 @@
       }
     }
   }
-  &__vote-up-btn {
-    background: linear-gradient(160deg, #E96E00 30%, #FFAB15 90%);
-    color: white !important;
+ 
+  &__vote-btn {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.78);
 
     .v-icon {
-      color: white;
+      color: rgba(0, 0, 0, 0.78);
     }
   }
-  &__vote-up-btn:hover {
-    background: linear-gradient(160deg, #ea5514 30%, #f4991e 90%);
-  }
-  &__vote-down-btn {
+  &__vote-btn:first-of-type {
     margin-right: 6px;
-    border: 1px solid black;
+  }
+  &__vote-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  &__vote--voted {
+    border: 1px solid $nos-main-theme;
+    background: rgba($nos-main-theme, 0.05);
+    color: $nos-main-theme;
 
     .v-icon {
-      color: black;
+      color: $nos-main-theme;
     }
   }
-  &__vote-down-btn:hover {
-    background: rgba(0, 0, 0, 0.15);
+  &__vote--voted {
+    background: rgba($nos-main-theme, 0.05) !important;
   }
+
   .nos-basic-btn {
     flex: 50;
     height: 32px;
@@ -162,8 +168,8 @@
       width: 100%;
     }
 
-    &__vote-down-btn {
-      margin-right: 8px;
+    &__vote-btn:first-of-type {
+      margin-right: 12px;
     }
   }
 }
