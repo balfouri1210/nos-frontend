@@ -64,11 +64,21 @@ export const getters = {
     return state.durationToEvent;
   },
 
-  // getIsModalGreyScale(state, getters, rootState) {
-  //   return getters.getAppStatus !== 'season' && rootState.route.name.indexOf('index') !== -1;
-  // }
-  
-  
+  getIsModalWhiteTone(state, getters) {
+    return route => {
+      let result;
+
+      if (getters.getAppStatus === 'season') {
+        result = route.name.indexOf('histories___') !== -1;
+      } else {
+        result = route.name.indexOf('index___') !== -1 || route.name.indexOf('histories___') !== -1;
+      }
+
+      return result;
+    };
+  },
+
+
   getHistoryYear(state) {
     return state.historyYear;
   },

@@ -21,14 +21,17 @@
             >
             <span class="player__meta-name">{{ player.known_as }}</span>
           </p>
+
           <p class="player__meta-item">
             <span>Date of birth</span>
             <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
           </p>
+
           <p class="player__meta-item">
             <span>Height</span>
             <span>{{ player.height }} cm</span>
           </p>
+
           <p class="player__meta-item">
             <span>League</span>
             <span>
@@ -38,6 +41,7 @@
               >
             </span>
           </p>
+
           <p class="player__meta-item">
             <span>Team</span>
             <span><img
@@ -46,6 +50,7 @@
               style="margin-right: 4px"
             > {{ player.club_name }}</span>
           </p>
+
           <p class="player__meta-item">
             <span>Position</span>
             <span>{{ player.position }}</span>
@@ -75,6 +80,29 @@
         </div>
       </div>
     </div> 
+
+    <div>
+      <v-icon>mdi-thumb-up</v-icon>
+      <v-icon>mdi-thumb-down</v-icon>
+      <v-icon>mdi-help-circle-outline</v-icon>
+      <v-icon>mdi-alert-circle-outline</v-icon>
+      <v-icon>mdi-fire</v-icon>
+      <v-icon>mdi-party-popper</v-icon>
+      <v-icon>mdi-skull</v-icon>
+      <v-icon>mdi-arm-flex</v-icon>
+      <v-icon>mdi-alien</v-icon>
+      <v-icon>mdi-battery-high</v-icon>
+      <v-icon>mdi-battery-medium</v-icon>
+      <v-icon>mdi-battery-low</v-icon>
+      <v-icon>mdi-battery-off-outline</v-icon>
+      <v-icon>mdi-bomb</v-icon>
+      <v-icon>mdi-emoticon-angry-outline</v-icon>
+      <v-icon>mdi-emoticon-confused-outline</v-icon>
+      <v-icon>mdi-emoticon-cool-outline</v-icon>
+      <v-icon>mdi-emoticon-cry-outline</v-icon>
+      <v-icon>mdi-emoticon-lol-outline</v-icon>
+      <v-icon>mdi-emoticon-poop</v-icon>
+    </div>
   </div>
 </template>
 
@@ -103,6 +131,10 @@ export default {
     };
   },
 
+  mounted() {
+    console.log(this.player);
+  },
+
   methods: {
     ...mapGetters(['getJwt', 'getId']),
 
@@ -119,25 +151,42 @@ export default {
       if (this.$route.name.indexOf('history') !== -1) return;
 
       try {
-        const votePlayerResult = await this.$axios.$put('/api/vote/player', {
-          playerId: this.player.id,
-          vote
-        });
+        if (this.player.vote) {
+          if (this.player.vote === vote) {
+            // 투표 취소
+            await this.$axios.$delete('/api/vote/player', {
+              params: {
+                playerId: this.player.id,
+                vote
+              }
+            });
 
-        if (votePlayerResult === 'voted') {
-          this.player.vote = vote;
-          this.player[`vote_${vote}_count`]++;
+            this.player[`vote_${vote}_count`]--;
+            this.player.vote = null;
+          } else {
+            // 다른 표에 투표
+            await this.$axios.$put('/api/vote/player', {
+              playerId: this.player.id,
+              vote
+            });
+
+            this.player[`vote_${this.player.vote}_count`]--;
+            this.player[`vote_${vote}_count`]++;
+            this.player.vote = vote;
+          }
         } else {
-          this.player.vote = null;
-          this.player[`vote_${vote}_count`]--;
+          // 일반 투표
+          await this.$axios.$put('/api/vote/player', {
+            playerId: this.player.id,
+            vote
+          });
+
+          this.player[`vote_${vote}_count`]++;
+          this.player.vote = vote;
         }
       } catch (err) {
-        if (err.response.data.code === 'p010') {
-          alert('Already voted!');
-        } else {
-          console.error(err);
-          return this.$nuxt.error({ statusCode: 500 });
-        }
+        console.error(err);
+        return this.$nuxt.error({ statusCode: 500 });
       }
     }
   }

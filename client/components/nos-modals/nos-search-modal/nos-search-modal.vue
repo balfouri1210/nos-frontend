@@ -42,7 +42,8 @@
               </p>
 
               <span class="nos-search-modal__suggestion-info">
-                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }} / {{ item.height }}cm / {{ item.position }}
+                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}
+                <span class="nos-search-modal__suggestion-info-detail"> / {{ item.height }}cm / {{ item.position }}</span>
               </span>
             </button>
           </li>

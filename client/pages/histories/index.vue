@@ -86,19 +86,14 @@
               >
                 <p>
                   <img
-                    class="histories__flag"
-                    :src="`/flags/${player.country_code.toLowerCase()}.png`"
-                    :alt="player.country_code"
+                    class="histories__club"
+                    :src="player.club_image"
+                    :alt="player.club_team_id"
                   >
                   {{ player.known_as }}
                 </p>
 
                 <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} |
-                  <img
-                    class="histories__club"
-                    :src="player.club_image"
-                    :alt="player.club_team_id"
-                  >
                   {{ player.position }}
                 </span>
               </li>
@@ -107,30 +102,6 @@
         </li>
       </ul>
     </div>
-
-    <!-- <div
-      class="histories__load-more"
-    >
-      <button
-        :disabled="histories[histories.length - 1].id === 1"
-        class="nos-basic-btn"
-        @click="loadMoreHistories"
-      >
-        <v-progress-circular
-          v-if="isMoreHistoriesLoading"
-          class="centered"
-          :size="20"
-          :width="3"
-          color="white"
-          indeterminate
-        />
-
-        <span v-else>
-          <span v-if="histories[histories.length - 1].id === 1">All histories are loaded</span>
-          <span v-else>Load More Histories</span>
-        </span>
-      </button>
-    </div> -->
   </div>
 </template>
 

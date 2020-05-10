@@ -36,7 +36,7 @@
               <header class="player-modal__header">
                 <nuxt-link :to="localePath('index')">
                   <i class="material-icon">arrow_back</i>
-                  <span>Leaderboard</span>
+                  <span>Back to Leaderboard</span>
                 </nuxt-link>
               </header>
 
@@ -573,10 +573,10 @@
 
             <!-- YOUTUBE AREA -->
             <div class="player-modal__right ">
-              <nos-youtube-area
+              <!-- <nos-youtube-area
                 :search-keyword="$route.params.playerName"
                 @selectYoutubeVideo="selectYoutubeVideoHandler"
-              />
+              /> -->
             </div>
           </div>
         </div>

@@ -96,9 +96,12 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      margin: 4px 0;
     }
 
     p {
+      display: flex;
+      align-items: center;
       max-width: 180px;
       overflow: hidden;
       white-space: nowrap;
@@ -115,7 +118,7 @@
     }
 
     .histories__club {
-      margin: 0 8px;
+      margin: 2px 8px 0 0;
       width: 14px;
     }
 
@@ -163,9 +166,6 @@
     }
 
     &__month-list {
-      // max-width: 640px;
-      // margin: 0 auto !important;
-      // grid-template-columns: repeat(4, 1fr);
       grid-gap: 4px;
     }
 
@@ -202,6 +202,10 @@
 
     &__top5Players {
       max-width: 380px;
+
+      li {
+        margin: 7px 0;
+      }
 
       p {
         max-width: 220px;

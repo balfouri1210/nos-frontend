@@ -1,7 +1,7 @@
 <template>
   <div
     class="nos-modal nos-account-menu-modal"
-    :class="{'nos-modal--greyscale': isGreyScale}"
+    :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
     <nos-modal-header @closeModal="$emit('closeModal')" />
 
@@ -29,15 +29,6 @@ import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
 export default {
   components: {
     nosModalHeader
-  },
-
-  computed: {
-    isGreyScale() {
-      return (
-        this.$store.getters.getAppStatus !== 'season' &&
-        this.$route.name.indexOf('index') !== -1
-      );
-    }
   },
 
   methods: {

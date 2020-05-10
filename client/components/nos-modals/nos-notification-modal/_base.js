@@ -15,15 +15,9 @@ export default {
   },
 
   computed: {
-    isGreyScale() {
-      return (
-        this.$store.getters.getAppStatus !== 'season' &&
-        this.$route.name.indexOf('index') !== -1
-      );
-    },
-
     progressCircularColor() {
-      const result = this.isGreyScale ? '#f4991e' : 'rgb(255, 255, 255)';
+      const result =
+      this.$store.getters.getIsModalWhiteTone(this.$route) ? '#f07c1a' : 'rgb(255, 255, 255)';
       return result;
     }
   },

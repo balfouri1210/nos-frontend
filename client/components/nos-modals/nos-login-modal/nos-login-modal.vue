@@ -1,7 +1,7 @@
 <template>
   <div
     class="nos-modal nos-login-modal"
-    :class="{'nos-modal--greyscale': isGreyScale}"
+    :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
     <nos-modal-header @closeModal="$emit('closeModal')" />
 
@@ -114,15 +114,6 @@ export default {
 
       errorMessage: null
     };
-  },
-
-  computed: {
-    isGreyScale() {
-      return (
-        this.$store.getters.getAppStatus !== 'season' &&
-        this.$route.name.indexOf('index') !== -1
-      );
-    }
   },
 
   methods: {
