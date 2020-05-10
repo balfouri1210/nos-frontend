@@ -1,5 +1,20 @@
 import Vue from 'vue';
 
+Vue.filter('positionExtension', function(value) {
+  if (!value)
+    return 'Unknown';
+
+  let result;
+
+  switch (value) {
+  case 'FW': result = 'Foward'; break;
+  case 'MF': result = 'Midfielder'; break;
+  case 'DF': result = 'Defender'; break;
+  case 'GK': result = 'Goalkeeper'; break;
+  }
+  return result;
+});
+
 Vue.filter('thousandSeparator', function(value) {
   if (!value)
     return 0;

@@ -4,7 +4,7 @@
       <div
         class="player__image"
         :style="{
-          backgroundImage: `url(${nosImageUrl}/players/david_beckham.jpg), url(${nosImageUrl}/players/default.png)`,
+          backgroundImage: `url(${nosImageUrl}/players/${player.id}.jpg), url(${nosImageUrl}/players/default.png)`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
@@ -23,16 +23,16 @@
           </p>
 
           <p class="player__meta-item">
-            <span>Date of birth</span>
-            <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
+            <span>DoB / Height</span>
+            <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} / {{ player.height }} cm</span>
           </p>
 
-          <p class="player__meta-item">
+          <!-- <p class="player__meta-item">
             <span>Height</span>
             <span>{{ player.height }} cm</span>
-          </p>
+          </p> -->
 
-          <p class="player__meta-item">
+          <!-- <p class="player__meta-item">
             <span>League</span>
             <span>
               <img
@@ -40,7 +40,7 @@
                 alt="league"
               >
             </span>
-          </p>
+          </p> -->
 
           <p class="player__meta-item">
             <span>Team</span>
@@ -53,7 +53,7 @@
 
           <p class="player__meta-item">
             <span>Position</span>
-            <span>{{ player.position }}</span>
+            <span>{{ player.position | positionExtension }}</span>
           </p>
         </div>
 
@@ -88,7 +88,6 @@
       <v-icon>mdi-alert-circle-outline</v-icon>
       <v-icon>mdi-fire</v-icon>
       <v-icon>mdi-party-popper</v-icon>
-      <v-icon>mdi-skull</v-icon>
       <v-icon>mdi-arm-flex</v-icon>
       <v-icon>mdi-alien</v-icon>
       <v-icon>mdi-battery-high</v-icon>
