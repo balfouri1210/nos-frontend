@@ -1,9 +1,6 @@
 import Vue from 'vue';
 
 Vue.filter('positionExtension', function(value) {
-  if (!value)
-    return 'Unknown';
-
   let result;
 
   switch (value) {
@@ -11,6 +8,7 @@ Vue.filter('positionExtension', function(value) {
   case 'MF': result = 'Midfielder'; break;
   case 'DF': result = 'Defender'; break;
   case 'GK': result = 'Goalkeeper'; break;
+  default: result = 'Unknown'; break;
   }
   return result;
 });
