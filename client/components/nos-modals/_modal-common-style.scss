@@ -16,10 +16,15 @@
       padding: 10px 0;
     }
   }
+
+  ::v-deep .nos-input__error-message {
+    color: black;
+  }
 }
 
-.nos-modal--greyscale {
-  background: rgba(white, 0.95);
+
+.nos-modal--white-tone {
+  background: white;
   box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.15);
 
   label {
@@ -33,18 +38,22 @@
 
   .nos-modal__button {
     border: 1px solid $nos-main-theme;
-    background: rgba($nos-main-theme, 0.9) !important;
+    background: #f07c1a !important;
     color: white !important;
   }
 
   a:last-of-type {
     border: 1px solid $nos-main-theme;
-    background: rgba($nos-main-theme, 0.9) !important;
+    background: #f07c1a !important;
     color: white !important;
   }
 
   p, span {
     color: white;
+  }
+
+  ::v-deep .nos-input__error-message {
+    color: #f07c1a;
   }
 }
 

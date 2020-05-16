@@ -1,5 +1,18 @@
 import Vue from 'vue';
 
+Vue.filter('positionExtension', function(value) {
+  let result;
+
+  switch (value) {
+  case 'FW': result = 'Foward'; break;
+  case 'MF': result = 'Midfielder'; break;
+  case 'DF': result = 'Defender'; break;
+  case 'GK': result = 'Goalkeeper'; break;
+  default: result = 'Unknown'; break;
+  }
+  return result;
+});
+
 Vue.filter('thousandSeparator', function(value) {
   if (!value)
     return 0;
@@ -42,4 +55,20 @@ Vue.filter('abbrNum', function(number, decPlaces) {
   }
 
   return number;
+});
+
+Vue.filter('commentFormatter', function(value) {
+  let formattedText;
+
+  //URLs starting with http://, https://, or ftp://
+  const replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gim;
+  formattedText = value.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+  //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+  const replacePattern2 = /(^|[^/])(www\.[\S]+(\b|$))/gim;
+  formattedText = formattedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+  formattedText = formattedText.replace(/\n/g, '<br>');
+
+  return formattedText;
 });

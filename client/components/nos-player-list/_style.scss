@@ -17,6 +17,7 @@
   }
 
   &__image {
+    position: relative;
     width: 100%;
   }
 
@@ -38,21 +39,20 @@
 
   &__meta-content {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    padding: 0 16px;
 
     img {
       width: 26px;
-      margin-top: 4px;
-      margin-right: 8px;
+      margin-right: 10px;
       box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.15);
     }
+  }
 
-    p {
-      text-align: left;
-    }
-
-    span {
-      display: none;
+  &__profile-wrapper {
+    .player-top__known-as {
+      font-size: 20px;
+      font-weight: 300;
     }
   }
 
@@ -178,21 +178,17 @@
         margin-top: 0;
         margin-right: 14px;
       }
+   }
 
-      p {
-        font-size: 28px;
-        font-weight: 300;
-      }
+    &__profile-wrapper {
+      display: flex;
+      align-items: center;
 
-      span {
-        display: inline-block;
-        margin: 0 8px;
-      }
-
-      br {
-        display: none;
+      .player-top__known-as {
+        font-size: 32px;
       }
     }
+  
 
     &__logo {
       width: 126px;

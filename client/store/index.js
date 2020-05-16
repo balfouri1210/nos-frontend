@@ -64,11 +64,21 @@ export const getters = {
     return state.durationToEvent;
   },
 
-  // getIsModalGreyScale(state, getters, rootState) {
-  //   return getters.getAppStatus !== 'season' && rootState.route.name.indexOf('index') !== -1;
-  // }
-  
-  
+  getIsModalWhiteTone(state, getters) {
+    return route => {
+      let result;
+
+      if (getters.getAppStatus === 'season') {
+        result = route.name.indexOf('histories___') !== -1;
+      } else {
+        result = route.name.indexOf('index___') !== -1 || route.name.indexOf('histories___') !== -1;
+      }
+
+      return result;
+    };
+  },
+
+
   getHistoryYear(state) {
     return state.historyYear;
   },
@@ -98,9 +108,6 @@ export const actions = {
 
         if (cookie.playerId) commit('player/mutatePlayerId', parseInt(cookie.playerId));
         if (cookie.playerName) commit('player/mutatePlayerName', cookie.playerName);
-
-        if (cookie.historyYear) commit('mutateHistoryYear', parseInt(cookie.historyYear));
-        if (cookie.historyMonth) commit('mutateHistoryMonth', parseInt(cookie.historyMonth));
       }
     } catch (err) {
       console.error(err);

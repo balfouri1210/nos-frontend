@@ -1,12 +1,7 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapActions } = createNamespacedHelpers('auth');
-import vClickOutside from 'v-click-outside';
 
 export default {
-  directives: {
-    clickOutside: vClickOutside.directive
-  },
-
   data() {
     return {
       isLoginModal: false,

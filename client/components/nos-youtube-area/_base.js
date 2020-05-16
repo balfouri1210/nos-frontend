@@ -36,11 +36,11 @@ export default {
         const searchResult = await this.$axios.$get(
           'https://www.googleapis.com/youtube/v3/search', {
             params: {
-              key: process.env.YOUTUBE_API_URL,
+              key: process.env.YOUTUBE_API_KEY,
               part: 'snippet',
               q: searchKeyword,
               type: 'video',
-              maxResults: 10,
+              maxResults: 30,
               pageToken: this.youtubeNextPageToken,
               fields: 'nextPageToken,items/id,items/snippet/channelTitle,items/snippet/publishedAt,items/snippet/title,items/snippet/thumbnails',
               publishedAfter
@@ -48,11 +48,14 @@ export default {
           }
         );
 
+        console.log(searchResult);
+
         const searchResultIdList = searchResult.items.map(item => {
           return item.id.videoId;
         });
 
         const searchResultStat = await this.getVideoStat(searchResultIdList);
+        console.log(searchResultStat);
 
         searchResult.items = searchResult.items.map(item => {
           searchResultStat.items.forEach(subItem => {
@@ -86,7 +89,7 @@ export default {
       return this.$axios.$get(
         'https://www.googleapis.com/youtube/v3/videos', {
           params: {
-            key: process.env.YOUTUBE_API_URL,
+            key: process.env.YOUTUBE_API_KEY,
             part: 'contentDetails, statistics',
             id: searchResultIdList.join(','),
             fields: 'items/id, items/contentDetails/duration, items/statistics/viewCount'

@@ -25,6 +25,8 @@ module.exports = {
 
   // 사용자 편의 규칙 추가
   rules: {
+    // allow debugger during development
+    'no-debugger': process.env.STAGE === "prod" ? "error" : "off",
     "quotes": [2, "single", {
       "avoidEscape": true
     }],
@@ -33,6 +35,7 @@ module.exports = {
     "keyword-spacing": ["error", {
       "after": true
     }],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "vue/no-use-v-if-with-v-for": "off"
   }
 };

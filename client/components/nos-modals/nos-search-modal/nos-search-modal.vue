@@ -17,6 +17,7 @@
               :placeholder="'Search'"
               :clearable="true"
               :is-loading="isSearching"
+              :auto-focus="true"
               @input="searchKeyword = $event"
             />
           </div>
@@ -42,7 +43,12 @@
               </p>
 
               <span class="nos-search-modal__suggestion-info">
-                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }} / {{ item.height }}cm / {{ item.position }}
+                <img
+                  :src="`/flags/${item.country_code.toLowerCase()}.png`"
+                  :alt="item.country_code"
+                >
+                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}
+                <span class="nos-search-modal__suggestion-info-detail"> / {{ item.height }}cm / {{ item.position }}</span>
               </span>
             </button>
           </li>

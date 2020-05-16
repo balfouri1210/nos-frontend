@@ -210,7 +210,7 @@
       <div class="settings__delete-account">
         <div class="settings__delete-account-title">
           <h1>Delete Account</h1>
-          <p>When you press the button below, your comments, replies, likes and all other data will be removed permanently and will not be recoverable.</p>
+          <p>When you press the button below, your comments, replies, reactions and all other data will be removed permanently and will not be recoverable.</p>
         </div>
 
         <button

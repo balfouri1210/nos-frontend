@@ -131,7 +131,7 @@
                               <p
                                 class="player-modal__comment-content"
                                 :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
-                                v-html="comment.content.replace(/\n/g, '<br>')"
+                                v-html="$options.filters.commentFormatter(comment.content)"
                               />
                             </div>
                           </div>
@@ -275,10 +275,10 @@
             </div>
 
             <div class="player-modal__right">
-              <nos-youtube-area
+              <!-- <nos-youtube-area
                 :search-keyword="$route.params.playerName"
                 @selectYoutubeVideo="selectYoutubeVideoHandler"
-              />
+              /> -->
             </div>
           </div>
         </div>

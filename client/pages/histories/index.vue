@@ -74,63 +74,41 @@
             })"
             @click.native="selectHistory"
           >
-            <p class="histories__period">
-              {{ $moment.utc(history.start_date).format('MM. DD') }} <span>{{ $moment.utc(history.start_date).format('HH:mm') }}</span>
-              ~ {{ $moment.utc(history.end_date).format('MM. DD') }} <span>{{ $moment.utc(history.end_date).format('HH:mm') }}</span>
-            </p>
+            <div>
+              <p class="histories__period">
+                {{ $moment.utc(history.start_date).format('MM. DD') }} <span>{{ $moment.utc(history.start_date).format('HH:mm') }}</span>
+                ~ {{ $moment.utc(history.end_date).format('MM. DD') }} <span>{{ $moment.utc(history.end_date).format('HH:mm') }}</span>
+              </p>
 
-            <ul class="histories__top5Players">
-              <li
-                v-for="(player, playerIndex) in history.players"
-                :key="playerIndex"
-              >
-                <p>
-                  <img
-                    class="histories__flag"
-                    :src="`/flags/${player.country_code.toLowerCase()}.png`"
-                    :alt="player.country_code"
-                  >
-                  {{ player.known_as }}
-                </p>
+              <ul class="histories__top5Players">
+                <li
+                  v-for="(player, playerIndex) in history.players"
+                  :key="playerIndex"
+                >
+                  <p>
+                    <img
+                      class="histories__club"
+                      :src="player.club_image"
+                      :alt="player.club_team_id"
+                    >
+                    <span class="histories__name">{{ player.known_as }}</span>
+                  </p>
 
-                <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} |
-                  <img
-                    class="histories__club"
-                    :src="player.club_image"
-                    :alt="player.club_team_id"
-                  >
-                  {{ player.position }}
-                </span>
-              </li>
-            </ul>
+                  <span class="histories__dob">
+                    <img
+                      :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                      :alt="player.country_code"
+                    >
+                    {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} |
+                    {{ player.position }}
+                  </span>
+                </li>
+              </ul>
+            </div>
           </nuxt-link>
         </li>
       </ul>
     </div>
-
-    <!-- <div
-      class="histories__load-more"
-    >
-      <button
-        :disabled="histories[histories.length - 1].id === 1"
-        class="nos-basic-btn"
-        @click="loadMoreHistories"
-      >
-        <v-progress-circular
-          v-if="isMoreHistoriesLoading"
-          class="centered"
-          :size="20"
-          :width="3"
-          color="white"
-          indeterminate
-        />
-
-        <span v-else>
-          <span v-if="histories[histories.length - 1].id === 1">All histories are loaded</span>
-          <span v-else>Load More Histories</span>
-        </span>
-      </button>
-    </div> -->
   </div>
 </template>
 

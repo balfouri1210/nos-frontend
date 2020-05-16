@@ -4,7 +4,7 @@
       <div
         class="player__image"
         :style="{
-          backgroundImage: `url(${nosImageUrl}/players/david_beckham.jpg), url(${nosImageUrl}/players/default.png)`,
+          backgroundImage: `url(${nosImageUrl}/players/${player.id}.jpg), url(${nosImageUrl}/players/default.png)`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
@@ -14,133 +14,115 @@
       <div class="player__meta-wrapper">
         <div class="player__meta">
           <p class="player__meta-header">
-            <img
-              class="player__meta-flag"
-              :src="`/flags/${player.country_code.toLowerCase()}.png`"
-              :alt="player.country_code"
-            >
             <span class="player__meta-name">{{ player.known_as }}</span>
           </p>
+
           <p class="player__meta-item">
-            <span>Date of birth</span>
-            <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
+            <span>DoB / Height</span>
+            <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} / {{ player.height }} cm</span>
           </p>
+
           <p class="player__meta-item">
-            <span>Height</span>
-            <span>{{ player.height }} cm</span>
-          </p>
-          <p class="player__meta-item">
-            <span>League</span>
+            <span>Nationality</span>
             <span>
               <img
-                :src="`/leagues/${player.league_id}.png`"
-                alt="league"
+                class="player__meta-flag"
+                :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                :alt="player.country_code"
               >
+              {{ player.country_name }}
             </span>
           </p>
+
           <p class="player__meta-item">
             <span>Team</span>
             <span><img
+              class="player__meta-emblem"
               :src="player.club_image"
               alt="club"
-              style="margin-right: 4px"
             > {{ player.club_name }}</span>
           </p>
+
           <p class="player__meta-item">
             <span>Position</span>
-            <span>{{ player.position }}</span>
+            <span>{{ player.position | positionExtension }}</span>
           </p>
         </div>
 
         <div class="player__vote">
           <button
+            v-for="(vote, index) in voteList.slice(0, 3)"
+            v-if="vote.count > 0"
+            :key="index"
             class="player__vote-btn"
-            :class="{'player__vote--voted': player.vote === 'up'}"
-            :disabled="disabled"
-            @click="votePlayer('up')"
+            :class="{
+              'player__vote--voted': player.vote === vote.name,
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+            }"
+            :disabled="disabled || isVoting"
+            @click="votePlayer(vote.name)"
           >
-            <v-icon>mdi-thumb-up</v-icon>
-            <span>{{ player.vote_up_count }}</span>
+            <v-icon>{{ vote.iconName }}</v-icon>
+            <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
           </button>
 
           <button
-            class="player__vote-btn"
-            :class="{'player__vote--voted': player.vote === 'down'}"
-            :disabled="disabled"
-            @click="votePlayer('down')"
+            class="player__vote-more-btn"
+            @click="showAllVotes"
           >
-            <v-icon>mdi-thumb-down</v-icon>
-            <span>{{ player.vote_down_count }}</span>
+            <v-icon>mdi-plus</v-icon>
+            <span>More</span>
           </button>
         </div>
       </div>
     </div> 
+
+    <!-- SHOW ALL OF VOTES -->
+    <v-dialog
+      v-model="allVotes"
+      content-class="player__all-votes-dialog"
+      max-width="320px"
+    >
+      <v-card>
+        <v-card-title>Reaction</v-card-title>
+        <v-divider />
+        <div class="player__all-votes">
+          <button
+            v-for="(vote, index) in voteList"
+            :key="index"
+            class="player__vote-btn"
+            :class="{
+              'player__vote--voted': player.vote === vote.name,
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+            }"
+            :disabled="disabled || isVoting"
+            @click="votePlayer(vote.name)"
+          >
+            <v-icon>{{ vote.iconName }}</v-icon>
+            <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
+          </button>
+        </div>
+        <v-divider />
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="#f4991e"
+            text
+            @click="allVotes = false"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex';
-const { mapGetters } = createNamespacedHelpers('auth');
+import Base from './_base';
 
 export default {
-  props: {
-    player: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
-
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  data() {
-    return {
-      nosImageUrl: process.env.NOS_IMAGE_URL
-    };
-  },
-
-  methods: {
-    ...mapGetters(['getJwt', 'getId']),
-
-    checkIsLoggedIn() {
-      if (!this.getJwt()) {
-        this.$parent.isRequestLoginPopup = true;
-      } else {
-        return true;
-      }
-    },
-
-    async votePlayer(vote) {
-      if (!this.checkIsLoggedIn()) return;
-      if (this.$route.name.indexOf('history') !== -1) return;
-
-      try {
-        const votePlayerResult = await this.$axios.$put('/api/vote/player', {
-          playerId: this.player.id,
-          vote
-        });
-
-        if (votePlayerResult === 'voted') {
-          this.player.vote = vote;
-          this.player[`vote_${vote}_count`]++;
-        } else {
-          this.player.vote = null;
-          this.player[`vote_${vote}_count`]--;
-        }
-      } catch (err) {
-        if (err.response.data.code === 'p010') {
-          alert('Already voted!');
-        } else {
-          console.error(err);
-          return this.$nuxt.error({ statusCode: 500 });
-        }
-      }
-    }
-  }
+  mixins: [Base]
 };
 </script>
 

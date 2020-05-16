@@ -1,7 +1,7 @@
 <template>
   <div
     class="nos-modal nos-notification-modal"
-    :class="{'nos-modal--greyscale': isGreyScale}"
+    :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
     <div class="nos-notification">
       <nos-modal-header @closeModal="$emit('closeModal')" />

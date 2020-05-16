@@ -1,5 +1,4 @@
 import months from '@/lib/months';
-import Cookies from 'js-cookie';
 
 export default {
   transition: 'fade',
@@ -72,32 +71,6 @@ export default {
     selectHistory() {
       this.$store.commit('mutateHistoryYear', this.selectedYear);
       this.$store.commit('mutateHistoryMonth', this.selectedMonth);
-      this.saveHistoryInfoToCookie(this.selectedYear, this.selectedMonth);
-    },
-
-    saveHistoryInfoToCookie(year, month) {
-      Cookies.set('historyYear', year);
-      Cookies.set('historyMonth', month);
-    },
-
-    // async loadMoreHistories() {
-    //   if (this.histories[this.histories.length - 1].id === 1) return;
-    //   this.isMoreHistoriesLoading = true;
-
-    //   try {
-    //     const moreHistories = await this.$axios.$get('/api/histories', {
-    //       params: {
-    //         minId: this.histories[this.histories.length - 1].id
-    //       }
-    //     });
-
-    //     this.histories = this.histories.concat(moreHistories);
-    //   } catch (err) {
-    //     console.error(err);
-    //     return this.$nuxt.error({ statusCode: 500 });
-    //   } finally {
-    //     this.isMoreHistoriesLoading = false;
-    //   }
-    // }
+    }
   }
 };

@@ -36,7 +36,7 @@
               <header class="player-modal__header">
                 <nuxt-link :to="localePath('index')">
                   <i class="material-icon">arrow_back</i>
-                  <span>Leaderboard</span>
+                  <span>Back to Leaderboard</span>
                 </nuxt-link>
               </header>
 
@@ -145,21 +145,6 @@
                       <v-icon>mdi-comment-processing-outline</v-icon>
                       <span>Add First Comment!</span>
                     </p>
-
-                    <div class="player-modal__last-week-comments">
-                      <p class="player-modal__last-week-comments-title">
-                        Top comments of last week
-                      </p>
-
-                      <ul>
-                        <li><p>" He was great enough! "</p></li>
-                        <li><p>" Valencia must include him starting eleven. "</p></li>
-                        <li><p>" nodejs programming is great to develop web backend "</p></li>
-                        <li><p>" Vuejs is powerful framework for frontend "</p></li>
-                        <li><p>" ACE of SOUTH KOREA "</p></li>
-                        <li><p>... Go to last week</p></li>
-                      </ul>
-                    </div>
                   </div>
 
                   <!-- ACTUAL COMMENTS -->
@@ -200,7 +185,7 @@
                               <p
                                 class="player-modal__comment-content"
                                 :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
-                                v-html="comment.content.replace(/\n/g, '<br>')"
+                                v-html="$options.filters.commentFormatter(comment.content)"
                               />
 
                               <!-- Comment more menu -->
@@ -306,6 +291,7 @@
                           <div class="player-modal__comment-sub-action">
                             <button
                               :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
+                              :disabled="isOpinionVoting"
                               @click="votePlayerOpinion(comment, 'up')"
                             >
                               <v-icon>mdi-thumb-up</v-icon>
@@ -314,6 +300,7 @@
 
                             <button
                               :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
+                              :disabled="isOpinionVoting"
                               @click="votePlayerOpinion(comment, 'down')"
                             >
                               <v-icon>mdi-thumb-down</v-icon>
@@ -498,9 +485,11 @@
                                   </div>
                                 </div>
 
+                                <!-- Reply sub action -->
                                 <div class="player-modal__reply-sub-action">
                                   <button
                                     :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
+                                    :disabled="isOpinionVoting"
                                     @click="votePlayerOpinion(reply, 'up')"
                                   >
                                     <v-icon>mdi-thumb-up</v-icon>
@@ -508,6 +497,7 @@
                                   </button>
                                   <button
                                     :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
+                                    :disabled="isOpinionVoting"
                                     @click="votePlayerOpinion(reply, 'down')"
                                   >
                                     <v-icon>mdi-thumb-down</v-icon>

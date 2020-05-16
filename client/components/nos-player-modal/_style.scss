@@ -48,7 +48,7 @@
       display: flex;
       align-items: center;
       font-size: 12px;
-      color: $nos-main-theme;
+      color: rgba(0, 0, 0, 0.7);
     }
 
     i {
@@ -191,6 +191,8 @@
   }
 
   &__comment {
+    margin-bottom: 16px;
+
     &-username {
       margin-right: 4px;
       font-size: 13px;
@@ -232,8 +234,6 @@
       max-height: unset;
       overflow: visible;
     }
-
-    margin-bottom: 10px;
   }
 
   &__edit-opinion {
@@ -275,6 +275,7 @@
   &__comment-sub-action {
     display: flex;
     align-items: center;
+    margin-top: 4px;
     font-style: normal;
 
     button {
@@ -414,6 +415,7 @@
   &__reply-sub-action {
     display: flex;
     align-items: center;
+    margin-top: 4px;
     font-style: normal;
 
     button:first-of-type {
