@@ -13,7 +13,11 @@
             backgroundSize: 'cover',
             backgroundPosition: 'center center'
           }"
-        />
+        >
+          <div class="player__meta">
+            <p>{{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}<span v-if="topPlayer.height > 0"> / {{ topPlayer.height }}cm</span></p>
+          </div>
+        </div>
 
         <div class="player-top__meta">
           <div class="player-top__meta-content">
@@ -21,7 +25,11 @@
               :src="`/flags/${topPlayer.country_code.toLowerCase()}.png`"
               :alt="topPlayer.country_code"
             >
-            <p>{{ topPlayer.known_as }}<span>-</span><br>{{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}</p>
+            <div class="player-top__profile-wrapper">
+              <p class="player-top__known-as">
+                {{ topPlayer.known_as }}
+              </p>
+            </div>
           </div>
         </div>
       </div> 

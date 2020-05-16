@@ -131,7 +131,7 @@
                               <p
                                 class="player-modal__comment-content"
                                 :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
-                                v-html="comment.content.replace(/\n/g, '<br>')"
+                                v-html="$options.filters.commentFormatter(comment.content)"
                               />
                             </div>
                           </div>

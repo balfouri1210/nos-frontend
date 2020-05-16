@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-start;
   border-top: 0.5px solid #DBDBDF;
+  height: 182px;
 
   &__image {
     max-width: 120px;
@@ -22,7 +23,7 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 8px 10px;
+    padding: 8px 10px 2px;
   }
   &__meta {
   }
@@ -30,12 +31,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 8px;
-  }
-  &__meta-flag {
-    width: 18px;
-    height: 13px;
-    margin-right: 10px;
-    box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 2px 0px;
   }
   &__meta-name {
     font-size: 15px;
@@ -63,68 +58,104 @@
       word-break: break-all;
       line-height: 16px;
     }
-
-    img {
-      height: 18px;
-    }
+  }
+  &__meta-flag {
+    width: 18px;
+    height: 13px;
+    margin-right: 10px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px;
+  }
+  &__meta-emblem {
+    height: 18px;
+    margin-right: 8px;
   }
 
   &__vote {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 3px;
     margin-top: 8px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 28px;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
   }
  
   &__vote-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 50;
-    width: 100%;
-    height: 32px;
-    padding: 4px 8px;
     border: 1px solid rgba(0, 0, 0, 0.8);
-    border-radius: 4px;
     color: rgba(0, 0, 0, 0.78);
 
     .v-icon {
-      margin-right: 8px;
-      font-size: 14px;
+      margin-right: 4px;
+      font-size: 17px;
       color: rgba(0, 0, 0, 0.78);
     }
 
     span {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 400;
     }
-  }
-  &__vote-btn:first-of-type {
-    margin-right: 6px;
   }
   &__vote-btn:hover {
     background: rgba(0, 0, 0, 0.05);
   }
   &__vote--voted {
-    border: 1px solid $nos-main-theme;
-    background: rgba($nos-main-theme, 0.05);
-    color: $nos-main-theme;
+    border: 1px solid $nos-main-theme !important;
+    background: rgba($nos-main-theme, 0.05) !important;
+    color: $nos-main-theme !important;
 
     .v-icon {
-      color: $nos-main-theme;
+      color: $nos-main-theme !important;
     }
   }
-  &__vote--voted {
-    background: rgba($nos-main-theme, 0.05) !important;
+  &__vote--thumb {
+    .v-icon {
+      font-size: 15px;
+    }
   }
 
-  .nos-basic-btn {
-    flex: 50;
-    height: 32px;
-    margin-left: 8px;
+  &__vote-more-btn {
+    background: rgba(0, 0, 0, 0.1);
 
     .v-icon {
-      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      color: black;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  &__all-votes-dialog {
+    .v-card__title {
+      font-weight: 300;
+    }
+  }
+  &__all-votes {
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3px;
+    padding: 16px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 32px;
+      padding: 4px 8px;
+      border-radius: 8px;
     }
   }
 }
@@ -135,8 +166,13 @@
     height: 271px;
     border: 0;
 
+    &__image {
+      max-width: 180px;
+      width: 100%;
+    }
+
     &__meta-wrapper {
-      padding: 28px 28px 12px;
+      padding: 24px 28px 12px;
     }
 
     &__meta-header {
@@ -156,13 +192,42 @@
       }
     }
 
-    &__image {
-      max-width: 180px;
-      width: 100%;
+    &__vote {
+      grid-gap: 5px;
+
+      button {
+        height: 32px;
+      }
     }
 
-    &__vote-btn:first-of-type {
-      margin-right: 12px;
+    &__vote-btn {
+      .v-icon {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+  
+      span {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+    &__vote--thumb {
+      .v-icon {
+        font-size: 17px;
+      }
+    }
+    &__vote-more-btn {
+      .v-icon {
+        font-size: 17px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    &__all-votes {
+      grid-gap: 5px;
     }
   }
 }

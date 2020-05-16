@@ -120,6 +120,11 @@ export default {
     progressCircularColor: {
       type: String,
       default: '#808080'
+    },
+
+    autoFocus: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -133,6 +138,10 @@ export default {
         this.$emit('input', newValue);
       }
     }
+  },
+
+  mounted() {
+    if (this.autoFocus) this.$refs.nosInput.focus();
   },
 
   methods: {

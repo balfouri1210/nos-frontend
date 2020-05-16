@@ -108,9 +108,6 @@ export const actions = {
 
         if (cookie.playerId) commit('player/mutatePlayerId', parseInt(cookie.playerId));
         if (cookie.playerName) commit('player/mutatePlayerName', cookie.playerName);
-
-        if (cookie.historyYear) commit('mutateHistoryYear', parseInt(cookie.historyYear));
-        if (cookie.historyMonth) commit('mutateHistoryMonth', parseInt(cookie.historyMonth));
       }
     } catch (err) {
       console.error(err);

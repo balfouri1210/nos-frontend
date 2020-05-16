@@ -57,14 +57,14 @@ export default {
 
     viewOnYoutubeApp() {
       const desktopFallback = `https://youtube.com/watch?v=${this.videoId}`;
-      const mobileFallback = `https://youtube.com/watch?v=${this.videoId}`;
+      // const mobileFallback = `https://youtube.com/watch?v=${this.videoId}`;
       const app = `vnd.youtube://${this.videoId}`;
 
       if (this.isBasedOnMobileDevice) {
         window.location = app;
-        window.setTimeout(function() {
-          window.location = mobileFallback;
-        }, 1000);
+        // window.setTimeout(function() {
+        //   window.location = mobileFallback;
+        // }, 1000);
       } else {
         window.location = desktopFallback;
       }

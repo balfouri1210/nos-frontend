@@ -21,10 +21,15 @@
 
   &__left {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     .v-icon {
-      font-size: 22px;
+      font-size: 18px;
+    }
+
+    .v-chip:hover {
+      background: rgba(#1976d2, 0.15) !important;
+      transition: all 0.3s ease-out;
     }
   }
 
@@ -105,11 +110,21 @@
     }
   }
 
-  .nos-header__right {
-    button {
-      .v-icon {
-        color: white;
-      }
+  a, button {
+    .v-icon {
+      color: white;
+    }
+  }
+
+  .nos-header__left {
+    .v-chip {
+      color: white !important;
+      caret-color: white !important;
+      border-color: white !important;
+    }
+
+    .v-chip:hover {
+      background: rgba(white, 0.25) !important;
     }
   }
 }

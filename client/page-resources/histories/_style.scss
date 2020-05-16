@@ -63,17 +63,20 @@
 
   &__item {
     border-bottom: 1px solid #e4e4e4;
-    padding: 36px 0 42px;
   }
   &__item:last-of-type {
     border: none;
   }
 
   &__link {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
+    display: block;
+
+    div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 36px 0 42px;
+    }
   }
 
   &__period {
@@ -103,6 +106,9 @@
       display: flex;
       align-items: center;
       max-width: 180px;
+    }
+
+    .histories__name {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -111,23 +117,24 @@
       font-weight: 300;
     }
 
-    .histories__flag {
-      width: 17px;
-      margin-right: 8px;
-      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.15);
-    }
-
     .histories__club {
       margin: 2px 8px 0 0;
-      width: 14px;
+      width: 17px;
     }
 
-    span {
+    .histories__dob {
       display: flex;
       align-items: center;
       font-size: 12px;
       font-weight: 300;
       color: rgba(0, 0, 0, 0.7);
+
+      img {
+        width: 16px;
+        height: 12px;
+        margin-right: 10px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 2px 0px;
+        }
     }
   }
 
@@ -174,7 +181,6 @@
     }
 
     &__item {
-      padding: 56px 0 60px;
       border-radius: 6px;
       transition: all 0.3s ease-out;
       cursor: pointer;
@@ -184,10 +190,13 @@
     }
 
     &__link {
-      flex-direction: row;
-      justify-content: space-between;
-      max-width: 780px;
-      margin: 0 auto;
+      div {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 56px 0 60px;
+      }
     }
 
     &__period {

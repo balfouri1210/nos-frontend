@@ -8,7 +8,8 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '907degrees' },
-      { name: 'theme-color', content: '#000000' }
+      { name: 'theme-color', content: '#000000' },
+      { name: 'google-site-verification', content: '3zp6wWo1KnDbOYUMSMGHw4TiYyXVEB7dEP-g89ifApg' }
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap'},
@@ -68,7 +69,8 @@ module.exports = {
     { src: '~/plugins/vue-spinner.js', ssr: false },
     { src: '~/plugins/vue-countdown.js', ssr: false },
     { src: '~/plugins/moment.js' },
-    { src: '~/plugins/filter.js' }
+    { src: '~/plugins/filter.js' },
+    { src: '~/plugins/v-click-outside.js', ssr: false }
   ],
 
   buildModules: [

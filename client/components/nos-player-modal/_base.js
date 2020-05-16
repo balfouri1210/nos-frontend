@@ -56,7 +56,9 @@ export default {
 
       reportTargetObject: null,
       isReportDialog: false,
-      reportReason: null
+      reportReason: null,
+
+      isOpinionVoting: false
     };
   },
 
@@ -244,6 +246,7 @@ export default {
       if (!this.checkIsLoggedIn()) return;
 
       try {
+        this.isOpinionVoting = true;
         const voteOpinionResult = await this.$axios.$put('/api/vote/opinion', {
           targetAuthorId: opinion.users_id,
           targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
@@ -266,6 +269,8 @@ export default {
           console.error(err);
           return this.$nuxt.error({ statusCode: 500 });
         }
+      } finally {
+        this.isOpinionVoting = false;
       }
     },
 
@@ -462,7 +467,9 @@ export default {
       } catch (err) {
         alert('Sorry, There is some problem. Please refresh page or try again few minutes later.');
       } finally {
+        this.reportTargetObject = null;
         this.isReportDialog = false;
+        this.reportReason = null;
       }
     },
 

@@ -16,7 +16,17 @@
         </div>
 
         <nuxt-link :to="localePath('about')">
-          <v-icon>mdi-information-outline</v-icon>
+          <v-chip
+            color="primary"
+            outlined
+            small
+            style="cursor: pointer"
+          >
+            <v-icon left>
+              mdi-information-outline
+            </v-icon>
+            About 907
+          </v-chip>
         </nuxt-link>
       </div>
 
