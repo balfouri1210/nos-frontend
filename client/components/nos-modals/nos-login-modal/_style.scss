@@ -25,27 +25,22 @@
 
   &__error-message {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-top: 6px;
-    padding: 2px 8px;
+    padding: 7px 6px;
     border-radius: 6px;
     background: darkred;
     color: white;
     font-size: 14px;
-    
-    div {
-      display: flex;
-      align-items: center;
-    }
 
     button {
       display: flex;
       padding: 0;
     }
 
-    span {
-      text-transform: capitalize;
+    i {
+      margin-top: 3px;
     }
   }
 

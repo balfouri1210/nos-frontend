@@ -71,7 +71,7 @@
   &__link {
     display: block;
 
-    div {
+    &-content {
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -83,7 +83,25 @@
     margin-bottom: 8px;
     font-size: 18px;
 
-    span {
+    &-latest {
+      display: block;
+      color: $nos-main-theme;
+      text-align: center;
+
+      p {
+        display: inline-block;
+        background: linear-gradient(to right, rgb(146, 23, 77) 9.38%, rgb(228, 29, 92) 88.54%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 300;
+      }
+      p::before {
+        display: inline !important;
+      }
+    }
+    
+    &-time {
       font-size: 14px;
       font-weight: 300;
       color: rgba(0, 0, 0, 0.6);
@@ -190,7 +208,7 @@
     }
 
     &__link {
-      div {
+      &-content {
         flex-direction: row;
         justify-content: space-between;
         max-width: 780px;
@@ -204,7 +222,7 @@
       text-align: center;
       font-size: 22px;
 
-      span {
+      &-time {
         font-size: 16px;
       }
     }

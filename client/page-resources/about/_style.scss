@@ -248,25 +248,23 @@
 }
 
 .gradient-text {
-  display: inline-block;
-  margin-top: -50px;
+  display: inline;
   background: linear-gradient(to right, #ea5514, #f4991e);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .gradient-text::before {
-  display: inline !important;
+  display: contents !important;
 }
 
 .gradient-text--purple {
-  display: inline-block;
-  margin-top: -50px;
+  display: inline;
   background: linear-gradient(to right, rgb(146, 23, 77) 9.38%, rgb(228, 29, 92) 88.54%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .gradient-text--purple::before {
-  display: inline !important;
+  display: contents !important;
 }

@@ -74,11 +74,17 @@
             })"
             @click.native="selectHistory"
           >
-            <div>
-              <p class="histories__period">
-                {{ $moment.utc(history.start_date).format('MM. DD') }} <span>{{ $moment.utc(history.start_date).format('HH:mm') }}</span>
-                ~ {{ $moment.utc(history.end_date).format('MM. DD') }} <span>{{ $moment.utc(history.end_date).format('HH:mm') }}</span>
-              </p>
+            <div class="histories__link-content">
+              <div class="histories__period">
+                <div
+                  v-if="history.id === $store.getters.getLatestHistoryId"
+                  class="histories__period-latest"
+                >
+                  <p>Latest History</p>
+                </div>
+                {{ $moment.utc(history.start_date).format('MM. DD') }} <span class="histories__period-time">{{ $moment.utc(history.start_date).format('HH:mm') }}</span>
+                ~ {{ $moment.utc(history.end_date).format('MM. DD') }} <span class="histories__period-time">{{ $moment.utc(history.end_date).format('HH:mm') }}</span>
+              </div>
 
               <ul class="histories__top5Players">
                 <li

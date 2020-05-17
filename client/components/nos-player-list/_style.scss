@@ -138,6 +138,9 @@
       text-overflow: ellipsis;
       word-break: break-all;
     }
+    p:last-of-type {
+      font-weight: 300;
+    }
 
     img {
       width: 15px;

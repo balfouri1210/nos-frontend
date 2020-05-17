@@ -2,8 +2,7 @@ const env = {
   STAGE: 'dev',
   NOS_API_URL: 'https://api.907degrees.com',
   NOS_IMAGE_URL: 'https://images.907degrees.com',
-  YOUTUBE_API_KEY: 'AIzaSyCVerlZZjFa14hJ70XTH_DIfhlgf6c3vvI',
-  // YOUTUBE_API_KEY: 'AIzaSyAJ2FWloctY4Cf5nMatWUH8VrGn8FxVg64',
+  YOUTUBE_API_KEY: 'AIzaSyDRKV44WOv8EfOf2nftTdlrSj8MLzvzd80',
   GA_TRACKING_ID: ''
 };
 

@@ -51,12 +51,11 @@
           v-show="errorMessage"
           class="nos-login-modal__error-message"
         >
-          <div>
-            <i
-              class="material-icons nos-login-modal__error-icon"
-            >error</i>
-            <span>{{ errorMessage }}</span>
-          </div>
+          <i
+            class="material-icons nos-login-modal__error-icon"
+          >error</i>
+
+          <p>{{ errorMessage }}</p>
 
           <div>
             <button
@@ -134,13 +133,30 @@ export default {
         this.mutateUsername(decodedJwt.username);
         this.$emit('loginSuccess');
       } catch (err) {
-        console.error(err);
         if (err.response) {
-          this.errorMessage = err.response.data.message
-            .toLowerCase()
-            .replace(/_/g, ' ');
+          switch (err.response.data.code) {
+          case 'u003':
+            this.errorMessage =
+                'There isn’t an account associated with this email address.';
+            break;
+
+          case 'u004':
+            this.errorMessage =
+                'The password you entered is incorrect. Please try again.';
+            break;
+
+          case 'u011':
+            this.errorMessage =
+                'Email verification required. Please check your inbox.';
+            break;
+
+          default:
+            this.errorMessage =
+                'Sorry, looks like we’re having some issues :( Please try again or Contact us';
+          }
         } else {
-          this.errorMessage = 'Server Error';
+          this.errorMessage =
+            'Sorry, looks like we’re having some issues :( Please try again or Contact us';
         }
       }
     }
