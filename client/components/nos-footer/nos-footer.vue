@@ -28,7 +28,7 @@
           2020 © 907DEGREES. All Rights Reserved.
         </p>
         <p class="footer__contact">
-          907degrees@gmail.com
+          support@907degrees.com
         </p>
       </div>
     </div>

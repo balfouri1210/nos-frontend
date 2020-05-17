@@ -15,7 +15,10 @@
           }"
         >
           <div class="player__meta">
-            <p>{{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}<span v-if="topPlayer.height > 0"> / {{ topPlayer.height }}cm</span></p>
+            <p>
+              {{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}
+              <span v-if="topPlayer.height > 0"> / {{ topPlayer.height }}cm</span>
+            </p>
           </div>
         </div>
 
@@ -82,7 +85,10 @@
                 :alt="player.country_code"
               >{{ player.known_as }}
             </p>
-            <p>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}<span v-if="player.height > 0"> / {{ player.height }}cm</span></p>
+            <p>
+              {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}
+              <span v-if="player.height > 0"> / {{ player.height }}cm</span>
+            </p>
           </div>
         </button>
       </li>

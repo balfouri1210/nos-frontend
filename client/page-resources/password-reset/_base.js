@@ -8,6 +8,8 @@ export default {
       isResetPwdEmailSending: false,
       isResetPwdEmailSendCompleted: false,
       isResetPwdEmailSendFailed: false,
+
+      userNotFound: false
     };
   },
 
@@ -20,7 +22,9 @@ export default {
         });
         this.isResetPwdEmailSendCompleted = true;
       } catch (err) {
-        if (err.response.data.status === 400) {
+        if (err.response.data.code === 'u003') {
+          this.userNotFound = true;
+        } else {
           this.isResetPwdEmailSendFailed = true;
         }
       } finally {

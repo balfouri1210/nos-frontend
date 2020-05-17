@@ -40,6 +40,30 @@
       </form>
     </validation-observer>
 
+    <transition
+      name="fade"
+    >
+      <div
+        v-show="userNotFound"
+        class="password-reset__error-message"
+      >
+        <i class="material-icons password-reset__error-icon">error</i>
+
+        <p>There isn’t an account associated with this email address.</p>
+
+        <div>
+          <button
+            class="password-reset__error-close"
+            @click="userNotFound = null"
+          >
+            <i
+              class="material-icons"
+            >close</i>
+          </button>
+        </div>
+      </div>
+    </transition>
+
     <div
       v-if="isResetPwdEmailSendCompleted"
       class="password-reset__result"
@@ -84,6 +108,39 @@ export default {
   &__result {
     margin-top: 12px;
     text-align: center;
+  }
+
+  &__error-message {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 7px 6px;
+    border-radius: 6px;
+    background: darkred;
+    color: white;
+    font-size: 14px;
+
+    button {
+      display: flex;
+      padding: 0;
+    }
+
+    i {
+      margin-top: 3px;
+    }
+  }
+
+  &__error-icon {
+    margin-right: 4px;
+  }
+
+  &__error-close {
+    background: none !important;
+
+    i {
+      color: white;
+    }
   }
 }
 </style>

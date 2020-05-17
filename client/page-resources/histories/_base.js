@@ -36,7 +36,22 @@ export default {
     }
   },
 
+  created() {
+    this.assignLatestHistoryId();
+  },
+
   methods: {
+    async assignLatestHistoryId() {
+      try {
+        if (!this.$store.getters.getLatestHistoryId) {
+          const latestHistoryId = (await this.$axios.$get('/api/histories/latest')).latest_history_id;
+          this.$store.commit('mutateLatestHistoryId', latestHistoryId);
+        }
+      } catch (err) {
+        this.$nuxt.error({ statusCode: 500, message: 'get-latest-history-id-failed' });
+      }
+    },
+
     decreaseYear() {
       this.selectedYear--;
       this.getHistories();

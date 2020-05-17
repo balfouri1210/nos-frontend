@@ -8,6 +8,7 @@ export const state = () => ({
   seasonStart: null,
   durationToEvent: 0,
 
+  latestHistoryId: null,
   historyYear: null,
   historyMonth: null
 });
@@ -33,6 +34,10 @@ export const mutations = {
     state.durationToEvent = duration;
   },
 
+
+  mutateLatestHistoryId(state, id) {
+    state.latestHistoryId = id;
+  },
 
   mutateHistoryYear(state, year) {
     state.historyYear = year;
@@ -78,6 +83,10 @@ export const getters = {
     };
   },
 
+
+  getLatestHistoryId(state) {
+    return state.latestHistoryId;
+  },
 
   getHistoryYear(state) {
     return state.historyYear;
