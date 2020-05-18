@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <h1>{{ $t('signup') }}</h1>
+    <h1>SIGNUP</h1>
 
     <div
       class="signup__form"
@@ -16,10 +16,12 @@
               id="email"
               type="email"
               name="email"
+              outlined
               :rules="'required|available_email'"
               :value="userInfo.email"
               :debounce="400"
               :autocomplete="'new-password'"
+              :placeholder="'Email address'"
               @input="userInfo.email = $event"
             />
           </div>
@@ -30,9 +32,11 @@
               id="password"
               type="password"
               name="password"
+              outlined
               :rules="'required|min:6'"
               :value="userInfo.password"
               :autocomplete="'new-password'"
+              :placeholder="'******'"
               @input="userInfo.password = $event"
             />
           </div>
@@ -43,23 +47,37 @@
               id="confirmPassword"
               type="password"
               name="confirmPassword"
+              outlined
               :rules="{ required: true, is: userInfo.password }"
               :value="confirmPassword"
               :autocomplete="'new-password'"
+              :placeholder="'******'"
               @input="confirmPassword = $event"
             />
           </div>
 
           <div class="signup__property">
             <label for="username">Username</label>
+            <span
+              :style="{
+                display: 'inline-block',
+                margin: '-4px 0 10px',
+                fontSize: '13px',
+                fontWeight: 300,
+                color: 'rgba(0, 0, 0, 0.5)',
+                lineHeight: '17px'
+              }"
+            >Your username is how other community members will see you.</span>
             <nos-input
               id="username"
               type="text"
               name="username"
+              outlined
               :rules="'required|min:2|max:30|alpha_dash|available_username'"
               :value="userInfo.username"
               :debounce="400"
               :autocomplete="'new-password'"
+              :placeholder="'Username'"
               @input="userInfo.username = $event"
             />
           </div>
@@ -88,22 +106,11 @@
           </div>
 
           <div class="signup__property">
-            <label for="gender">Gender</label>
-            <nos-select
-              id="gender"
-              name="gender"
-              :options="['male', 'female']"
-              :rules="'required'"
-              :value="userInfo.gender"
-              @input="userInfo.gender = $event"
-            />
-          </div>
-
-          <div class="signup__property">
             <label for="country">Country</label>
             <nos-select
               id="countryId"
-              name="countryId"
+              name="country"
+              outlined
               :options="countries"
               :rules="'required'"
               :value="userInfo.countryId"
@@ -139,13 +146,6 @@
         Sorry, something is bothering signup. Please retry after few minutes.
       </p>
     </div>
-
-    <!-- Use this when you want to use Verification code mode 20200130 -->
-    <!-- <nos-user-verifier
-      :email="userInfo.email"
-      @verified="verifiedHandler"
-      @verifyFailed="verifyFailedHandler"
-    /> -->
 
     <div
       v-if="signupCompleted"

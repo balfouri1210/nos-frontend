@@ -152,6 +152,10 @@
     }
     &__suggestion-name {
       width: auto;
+
+      span {
+        max-width: 300px;
+      }
     }
     &__suggestion-info {
       font-size: 13px;

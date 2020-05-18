@@ -60,5 +60,6 @@
 @media only screen and (min-width: $mobile-width) {
   .nos-modal {
     right: 0;
+    max-width: 310px;
   }
 }

@@ -28,7 +28,7 @@
     }
 
     .v-chip {
-      border-width: 1.4px;
+      border-width: 1.2px;
     }
     .v-chip:hover {
       background: rgba(#1976d2, 0.15) !important;
@@ -38,7 +38,7 @@
 
   &__logo {
     display: inline-flex;
-    margin-right: 20px;
+    margin-right: 16px;
 
     a {
       display: inline-block;
@@ -142,10 +142,12 @@
     }
 
     &__logo {
+      margin-right: 20px;
+
       a {
         width: 166px;
         height: 23px;
-         background-image: url('https://images.907degrees.com/logos/logo2.svg');
+        background-image: url('https://images.907degrees.com/logos/logo2.svg');
       }
     }
   }

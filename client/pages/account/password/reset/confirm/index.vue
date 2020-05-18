@@ -1,30 +1,7 @@
 <template>
   <div class="password-reset-confirm">
     <div v-if="verificationResult">
-      <div
-        v-if="isPasswordResetCompleted"
-        class="password-reset-confirm__complete"
-      >
-        <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-        <p>Your password reset successfully!</p>
-        <p>Please login with your new password</p>
-
-        <nuxt-link
-          :to="localePath('login')"
-          class="nos-basic-btn"
-        >
-          Go to Login
-        </nuxt-link>
-      </div>
-
-      <div
-        v-else-if="isPasswordResetFailed"
-        class="password-reset-confirm__complete"
-      >
-        FAILED!
-      </div>
-
-      <div v-else>
+      <div v-if="!isPasswordResetCompleted">
         <validation-observer v-slot="{ handleSubmit, invalid }">
           <form
             id="app"
@@ -80,10 +57,33 @@
           </form>
         </validation-observer>
       </div>
+
+      <div
+        v-if="isPasswordResetCompleted"
+        class="password-reset-confirm__complete"
+      >
+        <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
+        <p>비밀번호가 성공적으로 변경되었습니다</p>
+        <p>새로운 비밀번호로 로그인해주세요</p>
+
+        <nuxt-link
+          :to="localePath('login')"
+          class="nos-basic-btn"
+        >
+          Go to Login
+        </nuxt-link>
+      </div>
+
+      <div
+        v-if="isPasswordResetFailed"
+        class="password-reset-confirm__complete"
+      >
+        FAILED!
+      </div>
     </div>
 
     <div v-else>
-      <p>Sorry, The user does not exist or this email is expired. Please check again or contact us.</p>
+      <p>죄송합니다. 존재하지 않는 계정이거나 설정 과정에서 문제가 발생했습니다. 페이지를 새로고침하거나 잠시 후 다시 시도해주세요. 문제가 지속된다면 support@907degrees.com으로 연락하세요</p>
     </div>
   </div>
 </template>

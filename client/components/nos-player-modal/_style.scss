@@ -386,6 +386,7 @@
 
     &-username {
       margin-right: 4px;
+      font-size: 14px;
       font-weight: 800;
     }
 
@@ -446,8 +447,14 @@
   }
 
   &__added-reply {
+    font-size: 14px;
+
     &-username {
       font-weight: 800;
+    }
+
+    &-content {
+      line-height: 1.4rem;
     }
   }
 

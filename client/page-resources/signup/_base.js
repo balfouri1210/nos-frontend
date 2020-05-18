@@ -1,11 +1,6 @@
 import countries from '@/lib/countries';
-import nosUserVerifier from '@/components/nos-user-verifier/nos-user-verifier.vue';
 
 export default {
-  components: {
-    nosUserVerifier
-  },
-
   data() {
     return {
       errors: [],
@@ -14,8 +9,7 @@ export default {
         password: null,
         username: null,
         countryId: null,
-        birth: null,
-        gender: null
+        birth: null
       },
 
       confirmPassword: null,

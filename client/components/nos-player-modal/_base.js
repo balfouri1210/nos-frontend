@@ -293,11 +293,12 @@ export default {
 
         targetComment.content = targetComment.editCommentContent;
         targetComment.isEditing = false;
-        targetComment.isEditCommentSaving = false;
         targetComment.needReadMore = this.isNewLineExceed(targetComment.editCommentContent);
       } catch (err) {
         console.error(err);
         this.isCommentMalfunction = true;
+      } finally {
+        targetComment.isEditCommentSaving = false;
       }
     },
 
@@ -329,16 +330,17 @@ export default {
 
     async saveEditReply(targetReply) {
       try {
-        this.$set(targetReply, 'isEditCommentSaving', true);
+        this.$set(targetReply, 'isEditReplySaving', true);
         await this.$axios.$put(`/api/replies/player/${targetReply.id}`, {
           newContent: targetReply.editReplyContent
         });
         targetReply.content = targetReply.editReplyContent;
         targetReply.isEditing = false;
-        targetReply.isEditCommentSaving = false;
       } catch (err) {
         console.error(err);
         this.isCommentMalfunction = true;
+      } finally {
+        targetReply.isEditReplySaving = false;
       }
     },
 

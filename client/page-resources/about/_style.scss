@@ -249,6 +249,7 @@
 
 .gradient-text {
   display: inline;
+  padding-bottom: 10px;
   background: linear-gradient(to right, #ea5514, #f4991e);
   background-clip: text;
   -webkit-background-clip: text;
@@ -260,6 +261,7 @@
 
 .gradient-text--purple {
   display: inline;
+  padding-bottom: 10px;
   background: linear-gradient(to right, rgb(146, 23, 77) 9.38%, rgb(228, 29, 92) 88.54%);
   background-clip: text;
   -webkit-background-clip: text;

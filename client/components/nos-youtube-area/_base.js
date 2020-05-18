@@ -48,14 +48,11 @@ export default {
           }
         );
 
-        console.log(searchResult);
-
         const searchResultIdList = searchResult.items.map(item => {
           return item.id.videoId;
         });
 
         const searchResultStat = await this.getVideoStat(searchResultIdList);
-        console.log(searchResultStat);
 
         searchResult.items = searchResult.items.map(item => {
           searchResultStat.items.forEach(subItem => {

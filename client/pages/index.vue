@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <nos-onboarding-ui />
     <nos-preseason-ui v-if="$store.getters.getAppStatus === 'preseason'" />
 
     <div
