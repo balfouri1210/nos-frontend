@@ -8,7 +8,6 @@
             <span>Back to Histories</span>
           </nuxt-link>
 
-          <p>Previous Leaderboard</p>
           <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>
         </div>
       </div>
@@ -55,14 +54,14 @@ export default {
 
 <style lang="scss" scoped>
 .history {
-  padding-top: 60px;
+  padding-top: 44px;
 
   &__period {
     position: fixed;
     top: $mobile-header-height;
     left: 0;
     width: 100%;
-    height: 58px;
+    height: 42px;
     margin-bottom: 2px;
     padding: 8px;
     background: #d57c59;
@@ -74,14 +73,18 @@ export default {
 
   &__period-content {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: $web-body-content-width;
+    height: 100%;
     margin: 0 auto;
 
     a {
       display: flex;
       align-items: center;
       position: absolute;
-      top: 8px;
+      top: 1px;
       left: 4px;
       color: white;
 
@@ -100,7 +103,7 @@ export default {
 @media screen and (min-width: $mobile-width) {
   .history {
     margin-bottom: 80px;
-    padding-top: 58px;
+    padding-top: 42px;
 
     &__period {
       top: $web-header-height;

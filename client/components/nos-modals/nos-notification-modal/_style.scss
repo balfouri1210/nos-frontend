@@ -1,6 +1,8 @@
 .nos-notification {
   .nos-modal__body {
     min-height: 48px;
+    max-height: 300px;
+    overflow: auto;
   }
 
   &__empty {
@@ -40,5 +42,9 @@
 @media only screen and (min-width: $mobile-width) {
   .nos-notification-modal {
     top: 60px;
+
+    .nos-modal__body {
+      max-height: 326px;
+    }
   }
 }
