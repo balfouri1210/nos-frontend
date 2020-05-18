@@ -11,15 +11,18 @@
 
       <div class="onboarding-ui__desc-wrapper">
         <div class="onboarding-ui__desc">
-          <nuxt-link :to="localePath('about')">
+          <nuxt-link
+            :to="localePath('about')"
+            @click.native="closeOnboardingUi"
+          >
             <v-icon>mdi-party-popper</v-icon>
-            환영합니다. 907에 대해 알아보세요
+            Welcome! Find out about 907Degrees
           </nuxt-link>
         </div>
 
         <div class="onboarding-ui__desc">
           <button @click="closeOnboardingUi">
-            괜찮아요, 나중에 볼게요
+            It's ok, Later
           </button>
         </div>
       </div>
