@@ -224,7 +224,8 @@ export default {
         parent_comments_id: parentComment.id,
         created_at: new Date(),
         vote_up_count: 0,
-        vote_down_count: 0
+        vote_down_count: 0,
+        users_id: this.getId()
       };
 
       if (parentComment.isReply) parentComment.replies.unshift(addedReply);

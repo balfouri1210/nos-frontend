@@ -476,7 +476,7 @@
                                       @click="saveEditReply(reply)"
                                     >
                                       <pulse-loader
-                                        v-if="reply.isEditCommentSaving"
+                                        v-if="reply.isEditReplySaving"
                                         :color="'white'"
                                         :size="'4px'"
                                       />
