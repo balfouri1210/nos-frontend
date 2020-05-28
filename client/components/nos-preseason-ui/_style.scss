@@ -80,22 +80,9 @@
       button {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 6px 0;
         width: 100%;
-      }
-
-      img {
-        width: 17px;
-        margin-right: 8px;
-      }
-
-      span {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        word-break: break-all;
-        line-height: normal;
-        color: black;
       }
     }
 

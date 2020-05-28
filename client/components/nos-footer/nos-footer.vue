@@ -25,7 +25,11 @@
         </button> -->
 
         <p class="footer__copyright">
-          2020 © 907DEGREES. All Rights Reserved.
+          <span>2020 © 907DEGREES. All Rights Reserved</span>
+          <span style="width: 20px">·</span>
+          <nuxt-link :to="localePath('privacy-policy')">
+            Privacy
+          </nuxt-link>
         </p>
         <p class="footer__contact">
           support@907degrees.com

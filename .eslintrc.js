@@ -7,7 +7,8 @@ module.exports = {
   },
 
   globals: {
-    "process": true
+    "process": true,
+    "gtag": true
   },
 
   // 현재 eslintrc 파일을 기준으로 ESLint 규칙을 적용

@@ -14,6 +14,7 @@ export default {
       isMoreYoutubeSearching: false,
       youtubeSearchFailed: false,
       youtubeSearchKeyword: this.searchKeyword,
+      youtubeSearchKeywordCopied: null,
       youtubeSearchPeriod: null,
 
       publishedAfter: null
@@ -22,6 +23,12 @@ export default {
 
   created() {
     this.getYoutubeSearchResult(this.searchKeyword);
+  },
+
+  computed: {
+    isBasedOnMobileDevice() {
+      return /Android|iPhone|iPad/i.test(navigator.userAgent);
+    }
   },
 
   methods: {
@@ -79,6 +86,7 @@ export default {
       } finally {
         this.isMoreYoutubeSearching = false;
         this.isYoutubeSearching = false;
+        this.youtubeSearchKeywordCopied = this.youtubeSearchKeyword;
       }
     },
 
@@ -136,6 +144,18 @@ export default {
 
     selectYoutubeVideo(videoId) {
       this.$emit('selectYoutubeVideo', videoId);
+    },
+
+    // When youtube data quota is exceeded
+    goToYoutube() {
+      const fallback = `https://youtube.com/results?search_query=${this.youtubeSearchKeyword}`;
+      window.open(fallback, '_blank');
+
+      function killPopup() {
+        window.removeEventListener('pagehide', killPopup);
+      }
+
+      window.addEventListener('pagehide', killPopup);
     }
   }
 };

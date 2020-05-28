@@ -17,7 +17,7 @@
                 type="password"
                 name="newPassword"
                 :placeholder="'******'"
-                :rules="'required|min:6'"
+                :rules="'required|min:8'"
                 :value="newPassword"
                 @input="newPassword = $event"
               />
@@ -63,8 +63,8 @@
         class="password-reset-confirm__complete"
       >
         <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-        <p>비밀번호가 성공적으로 변경되었습니다</p>
-        <p>새로운 비밀번호로 로그인해주세요</p>
+        <p>Your password has been changed successfully.</p>
+        <p>Please sign in with your new password.</p>
 
         <nuxt-link
           :to="localePath('login')"
@@ -78,12 +78,16 @@
         v-if="isPasswordResetFailed"
         class="password-reset-confirm__complete"
       >
-        FAILED!
+        Sorry, looks like we’re having some issues :( Please try again.
       </div>
     </div>
 
     <div v-else>
-      <p>죄송합니다. 존재하지 않는 계정이거나 설정 과정에서 문제가 발생했습니다. 페이지를 새로고침하거나 잠시 후 다시 시도해주세요. 문제가 지속된다면 support@907degrees.com으로 연락하세요</p>
+      <p>
+        Sorry, the account does not exist or there was a problem with the set up process.
+        Please refresh the page or try it later. If the error continues, please contact
+        <a href="mailto: support@907degrees.com"> support@907degrees.com</a>
+      </p>
     </div>
   </div>
 </template>

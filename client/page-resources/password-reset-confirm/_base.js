@@ -28,10 +28,11 @@ export default {
     async resetPassword() {
       try {
         this.isPasswordResetting = true;
-        this.$axios.$put('/api/auth/password-reset', {
+        await this.$axios.$put('/api/auth/password-reset', {
           verificationCode: this.$route.query.vc,
           newPassword: this.newPassword
         });
+
         this.isPasswordResetCompleted = true;
       } catch (err) {
         this.isPasswordResetFailed = true;

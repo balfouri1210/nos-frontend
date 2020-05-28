@@ -4,10 +4,24 @@
     :class="{'nos-search-modal--preseason': $store.getters.getAppStatus === 'preseason'}"
   >
     <div class="nos-search-modal__inner">
+      <ul class="nos-search-modal__clubs">
+        <li
+          v-for="(club, index) in clubs"
+          :key="index"
+        >
+          <button @click="selectClub(club)">
+            <img
+              :src="club.image"
+              :alt="club.name"
+            >
+          </button>
+        </li>
+      </ul>
+
       <validation-observer v-slot="{ handleSubmit }">
         <form
           id="playerSearchForm"
-          @submit.prevent="handleSubmit(search)"
+          @submit.prevent="handleSubmit(searchPlayerByKeyword)"
         >
           <div class="nos-search-modal__form">
             <nos-input
@@ -25,7 +39,7 @@
       </validation-observer>
 
       <div
-        v-if="suggestions.length > 0 && searchKeyword"
+        v-if="suggestions.length > 0"
         class="nos-search-modal__suggestion"
       >
         <ul>
@@ -59,56 +73,10 @@
 </template>
 
 <script>
-import U from '@/lib/util';
+import Base from './_base';
 
 export default {
-  data() {
-    return {
-      searchKeyword: null,
-      suggestions: [],
-      isSearching: false
-    };
-  },
-
-  watch: {
-    searchKeyword: U.debounce(async function() {
-      try {
-        if (this.searchKeyword && this.searchKeyword.length >= 2) {
-          this.isSearching = true;
-          this.suggestions = await this.search();
-        } else {
-          this.suggestions = [];
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        this.isSearching = false;
-      }
-    }, 400)
-  },
-
-  methods: {
-    search() {
-      return this.$axios.$get(`/api/search/${this.searchKeyword}`) || [];
-    },
-
-    selectSearchItem(item) {
-      this.$store.commit('player/mutatePlayerId', item.id);
-      this.$store.commit('player/mutatePlayerName', item.known_as);
-      U.savePlayerInfoToCookie(item.id, item.known_as);
-      this.$emit('closeModal');
-
-      // 평상시
-      this.$router.push(
-        this.localePath({
-          name: 'index-player-playerName',
-          params: {
-            playerName: item.known_as
-          }
-        })
-      );
-    }
-  }
+  mixins: [Base]
 };
 </script>
 

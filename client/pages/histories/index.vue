@@ -52,7 +52,7 @@
         v-if="histories.length === 0"
         class="histories__empty centered"
       >
-        <h1>EMPTY PERIOD</h1>
+        <h1>No histories during this period</h1>
       </div>
 
       <ul

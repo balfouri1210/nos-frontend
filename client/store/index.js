@@ -105,7 +105,7 @@ export const actions = {
     try {
       if (req.headers.cookie) {
         const cookie = U.cookieParser(req.headers.cookie);
-        const jwt = cookie.jwt;
+        const jwt = cookie.nosJwt;
         if (jwt) {
           commit('auth/mutateJwt', jwt);
 
@@ -137,8 +137,8 @@ export const actions = {
       if (now.isBefore(seasonEndMoment)) {
         durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;
   
-        if (durationToEvent < 1000 * 60 * 60 * 12) {
-          // 시즌종료까지 남은시간이 12시간 이내일 경우
+        if (durationToEvent < 1000 * 60 * 60 * 24) {
+          // 시즌종료까지 남은시간이 24시간 이내일 경우
           commit('mutateAppStatus', 'lastStage');
           commit('mutateSeasonEnd', seasonEndMoment);
           commit('mutateSeasonStart', null);

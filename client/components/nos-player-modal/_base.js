@@ -54,11 +54,13 @@ export default {
       hitsList: [],
       now: this.$moment.utc(),
 
-      reportTargetObject: null,
       isReportDialog: false,
+      reportTargetObject: null,
       reportReason: null,
+      isReportSaved: false,
 
-      isOpinionVoting: false
+      isOpinionVoting: false,
+      isCommunityGuide: false
     };
   },
 
@@ -81,11 +83,21 @@ export default {
       return this.hitsList.findIndex((item) => {
         return item.id === this.playerId;
       });
+    },
+
+    previousCommentIdList() {
+      const previousCommentIdList = this.comments.map((comment) => {
+        return comment.id;
+      });
+
+      return previousCommentIdList.toString();
     }
   },
 
   created() {
-    this.comments = this.initialComments.slice();
+    if (this.player.comment_count < 0) this.player.comment_count = 0;
+
+    this.comments = this.initialComments.slice(); // 최초 댓글들 복사
     if (this.comments) this.commentMappingWithUiProperty(this.comments);
   },
 
@@ -136,10 +148,11 @@ export default {
       return this.$axios.$put(`/api/players/hits/${this.playerId}`);
     },
 
-    closeModal() {
-      this.$router.back();
-    },
 
+
+    // ///////////////// //
+    // COMMENT 관련 메소드  //
+    // ///////////////// //
     commentMappingWithUiProperty(comments) {
       comments.forEach(comment => {
         this.$set(comment, 'isReply', false);
@@ -151,20 +164,6 @@ export default {
         this.$set(comment, 'needReadMore', this.isNewLineExceed(comment.content));
         this.$set(comment, 'expanded', false);
       });
-    },
-
-    async getReplies(parentComment) {
-      parentComment.replies = [];
-      parentComment.isReply = true;
-      parentComment.isRepliesLoaded = false;
-
-      try {
-        parentComment.replies = await this.$axios.$get(`/api/replies/player/${parentComment.id}`);
-        parentComment.isRepliesLoaded = true;
-      } catch (err) {
-        this.isCommentMalfunction = true;
-        console.error(err);
-      }
     },
 
     async addComment() {
@@ -192,7 +191,124 @@ export default {
       addedComment.isReply = false;
       addedComment.isNewReply = false;
       addedComment.replyContent = '';
+      addedComment.needReadMore = this.isNewLineExceed(addedComment.content);
+      addedComment.expanded = false;
       this.comments.unshift(addedComment);
+    },
+
+    editComment(comment) {
+      this.$set(comment, 'isEditing', true);
+      this.$set(comment, 'editCommentContent', comment.content);
+    },
+
+    cancelEditComment(comment) {
+      comment.isEditing = false;
+    },
+
+    async saveEditComment(targetComment) {
+      try {
+        this.$set(targetComment, 'isEditCommentSaving', true);
+        await this.$axios.$put(`/api/comments/player/${targetComment.id}`, {
+          newContent: targetComment.editCommentContent
+        });
+
+        targetComment.content = targetComment.editCommentContent;
+        targetComment.isEditing = false;
+        targetComment.needReadMore = this.isNewLineExceed(targetComment.editCommentContent);
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      } finally {
+        targetComment.isEditCommentSaving = false;
+      }
+    },
+
+    async deleteComment(targetComment) {
+      try {
+        await this.$axios.$delete(`/api/comments/player/${this.playerId}/${targetComment.id}`);
+        alert('It was deleted successfully.');
+
+        const idx = this.comments.findIndex((comment) => {
+          return comment.id === targetComment.id;
+        });
+        if (idx > -1) this.comments.splice(idx, 1);
+        this.player.comment_count --;
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      }
+    },
+
+    async sortCommentBy(sortType) {
+      // this.comments = [];
+      this.isCommentsLoading = true;
+      this.commentSortType = sortType;
+
+      try {
+        switch (sortType) {
+        case 'date' :
+          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+            params: { sortType: 'date' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
+
+        case 'like' :
+        default :
+          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+            params: { sortType: 'like' }
+          });
+          this.commentMappingWithUiProperty(this.comments);
+          break;
+        }
+        this.isCommentsLoading = false;
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      }
+    },
+
+    async loadMoreComments() {
+      if (this.isMoreCommentsLoading) return;
+      else if (this.player.comment_count <= this.comments.length) return;
+
+      this.isMoreCommentsLoading = true;
+      try {
+        const moreComments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
+          params: {
+            sortType: this.commentSortType,
+            minId: this.comments[this.comments.length - 1].id,
+            previousCommentIdList: this.previousCommentIdList
+          }
+        });
+        this.commentMappingWithUiProperty(moreComments);
+        this.comments = this.comments.concat(moreComments);
+      } catch (err) {
+        console.error(err);
+        this.isCommentMalfunction = true;
+      } finally {
+        this.isMoreCommentsLoading = false;
+      }
+    },
+
+
+
+
+    // /////////////// //
+    // REPLY 관련 메소드  //
+    // /////////////// //
+    async getReplies(parentComment) {
+      parentComment.replies = [];
+      parentComment.isReply = true;
+      parentComment.isRepliesLoaded = false;
+
+      try {
+        parentComment.replies = await this.$axios.$get(`/api/replies/player/${parentComment.id}`);
+        parentComment.isRepliesLoaded = true;
+      } catch (err) {
+        this.isCommentMalfunction = true;
+        console.error(err);
+      }
     },
 
     async addReply(parentComment) {
@@ -242,84 +358,6 @@ export default {
       comment.replyContent = '';
     },
 
-
-    async votePlayerOpinion(opinion, vote) {
-      if (!this.checkIsLoggedIn()) return;
-
-      try {
-        this.isOpinionVoting = true;
-        const voteOpinionResult = await this.$axios.$put('/api/vote/opinion', {
-          targetAuthorId: opinion.users_id,
-          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
-          targetOpinionId: opinion.id,
-          userId: this.getId(),
-          vote
-        });
-
-        if (voteOpinionResult === 'voted') {
-          opinion.isVoted = vote;
-          opinion[`vote_${vote}_count`] ++;
-        } else {
-          opinion.isVoted = null;
-          opinion[`vote_${vote}_count`] --;
-        }
-      } catch (err) {
-        if (err.response.data.code === 'o003') {
-          alert('Already voted!');
-        } else {
-          console.error(err);
-          return this.$nuxt.error({ statusCode: 500 });
-        }
-      } finally {
-        this.isOpinionVoting = false;
-      }
-    },
-
-    // Related to Edit & Delete Comment
-    editComment(comment) {
-      this.$set(comment, 'isEditing', true);
-      this.$set(comment, 'editCommentContent', comment.content);
-    },
-
-    cancelEditComment(comment) {
-      comment.isEditing = false;
-    },
-
-    async saveEditComment(targetComment) {
-      try {
-        this.$set(targetComment, 'isEditCommentSaving', true);
-        await this.$axios.$put(`/api/comments/player/${targetComment.id}`, {
-          newContent: targetComment.editCommentContent
-        });
-
-        targetComment.content = targetComment.editCommentContent;
-        targetComment.isEditing = false;
-        targetComment.needReadMore = this.isNewLineExceed(targetComment.editCommentContent);
-      } catch (err) {
-        console.error(err);
-        this.isCommentMalfunction = true;
-      } finally {
-        targetComment.isEditCommentSaving = false;
-      }
-    },
-
-    async deleteComment(targetComment) {
-      try {
-        await this.$axios.$delete(`/api/comments/player/${this.playerId}/${targetComment.id}`);
-        alert('삭제됐다!');
-
-        const idx = this.comments.findIndex((comment) => {
-          return comment.id === targetComment.id;
-        });
-        if (idx > -1) this.comments.splice(idx, 1);
-        this.player.comment_count --;
-      } catch (err) {
-        console.error(err);
-        this.isCommentMalfunction = true;
-      }
-    },
-
-    // Related to Edit & Delete Comment
     editReply(reply) {
       this.$set(reply, 'isEditing', true);
       this.$set(reply, 'editReplyContent', reply.content);
@@ -352,7 +390,7 @@ export default {
             parentCommentsId: parentComment.id
           }
         });
-        alert('삭제됐다!');
+        alert('It was deleted successfully.');
 
         const idx = parentComment.replies.findIndex((reply) => {
           return reply.id === targetReply.id;
@@ -362,62 +400,6 @@ export default {
       } catch (err) {
         console.error(err);
         this.isCommentMalfunction = true;
-      }
-    },
-
-    async sortCommentBy(sortType) {
-      // this.comments = [];
-      this.isCommentsLoading = true;
-      this.commentSortType = sortType;
-
-      try {
-        switch (sortType) {
-        case 'date' :
-          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
-            params: { sortType: 'date' }
-          });
-          this.commentMappingWithUiProperty(this.comments);
-          break;
-
-        case 'like' :
-        default :
-          this.comments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
-            params: { sortType: 'like' }
-          });
-          this.commentMappingWithUiProperty(this.comments);
-          break;
-        }
-        this.isCommentsLoading = false;
-      } catch (err) {
-        console.error(err);
-        this.isCommentMalfunction = true;
-      }
-    },
-
-    async loadMoreComments() {
-      if (this.isMoreCommentsLoading) return;
-      else if (this.player.comment_count <= this.comments.length) return;
-
-      const previousCommentIdList = this.comments.map((comment) => {
-        return comment.id;
-      });
-
-      this.isMoreCommentsLoading = true;
-      try {
-        const moreComments = await this.$axios.$get(`/api/comments/player/${this.playerId}`, {
-          params: {
-            sortType: this.commentSortType,
-            minId: this.comments[this.comments.length - 1].id,
-            previousCommentIdList
-          }
-        });
-        this.commentMappingWithUiProperty(moreComments);
-        this.comments = this.comments.concat(moreComments);
-      } catch (err) {
-        console.error(err);
-        this.isCommentMalfunction = true;
-      } finally {
-        this.isMoreCommentsLoading = false;
       }
     },
 
@@ -438,6 +420,41 @@ export default {
       }
     },
 
+
+
+    // 기타 기능들
+    async votePlayerOpinion(opinion, vote) {
+      if (!this.checkIsLoggedIn()) return;
+
+      try {
+        this.isOpinionVoting = true;
+        const voteOpinionResult = await this.$axios.$put('/api/vote/opinion', {
+          targetAuthorId: opinion.users_id,
+          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+          targetOpinionId: opinion.id,
+          userId: this.getId(),
+          vote
+        });
+
+        if (voteOpinionResult === 'voted') {
+          opinion.isVoted = vote;
+          opinion[`vote_${vote}_count`] ++;
+        } else {
+          opinion.isVoted = null;
+          opinion[`vote_${vote}_count`] --;
+        }
+      } catch (err) {
+        if (err.response.data.code === 'o003') {
+          alert('You have already voted.');
+        } else {
+          console.error(err);
+          return this.$nuxt.error({ statusCode: 500 });
+        }
+      } finally {
+        this.isOpinionVoting = false;
+      }
+    },
+
     checkIsLoggedIn() {
       if (!this.getJwt()) {
         this.isRequestLoginPopup = true;
@@ -449,7 +466,6 @@ export default {
     isNewLineExceed(content) {
       return (content.match(/\n/g)||[]).length >= 4;
     },
-
 
     openReportDialog(opinion) {
       this.isReportDialog = true;
@@ -466,12 +482,11 @@ export default {
           reason: this.reportReason
         });
 
-        alert('Reported! This opinion will be penalized according to policy after review.');
-      } catch (err) {
-        alert('Sorry, There is some problem. Please refresh page or try again few minutes later.');
-      } finally {
         this.reportTargetObject = null;
-        this.isReportDialog = false;
+        this.isReportSaved = true;
+      } catch (err) {
+        alert('Sorry, looks like we’re having some issues :( Please try again.');
+      } finally {
         this.reportReason = null;
       }
     },
@@ -479,6 +494,10 @@ export default {
     selectYoutubeVideoHandler(videoId) {
       this.selectedYoutubeVideoId = videoId;
       this.isYoutubePlayer = true;
+    },
+
+    closeModal() {
+      this.$router.back();
     }
   }
 };

@@ -92,55 +92,87 @@
       />
     </div>
 
-    <ul class="youtube-area__video-list">
-      <li
-        v-for="(video, index) in youtubeSearchResult"
-        :key="index"
+    <div v-if="youtubeSearchResult.length > 0">
+      <ul class="youtube-area__video-list">
+        <li
+          v-for="(video, index) in youtubeSearchResult"
+          :key="index"
+        >
+          <button
+            class="youtube-area__video"
+            @click="selectYoutubeVideo(video.videoId)"
+          >
+            <div
+              class="youtube-area__video-thumbnail"
+              :style="{
+                backgroundImage: `url(${video.thumbnails.medium.url}),  url(/player_default.png)`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center'
+              }"
+            >
+              <span>{{ $moment.duration(video.duration).format('h:mm:ss').padStart(4, '0:0') }}</span>
+            </div>
+            <div class="youtube-area__video-info">
+              <p
+                class="video-info__title"
+                v-html="video.title"
+              />
+              <span class="video-info__channel-title">
+                {{ video.channelTitle }}
+              </span>
+              <span class="video-info__etc">
+                Hits: {{ video.viewCount | abbrNum(1) }} | {{ $moment(video.publishedAt).fromNow() }}
+              </span>
+            </div>
+          </button>
+        </li>
+      </ul>
+
+      <div
+        v-if="!isYoutubeSearching"
+        class="youtube-area__load-more-video"
       >
         <button
-          class="youtube-area__video"
-          @click="selectYoutubeVideo(video.videoId)"
+          v-if="youtubeNextPageToken"
+          @click="loadMoreVideos"
         >
-          <div
-            class="youtube-area__video-thumbnail"
-            :style="{
-              backgroundImage: `url(${video.thumbnails.medium.url}),  url(/player_default.png)`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center'
-            }"
-          >
-            <span>{{ $moment.duration(video.duration).format('h:mm:ss').padStart(4, '0:0') }}</span>
-          </div>
-          <div class="youtube-area__video-info">
-            <p
-              class="video-info__title"
-              v-html="video.title"
-            />
-            <span>{{ video.channelTitle }} | {{ $moment(video.publishedAt).fromNow() }}</span>
-            <span>Hits: {{ video.viewCount | abbrNum(1) }}</span>
-          </div>
+          <v-progress-circular
+            v-if="isMoreYoutubeSearching"
+            :size="20"
+            :width="2"
+            color="#808080"
+            indeterminate
+          />
+          <span v-else>Load More Videos</span>
         </button>
-      </li>
-    </ul>
+      </div>
+    </div>
 
+    <!-- YOUTUBE DATA API QUOTA EXCEED UI -->
     <div
-      v-if="!isYoutubeSearching"
-      class="youtube-area__load-more-video"
+      v-if="youtubeSearchFailed && !isYoutubeSearching"
+      class="youtube-area__quota-exceed"
     >
-      <button
-        v-if="youtubeNextPageToken"
-        @click="loadMoreVideos"
+      <img
+        src="logos/youtube.png"
+        alt="youtube"
       >
-        <v-progress-circular
-          v-if="isMoreYoutubeSearching"
-          :size="20"
-          :width="2"
-          color="#808080"
-          indeterminate
-        />
-        <span v-else>Load More Videos</span>
+      <p>
+        Sorry. Due to the high traffic, YouTube data quota has been exceeded.
+        Until 08:00 UTC, please go to YouTube to continue watching the video.
+      </p>
+      <button @click="goToYoutube">
+        Go to {{ youtubeSearchKeywordCopied }} videos
       </button>
+
+      <span>
+        Due to the YouTube policy, the only limited amount of data can be provided daily.
+        Additional daily data has been requested to YouTube,
+        however, we are unsure with the timeline for review and final confirmation.
+        We apologize for any inconvenience caused by an unpredictable timeline.
+        We will try our best to quickly solve this issue.
+      </span>
     </div>
   </div>
 </template>

@@ -66,7 +66,7 @@ Vue.filter('commentFormatter', function(value) {
 
   //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
   const replacePattern2 = /(^|[^/])(www\.[\S]+(\b|$))/gim;
-  formattedText = formattedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+  formattedText = formattedText.replace(replacePattern2, '$1<a href="http://$2" style="color: #1976d2" target="_blank">$2</a>');
 
   formattedText = formattedText.replace(/\n/g, '<br>');
 

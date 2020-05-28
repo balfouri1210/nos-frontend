@@ -30,6 +30,7 @@
     "v-click-outside": "^3.0.0",
     "vee-validate": "^3.2.1",
     "vue-awesome-countdown": "^1.0.25",
+    "vue-scrollto": "^2.18.1",
     "vue-spinner": "^1.0.3",
     "vuejs-datepicker": "^1.6.2"
   },

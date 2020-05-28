@@ -105,12 +105,14 @@ export default {
     },
 
     showAllVotes() {
-      if (!this.checkIsLoggedIn()) return;
+      if (this.$route.name.indexOf('history') === -1) {
+        if (!this.checkIsLoggedIn()) return;
+      }
+
       this.allVotes = true;
     },
 
     async votePlayer(vote) {
-      if (!this.checkIsLoggedIn()) return;
       if (this.$route.name.indexOf('history') !== -1) return;
 
       try {

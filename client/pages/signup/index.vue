@@ -33,7 +33,7 @@
               type="password"
               name="password"
               outlined
-              :rules="'required|min:6'"
+              :rules="'required|min:8'"
               :value="userInfo.password"
               :autocomplete="'new-password'"
               :placeholder="'******'"
@@ -60,8 +60,8 @@
             <label for="username">Username</label>
             <span
               :style="{
-                display: 'inline-block',
-                margin: '-4px 0 10px',
+                display: 'block',
+                margin: '-6px 0 10px',
                 fontSize: '13px',
                 fontWeight: 300,
                 color: 'rgba(0, 0, 0, 0.5)',
@@ -119,6 +119,13 @@
           </div>
 
           <div>
+            <p class="signup__privacy-policy">
+              By selecting Agree and continue below, I agree to 907Degrees’s
+              <nuxt-link :to="localePath('privacy-policy')">
+                Privacy Policy
+              </nuxt-link>.
+            </p>
+
             <button
               type="submit"
               class="nos-basic-btn"
@@ -133,7 +140,7 @@
                 color="rgb(255, 255, 255)"
                 indeterminate
               />
-              <span v-else>NEXT</span>
+              <span v-else>Agree and Continue</span>
             </button>
           </div>
         </form>

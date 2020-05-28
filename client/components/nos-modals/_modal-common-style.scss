@@ -2,7 +2,7 @@
   position: absolute;
   top: 52px;
   right: 6px;
-  max-width: 280px;
+  max-width: 296px;
   width: 100%;
   padding: 12px 10px;
   border-radius: 10px;
@@ -48,8 +48,14 @@
     color: white !important;
   }
 
-  p, span {
-    color: white;
+  button {
+    p, span {
+      color: white;
+    }
+  }
+
+  .nos-notification__empty {
+    color: black;
   }
 
   ::v-deep .nos-input__error-message {

@@ -64,6 +64,14 @@ export default {
           !comment.isMoreRepliesLoading
         );
       };
+    },
+
+    previousCommentIdList() {
+      const previousCommentIdList = this.comments.map((comment) => {
+        return comment.id;
+      });
+
+      return previousCommentIdList.toString();
     }
   },
 
@@ -140,17 +148,13 @@ export default {
       if (this.isMoreCommentsLoading) return;
       else if (this.player.comment_count <= this.comments.length) return;
 
-      const previousCommentIdList = this.comments.map((comment) => {
-        return comment.id;
-      });
-
       this.isMoreCommentsLoading = true;
       try {
         const moreComments = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/comments`, {
           params: {
             sortType: this.commentSortType,
             minId: this.comments[this.comments.length - 1].id,
-            previousCommentIdList
+            previousCommentIdList: this.previousCommentIdList
           }
         });
         this.commentMappingWithUiProperty(moreComments);

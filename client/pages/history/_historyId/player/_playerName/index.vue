@@ -96,7 +96,7 @@
                   >
                     <p class="player-modal__no-comments-header">
                       <v-icon>mdi-comment-processing-outline</v-icon>
-                      <span>There is no comment in this period</span>
+                      <span>No comments during this period</span>
                     </p>
                   </div>
 

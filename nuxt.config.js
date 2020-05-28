@@ -26,7 +26,7 @@ module.exports = {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js',new Date());
-          gtag('config', 'UA-164815160-1');
+          gtag('config', '${env.GA_TRACKING_ID}');
         `
       }
     ],
@@ -60,6 +60,7 @@ module.exports = {
   },
 
   plugins: [
+    { src: '~/plugins/router.js' },
     { src: '~/plugins/i18n.js' },
     { src: '~/plugins/axios.js' },
     { src: '~/plugins/validator.js' },
@@ -104,7 +105,9 @@ module.exports = {
         vueI18nLoader: true,
         strategy: 'prefix_except_default'
       }
-    ]
+    ],
+
+    ['vue-scrollto/nuxt', { duration: 300 }]
   ],
 
   env: {

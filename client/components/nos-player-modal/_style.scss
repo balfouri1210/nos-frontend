@@ -74,7 +74,7 @@
     display: flex;
     align-items: center;
     height: 50px;
-    margin: 4px 0 8px;
+    margin: 4px 0 6px;
 
     textarea {
       width: 100%;
@@ -99,6 +99,26 @@
     }
     button:disabled {
       background: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  &__add-comment-community-guide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 2px 12px;
+    border-radius: 2px;
+    background: $nos-main-theme;
+    font-size: 12px;
+
+    .v-icon {
+      margin-right: 4px;
+    }
+
+    * {
+      color: white;
     }
   }
 
@@ -280,16 +300,17 @@
 
     button {
       display: flex;
+      padding-right: 4px;
       align-items: center;;
       color: #909090;
       font-size: 13px;
     }
 
     button:first-of-type {
-      margin-right: 16px;
+      margin-right: 14px;
     }
     button:nth-of-type(2) {
-      margin-right: 8px;
+      margin-right: 6px;
     }
 
     .v-icon {

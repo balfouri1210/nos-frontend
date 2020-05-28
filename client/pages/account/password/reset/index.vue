@@ -5,21 +5,19 @@
         id="app"
         @submit.prevent="handleSubmit(onSubmit)"
       >
-        <div>
-          <label for="email">Email</label>
-          <nos-input
-            id="email"
-            type="email"
-            name="email"
-            outlined
-            :rules="'required'"
-            :value="email"
-            :placeholder="'Email address'"
-            :autocomplete="'new-password'"
-            :disabled="isResetPwdEmailSendCompleted || isResetPwdEmailSendFailed"
-            @input="email = $event"
-          />
-        </div>
+        <label for="email">Email</label>
+        <nos-input
+          id="email"
+          type="email"
+          name="email"
+          outlined
+          :rules="'required'"
+          :value="email"
+          :placeholder="'Email address'"
+          :autocomplete="'new-password'"
+          :disabled="isResetPwdEmailSendCompleted || isResetPwdEmailSendFailed"
+          @input="email = $event"
+        />
 
         <button
           type="submit"
@@ -95,6 +93,11 @@ export default {
 <style lang="scss" scoped>
 .password-reset {
   margin-top: 32px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
 
   ::v-deep input {
     height: 40px;

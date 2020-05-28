@@ -125,7 +125,7 @@ export default {
         });
 
         this.mutateJwt(data.token);
-        Cookies.set('jwt', data.token, { expires: TOKEN_EXPIRES });
+        Cookies.set('nosJwt', data.token, { expires: TOKEN_EXPIRES });
 
         const decodedJwt = jwtDecode(data.token);
         this.mutateId(decodedJwt.id);
@@ -137,26 +137,26 @@ export default {
           switch (err.response.data.code) {
           case 'u003':
             this.errorMessage =
-                'There isn’t an account associated with this email address.';
+                "The email you entered doesn't belong to an account. Please check your email and try again.";
             break;
 
           case 'u004':
             this.errorMessage =
-                'The password you entered is incorrect. Please try again.';
+                'Sorry, your password was incorrect. Please double-check your password.';
             break;
 
           case 'u011':
             this.errorMessage =
-                'Email verification required. Please check your inbox.';
+                'Email verification is required. Please check your inbox.';
             break;
 
           default:
             this.errorMessage =
-                'Sorry, looks like we’re having some issues :( Please try again or Contact us';
+                'Sorry, looks like we’re having some issues :( Please try again.';
           }
         } else {
           this.errorMessage =
-            'Sorry, looks like we’re having some issues :( Please try again or Contact us';
+            'Sorry, looks like we’re having some issues :( Please try again.';
         }
       }
     }

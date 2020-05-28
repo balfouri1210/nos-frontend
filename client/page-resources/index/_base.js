@@ -18,12 +18,9 @@ export default {
   async asyncData({ $axios, error, store }) {
     if (store.getters.getAppStatus === 'preseason') {
       return;
-    // } else if () {
     } else {
-      let initialPlayerList = [];
-    
       try {
-        initialPlayerList = await $axios.$get('/api/players');
+        const initialPlayerList = await $axios.$get('/api/players');
         return { initialPlayerList };
       } catch (err) {
         console.error(err);

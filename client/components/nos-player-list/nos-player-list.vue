@@ -14,9 +14,12 @@
             backgroundPosition: 'center center'
           }"
         >
-          <div class="player__meta">
+          <div
+            class="player__meta"
+            style="height: 25%"
+          >
             <p>
-              {{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}
+              <span>{{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }}</span>
               <span v-if="topPlayer.height > 0"> / {{ topPlayer.height }}cm</span>
             </p>
           </div>
@@ -59,13 +62,14 @@
               :class="{
                 'player--degrees-over-0': degreeCalculator(player.score) >= 0 && degreeCalculator(player.score) < 100,
                 'player--degrees-over-100': degreeCalculator(player.score) >= 100 && degreeCalculator(player.score) < 300,
-                'player--degrees-over-300': degreeCalculator(player.score) >= 300 && degreeCalculator(player.score) < 500,
-                'player--degrees-over-500': degreeCalculator(player.score) >= 500 && degreeCalculator(player.score) < 700,
-                'player--degrees-over-700': degreeCalculator(player.score) >= 700 && degreeCalculator(player.score) < 900,
-                'player--degrees-over-900': degreeCalculator(player.score) >= 900
+                'player--degrees-over-200': degreeCalculator(player.score) >= 300 && degreeCalculator(player.score) < 500,
+                'player--degrees-over-400': degreeCalculator(player.score) >= 500 && degreeCalculator(player.score) < 700,
+                'player--degrees-over-600': degreeCalculator(player.score) >= 700 && degreeCalculator(player.score) < 900,
+                'player--degrees-over-800': degreeCalculator(player.score) >= 900
               }"
             >
-              {{ degreeCalculator(player.score) }}
+              <v-icon>mdi-fire</v-icon>
+              <span>{{ degreeCalculator(player.score) }}</span>
             </p>
           </div>
 
@@ -79,16 +83,19 @@
             }"
           />
           <div class="player__meta">
-            <p>
-              <img
-                :src="`/flags/${player.country_code.toLowerCase()}.png`"
-                :alt="player.country_code"
-              >{{ player.known_as }}
-            </p>
-            <p>
-              {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}
-              <span v-if="player.height > 0"> / {{ player.height }}cm</span>
-            </p>
+            <div>
+              <p>
+                <img
+                  :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                  :alt="player.country_code"
+                >
+                {{ player.known_as }}
+              </p>
+              <p>
+                <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
+                <span v-if="player.height > 0"> / {{ player.height }}cm</span>
+              </p>
+            </div>
           </div>
         </button>
       </li>

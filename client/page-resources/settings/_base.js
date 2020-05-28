@@ -90,8 +90,8 @@ export default {
 
     applyNewJWT(newToken) {
       this.mutateJwt(newToken);
-      Cookies.set('jwt', newToken, { expires: TOKEN_EXPIRES });
-      
+      Cookies.set('nosJwt', newToken, { expires: TOKEN_EXPIRES });
+
       const decodedJwt = jwtDecode(newToken);
       this.mutateId(decodedJwt.id);
       this.mutateEmail(decodedJwt.email);

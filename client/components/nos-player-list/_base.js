@@ -1,5 +1,5 @@
 import U from '@/lib/util';
-import { PLAYER_LIST_MAX } from '@/lib/constants';
+// import { PLAYER_LIST_MAX } from '@/lib/constants';
 
 export default {
   props: {
@@ -25,7 +25,8 @@ export default {
       topScore: this.initialPlayerList[0].score,
       playerList: this.initialPlayerList.slice(1),
       isMorePlayersLoading: false,
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      nosImageUrl: process.env.NOS_IMAGE_URL,
+      totalPlayerCount: 0
     };
   },
 
@@ -35,7 +36,7 @@ export default {
         return player.id;
       });
       playerIdList.unshift(this.topPlayer.id);
-      return playerIdList;
+      return playerIdList.toString();
     },
 
     degreeCalculator() {
@@ -48,6 +49,19 @@ export default {
           return Math.round((907 * score) / this.topScore);
         }
       };
+    }
+  },
+
+  async created() {
+    // 총 선수 수를 할당 (선수가 모두 로딩되었을 때, 자동 로딩을 멈추기 위한 장치)
+    try {
+      if (this.$route.name.indexOf('history') === -1) {
+        this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
+      } else {
+        this.totalPlayerCount = 100;
+      }
+    } catch (err) {
+      console.error(err);
     }
   },
 
@@ -80,7 +94,7 @@ export default {
     },
 
     async loadMorePlayers() {
-      if (this.isMorePlayersLoading || this.playerList.length >= PLAYER_LIST_MAX - 1) return;
+      if (this.isMorePlayersLoading || this.playerList.length + 1 >= this.totalPlayerCount) return;
 
       try {
         this.isMorePlayersLoading = true;
@@ -93,17 +107,12 @@ export default {
         });
 
         this.playerList = this.playerList.concat(loadedPlayers);
-        if (this.playerList.length > PLAYER_LIST_MAX) this.resizePlayerList();
       } catch (err) {
         console.error(err);
         return this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isMorePlayersLoading = false;
       }
-    },
-
-    resizePlayerList() {
-      this.playerList = this.playerList.slice(1, PLAYER_LIST_MAX);
     },
 
     detectScroll() {

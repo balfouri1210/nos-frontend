@@ -90,7 +90,7 @@
                 v-if="!isProfileUpdating && isProfileUpdateFailed"
                 class="settings__failed"
               >
-                * You can update your profile 30days after last update.
+                * You can edit it after 30 days from the last modification.
               </p>
             </div>
           </form>
@@ -141,7 +141,7 @@
               name="oldPassword"
               outlined
               :placeholder="'******'"
-              :rules="'required|min:6'"
+              :rules="'required|min:8'"
               :value="userInfo.oldPassword"
               @input="userInfo.oldPassword = $event"
             />
@@ -159,7 +159,7 @@
               name="newPassword"
               outlined
               :placeholder="'******'"
-              :rules="'required|min:6'"
+              :rules="'required|min:8'"
               :value="userInfo.newPassword"
               @input="userInfo.newPassword = $event"
             />

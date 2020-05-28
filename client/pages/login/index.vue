@@ -26,7 +26,7 @@
               id="password"
               type="password"
               name="password"
-              :rules="'required|min:6'"
+              :rules="'required'"
               :value="userInfo.password"
               @input="userInfo.password = $event"
             />
@@ -116,7 +116,7 @@ export default {
         });
 
         this.mutateJwt(data.token);
-        Cookies.set('jwt', data.token, { expires: TOKEN_EXPIRES });
+        Cookies.set('nosJwt', data.token, { expires: TOKEN_EXPIRES });
 
         const decodedJwt = jwtDecode(data.token);
         this.mutateId(decodedJwt.id);

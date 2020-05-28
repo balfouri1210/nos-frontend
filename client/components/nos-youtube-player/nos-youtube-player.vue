@@ -16,9 +16,8 @@
     />
 
     <button
-      v-if="isBasedOnMobileDevice"
       class="youtube-player__view-on-app-btn"
-      @click="viewOnYoutubeApp"
+      @click="watchOnYoutubeApp"
     >
       <img
         src="logos/youtube.png"
@@ -55,7 +54,7 @@ export default {
       this.$emit('closeYoutubeVideo');
     },
 
-    viewOnYoutubeApp() {
+    watchOnYoutubeApp() {
       const desktopFallback = `https://youtube.com/watch?v=${this.videoId}`;
       // const mobileFallback = `https://youtube.com/watch?v=${this.videoId}`;
       const app = `vnd.youtube://${this.videoId}`;

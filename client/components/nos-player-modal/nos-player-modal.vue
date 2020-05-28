@@ -61,6 +61,8 @@
                           rows="2"
                           maxlength="300"
                           :placeholder="`How was ${player.known_as} this week?`"
+                          @focus="isCommunityGuide = true"
+                          @blur="isCommunityGuide = false"
                         />
 
                         <button
@@ -72,6 +74,26 @@
                       </div>
                     </validation-provider>
                   </validation-observer>
+
+                  <transition
+                    name="fade"
+                  >
+                    <nuxt-link
+                      v-if="isCommunityGuide"
+                      class="player-modal__add-comment-community-guide"
+                      :to="localePath({
+                        name: 'about',
+                        hash: '#community-guide'
+                      })"
+                    >
+                      <v-icon
+                        style="font-size: 15px"
+                      >
+                        mdi-information-outline
+                      </v-icon>
+                      <span>Community Guide</span>
+                    </nuxt-link>
+                  </transition>
                 </div>
 
 
@@ -143,7 +165,7 @@
                   >
                     <p class="player-modal__no-comments-header">
                       <v-icon>mdi-comment-processing-outline</v-icon>
-                      <span>Add First Comment!</span>
+                      <span>Leave First Comment!</span>
                     </p>
                   </div>
 
@@ -402,9 +424,10 @@
                                   v-if="!reply.isEditing"
                                   class="player-modal__reply-body"
                                 >
-                                  <p class="player-modal__reply-content">
-                                    {{ reply.content }}
-                                  </p>
+                                  <p
+                                    class="player-modal__reply-content"
+                                    v-html="$options.filters.commentFormatter(reply.content)"
+                                  />
 
                                   <!-- Reply more menu -->
                                   <v-menu
@@ -594,32 +617,58 @@
       <v-card>
         <v-card-title>Report</v-card-title>
         <v-divider />
-        <v-card-text>
+        <v-card-text v-if="!isReportSaved">
           <v-radio-group
             v-model="reportReason"
             column
           >
             <v-radio
-              label="선수, 다른 유저에 대한 심한 모욕, 폭언"
-              value="abuse"
+              label="Insult, sexual harassment, and malicious attack on players or other users"
+              value="insult"
               color="#f4991e"
             />
             <v-radio
-              label="인종, 민족, 국적, 종교, 장애, 성별, 연령 차별"
+              label="Promotes or condones violence against individuals
+                or groups based on race or ethnic origin, religion, disability, gender,
+                age, nationality, veteran status, caste"
               value="discrimination"
               color="#f4991e"
             />
             <v-radio
-              label="게시물 도배"
+              label="Simultaneous posting/duplicate comments"
               value="plastered"
+              color="#f4991e"
+            />
+            <v-radio
+              label="Comments that are harmful to the community"
+              value="harmful"
               color="#f4991e"
             />
           </v-radio-group>
         </v-card-text>
+
+        <v-card-text
+          v-else
+          style="text-align: center"
+        >
+          <v-icon
+            :style="{
+              margin: '24px 0 16px',
+              fontSize: '52px',
+              color: '#f4991e'
+            }"
+          >
+            mdi-checkbox-marked-circle-outline
+          </v-icon>
+          <p>The report was submitted. Restrictions will be given according to the guidelines after the review.</p>
+        </v-card-text>
+
         <v-divider />
+
         <v-card-actions>
           <v-spacer />
           <v-btn
+            v-if="!isReportSaved"
             color="#f4991e"
             text
             @click="isReportDialog = false"
@@ -627,12 +676,21 @@
             Cancel
           </v-btn>
           <v-btn
+            v-if="!isReportSaved"
             color="#f4991e"
             text
             :disabled="!reportReason"
             @click="saveReport"
           >
             Report
+          </v-btn>
+          <v-btn
+            v-if="isReportSaved"
+            color="#f4991e"
+            text
+            @click="isReportDialog = false"
+          >
+            Confirm
           </v-btn>
         </v-card-actions>
       </v-card>

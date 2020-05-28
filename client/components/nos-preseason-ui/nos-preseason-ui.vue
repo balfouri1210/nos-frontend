@@ -23,9 +23,8 @@
                   </v-icon>
                 </template>
                 <span>
-                  New leaderboard will be opened at {{ $moment.utc($store.getters.getSeasonStart).format('YYYY. MM. DD HH:mm') }} (UTC).<br>
-                  You can search player, leave opinion and vote.
-                  907 calculates all the data and opens you new leaderboard.
+                  A new leaderboard opens at {{ $moment.utc($store.getters.getSeasonStart).format('YYYY. MM. DD HH:mm') }} (UTC).
+                  Meanwhile, you can search for players, leave comments, or add reactions.
                 </span>
               </v-tooltip>
             </p>
@@ -35,7 +34,7 @@
 
       <div class="preseason__content">
         <p class="preseason__ment">
-          Search players and Leave a opinion
+          Search players and Show your interest
         </p>
 
         <div :style="{ position: 'relative' }">
@@ -69,11 +68,21 @@
                 :key="index"
               >
                 <button @click="selectSearchItem(item)">
-                  <img
-                    :src="item.club_image"
-                    alt="club"
-                  >
-                  <span>{{ item.known_as }}</span>
+                  <p class="nos-search-modal__suggestion-name">
+                    <img
+                      :src="item.club_image"
+                      alt="club"
+                    >
+                    <span>{{ item.known_as }}</span>
+                  </p>
+
+                  <span class="nos-search-modal__suggestion-info">
+                    <img
+                      :src="`/flags/${item.country_code.toLowerCase()}.png`"
+                      :alt="item.country_code"
+                    >
+                    {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}
+                  </span>
                 </button>
               </li>
             </ul>
@@ -81,7 +90,7 @@
         </div>
 
         <p class="preseason__ment">
-          Want to check previous leaderboard?
+          Want to check on the previous leaderboard?
         </p>
 
         <nuxt-link
@@ -105,4 +114,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "./_style.scss";
+@import "@/components/nos-modals/nos-search-modal/_style.scss";
 </style>

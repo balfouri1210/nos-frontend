@@ -16,13 +16,13 @@
             @click.native="closeOnboardingUi"
           >
             <v-icon>mdi-party-popper</v-icon>
-            Welcome! Find out about 907Degrees
+            Welcome! Learn more about 907.
           </nuxt-link>
         </div>
 
         <div class="onboarding-ui__desc">
           <button @click="closeOnboardingUi">
-            It's ok, Later
+            I'm good, I’ll try it later.
           </button>
         </div>
       </div>

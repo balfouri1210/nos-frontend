@@ -7,7 +7,8 @@
       </div>
 
       <div class="bugs__desc">
-        <p>Sorry, looks like we’re having some issues. We’re working towards making something better. It won’t be long.</p>
+        <p>Sorry, there was an error processing your request. Please refresh the page or try again later.</p>
+        <p>We will do our best for the steady state service.</p>
       </div>
     </div>
 
@@ -16,7 +17,7 @@
         Feel free to report a problem with us.<br>It’ll help us improve 907.
       </p>
       <a
-        href="mailto:907degrees@gmail.com"
+        href="mailto:support@907degrees.com"
         class="bugs__report-btn"
       >Report a Problem</a>
     </div>

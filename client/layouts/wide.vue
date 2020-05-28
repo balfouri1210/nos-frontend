@@ -16,19 +16,19 @@ export default {
   components: {
     nosHeader,
     nosFooter
-  },
-
-  mounted() {
-    // 解决ios丢失上一级url问题
-    window.history.replaceState(
-      null,
-      null,
-      `${this.$router.options.base}${this.$route.fullPath}`.replace(
-        /\/\//g,
-        '/'
-      )
-    );
   }
+
+  // mounted() {
+  //   // 解决ios丢失上一级url问题
+  //   window.history.replaceState(
+  //     null,
+  //     null,
+  //     `${this.$router.options.base}${this.$route.fullPath}`.replace(
+  //       /\/\//g,
+  //       '/'
+  //     )
+  //   );
+  // }
 };
 </script>
 
