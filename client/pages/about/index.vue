@@ -180,7 +180,7 @@
 
         <div class="about__desc">
           <p>
-            If you want to learn more about our history, click the icon on the header.
+            If you want to check previous history, click the icon on the header.
           </p>
           <p>
             You can check the weekly leaderboard, comments and reactions.

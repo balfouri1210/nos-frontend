@@ -196,7 +196,7 @@
   .youtube-area {
     &__video-list {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
       grid-gap: 4px;
     }
 
