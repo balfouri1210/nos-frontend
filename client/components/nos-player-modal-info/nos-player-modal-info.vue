@@ -49,25 +49,25 @@
           </p>
         </div>
 
-        <div class="player__vote">
+        <div class="player__reaction">
           <button
             v-for="(vote, index) in voteList.slice(0, 3)"
             v-if="vote.count > 0"
             :key="index"
-            class="player__vote-btn"
+            class="player__reaction-btn"
             :class="{
-              'player__vote--voted': player.vote === vote.name,
-              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__reaction--voted': player.vote === vote.name,
+              'player__reaction--thumb': vote.name === 'up' || vote.name === 'down'
             }"
             :disabled="disabled || isVoting"
-            @click="votePlayer(vote.name)"
+            @click="addPlayerReaction(vote.name)"
           >
             <v-icon>{{ vote.iconName }}</v-icon>
             <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
           </button>
 
           <button
-            class="player__vote-more-btn"
+            class="player__reaction-more-btn"
             @click="showAllVotes"
           >
             <v-icon>mdi-plus</v-icon>
@@ -90,13 +90,13 @@
           <button
             v-for="(vote, index) in voteList"
             :key="index"
-            class="player__vote-btn"
+            class="player__reaction-btn"
             :class="{
-              'player__vote--voted': player.vote === vote.name,
-              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__reaction--voted': player.vote === vote.name,
+              'player__reaction--thumb': vote.name === 'up' || vote.name === 'down'
             }"
             :disabled="disabled || isVoting"
-            @click="votePlayer(vote.name)"
+            @click="addPlayerReaction(vote.name)"
           >
             <v-icon>{{ vote.iconName }}</v-icon>
             <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>

@@ -99,6 +99,7 @@ export default {
     checkIsLoggedIn() {
       if (!this.getJwt()) {
         this.$parent.isRequestLoginPopup = true;
+        return false;
       } else {
         return true;
       }
@@ -112,8 +113,9 @@ export default {
       this.allVotes = true;
     },
 
-    async votePlayer(vote) {
+    async addPlayerReaction(vote) {
       if (this.$route.name.indexOf('history') !== -1) return;
+      if (!this.checkIsLoggedIn()) return; 
 
       try {
         this.isVoting = true;
@@ -152,9 +154,8 @@ export default {
           this.player.vote = vote;
         }
       } catch (err) {
-        console.error(err);
         alert('Oh no! We were unable to process your request. Please try again or Contact us.');
-        // return this.$nuxt.error({ statusCode: 500 });
+        return this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isVoting = false;
       }

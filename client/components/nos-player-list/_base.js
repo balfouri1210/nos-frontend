@@ -58,7 +58,7 @@ export default {
       if (this.$route.name.indexOf('history') === -1) {
         this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
       } else {
-        this.totalPlayerCount = 100;
+        this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.$route.params.historyId}`)).total_player_count;
       }
     } catch (err) {
       console.error(err);
