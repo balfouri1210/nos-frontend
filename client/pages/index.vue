@@ -9,7 +9,7 @@
     >
       <client-only v-if="$store.getters.getAppStatus === 'lastStage'">
         <nos-countdown @seasonEnd="seasonEndHandler">
-          <p>LEADERBOARD RESET IN</p>
+          <p>LEADERBOARD RESETS AFTER</p>
         </nos-countdown>
       </client-only>
 
