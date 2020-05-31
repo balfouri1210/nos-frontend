@@ -70,7 +70,7 @@
     margin-right: 8px;
   }
 
-  &__reaction {
+  &__vote {
     display: grid;
     list-style: none;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -88,7 +88,7 @@
     }
   }
  
-  &__reaction-btn {
+  &__vote-btn {
     border: 1px solid rgba(0, 0, 0, 0.8);
     color: rgba(0, 0, 0, 0.78);
 
@@ -103,10 +103,10 @@
       font-weight: 400;
     }
   }
-  &__reaction-btn:hover {
+  &__vote-btn:hover {
     background: rgba(0, 0, 0, 0.05);
   }
-  &__reaction--voted {
+  &__vote--voted {
     border: 1px solid $nos-main-theme !important;
     background: rgba($nos-main-theme, 0.05) !important;
     color: $nos-main-theme !important;
@@ -115,13 +115,13 @@
       color: $nos-main-theme !important;
     }
   }
-  &__reaction--thumb {
+  &__vote--thumb {
     .v-icon {
       font-size: 15px;
     }
   }
 
-  &__reaction-more-btn {
+  &__vote-more-btn {
     background: rgba(0, 0, 0, 0.1);
 
     .v-icon {
@@ -192,7 +192,7 @@
       }
     }
 
-    &__reaction {
+    &__vote {
       grid-gap: 5px;
 
       button {
@@ -200,7 +200,7 @@
       }
     }
 
-    &__reaction-btn {
+    &__vote-btn {
       .v-icon {
         margin-right: 8px;
         font-size: 20px;
@@ -211,12 +211,12 @@
         font-weight: 400;
       }
     }
-    &__reaction--thumb {
+    &__vote--thumb {
       .v-icon {
         font-size: 17px;
       }
     }
-    &__reaction-more-btn {
+    &__vote-more-btn {
       .v-icon {
         font-size: 17px;
       }

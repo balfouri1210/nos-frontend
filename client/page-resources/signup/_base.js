@@ -33,6 +33,11 @@ export default {
 
         this.signupFormSubmitting = false;
 
+        gtag('event', 'signup', {
+          event_category: 'account',
+          event_label: 'email'
+        });
+
         this.$router.push(this.localePath({
           name: 'signup-complete-email',
           params: {

@@ -113,52 +113,66 @@ export default {
       this.allVotes = true;
     },
 
-    async addPlayerReaction(vote) {
+    async addPlayerVote(vote) {
       if (this.$route.name.indexOf('history') !== -1) return;
       if (!this.checkIsLoggedIn()) return; 
 
       try {
         this.isVoting = true;
+        const previousPlayerVote = this.player.vote;
 
         if (this.player.vote) {
           if (this.player.vote === vote) {
             // 이미 한 투표와 같은 표 선택 : 투표 취소
-            await this.$axios.$delete('/api/vote/player', {
-              params: {
-                playerId: this.player.id,
-                vote
-              }
-            });
-
             this.player[`vote_${vote}_count`]--;
             this.player.vote = null;
+
+            await this.requestCancelPlayerVote(previousPlayerVote);
           } else {
             // 이미 한 투표와 다른 표 선택
-            await this.$axios.$put('/api/vote/player', {
-              playerId: this.player.id,
-              vote
-            });
-
             this.player[`vote_${this.player.vote}_count`]--;
             this.player[`vote_${vote}_count`]++;
             this.player.vote = vote;
+
+            await this.requestUpdatePlayerVote(previousPlayerVote, vote);
           }
         } else {
           // 일반 투표
-          await this.$axios.$put('/api/vote/player', {
-            playerId: this.player.id,
-            vote
-          });
-
           this.player[`vote_${vote}_count`]++;
           this.player.vote = vote;
+
+          await this.requestAddPlayerVote(vote);
         }
       } catch (err) {
         alert('Oh no! We were unable to process your request. Please try again or Contact us.');
-        return this.$nuxt.error({ statusCode: 500 });
+        // return this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isVoting = false;
       }
+    },
+
+    requestAddPlayerVote(vote) {
+      return this.$axios.$post('/api/vote/player', {
+        playerId: this.player.id,
+        vote
+      });
+    },
+
+    requestUpdatePlayerVote(previousVote, vote) {
+      return this.$axios.$put('/api/vote/player', {
+        playerId: this.player.id,
+        previousVote,
+        vote
+      });
+    },
+
+    requestCancelPlayerVote(vote) {
+      return this.$axios.$delete('/api/vote/player', {
+        params: {
+          playerId: this.player.id,
+          vote
+        }
+      });
     }
   }
 };

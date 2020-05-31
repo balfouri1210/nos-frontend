@@ -5,6 +5,20 @@
       @click="selectPlayer(topPlayer)"
     >
       <div class="player-top__div">
+        <div class="player__header">
+          <div class="player__hits-and-comment">
+            <p>
+              <v-icon>mdi-eye</v-icon>
+              <span>{{ topPlayer.hits | thousandSeparator }}</span>
+            </p>
+
+            <p>
+              <v-icon>mdi-message-processing-outline</v-icon>
+              <span>{{ topPlayer.comment_count | thousandSeparator }}</span>
+            </p>
+          </div>
+        </div>
+
         <div
           class="player-top__image"
           :style="{
@@ -57,8 +71,21 @@
       >
         <button @click="selectPlayer(player)">
           <div class="player__header">
+            <div class="player__hits-and-comment">
+              <p>
+                <v-icon>mdi-eye-outline</v-icon>
+                <span>{{ player.hits | thousandSeparator }}</span>
+              </p>
+
+              <p>
+                <v-icon>mdi-message-processing-outline</v-icon>
+                <span>{{ player.comment_count | thousandSeparator }}</span>
+              </p>
+            </div>
+
             <p
               v-if="degreeCalculator(player.score) > 0"
+              class="player__temperature"
               :class="{
                 'player--degrees-over-0': degreeCalculator(player.score) >= 0 && degreeCalculator(player.score) < 100,
                 'player--degrees-over-100': degreeCalculator(player.score) >= 100 && degreeCalculator(player.score) < 300,

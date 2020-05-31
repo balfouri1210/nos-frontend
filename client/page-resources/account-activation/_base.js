@@ -1,5 +1,3 @@
-import { errors } from '@/lib/constants';
-
 export default {
   layout: 'entry',
 
@@ -7,7 +5,7 @@ export default {
     let isAccountActivated,
       isAccountAlreadyActivated,
       isAccountActivationFailed,
-      verificationFinished;
+      activationFinished;
 
     try {
       await $axios.$put('/api/auth/account-activation', {
@@ -17,23 +15,39 @@ export default {
       isAccountActivated = true;
     } catch (err) {
       switch (err.response.data.code) {
-      case errors.ALREADY_ACTIVATED_USER.code:
+      case 'u010':
         isAccountAlreadyActivated = true;
         break;
 
-      case errors.USER_NOT_FOUND.code:
+      case 'u003':
         isAccountActivationFailed = true;
         break;
       }
     } finally {
-      verificationFinished = true;
+      activationFinished = true;
     }
 
     return {
       isAccountActivated,
       isAccountAlreadyActivated,
       isAccountActivationFailed,
-      verificationFinished
+      activationFinished
     };
+  },
+
+  mounted() {
+    if (this.isAccountActivated) {
+      gtag('event', 'account-activation', {
+        event_category: 'account'
+      });
+    } else if (this.isAccountAlreadyActivated) {
+      gtag('event', 'account-already-activation', {
+        event_category: 'account'
+      });
+    } else if (this.isAccountActivationFailed) {
+      gtag('event', 'account-activation-fail', {
+        event_category: 'account'
+      });
+    }
   }
 };

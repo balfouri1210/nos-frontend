@@ -131,6 +131,12 @@ export default {
         this.mutateId(decodedJwt.id);
         this.mutateEmail(decodedJwt.email);
         this.mutateUsername(decodedJwt.username);
+
+        gtag('event', 'login', {
+          event_category: 'account',
+          event_label: 'email'
+        });
+
         this.$emit('loginSuccess');
       } catch (err) {
         if (err.response) {

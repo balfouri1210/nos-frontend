@@ -312,7 +312,7 @@
                           <!-- Comment sub action -->
                           <div class="player-modal__comment-sub-action">
                             <button
-                              :class="{'player-modal--is-voted': comment.isVoted === 'up'}"
+                              :class="{'player-modal--is-voted': comment.vote === 'up'}"
                               :disabled="isOpinionVoting"
                               @click="votePlayerOpinion(comment, 'up')"
                             >
@@ -321,7 +321,7 @@
                             </button>
 
                             <button
-                              :class="{'player-modal--is-voted': comment.isVoted === 'down'}"
+                              :class="{'player-modal--is-voted': comment.vote === 'down'}"
                               :disabled="isOpinionVoting"
                               @click="votePlayerOpinion(comment, 'down')"
                             >
@@ -511,7 +511,7 @@
                                 <!-- Reply sub action -->
                                 <div class="player-modal__reply-sub-action">
                                   <button
-                                    :class="{'player-modal--is-voted': reply.isVoted === 'up'}"
+                                    :class="{'player-modal--is-voted': reply.vote === 'up'}"
                                     :disabled="isOpinionVoting"
                                     @click="votePlayerOpinion(reply, 'up')"
                                   >
@@ -519,7 +519,7 @@
                                     <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
                                   </button>
                                   <button
-                                    :class="{'player-modal--is-voted': reply.isVoted === 'down'}"
+                                    :class="{'player-modal--is-voted': reply.vote === 'down'}"
                                     :disabled="isOpinionVoting"
                                     @click="votePlayerOpinion(reply, 'down')"
                                   >

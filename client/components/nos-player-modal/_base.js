@@ -428,32 +428,66 @@ export default {
 
       try {
         this.isOpinionVoting = true;
-        const voteOpinionResult = await this.$axios.$put('/api/vote/opinion', {
-          targetAuthorId: opinion.users_id,
-          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
-          targetOpinionId: opinion.id,
-          userId: this.getId(),
-          vote
-        });
+        const previousVote = opinion.vote;
 
-        if (voteOpinionResult === 'voted') {
-          opinion.isVoted = vote;
-          opinion[`vote_${vote}_count`] ++;
+        if (opinion.vote) {
+          if (opinion.vote === vote) {
+            // 이미 한 투표와 같은 표 선택 : 투표 취소
+            opinion[`vote_${opinion.vote}_count`] --;
+            opinion.vote = null;
+
+            await this.requestCancelVotePlayerOpinion(opinion, previousVote);
+          } else {
+            // 이미 한 투표와 다른 표 선택
+            opinion[`vote_${opinion.vote}_count`] --;
+            opinion[`vote_${vote}_count`] ++;
+            opinion.vote = vote;
+
+            await this.updateVotePlayerOpinion(opinion, previousVote, vote);
+          }
         } else {
-          opinion.isVoted = null;
-          opinion[`vote_${vote}_count`] --;
+          // 일반 투표
+          opinion[`vote_${vote}_count`] ++;
+          opinion.vote = vote;
+          await this.requestVotePlayerOpinion(opinion, vote);
         }
       } catch (err) {
-        if (err.response.data.code === 'o003') {
-          alert('You have already voted.');
-        } else {
-          console.error(err);
-          return this.$nuxt.error({ statusCode: 500 });
-        }
+        alert('Oh no! We were unable to process your request. Please try again or Contact us.');
+        // return this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isOpinionVoting = false;
       }
     },
+
+    requestVotePlayerOpinion(opinion, vote) {
+      return this.$axios.$post('/api/vote/opinion', {
+        targetAuthorId: opinion.users_id,
+        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+        targetOpinionId: opinion.id,
+        vote
+      });
+    },
+
+    updateVotePlayerOpinion(opinion, previousVote, vote) {
+      return this.$axios.$put('/api/vote/opinion', {
+        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+        targetOpinionId: opinion.id,
+        previousVote,
+        vote
+      });
+    },
+
+    requestCancelVotePlayerOpinion(opinion, vote) {
+      return this.$axios.$delete('/api/vote/opinion', {
+        params: {
+          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+          targetOpinionId: opinion.id,
+          vote
+        }
+      });
+    },
+
+
 
     checkIsLoggedIn() {
       if (!this.getJwt()) {

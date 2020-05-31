@@ -49,25 +49,25 @@
           </p>
         </div>
 
-        <div class="player__reaction">
+        <div class="player__vote">
           <button
             v-for="(vote, index) in voteList.slice(0, 3)"
             v-if="vote.count > 0"
             :key="index"
-            class="player__reaction-btn"
+            class="player__vote-btn"
             :class="{
-              'player__reaction--voted': player.vote === vote.name,
-              'player__reaction--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__vote--voted': player.vote === vote.name,
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
             }"
             :disabled="disabled || isVoting"
-            @click="addPlayerReaction(vote.name)"
+            @click="addPlayerVote(vote.name)"
           >
             <v-icon>{{ vote.iconName }}</v-icon>
             <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
           </button>
 
           <button
-            class="player__reaction-more-btn"
+            class="player__vote-more-btn"
             @click="showAllVotes"
           >
             <v-icon>mdi-plus</v-icon>
@@ -84,19 +84,19 @@
       max-width="320px"
     >
       <v-card>
-        <v-card-title>Reaction</v-card-title>
+        <v-card-title>Reactions</v-card-title>
         <v-divider />
         <div class="player__all-votes">
           <button
             v-for="(vote, index) in voteList"
             :key="index"
-            class="player__reaction-btn"
+            class="player__vote-btn"
             :class="{
-              'player__reaction--voted': player.vote === vote.name,
-              'player__reaction--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__vote--voted': player.vote === vote.name,
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
             }"
             :disabled="disabled || isVoting"
-            @click="addPlayerReaction(vote.name)"
+            @click="addPlayerVote(vote.name)"
           >
             <v-icon>{{ vote.iconName }}</v-icon>
             <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>

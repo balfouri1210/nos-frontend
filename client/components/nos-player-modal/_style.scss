@@ -302,7 +302,7 @@
       display: flex;
       padding-right: 4px;
       align-items: center;;
-      color: #909090;
+      color: #797979;
       font-size: 13px;
     }
 
@@ -440,6 +440,13 @@
     margin-top: 4px;
     font-style: normal;
 
+    button {
+      display: flex;
+      padding-right: 4px;
+      align-items: center;;
+      color: #797979;
+      font-size: 13px;
+    }
     button:first-of-type {
       margin-right: 16px;
     }
