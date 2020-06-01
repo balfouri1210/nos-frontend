@@ -15,6 +15,12 @@ export default {
     store.dispatch('updateAppStatus');
   },
 
+  mounted() {
+    const ua = window.navigator.userAgent;
+    if (ua.indexOf('MSIE ') !== -1)
+      this.$router.push(this.localePath('unsupported-browser'));
+  },
+
   async asyncData({ $axios, error, store }) {
     if (store.getters.getAppStatus === 'preseason') {
       return;

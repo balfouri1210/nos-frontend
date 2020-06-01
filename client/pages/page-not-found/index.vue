@@ -7,7 +7,7 @@
       </div>
 
       <div class="page-not-found__desc">
-        <p>We can’t seem to find the page you’re looking for. Please double check the URL and try agian.</p>
+        <p>We can’t seem to find the page you’re looking for. Please double check the URL and try again.</p>
       </div>
     </div>
   </div>

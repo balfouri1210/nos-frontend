@@ -1,8 +1,17 @@
 <template>
   <div class="youtube-area">
     <div class="youtube-area__header">
-      <div class="youtube-area__search-form">
-        <validation-observer v-slot="{ handleSubmit }">
+      <!-- <div class="youtube-area__search-form"> -->
+      <div class="youtube-area__header-title">
+        <button @click="goToYoutube">
+          <img
+            src="logos/youtube.png"
+            alt="youtube"
+          >
+          <span>On Youtube</span>
+        </button>
+      </div>
+      <!-- <validation-observer v-slot="{ handleSubmit }">
           <form
             id="youtubeSearchForm"
             @submit.prevent="handleSubmit(searchYoutube)"
@@ -24,60 +33,60 @@
               </button>
             </div>
           </form>
-        </validation-observer>
+        </validation-observer> -->
 
-        <div
-          class="youtube-area__sorting"
+      <div
+        class="youtube-area__sorting"
+      >
+        <v-menu
+          :content-class="'youtube-area__v-menu'"
+          transition="slide-y-transition"
+          bottom
+          left
+          :offset-y="true"
         >
-          <v-menu
-            :content-class="'youtube-area__v-menu'"
-            transition="slide-y-transition"
-            bottom
-            left
-            :offset-y="true"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                text
-                v-on="on"
+          <template v-slot:activator="{ on }">
+            <v-btn
+              text
+              v-on="on"
+            >
+              <v-icon>mdi-tune</v-icon>
+              <span>Upload date</span>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item @click="setYoutubeSearchPeriod('24h')">
+              <v-list-item-title
+                :class="{'youtube-area__period--selected': youtubeSearchPeriod === '24h'}"
               >
-                <v-icon>mdi-tune</v-icon>
-                <span>Upload date</span>
-              </v-btn>
-            </template>
+                Last 24 hours
+              </v-list-item-title>
+            </v-list-item>
 
-            <v-list>
-              <v-list-item @click="setYoutubeSearchPeriod('24h')">
-                <v-list-item-title
-                  :class="{'youtube-area__period--selected': youtubeSearchPeriod === '24h'}"
-                >
-                  Last 24 hours
-                </v-list-item-title>
-              </v-list-item>
+            <v-list-item @click="setYoutubeSearchPeriod('7d')">
+              <v-list-item-title
+                :class="{'youtube-area__period--selected': youtubeSearchPeriod === '7d'}"
+              >
+                Last 7 days
+              </v-list-item-title>
+            </v-list-item>
 
-              <v-list-item @click="setYoutubeSearchPeriod('7d')">
-                <v-list-item-title
-                  :class="{'youtube-area__period--selected': youtubeSearchPeriod === '7d'}"
-                >
-                  Last 7 days
-                </v-list-item-title>
-              </v-list-item>
+            <v-list-item @click="setYoutubeSearchPeriod('30d')">
+              <v-list-item-title
+                :class="{'youtube-area__period--selected': youtubeSearchPeriod === '30d'}"
+              >
+                Last 30 days
+              </v-list-item-title>
+            </v-list-item>
 
-              <v-list-item @click="setYoutubeSearchPeriod('30d')">
-                <v-list-item-title
-                  :class="{'youtube-area__period--selected': youtubeSearchPeriod === '30d'}"
-                >
-                  Last 30 days
-                </v-list-item-title>
-              </v-list-item>
-
-              <v-list-item @click="setYoutubeSearchPeriod()">
-                <v-list-item-title>Unset</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </div>
+            <v-list-item @click="setYoutubeSearchPeriod()">
+              <v-list-item-title>Unset</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </div>
+      <!-- </div> -->
     </div>
 
     <div

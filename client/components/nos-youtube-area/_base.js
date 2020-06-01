@@ -113,10 +113,10 @@ export default {
       this.getYoutubeSearchResult(this.youtubeSearchKeyword, this.publishedAfter);
     },
 
-    searchYoutube() {
-      this.clearYoutubeSearchConfiguration();
-      this.getYoutubeSearchResult(this.youtubeSearchKeyword);
-    },
+    // searchYoutube() {
+    //   this.clearYoutubeSearchConfiguration();
+    //   this.getYoutubeSearchResult(this.youtubeSearchKeyword);
+    // },
 
     setYoutubeSearchPeriod(period) {
       this.clearYoutubeSearchConfiguration();

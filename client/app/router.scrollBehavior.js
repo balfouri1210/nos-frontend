@@ -1,5 +1,8 @@
 // parameters: to, from, savedPosition
 export default function (to, from) {
+  // page not found일 경우
+  if (!from.name) return;
+
   // leaderboard와 player modal을 오갈 때 스크롤 고정
   if (from.name.indexOf('index___') !== -1
   && to.name.indexOf('index-player-playerName') !== -1) return;
