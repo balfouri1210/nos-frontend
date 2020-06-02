@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js, .vue src",
-    "serve": "STAGE=local NUXT_HOST=192.168.219.100 nuxt",
+    "serve": "STAGE=local NUXT_HOST=localhost nuxt",
     "build": "nuxt build",
     "deploy": "nuxt build && sls deploy"
   },

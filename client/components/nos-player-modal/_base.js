@@ -9,11 +9,6 @@ import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player
 
 export default {
   props: {
-    playerId: {
-      type: Number,
-      default: 0
-    },
-
     player: {
       type: Object,
       default: {}
@@ -37,6 +32,7 @@ export default {
 
   data() {
     return {
+      playerId: this.$route.params.playerId,
       comments: null,
       commentSortType: 'like',
       newCommentContent: '',
