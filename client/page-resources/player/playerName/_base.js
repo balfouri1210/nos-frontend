@@ -5,15 +5,13 @@ export default {
     nosPlayerModal
   },
 
-  async asyncData({ store, $axios, error }) {
-    const playerId = store.getters['player/getPlayerId'];
-
+  async asyncData({ $axios, error, params }) {
     function getPlayer() {
-      return $axios.$get(`/api/players/${playerId}`);
+      return $axios.$get(`/api/players/${params.playerId}`);
     }
 
     function getComments() {
-      return $axios.$get(`/api/comments/player/${playerId}`, {
+      return $axios.$get(`/api/comments/player/${params.playerId}`, {
         params: {
           sortType: 'like'
         }
@@ -26,7 +24,7 @@ export default {
         getComments()
       ]);
 
-      return { playerId, player, comments };
+      return { player, comments };
     } catch (err) {
       console.error(err);
       error({ statusCode: 500 });

@@ -47,6 +47,7 @@ export default {
 
       isRequestLoginPopup: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
+      nosUrl: process.env.NOS_URL,
 
       isYoutubePlayer: false,
       selectedYoutubeVideoId: null,
@@ -60,7 +61,9 @@ export default {
       isReportSaved: false,
 
       isOpinionVoting: false,
-      isCommunityGuide: false
+      isCommunityGuide: false,
+
+      isShareUrlCopied: false
     };
   },
 
@@ -107,6 +110,10 @@ export default {
 
   methods: {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
+
+    copySuccess() {
+      this.isShareUrlCopied = true;
+    },
 
     async manipulateHits() {
       if (window.localStorage.getItem('nos-hitsList')) {
@@ -531,7 +538,7 @@ export default {
     },
 
     closeModal() {
-      this.$router.back();
+      this.$router.push(this.localePath('index'));
     }
   }
 };

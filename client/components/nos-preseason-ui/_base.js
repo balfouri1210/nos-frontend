@@ -39,16 +39,14 @@ export default {
     },
 
     selectSearchItem(item) {
-      this.$store.commit('player/mutatePlayerId', item.id);
-      this.$store.commit('player/mutatePlayerName', item.known_as);
-      U.savePlayerInfoToCookie(item.id, item.known_as);
       this.$emit('closeModal');
 
       // 평상시
       this.$router.push(
         this.localePath({
-          name: 'index-player-playerName',
+          name: 'index-player-playerId-playerName',
           params: {
+            playerId: item.id,
             playerName: item.known_as
           }
         })

@@ -15,13 +15,12 @@ export default {
     store.dispatch('updateAppStatus');
   },
 
-  mounted() {
-    const ua = window.navigator.userAgent;
-    if (ua.indexOf('MSIE ') !== -1)
-      this.$router.push(this.localePath('unsupported-browser'));
-  },
+  async asyncData({ $axios, error, store, $ua, redirect, app }) {
+    const browser = $ua.browser().toLowerCase();
+    if (browser === 'internet explorer')
+      return redirect(app.localePath('unsupported-browser'));
 
-  async asyncData({ $axios, error, store }) {
+
     if (store.getters.getAppStatus === 'preseason') {
       return;
     } else {
@@ -33,6 +32,14 @@ export default {
         return error({ statusCode: 500 });
       }
     }
+  },
+
+  mounted() {
+    // console.log(this.$ua);
+    // console.log(this.deviceType);
+    // console.log(this.browser);
+    // if (ua.indexOf('MSIE ') !== -1)
+    //   this.$router.push(this.localePath('unsupported-browser'));
   },
 
   methods: {

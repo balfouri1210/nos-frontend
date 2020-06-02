@@ -76,16 +76,12 @@ export default {
   methods: {
     async selectPlayer(player) {
       try {
-        this.$store.commit('player/mutatePlayerId', player.id);
-        this.$store.commit('player/mutatePlayerName', player.known_as);
-        U.savePlayerInfoToCookie(player.id, player.known_as);
-
         if (this.isHistorical) {
           // History 페이지에서 선수를 클릭했을 때
-          this.$router.push(`/history/${this.$route.params.historyId}/player/${player.known_as}`);
+          this.$router.push(`/history/${this.$route.params.historyId}/player/${player.id}/${player.known_as.toLowerCase().replace(/ /g, '-')}`);
         } else {
           // Main 페이지에서 선수를 클릭했을 때
-          this.$router.push(`/player/${player.known_as}`);
+          this.$router.push(`/player/${player.id}/${player.known_as.toLowerCase().replace(/ /g, '-')}`);
         }
       } catch (err) {
         console.error(err);

@@ -13,11 +13,12 @@
 
       <div>
         <div class="about__desc">
-          <p>907 is a community designed for the football fans to explore their interest for the players and to share thoughts on a weekly basis.</p>
-          <p>When a hat-trick was made by a player, media only focuses on a few players.</p>
-          <p>However, we wanted to share more thoughts on more players and find out more about the reactions and interests that the true fans have instead of the particular media.</p>
+          <p>907 is a community designed for the football fans to explore their interest for the players on a weekly basis.</p>
+          <!-- <p>When a hat-trick was made by a player, media only focuses on a few players.</p> -->
+          <p>Media only focuses on a few players but we wanted to share more thoughts on more various players.</p>
 
-          <p>The statistics are cool-headed, whereas fans' interests are hotting up.</p>
+          <!-- <p>The statistics are cool-headed, whereas fans' interests are hotting up.</p> -->
+          <p>Statistics? meh.. We think Fans' interests are more valuable and hotting up.</p>
           <p>That is why we named the community 907Degrees.</p>
         </div>
       </div>

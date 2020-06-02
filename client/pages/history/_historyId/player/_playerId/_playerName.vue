@@ -302,4 +302,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/components/nos-player-modal/_style.scss";
+@import "@/components/nos-player-modal/_comment-style.scss";
+@import "@/components/nos-player-modal/_reply-style.scss";
 </style>

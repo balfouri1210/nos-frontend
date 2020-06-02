@@ -114,9 +114,6 @@ export const actions = {
           commit('auth/mutateEmail', decodedJwt.email);
           commit('auth/mutateUsername', decodedJwt.username);
         }
-
-        if (cookie.playerId) commit('player/mutatePlayerId', parseInt(cookie.playerId));
-        if (cookie.playerName) commit('player/mutatePlayerName', cookie.playerName);
       }
     } catch (err) {
       console.error(err);
@@ -127,9 +124,9 @@ export const actions = {
     let durationToEvent;
 
     // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
-    if (this.$moment.utc().day() === 5) {
+    if (this.$moment.utc().day() === 2) {
       const now = this.$moment.utc();
-      const criterionTime = `${now.format('YYYYMMDD')}1800`;
+      const criterionTime = `${now.format('YYYYMMDD')}2000`;
       
       const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
       const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');

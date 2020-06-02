@@ -5,9 +5,9 @@ export default function (to, from) {
 
   // leaderboard와 player modal을 오갈 때 스크롤 고정
   if (from.name.indexOf('index___') !== -1
-  && to.name.indexOf('index-player-playerName') !== -1) return;
+  && to.name.indexOf('index-player-playerId-playerName') !== -1) return;
 
-  if (from.name.indexOf('index-player-playerName') !== -1
+  if (from.name.indexOf('index-player-playerId-playerName') !== -1
   && to.name.indexOf('index___') !== -1)  return;
 
   // history leaderboard와 history player modal을 오갈 때 스크롤 고정

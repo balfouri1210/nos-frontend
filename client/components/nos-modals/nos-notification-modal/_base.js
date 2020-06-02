@@ -51,9 +51,6 @@ export default {
 
     selectNoti(noti) {
       this.$emit('closeModal');
-      this.$store.commit('player/mutatePlayerId', noti.object_id);
-      this.$store.commit('player/mutatePlayerName', noti.object_name);
-      U.savePlayerInfoToCookie(noti.object_id, noti.object_name);
       this.$router.push(`/player/${noti.object_name}`);
     }
   }

@@ -35,9 +35,23 @@
             <div class="player-modal__left">
               <header class="player-modal__header">
                 <nuxt-link :to="localePath('index')">
-                  <i class="material-icon">arrow_back</i>
-                  <span>Back to Leaderboard</span>
+                  <v-icon>mdi-arrow-left</v-icon>
+                  <span>Leaderboard</span>
                 </nuxt-link>
+
+                <button
+                  v-clipboard:copy="`${nosUrl}${$route.fullPath}`"
+                  v-clipboard:success="copySuccess"
+                >
+                  <v-icon v-if="!isShareUrlCopied">
+                    mdi-link-variant
+                  </v-icon>
+                  <span v-if="!isShareUrlCopied">Copy Link</span>
+                  <span
+                    v-else
+                    style="color: #f4991e"
+                  >Copied!</span>
+                </button>
               </header>
 
               <!-- Player basic info -->
@@ -390,7 +404,7 @@
                           </button>
 
                           <button
-                            v-if="comment.isReply"
+                            v-if="comment.reply_count && comment.isReply"
                             @click="comment.isReply = false"
                           >
                             <i class="material-icon">keyboard_arrow_up</i>
@@ -708,4 +722,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "./_style.scss";
+@import "./_comment-style.scss";
+@import "./_reply-style.scss";
 </style>

@@ -71,7 +71,8 @@ module.exports = {
     { src: '~/plugins/vue-countdown.js', ssr: false },
     { src: '~/plugins/moment.js' },
     { src: '~/plugins/filter.js' },
-    { src: '~/plugins/v-click-outside.js', ssr: false }
+    { src: '~/plugins/v-click-outside.js', ssr: false },
+    { src: '~/plugins/clipboard.js', ssr: false }
   ],
 
   buildModules: [
@@ -79,6 +80,7 @@ module.exports = {
     '@nuxtjs/style-resources',
     '@nuxtjs/vuetify',
     '@nuxtjs/moment',
+    'nuxt-user-agent',
 
     [
       'nuxt-i18n',

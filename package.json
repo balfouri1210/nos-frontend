@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js, .vue src",
-    "serve": "STAGE=local NUXT_HOST=localhost nuxt",
+    "serve": "STAGE=local NUXT_HOST=192.168.219.100 nuxt",
     "build": "nuxt build",
     "deploy": "nuxt build && sls deploy"
   },
@@ -25,11 +25,13 @@
     "moment-duration-format": "^2.3.2",
     "nuxt": "^2.10.2",
     "nuxt-i18n": "^6.4.1",
+    "nuxt-user-agent": "^1.2.2",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-http": "^2.3.0",
     "v-click-outside": "^3.0.0",
     "vee-validate": "^3.2.1",
     "vue-awesome-countdown": "^1.0.25",
+    "vue-clipboard2": "^0.3.1",
     "vue-scrollto": "^2.18.1",
     "vue-spinner": "^1.0.3",
     "vuejs-datepicker": "^1.6.2"

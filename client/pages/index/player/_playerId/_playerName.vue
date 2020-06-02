@@ -1,7 +1,6 @@
 <template>
   <div>
     <nos-player-modal
-      :player-id="playerId"
       :player="player"
       :initial-comments="comments"
     />

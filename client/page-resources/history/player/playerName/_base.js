@@ -13,9 +13,9 @@ export default {
     nosYoutubePlayer
   },
 
-  async asyncData({ store, $axios, error, params }) {
+  async asyncData({ $axios, error, params }) {
     const historyId = params.historyId;
-    const playerId = store.getters['player/getPlayerId'];
+    const playerId = params.playerId;
 
     function getPlayerHistory() {
       return $axios.$get(`/api/histories/${historyId}/player/${playerId}`);
