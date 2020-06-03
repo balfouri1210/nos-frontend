@@ -5,6 +5,7 @@ import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-reque
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
+import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
 // import Cookies from 'js-cookie';
 
 export default {
@@ -27,7 +28,8 @@ export default {
     nosRequestLoginPopup,
     nosPlayerModalInfo,
     nosYoutubeArea,
-    nosYoutubePlayer
+    nosYoutubePlayer,
+    nosLinkCopy
   },
 
   data() {

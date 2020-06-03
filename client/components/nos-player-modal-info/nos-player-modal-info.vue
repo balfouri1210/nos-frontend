@@ -25,11 +25,11 @@
           <p class="player__meta-item">
             <span>Nationality</span>
             <span>
-              <img
+              <!-- <img
                 class="player__meta-flag"
                 :src="`/flags/${player.country_code.toLowerCase()}.png`"
                 :alt="player.country_code"
-              >
+              > -->
               {{ player.country_name }}
             </span>
           </p>

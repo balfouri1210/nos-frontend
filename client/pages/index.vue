@@ -25,7 +25,6 @@
 import Base from '@/page-resources/index/_base';
 
 export default {
-  layout: 'wide',
   mixins: [Base]
 };
 </script>

@@ -2,7 +2,7 @@
   // COMMENT
   .comment {
     margin-bottom: 16px;
-    padding: 4px 9px;
+    padding: 4px 11px;
   }
 
   &__add-comment {
@@ -82,7 +82,7 @@
   }
 
   &__no-comments {
-    margin: 36px 0;
+    min-height: 180px;
     color: rgba(0, 0, 0, 0.78);
     text-align: center;
 
@@ -90,6 +90,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
       font-size: 18px;
 
       .v-icon {
@@ -309,6 +310,10 @@
       }
     }
 
+    &__no-comments {
+      min-height: 300px;
+    }
+
     &__comment {
       &-username {
         font-size: 14px;
@@ -322,10 +327,6 @@
         font-size: 14px;
         line-height: 1.3rem;
       }
-    }
-
-    &__no-comments {
-      margin: 60px 0;
     }
 
     &__opinion-action {

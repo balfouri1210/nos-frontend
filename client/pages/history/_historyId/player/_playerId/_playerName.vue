@@ -32,10 +32,22 @@
           <div class="player-modal__content">
             <div class="player-modal__left">
               <header class="player-modal__header">
-                <a @click="closeModal">
-                  <i class="material-icon">arrow_back</i>
+                <nuxt-link
+                  :to="localePath({
+                    name: 'history-historyId',
+                    params: {
+                      historyId: $route.params.historyId
+                    }
+                  })"
+                >
+                  <v-icon>mdi-arrow-left</v-icon>
                   <span>Leaderboard</span>
-                </a>
+                </nuxt-link>
+
+                <nos-link-copy
+                  :share-url="`${nosUrl}${$route.fullPath}`"
+                  :font-size="12"
+                />
               </header>
 
               <nos-player-modal-info
@@ -94,7 +106,7 @@
                     v-if="!comments.length && !isCommentsLoading"
                     class="player-modal__no-comments"
                   >
-                    <p class="player-modal__no-comments-header">
+                    <p class="player-modal__no-comments-header centered">
                       <v-icon>mdi-comment-processing-outline</v-icon>
                       <span>No comments during this period</span>
                     </p>
@@ -288,7 +300,7 @@
 </template>
 
 <script>
-import Base from '@/page-resources/history/player/playerName/_base';
+import Base from '@/page-resources/history/player/playerId/playerName/_base';
 
 export default {
   transition: {

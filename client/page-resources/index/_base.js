@@ -4,6 +4,8 @@ import nosPreseasonUi from '@/components/nos-preseason-ui/nos-preseason-ui.vue';
 import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vue';
 
 export default {
+  layout: 'wide',
+
   components: {
     nosPlayerList,
     nosCountdown,
@@ -32,14 +34,6 @@ export default {
         return error({ statusCode: 500 });
       }
     }
-  },
-
-  mounted() {
-    // console.log(this.$ua);
-    // console.log(this.deviceType);
-    // console.log(this.browser);
-    // if (ua.indexOf('MSIE ') !== -1)
-    //   this.$router.push(this.localePath('unsupported-browser'));
   },
 
   methods: {

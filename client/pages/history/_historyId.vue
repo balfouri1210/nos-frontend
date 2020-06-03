@@ -5,7 +5,7 @@
         <div class="history__period-content">
           <nuxt-link :to="localePath('histories')">
             <v-icon>mdi-keyboard-backspace</v-icon>
-            <span>Back to Histories</span>
+            <span>Histories</span>
           </nuxt-link>
 
           <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>

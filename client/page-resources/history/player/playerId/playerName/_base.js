@@ -4,13 +4,15 @@ import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-mo
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
+import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
 
 export default {
   components: {
     nosSkeletonLoader,
     nosPlayerModalInfo,
     nosYoutubeArea,
-    nosYoutubePlayer
+    nosYoutubePlayer,
+    nosLinkCopy
   },
 
   async asyncData({ $axios, error, params }) {
@@ -49,9 +51,12 @@ export default {
       isMoreCommentsLoading: false,
 
       nosImageUrl: process.env.NOS_IMAGE_URL,
+      nosUrl: process.env.NOS_URL,
 
       isYoutubePlayer: false,
-      selectedYoutubeVideoId: null
+      selectedYoutubeVideoId: null,
+
+      isShareUrlCopied: false
     };
   },
 
@@ -88,7 +93,7 @@ export default {
 
     closeModal() {
       this.$router.push(this.localePath({
-        name: 'history-historyId-player',
+        name: 'history-historyId',
         params: {
           historyId: this.$route.params.historyId
         }

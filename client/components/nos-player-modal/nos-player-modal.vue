@@ -39,19 +39,10 @@
                   <span>Leaderboard</span>
                 </nuxt-link>
 
-                <button
-                  v-clipboard:copy="`${nosUrl}${$route.fullPath}`"
-                  v-clipboard:success="copySuccess"
-                >
-                  <v-icon v-if="!isShareUrlCopied">
-                    mdi-link-variant
-                  </v-icon>
-                  <span v-if="!isShareUrlCopied">Copy Link</span>
-                  <span
-                    v-else
-                    style="color: #f4991e"
-                  >Copied!</span>
-                </button>
+                <nos-link-copy
+                  :share-url="`${nosUrl}${$route.fullPath}`"
+                  :font-size="12"
+                />
               </header>
 
               <!-- Player basic info -->
@@ -177,7 +168,7 @@
                     v-if="!comments.length && !isCommentAdding"
                     class="player-modal__no-comments"
                   >
-                    <p class="player-modal__no-comments-header">
+                    <p class="player-modal__no-comments-header centered">
                       <v-icon>mdi-comment-processing-outline</v-icon>
                       <span>Leave First Comment!</span>
                     </p>

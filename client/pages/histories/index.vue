@@ -67,7 +67,7 @@
           <nuxt-link 
             class="histories__link"
             :to="localePath({
-              name: 'history-historyId-player',
+              name: 'history-historyId',
               params: {
                 historyId: history.id
               }

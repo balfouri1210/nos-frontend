@@ -2,6 +2,7 @@ import months from '@/lib/months';
 
 export default {
   transition: 'fade',
+  layout: 'base',
 
   async asyncData({ $axios, error, $moment, store }) {
     try {
