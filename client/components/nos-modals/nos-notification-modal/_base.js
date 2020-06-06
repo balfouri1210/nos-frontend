@@ -1,7 +1,7 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapMutations } = createNamespacedHelpers('auth');
 import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
-import U from '@/lib/util';
+// import U from '@/lib/util';
 
 export default {
   components: {
@@ -43,6 +43,7 @@ export default {
             noti.text = `Your comment got ${noti.content} Likes!`;
           }
         });
+
         this.mutateUnreadNotificationCount(0);
       } catch (err) {
         console.error(err);
@@ -51,7 +52,13 @@ export default {
 
     selectNoti(noti) {
       this.$emit('closeModal');
-      this.$router.push(`/player/${noti.object_name}`);
+      this.$router.push(this.localePath({
+        name: 'player-playerId-playerName',
+        params: {
+          playerId: noti.object_id,
+          playerName: noti.object_name.toLowerCase().replace(/ /g, '-')
+        }
+      }));
     }
   }
 };

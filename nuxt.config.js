@@ -72,7 +72,8 @@ module.exports = {
     { src: '~/plugins/moment.js' },
     { src: '~/plugins/filter.js' },
     { src: '~/plugins/v-click-outside.js', ssr: false },
-    { src: '~/plugins/clipboard.js', ssr: false }
+    { src: '~/plugins/clipboard.js', ssr: false },
+    { src: '~/plugins/vuetify.js', ssr: false }
   ],
 
   buildModules: [

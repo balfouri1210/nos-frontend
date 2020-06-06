@@ -13,11 +13,11 @@
 
       <div>
         <div class="about__desc">
-          <p>907 is a community designed for the football fans to explore their interest for the players on a weekly basis.</p>
-          <!-- <p>When a hat-trick was made by a player, media only focuses on a few players.</p> -->
-          <p>Media only focuses on a few players but we wanted to share more thoughts on more various players.</p>
-
-          <!-- <p>The statistics are cool-headed, whereas fans' interests are hotting up.</p> -->
+          <p>Who are the players you are interested in this week?</p>
+          <p>
+            907Degrees is a community designed for the football fans to explore their interest for the players on a weekly basis.
+            Media only focuses on a few players but we wanted to share more thoughts on more various players.
+          </p>
           <p>Statistics? meh.. We think Fans' interests are more valuable and hotting up.</p>
           <p>That is why we named the community 907Degrees.</p>
         </div>
@@ -34,7 +34,7 @@
 
       <div class="about__container">
         <div class="about__desc">
-          The leaderboards have the following characteristics.
+          The leaderboard has the following characteristics.
           <p>
             * The rankings are decided only based on the fans’ reaction of the week.
             For the most searched players and more of the back-and-forth discussions between fans,

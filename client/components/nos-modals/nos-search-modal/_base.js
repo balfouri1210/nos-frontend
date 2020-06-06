@@ -49,7 +49,7 @@ export default {
           name: 'index-player-playerId-playerName',
           params: {
             playerId: item.id,
-            playerName: item.known_as
+            playerName: item.known_as.toLowerCase().replace(/ /g, '-')
           }
         })
       );

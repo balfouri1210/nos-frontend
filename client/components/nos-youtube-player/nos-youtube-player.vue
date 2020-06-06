@@ -57,16 +57,18 @@ export default {
     watchOnYoutubeApp() {
       const desktopFallback = `https://youtube.com/watch?v=${this.videoId}`;
       // const mobileFallback = `https://youtube.com/watch?v=${this.videoId}`;
-      const app = `vnd.youtube://${this.videoId}`;
+      // const app = `vnd.youtube://${this.videoId}`;
 
-      if (this.isBasedOnMobileDevice) {
-        window.location = app;
-        // window.setTimeout(function() {
-        //   window.location = mobileFallback;
-        // }, 1000);
-      } else {
-        window.location = desktopFallback;
-      }
+      // if (this.isBasedOnMobileDevice) {
+      // window.location = app;
+      // window.setTimeout(function() {
+      //   window.location = mobileFallback;
+      // }, 1000);
+      // } else {
+      // window.location = desktopFallback;
+      // }
+
+      window.open(desktopFallback, '_blank');
 
       function killPopup() {
         window.removeEventListener('pagehide', killPopup);
@@ -130,10 +132,10 @@ export default {
 }
 
 @media screen and (min-width: $mobile-width) {
-  // .youtube-player {
-  //   &__view-on-app-btn {
-  //     display: none;
-  //   }
-  // }
+  .youtube-player {
+    &__view-on-app-btn {
+      display: none;
+    }
+  }
 }
 </style>

@@ -131,13 +131,13 @@
   }
 
   &__added-reply {
-    font-size: 14px;
-
     &-username {
       font-weight: 800;
     }
-
+    
     &-content {
+      font-size: 13px;
+      font-style: normal;
       line-height: 1.4rem;
     }
   }

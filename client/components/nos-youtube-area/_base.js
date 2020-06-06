@@ -13,8 +13,7 @@ export default {
       isYoutubeSearching: false,
       isMoreYoutubeSearching: false,
       youtubeSearchFailed: false,
-      youtubeSearchKeyword: this.searchKeyword,
-      youtubeSearchKeywordCopied: null,
+      // searchKeyword: this.searchKeyword,
       youtubeSearchPeriod: null,
 
       publishedAfter: null
@@ -45,12 +44,14 @@ export default {
             params: {
               key: process.env.YOUTUBE_API_KEY,
               part: 'snippet',
-              q: searchKeyword,
+              q: searchKeyword.replace(/-/g, ' '),
               type: 'video',
               maxResults: 30,
               pageToken: this.youtubeNextPageToken,
               fields: 'nextPageToken,items/id,items/snippet/channelTitle,items/snippet/publishedAt,items/snippet/title,items/snippet/thumbnails',
-              publishedAfter
+              publishedAfter,
+              videoSyndicated: 'true',
+              videoCategoryId: '17'
             }
           }
         );
@@ -86,7 +87,6 @@ export default {
       } finally {
         this.isMoreYoutubeSearching = false;
         this.isYoutubeSearching = false;
-        this.youtubeSearchKeywordCopied = this.youtubeSearchKeyword;
       }
     },
 
@@ -110,12 +110,12 @@ export default {
     },
 
     loadMoreVideos() {
-      this.getYoutubeSearchResult(this.youtubeSearchKeyword, this.publishedAfter);
+      this.getYoutubeSearchResult(this.searchKeyword, this.publishedAfter);
     },
 
     // searchYoutube() {
     //   this.clearYoutubeSearchConfiguration();
-    //   this.getYoutubeSearchResult(this.youtubeSearchKeyword);
+    //   this.getYoutubeSearchResult(this.searchKeyword);
     // },
 
     setYoutubeSearchPeriod(period) {
@@ -139,7 +139,7 @@ export default {
         this.publishedAfter = null;
       }
 
-      this.getYoutubeSearchResult(this.youtubeSearchKeyword, this.publishedAfter);
+      this.getYoutubeSearchResult(this.searchKeyword, this.publishedAfter);
     },
 
     selectYoutubeVideo(videoId) {
@@ -148,7 +148,7 @@ export default {
 
     // When youtube data quota is exceeded
     goToYoutube() {
-      const fallback = `https://youtube.com/results?search_query=${this.youtubeSearchKeyword}`;
+      const fallback = `https://youtube.com/results?search_query=${this.searchKeyword.replace(/-/g, ' ')}`;
       window.open(fallback, '_blank');
 
       function killPopup() {

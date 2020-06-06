@@ -78,10 +78,23 @@ export default {
       try {
         if (this.isHistorical) {
           // History 페이지에서 선수를 클릭했을 때
-          this.$router.push(`/history/${this.$route.params.historyId}/player/${player.id}/${player.known_as.toLowerCase().replace(/ /g, '-')}`);
+          this.$router.push(this.localePath({
+            name: 'history-historyId-player-playerId-playerName',
+            params: {
+              historyId: this.$route.params.historyId,
+              playerId: player.id,
+              playerName: player.known_as.toLowerCase().replace(/ /g, '-')
+            }
+          }));
         } else {
           // Main 페이지에서 선수를 클릭했을 때
-          this.$router.push(`/player/${player.id}/${player.known_as.toLowerCase().replace(/ /g, '-')}`);
+          this.$router.push(this.localePath({
+            name: 'index-player-playerId-playerName',
+            params: {
+              playerId: player.id,
+              playerName: player.known_as.toLowerCase().replace(/ /g, '-')
+            }
+          }));
         }
       } catch (err) {
         console.error(err);
