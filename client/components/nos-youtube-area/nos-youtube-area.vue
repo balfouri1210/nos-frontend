@@ -172,7 +172,7 @@
         Until 08:00 UTC, please go to YouTube to continue watching the video.
       </p>
       <button @click="goToYoutube">
-        Go to {{ youtubeSearchKeywordCopied.replace(/-/g, ' ') }} videos
+        Go to {{ searchKeyword.replace(/-/g, ' ') }} videos
       </button>
 
       <span>
