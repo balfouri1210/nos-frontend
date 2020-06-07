@@ -5,8 +5,6 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     version="1.1"
-    width="24"
-    height="24"
     viewBox="0 0 24 24"
   ><path d="M12.5,3.69a7.2,7.2,0,1,1-7.19,7.19A7.19,7.19,0,0,1,12.5,3.69M12.5,2a8.85,8.85,0,1,0,8.85,8.84A8.84,8.84,0,0,0,12.5,2Z" /><circle
     cx="10.25"

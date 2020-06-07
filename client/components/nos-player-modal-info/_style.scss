@@ -98,6 +98,10 @@
       color: rgba(0, 0, 0, 0.78);
     }
 
+    svg {
+      width: 20px;
+    }
+
     span {
       font-size: 13px;
       font-weight: 400;
@@ -209,6 +213,10 @@
       span {
         font-size: 14px;
         font-weight: 400;
+      }
+
+      svg {
+        width: 23px;
       }
     }
     &__vote--thumb {
