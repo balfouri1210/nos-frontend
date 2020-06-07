@@ -62,7 +62,7 @@ export default {
           iconName: 'mdi-emoticon-angry-outline'
         }, {
           name: 'hmm',
-          iconName: '$vuetify.icons.hmm'
+          iconName: 'mdi-emoticon-confused-outline'
         }, {
           name: 'cool',
           iconName: 'mdi-emoticon-cool-outline'
