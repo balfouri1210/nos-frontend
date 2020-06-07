@@ -49,33 +49,31 @@
           </p>
         </div>
 
-        <client-only>
-          <div class="player__vote">
-            <button
-              v-for="(vote, index) in voteList.slice(0, 3)"
-              v-if="vote.count > 0"
-              :key="index"
-              class="player__vote-btn"
-              :class="{
-                'player__vote--voted': player.vote === vote.name,
-                'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
-              }"
-              :disabled="disabled || isVoting"
-              @click="addPlayerVote(vote.name)"
-            >
-              <v-icon>{{ vote.iconName }}</v-icon>
-              <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
-            </button>
+        <div class="player__vote">
+          <button
+            v-for="(vote, index) in voteList.slice(0, 3)"
+            v-if="vote.count > 0"
+            :key="index"
+            class="player__vote-btn"
+            :class="{
+              'player__vote--voted': player.vote === vote.name,
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+            }"
+            :disabled="disabled || isVoting"
+            @click="addPlayerVote(vote.name)"
+          >
+            <v-icon>{{ vote.iconName }}</v-icon>
+            <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
+          </button>
 
-            <button
-              class="player__vote-more-btn"
-              @click="showAllVotes"
-            >
-              <v-icon>mdi-plus</v-icon>
-              <span>More</span>
-            </button>
-          </div>
-        </client-only>
+          <button
+            class="player__vote-more-btn"
+            @click="showAllVotes"
+          >
+            <v-icon>mdi-plus</v-icon>
+            <span>More</span>
+          </button>
+        </div>
       </div>
     </div> 
 

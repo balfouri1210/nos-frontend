@@ -73,13 +73,22 @@ module.exports = {
     { src: '~/plugins/filter.js' },
     { src: '~/plugins/v-click-outside.js', ssr: false },
     { src: '~/plugins/clipboard.js', ssr: false },
-    { src: '~/plugins/vuetify.js', ssr: false }
+    { src: '~/plugins/vuetify.js' }
   ],
 
   buildModules: [
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    '@nuxtjs/vuetify',
+    // treeShake를 꺼놓은 이유 : custom vuetify icon을 사용하기 위해서이다.
+    // plugin을 통해 커스텀 아이콘을 vuetify에 주입하는데, 개발에서는 잘 됐지만
+    // 할 수 있는 모든 방법을 다 써도 production mode (운영) 에서는 실패했다.
+    // 검색하다 https://github.com/nuxt-community/vuetify-module/issues/67
+    // 이걸 발견했고, treeShake를 끄니 커스텀아이콘이 렌더링 되었다.
+    // 이슈에서는 1.0.1이후로 고쳐졌다고 하지만 나는 여전히 treeShake를 꺼야했다.
+    // 일단은 이렇게 조치하고 넘어간다. 이것때문에 거의 3-4일을 아무것도 못했다. 스트레스가 크다.
+    ['@nuxtjs/vuetify', {
+      treeShake: false
+    }],
     '@nuxtjs/moment',
     'nuxt-user-agent',
 
