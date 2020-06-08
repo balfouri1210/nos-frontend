@@ -30,8 +30,8 @@
     .v-chip {
       border-width: 1.2px;
     }
-    .v-chip:hover {
-      background: rgba(#1976d2, 0.15) !important;
+    .v-chip.v-chip--outlined.v-chip.v-chip:hover {
+      background: rgba(#1976d2, 0.1) !important;
       transition: all 0.3s ease-out;
     }
   }

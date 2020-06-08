@@ -83,14 +83,22 @@ export default {
     };
   },
 
-  created() {
-    this.voteList.forEach(vote => {
-      vote.count = this.player[`vote_${vote.name}_count`];
-    });
+  computed: {
+    playerVotes() {
+      let result = this.voteList.map(vote => {
+        vote.count = this.player[`vote_${vote.name}_count`];
+        return vote;
+      });
+      result.sort((a, b) => { 
+        return a.count < b.count ? 1 : a.count > b.count ? -1 : 0;  
+      });
+    
+      return result;
+    }
+  },
 
-    this.voteList.sort((a, b) => { 
-      return a.count < b.count ? 1 : a.count > b.count ? -1 : 0;  
-    });
+  created() {
+
   },
 
   methods: {

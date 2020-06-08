@@ -1,5 +1,6 @@
 <template>
   <div id="player-list-wrapper">
+    <!-- 907DEGREES PLAYER -->
     <button
       class="player-top"
       @click="selectPlayer(topPlayer)"
@@ -61,6 +62,8 @@
       >
     </button>
 
+
+    <!-- REST OF PLAYERS -->
     <ul
       class="player-list"
     >

@@ -55,7 +55,7 @@
             class="material-icons nos-login-modal__error-icon"
           >error</i>
 
-          <p>{{ errorMessage }}</p>
+          <span>{{ errorMessage }}</span>
 
           <div>
             <button

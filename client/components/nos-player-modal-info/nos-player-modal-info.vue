@@ -51,7 +51,7 @@
 
         <div class="player__vote">
           <button
-            v-for="(vote, index) in voteList.slice(0, 3)"
+            v-for="(vote, index) in playerVotes.slice(0, 3)"
             v-if="vote.count > 0"
             :key="index"
             class="player__vote-btn"

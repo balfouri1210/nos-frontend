@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nos-skeleton-loader">
     <ul>
       <li
         v-for="(item, index) in line"
@@ -26,5 +26,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.nos-skeleton-loader {
+  padding-right: 16px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: unset;
+  }
+
+  ::v-deep .v-skeleton-loader__list-item-two-line {
+    height: unset;
+    padding: 0;
+  }
+}
 </style>

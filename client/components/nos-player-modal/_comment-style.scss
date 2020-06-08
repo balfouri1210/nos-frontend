@@ -207,7 +207,7 @@
     input {
       width: 100%;
       border-bottom: 1px solid black;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
       font-style: normal;
       line-height: 1.1rem;
@@ -278,7 +278,7 @@
 
   &--is-voted {
     .v-icon {
-      color: $nos-main-theme;
+      color: $nos-main-theme !important;
     }
   }
 
@@ -307,6 +307,10 @@
     }
 
     &__comment-editor {
+      textarea {
+        font-size: 14px;
+      }
+
       button {
         margin-left: 8px;
       }
@@ -333,6 +337,16 @@
 
     &__opinion-action {
       button {
+        font-size: 13px;
+      }
+    }
+
+    &__edit-opinion {
+      textarea {
+        font-size: 14px;
+      }
+
+      input {
         font-size: 13px;
       }
     }

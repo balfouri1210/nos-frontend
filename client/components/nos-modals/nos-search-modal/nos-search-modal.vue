@@ -48,13 +48,13 @@
             :key="index"
           >
             <button @click="selectSearchItem(item)">
-              <p class="nos-search-modal__suggestion-name">
+              <div class="nos-search-modal__suggestion-name">
                 <img
                   :src="item.club_image"
                   alt="club"
                 >
                 <span>{{ item.known_as }}</span>
-              </p>
+              </div>
 
               <span class="nos-search-modal__suggestion-info">
                 <img
