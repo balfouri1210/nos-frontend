@@ -1,19 +1,30 @@
 .nos-countdown {
   position: relative;
-  z-index: 99;
 
   &__timer-container {
-    color: white;
+    height: 36px;
   }
 
+  &__timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p:first-of-type {
+      margin-right: 6px;
+    }
+  }
+
+  &__slot {
+    display: none;
+  }
+
+  &--season,
   &--lastStage {
-    position: fixed;
     top: $mobile-header-height;
     left: 0;
     width: 100%;
     padding: 0 16px;
-    background: $nos-main-gradient;
-    line-height: 36px;
 
     .nos-countdown__timer-container {
       display: flex;
@@ -31,13 +42,33 @@
     }
 
     .nos-countdown__timer {
-      font-size: 14px;
-      font-weight: 800;
+      * {
+        font-size: 14px;
+        font-weight: 800;
+      }
     }
+  }
+
+  &--season {
+    position: absolute;
+    color: black;
+    // background: rgba($nos-main-theme, 0.2);
+  }
+
+  &--lastStage {
+    position: fixed;
+    background: $nos-main-gradient;
+    color: white;
+    z-index: 10;
   }
 
   &--preseason {
     background: transparent;
+    color: white;
+
+    .nos-countdown__timer-container {
+      height: unset;
+    }
 
     .nos-countdown__slot {
       ::v-deep * {
@@ -47,18 +78,37 @@
     }
 
     .nos-countdown__timer {
-      font-size: 40px;
-      font-weight: 800;
-      line-height: 50px;
+      * {
+        font-size: 40px;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 370px) {
+  .nos-countdown {
+    &__slot {
+      display: block;
     }
   }
 }
 
 @media screen and (min-width: $mobile-width) {
   .nos-countdown {
+    &__timer-container {
+      height: 42px;
+    }
+
+    &__timer {
+      p:first-of-type {
+        margin-right: 8px;
+      }
+    }
+
+    &--season,
     &--lastStage {
       top: $web-header-height;
-      line-height: 42px;
 
       .nos-countdown__slot {
         ::v-deep * {
@@ -67,7 +117,9 @@
       }
   
       .nos-countdown__timer {
-        font-size: 18px;
+        *{
+          font-size: 18px;
+        }
       }
     }
   }
