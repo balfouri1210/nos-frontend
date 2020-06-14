@@ -79,7 +79,9 @@ export default {
       ],
 
       allVotes: false,
-      isVoting: false
+      isVoting: false,
+
+      playerTemperature: 0
     };
   },
 
@@ -97,8 +99,13 @@ export default {
     }
   },
 
-  created() {
-
+  async created() {
+    try {
+      this.topScore = (await this.$axios.$get('/api/players/top-score')).score;
+      this.playerTemperature = Math.round((907 * this.player.score) / this.topScore);
+    } catch (err) {
+      console.error(err);
+    }
   },
 
   methods: {

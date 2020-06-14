@@ -4,6 +4,7 @@ import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loa
 import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-request-login-popup.vue';
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
+import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
 // import Cookies from 'js-cookie';
@@ -28,6 +29,7 @@ export default {
     nosRequestLoginPopup,
     nosPlayerModalInfo,
     nosYoutubeArea,
+    nosNewsArea,
     nosYoutubePlayer,
     nosLinkCopy
   },

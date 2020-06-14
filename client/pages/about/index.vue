@@ -16,7 +16,7 @@
           <p>Who are the players you are interested in this week?</p>
           <p>
             907Degrees is a community designed for the football fans to explore their interest for the players on a weekly basis.
-            Media only focuses on a few players but we wanted to share more thoughts on more various players.
+            We want to share thoughts on various players.
           </p>
           <p>Statistics? meh.. We think Fans' interests are more valuable and hotting up.</p>
           <p>That is why we named the community 907Degrees.</p>

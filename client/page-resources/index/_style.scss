@@ -2,12 +2,12 @@
   position: relative;
 }
 
-.home--lastStage {
+.home__body {
   margin-top: 38px;
 }
 
 @media screen and (min-width: $mobile-width) {
-  .home--lastStage {
+  .home__body {
     margin-top: 54px;
   }
 }

@@ -1,20 +1,21 @@
 <template>
   <div class="home">
-    <nos-onboarding-ui />
     <nos-preseason-ui v-if="$store.getters.getAppStatus === 'preseason'" />
 
     <div
       v-else
-      :class="{'home--lastStage': $store.getters.getAppStatus === 'lastStage'}"
+      class="home__body"
     >
-      <client-only v-if="$store.getters.getAppStatus === 'lastStage'">
+      <client-only>
         <nos-countdown @seasonEnd="seasonEndHandler">
-          <p>LEADERBOARD RESETS AFTER</p>
+          <p>NEW LEADERBOARD - </p>
         </nos-countdown>
       </client-only>
 
       <nos-player-list :initial-player-list="initialPlayerList" />
     </div>
+
+    <nos-onboarding-ui />
 
     <!-- Nuxt child for player modal -->
     <nuxt-child />

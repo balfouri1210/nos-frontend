@@ -73,7 +73,7 @@
                       :src="item.club_image"
                       alt="club"
                     >
-                    <span>{{ item.known_as }}</span>
+                    <span style="max-width: 170px; font-size: 14px">{{ item.known_as }}</span>
                   </p>
 
                   <span class="nos-search-modal__suggestion-info">

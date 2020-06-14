@@ -3,7 +3,9 @@
 
 export default function({ $axios, store, redirect, app, error }) {
   $axios.onRequest(config => {
-    if (store.state.auth.jwt && config.url.indexOf('youtube') === -1)
+    if (store.state.auth.jwt
+      && config.url.indexOf('youtube') === -1
+      && config.url.indexOf('azure') === -1)
       config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
  
     store.commit('mutateIsLoading', true);

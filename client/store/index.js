@@ -124,31 +124,36 @@ export const actions = {
     let durationToEvent;
 
     // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
-    if (this.$moment.utc().day() === 5) {
-      const now = this.$moment.utc();
-      const criterionTime = `${now.format('YYYYMMDD')}1800`;
-      
-      const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
-      const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');
+    // '돌아오는' 요일의 날짜를 구하고 싶으면, 위 기준에 각각 7을 더하면 된다. 돌아오는 금요일: 5 + 7 = 12
 
-      if (now.isBefore(seasonEndMoment)) {
-        durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;
-  
-        if (durationToEvent < 1000 * 60 * 60 * 24) {
-          // 시즌종료까지 남은시간이 24시간 이내일 경우
-          commit('mutateAppStatus', 'lastStage');
-          commit('mutateSeasonEnd', seasonEndMoment);
-          commit('mutateSeasonStart', null);
-          commit('mutateDurationToEvent', durationToEvent);
-        }
-      } else if (now.isBefore(seasonStartMoment)) {
-        // 프리시즌일 경우
-        durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
-        commit('mutateAppStatus', 'preseason');
-        commit('mutateSeasonEnd', null);
-        commit('mutateSeasonStart', seasonStartMoment);
-        commit('mutateDurationToEvent', durationToEvent);
+    // if (this.$moment.utc().day() === 5) {
+    const now = this.$moment.utc();
+    
+    var d = new Date();
+    d.setDate(d.getDate() + (5 + 7 - d.getDay()) % 7);
+    const criterionTime = `${this.$moment(d).format('YYYYMMDD')}1800`;
+
+    const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
+    const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');
+
+    if (now.isBefore(seasonEndMoment)) {
+      durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;
+      commit('mutateSeasonEnd', seasonEndMoment);
+      commit('mutateSeasonStart', null);
+      commit('mutateDurationToEvent', durationToEvent);
+
+      if (durationToEvent < 1000 * 60 * 60 * 24) {
+        // 시즌종료까지 남은시간이 24시간 이내일 경우
+        commit('mutateAppStatus', 'lastStage');
       }
+    } else if (now.isBefore(seasonStartMoment)) {
+      // 프리시즌일 경우
+      durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
+      commit('mutateAppStatus', 'preseason');
+      commit('mutateSeasonEnd', null);
+      commit('mutateSeasonStart', seasonStartMoment);
+      commit('mutateDurationToEvent', durationToEvent);
     }
+    // }
   }
 };

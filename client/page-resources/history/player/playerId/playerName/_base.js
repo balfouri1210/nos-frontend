@@ -2,6 +2,7 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapGetters } = createNamespacedHelpers('auth');
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
+import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
@@ -10,6 +11,7 @@ export default {
   components: {
     nosSkeletonLoader,
     nosPlayerModalInfo,
+    nosNewsArea,
     nosYoutubeArea,
     nosYoutubePlayer,
     nosLinkCopy

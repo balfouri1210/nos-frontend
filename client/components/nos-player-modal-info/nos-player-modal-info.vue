@@ -9,7 +9,32 @@
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
         }"
-      />
+      >
+        <div class="player__header">
+          <div class="player__hits-and-comment">
+            <p>
+              <v-icon>mdi-eye-outline</v-icon>
+              <span>{{ player.hits | thousandSeparator }}</span>
+            </p>
+          </div>
+
+          <p
+            v-if="playerTemperature > 0"
+            class="player__temperature"
+            :class="{
+              'player--degrees-over-0': playerTemperature >= 0 && playerTemperature < 100,
+              'player--degrees-over-100': playerTemperature >= 100 && playerTemperature < 300,
+              'player--degrees-over-200': playerTemperature >= 300 && playerTemperature < 500,
+              'player--degrees-over-400': playerTemperature >= 500 && playerTemperature < 700,
+              'player--degrees-over-600': playerTemperature >= 700 && playerTemperature < 900,
+              'player--degrees-over-800': playerTemperature >= 900
+            }"
+          >
+            <v-icon>mdi-fire</v-icon>
+            <span>{{ playerTemperature }}</span>
+          </p>
+        </div>
+      </div>
 
       <div class="player__meta-wrapper">
         <div class="player__meta">
@@ -35,7 +60,7 @@
           </p>
 
           <p class="player__meta-item">
-            <span>Team</span>
+            <span>Club</span>
             <span><img
               class="player__meta-emblem"
               :src="player.club_image"
@@ -57,7 +82,8 @@
             class="player__vote-btn"
             :class="{
               'player__vote--voted': player.vote === vote.name,
-              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down',
+              'player__vote--disabled': disabled
             }"
             :disabled="disabled || isVoting"
             @click="addPlayerVote(vote.name)"
@@ -88,12 +114,13 @@
         <v-divider />
         <div class="player__all-votes">
           <button
-            v-for="(vote, index) in voteList"
+            v-for="(vote, index) in playerVotes"
             :key="index"
             class="player__vote-btn"
             :class="{
               'player__vote--voted': player.vote === vote.name,
-              'player__vote--thumb': vote.name === 'up' || vote.name === 'down'
+              'player__vote--thumb': vote.name === 'up' || vote.name === 'down',
+              'player__vote--disabled': disabled
             }"
             :disabled="disabled || isVoting"
             @click="addPlayerVote(vote.name)"
