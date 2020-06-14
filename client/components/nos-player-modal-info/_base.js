@@ -188,6 +188,17 @@ export default {
           vote
         }
       });
+    },
+
+    watchOnYoutube() {
+      const fallback = `https://youtube.com/results?search_query=${this.$route.params.playerName.replace(/-/g, ' ')}`;
+      window.open(fallback, '_blank');
+
+      function killPopup() {
+        window.removeEventListener('pagehide', killPopup);
+      }
+
+      window.addEventListener('pagehide', killPopup);
     }
   }
 };

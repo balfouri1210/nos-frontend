@@ -56,7 +56,7 @@
         (2) Method of collection
         The Company collects the information of users in a way of the followings:
         <p class="privacy-policy__accented">
-          [Option to select 'method of collection' in Appendix &lt;2&gt;of Personal Privacy Policy]
+          [Option to select 'method of collection' in Appendix &lt;2&gt; of Personal Privacy Policy]
         </p>
       </div>
     </section>
@@ -66,7 +66,7 @@
         2. Use of collected information
         The Company uses the collected information of users for the following purposes:
         <p class="privacy-policy__accented">
-          [Option to select 'use of collected information' in Appendix &lt;3&gt;of Personal Privacy Policy]
+          [Option to select 'use of collected information' in Appendix &lt;3&gt; of Personal Privacy Policy]
         </p>
         The Company agrees that it will obtain consent from the users, if the Company desires to use
         the information other than those expressly stated in this Policy.
@@ -83,14 +83,14 @@
       <div class="privacy-policy__item">
         • when the Company shares the information with its affiliates, partners and service providers;
         <p class="privacy-policy__accented">
-          [Option to select 'sharing of collected information' in Appendix &lt;4-1&gt;of Personal Privacy Policy]
+          [Option to select 'sharing of collected information' in Appendix &lt;4-1&gt; of Personal Privacy Policy]
         </p>
       </div>
 
       <div class="privacy-policy__item">
         • when the users consent the sharing in advance;
         <p class="privacy-policy__accented">
-          [Option to select 'sharing of collected information' in Appendix &lt;4-2&gt;of Personal Privacy Policy]
+          [Option to select 'sharing of collected information' in Appendix &lt;4-2&gt; of Personal Privacy Policy]
         </p>
       </div>
 
@@ -126,7 +126,7 @@
           follows:
         </p>
         <p class="privacy-policy__accented">
-          [Option to select 'collecting cookies' in Appendix &lt;5&gt;of Personal Privacy Policy]
+          [Option to select 'collecting cookies' in Appendix &lt;5&gt; of Personal Privacy Policy]
         </p>
 
         <p>
@@ -179,7 +179,7 @@
         company constructs the following security measures to protect the users' personal information
         from any unauthorized access, release, use or modification
         <p class="privacy-policy__accented">
-          [Option to select 'security measures' in Appendix &lt;6&gt;of Personal Privacy Policy]
+          [Option to select 'security measures' in Appendix &lt;6&gt; of Personal Privacy Policy]
         </p>
       </div>
     </section>

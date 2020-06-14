@@ -14,7 +14,8 @@ export default {
       newsList: [],
       moreNewsListContainer: null,
       newsPage: 0,
-      isAllNewsLoaded: false
+      isAllNewsLoaded: false,
+      newsCountPerRequest: 20
     };
   },
 
@@ -27,26 +28,29 @@ export default {
       try {
         this.isNewsLoading = true;
 
-        const newsResponse = await this.$axios.$get(
-          'https://nos-news.cognitiveservices.azure.com/bing/v7.0/news/search', {
-            headers: {
-              'Ocp-Apim-Subscription-Key': process.env.AZURE_API_KEY
-            },
-  
-            params: {
-              cc: 'GB',
-              count: 30,
-              originalImg: true,
-              sortBy: this.newsSortCriteria,
-              offset: this.newsPage * 30,
-              q: this.searchKeyword.replace(/-/g, ' ')
+        const [newsList, moreNewsListContainer] = await Promise.all([
+          this.$axios.$get(
+            'https://nos-news.cognitiveservices.azure.com/bing/v7.0/news/search', {
+              headers: {
+                'Ocp-Apim-Subscription-Key': process.env.AZURE_API_KEY
+              },
+    
+              params: {
+                cc: 'GB',
+                count: this.newsCountPerRequest,
+                originalImg: true,
+                sortBy: this.newsSortCriteria,
+                offset: 0,
+                q: this.searchKeyword.replace(/-/g, ' ')
+              }
             }
-          }
-        );
+          ),
 
-        this.newsList.push(...newsResponse.value);
+          this.requestNextPageNews()
+        ]);
 
-        this.moreNewsListContainer = (await this.requestNextPageNews()).value;
+        this.newsList = newsList.value;
+        this.moreNewsListContainer = moreNewsListContainer.value;
       } catch (err) {
         console.error(err);
       } finally {
@@ -89,7 +93,7 @@ export default {
 
           params: {
             cc: 'GB',
-            count: 20,
+            count: this.newsCountPerRequest,
             originalImg: true,
             sortBy: this.newsSortCriteria,
             offset: (this.newsPage + 1) * 20,

@@ -1,7 +1,7 @@
 <template>
   <div class="player-modal-info">
     <div class="player">
-      <div
+      <button
         class="player__image"
         :style="{
           backgroundImage: `url(${nosImageUrl}/players/${player.id}.jpg), url(${nosImageUrl}/players/default.png)`,
@@ -9,15 +9,9 @@
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
         }"
+        @click="watchOnYoutube"
       >
         <div class="player__header">
-          <div class="player__hits-and-comment">
-            <p>
-              <v-icon>mdi-eye-outline</v-icon>
-              <span>{{ player.hits | thousandSeparator }}</span>
-            </p>
-          </div>
-
           <p
             v-if="playerTemperature > 0"
             class="player__temperature"
@@ -33,8 +27,20 @@
             <v-icon>mdi-fire</v-icon>
             <span>{{ playerTemperature }}</span>
           </p>
+
+          <p class="player__hits-and-comment">
+            <v-icon>mdi-eye-outline</v-icon>
+            <span>{{ player.hits | thousandSeparator }}</span>
+          </p>
         </div>
-      </div>
+
+        <div class="player__footer">
+          <img
+            src="logos/youtube.png"
+            alt="youtube"
+          >
+        </div>
+      </button>
 
       <div class="player__meta-wrapper">
         <div class="player__meta">
