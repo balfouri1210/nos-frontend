@@ -138,7 +138,7 @@
       <v-progress-circular
         :size="26"
         :width="3"
-        color="#f4991e"
+        color="#808080"
         indeterminate
       />
     </div>

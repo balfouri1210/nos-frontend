@@ -307,7 +307,26 @@ export default {
     mode: 'out-in'
   },
 
-  mixins: [Base]
+  mixins: [Base],
+
+  head() {
+    return {
+      title: `907Degrees - history: ${this.$route.params.playerName.replace(
+        /-/g,
+        ' '
+      )}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Check previous fans' reaction about ${this.$route.params.playerName.replace(
+            /-/g,
+            ' '
+          )}`
+        }
+      ]
+    };
+  }
 };
 </script>
 

@@ -70,17 +70,11 @@
             :class="{'news-item--without-thumbnail': !news.image}"
             target="_blank"
           >
-            <!-- <img
-              v-if="news.image"
-              class="news-item__thumbnail"
-              :src="news.image.contentUrl"
-              alt="news thumbnail"
-            > -->
             <div
               v-if="news.image"
               class="news-item__thumbnail"
               :style="{
-                backgroundImage: `url('${news.image.contentUrl}'), url(/player_default.png)`,
+                backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center'

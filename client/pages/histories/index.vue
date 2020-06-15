@@ -123,7 +123,19 @@ import Base from '@/page-resources/histories/_base';
 
 export default {
   layout: 'wide',
-  mixins: [Base]
+  mixins: [Base],
+  head() {
+    return {
+      title: '907Degrees - Histories',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Check previous leaderboard and fans' reaction"
+        }
+      ]
+    };
+  }
 };
 </script>
 

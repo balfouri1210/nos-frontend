@@ -48,6 +48,23 @@ export default {
       console.error(err);
       return error({ statusCode: 500 });
     }
+  },
+
+  head() {
+    return {
+      title: `907Degrees - History: ${this.$moment(this.startDate).format(
+        'YYYY. MM. DD HH:mm'
+      )} ~ ${this.$moment(this.endDate).format('YYYY. MM. DD HH:mm')}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `History of ${this.$moment(this.startDate).format(
+            'YYYY. MM. DD HH:mm'
+          )} ~ ${this.$moment(this.endDate).format('YYYY. MM. DD HH:mm')}`
+        }
+      ]
+    };
   }
 };
 </script>

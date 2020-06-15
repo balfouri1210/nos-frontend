@@ -19,7 +19,7 @@
             We want to share thoughts on various players.
           </p>
           <p>Statistics? meh.. We think Fans' interests are more valuable and hotting up.</p>
-          <p>That is why we named the community 907Degrees.</p>
+          <p>That is why we named the community 907Degrees. (90Min + 7Days)</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
           </p>
 
           <p>
-            * The Leaderboard resets every Friday at 18:00 UTC, for the next 6 hours we prepare a new leaderboard.
+            * The Leaderboard resets every <span style="color: #f4991e">Friday at 18:00 UTC</span>, for the next 6 hours we prepare a new leaderboard.
             During the pre-season, users can search the players they are interested in and show interest.
             The purpose of the pre-season is to prevent the ranking forming by the few users right after the reset.
           </p>
@@ -128,7 +128,7 @@
         </div>
 
         <div class="about__dummy-comment">
-          <div><span>How was N'Golo Kanté this week?</span></div>
+          <div><span>No one could stop him! His performance saved the team.</span></div>
           <div>ADD</div>
         </div>
 
@@ -248,7 +248,7 @@
           </p>
 
           <p style="margin-top: 16px">
-            The account with repeated actions written above will be restricted without warning.
+            The account with repeated actions written above will be restricted.
           </p>
           <p>
             Users can report the comments that violated the guidelines. An account with repeated reports
@@ -299,6 +299,19 @@ export default {
   mounted() {
     if (this.$route.hash === '#community-guide')
       this.$scrollTo('#community-guide', 300, { offset: -120 });
+  },
+
+  head() {
+    return {
+      title: 'About 907Degrees',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'What is 907Degrees?'
+        }
+      ]
+    };
   }
 };
 </script>
