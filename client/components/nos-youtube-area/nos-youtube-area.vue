@@ -114,7 +114,7 @@
             <div
               class="youtube-area__video-thumbnail"
               :style="{
-                backgroundImage: `url(${video.thumbnails.medium.url}), url(/player_default.png)`,
+                backgroundImage: `url(${video.thumbnails.medium.url}), url(/player_default2.png)`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center'

@@ -246,6 +246,9 @@
           <p class="about__strong">
             * Simultaneous posting/duplicate comments.
           </p>
+          <p class="about__strong">
+            * Advertising.
+          </p>
 
           <p style="margin-top: 16px">
             The account with repeated actions written above will be restricted.

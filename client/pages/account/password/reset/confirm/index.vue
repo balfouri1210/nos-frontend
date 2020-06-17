@@ -85,9 +85,16 @@
     <div v-else>
       <p>
         Sorry, the account does not exist or there was a problem with the set up process.
-        Please refresh the page or try it later. If the error continues, please contact
+        Please refresh the page or try it later. If the error continues, please contact us
         <a href="mailto: support@907degrees.com"> support@907degrees.com</a>
       </p>
+
+      <nuxt-link
+        :to="localePath('index')"
+        class="password-reset-confirm__link nos-basic-btn"
+      >
+        Go Home
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -124,10 +131,17 @@ export default {
   .nos-basic-btn {
     display: inline-block;
     margin-top: 24px;
+    height: 40px;
   }
 
   ::v-deep input {
     border-bottom: 1px solid black;
+  }
+
+  &__link {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 12px 32px;
   }
 }
 </style>

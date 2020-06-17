@@ -51,6 +51,9 @@ export default {
 
         this.newsList = newsList.value;
         this.moreNewsListContainer = moreNewsListContainer.value;
+
+        // 첫 기사가 20개 미만일 경우 load more news 끄기
+        if (this.newsList.length < 20) this.isAllNewsLoaded = true;
       } catch (err) {
         console.error(err);
       } finally {

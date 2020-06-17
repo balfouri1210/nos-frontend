@@ -56,7 +56,7 @@
                   <validation-observer ref="addCommentRef">
                     <validation-provider
                       v-slot="{ errors, invalid }"
-                      :rules="'required|newline_limit:10'"
+                      :rules="'required|newline_limit:10|min:20|max:300'"
                       name="comment"
                     >
                       <div class="player-modal__comment-editor">
@@ -646,6 +646,11 @@
             <v-radio
               label="Comments that are harmful to the community"
               value="harmful"
+              color="#f4991e"
+            />
+            <v-radio
+              label="Advertising"
+              value="advertising"
               color="#f4991e"
             />
           </v-radio-group>
