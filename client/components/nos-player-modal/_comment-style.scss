@@ -53,8 +53,9 @@
     width: 100%;
     margin-bottom: 8px;
     padding: 2px 12px;
+    border: 1px solid rgba($nos-main-theme, 0.5);
     border-radius: 2px;
-    background: $nos-main-theme;
+    background: rgba($nos-main-theme, 0.1);
     font-size: 12px;
 
     .v-icon {
@@ -62,7 +63,7 @@
     }
 
     * {
-      color: white;
+      color: $nos-main-theme;
     }
   }
 
@@ -79,6 +80,9 @@
     span {
       font-size: 13px;
     }
+  }
+  &__comment-count {
+    height: 30px;
   }
 
   &__no-comments {
@@ -138,20 +142,37 @@
     margin-bottom: 16px;
 
     &-meta {
+      display: flex;
+      align-items: flex-start;
       margin-bottom: 4px;
     }
 
-    &-username {
+    &-user-badge {
       margin-right: 4px;
+      padding: 0 6px 0;
+      border-radius: 5px;
+      background: $nos-main-gradient;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 15px;
+      font-family: 'Kanit', sans-serif !important;
+    }
+
+    &-username {
+      display: inline-block;
+      margin-right: 8px;
       font-size: 13px;
       font-weight: 800;
     }
 
     &-moment {
+      display: inline-block;
       color: #909090;
       font-size: 11px;
       font-family: 'Kanit', sans-serif !important;
       font-weight: 300;
+      line-height: 14px;
     }
 
     &-body {
@@ -321,12 +342,16 @@
     }
 
     &__comment {
+      &-user-badge {
+        line-height: 16px;
+      }
       &-username {
         font-size: 14px;
       }
 
       &-moment {
         font-size: 12px;
+        line-height: 16px;
       }
 
       &-content {

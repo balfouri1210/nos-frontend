@@ -56,7 +56,7 @@
                   <validation-observer ref="addCommentRef">
                     <validation-provider
                       v-slot="{ errors, invalid }"
-                      :rules="'required|newline_limit:10|min:20|max:300'"
+                      :rules="'required|newline_limit:10|min:10|max:300'"
                       name="comment"
                     >
                       <div class="player-modal__comment-editor">
@@ -107,7 +107,7 @@
                   v-if="comments.length"
                   class="player-modal__comment-option"
                 >
-                  <div>
+                  <div class="player-modal__comment-count">
                     <v-icon>mdi-message-reply-text</v-icon>
                     <span>{{ player.comment_count }}</span>
                   </div>
@@ -199,8 +199,18 @@
                       >
                         <div>
                           <div class="player-modal__comment-meta">
-                            <span class="player-modal__comment-username">{{ comment.username }}</span>
-                            <span class="player-modal__comment-moment">{{ $moment(comment.created_at).fromNow() }}</span>
+                            <span
+                              v-if="comment.user_authorization === 3"
+                              class="player-modal__comment-user-badge"
+                            >
+                              1°c
+                            </span>
+                            <p class="player-modal__comment-username">
+                              {{ comment.username }}
+                            </p>
+                            <p class="player-modal__comment-moment">
+                              {{ $moment(comment.created_at).fromNow() }}
+                            </p>
                           </div>
 
                           <!-- Comment content -->
