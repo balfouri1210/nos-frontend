@@ -81,11 +81,13 @@
     margin-bottom: 16px;
 
     div:first-of-type {
+      display: flex;
+      align-items: center;
       width: 100%;
+      height: 50px;
       border: 1px solid #dbdbdf;
       padding: 0 16px;
       border-radius: 2px;
-      line-height: 50px;
       font-size: 12px;
       text-align: left;
     }
