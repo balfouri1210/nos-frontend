@@ -9,7 +9,29 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '907degrees - Weekly Hottest Player' },
       { name: 'theme-color', content: '#000000' },
-      { name: 'google-site-verification', content: '3zp6wWo1KnDbOYUMSMGHw4TiYyXVEB7dEP-g89ifApg' }
+      { name: 'google-site-verification', content: '3zp6wWo1KnDbOYUMSMGHw4TiYyXVEB7dEP-g89ifApg' },
+
+      // Opengraph
+      {
+        'property':  'og:title',
+        'content':  'Weekly Hottest Player',
+      },
+      {
+        'property':  'og:site_name',
+        'content':  '907Degrees',
+      },
+      {
+        'property':  'og:description',
+        'content': 'Community designed for the football fans to explore their interest for the players on a weekly basis'
+      },
+      {
+        'property':  'og:url',
+        'content': '907degrees.com'
+      },
+      {
+        'property':  'og:image',
+        'content': 'opengraph.png'
+      }
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kanit:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap'},
