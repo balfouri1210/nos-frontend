@@ -570,7 +570,7 @@
                               {{ comment.addedReply.username }}
                             </p>
                             <p class="player-modal__added-reply-content">
-                              {{ comment.addedReply.content }}
+                              {{ $options.filters.commentFormatter(comment.addedReply.content) }}
                             </p>
                           </div>
                         </div>

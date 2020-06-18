@@ -71,6 +71,7 @@
         v-for="(player, index) in playerList"
         :key="index"
         class="player"
+        :class="{'player--without-image': player.image_url === 'n'}"
       >
         <button @click="selectPlayer(player)">
           <div class="player__header">
@@ -104,6 +105,7 @@
           </div>
 
           <div
+            v-if="player.image_url === 'y'"
             class="player__image"
             :style="{
               backgroundImage: `url(${nosImageUrl}/players/${player.id}.jpg), url(${nosImageUrl}/players/default2.png)`,
@@ -112,10 +114,20 @@
               backgroundPosition: 'center center'
             }"
           />
+
           <div class="player__meta">
             <div>
+              <img
+                v-if="player.image_url === 'n'"
+                :class="{'centered': player.image_url === 'n'}"
+                class="player__meta-club"
+                :src="player.club_image"
+                alt="club"
+              >
+
               <p>
                 <img
+                  class="player__meta-flag"
                   :src="`/flags/${player.country_code.toLowerCase()}.png`"
                   :alt="player.country_code"
                 >
