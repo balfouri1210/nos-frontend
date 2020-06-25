@@ -109,6 +109,13 @@
         <span v-else>Load More News</span>
       </button>
     </div>
+
+    <div
+      v-if="isAllNewsLoaded && newsList.length === 0"
+      class="news-area__empty centered"
+    >
+      No results found
+    </div>
   </div>
 </template>
 

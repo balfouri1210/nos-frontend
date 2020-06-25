@@ -128,10 +128,18 @@ export const actions = {
 
     // if (this.$moment.utc().day() === 5) {
     const now = this.$moment.utc();
-    
+
     var d = new Date();
     d.setDate(d.getDate() + (5 + 7 - d.getDay()) % 7);
-    const criterionTime = `${this.$moment(d).format('YYYYMMDD')}1800`;
+    d = d.toISOString();
+    // console.log(d);
+
+    let criterionTime;
+    if (this.$moment.utc().day() === 5) {
+      criterionTime = `${this.$moment.utc().format('YYYYMMDD')}1800`;
+    } else {
+      criterionTime = `${this.$moment(d).format('YYYYMMDD')}1800`;
+    }
 
     const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
     const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');

@@ -35,7 +35,11 @@ export default {
 
   methods: {
     search() {
-      return this.$axios.$get(`/api/search/${this.searchKeyword}`) || [];
+      return this.$axios.$get('/api/search', {
+        params: {
+          keyword: this.searchKeyword
+        }
+      }) || [];
     },
 
     selectSearchItem(item) {

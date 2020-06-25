@@ -200,7 +200,8 @@
       font-style: normal;
       overflow: hidden;
 
-      a {
+      ::v-deep a {
+        color: #1976d2;
         font-weight: 300;
       }
     }

@@ -1,4 +1,5 @@
 import U from '@/lib/util';
+import { eplClubs } from '@/lib/constants';
 
 export default {
   data() {
@@ -7,43 +8,44 @@ export default {
       suggestions: [],
       isSearching: false,
 
-      clubs: null
+      clubs: eplClubs
     };
   },
 
-  created() {
-    this.getClubs();
-  },
-
   methods: {
-    async getClubs() {
-      try {
-        this.clubs = await this.$axios.$get('/api/clubs', {
-          params: {
-            leagueId: 1
-          }
-        });
-      } catch (err) {
-        console.error(err);
-      }
+    loadSuggestionsByKeyword() {
+      return this.$axios.$get('/api/search', {
+        params: {
+          keyword: this.searchKeyword
+        }
+      }) || [];
+    },
+
+    selectClub(club) {
+      this.$emit('closeModal');
+
+      this.$router.push(this.localePath({
+        name: 'search',
+        query: {
+          clubId: club.id
+        }
+      }));
     },
 
     searchPlayerByKeyword() {
-      return this.$axios.$get(`/api/search/${this.searchKeyword}`) || [];
-    },
+      this.$emit('closeModal');
 
-    async selectClub(club) {
-      try {
-        this.suggestions = await this.$axios.$get(`/api/search/club/${club.id}`) || [];
-      } catch (err) {
-        console.error(err);
-      }
+      this.$router.push(this.localePath({
+        name: 'search',
+        query: {
+          keyword: this.searchKeyword
+        }
+      }));
     },
 
     selectSearchItem(item) {
       this.$emit('closeModal');
 
-      // 평상시
       this.$router.push(
         this.localePath({
           name: 'index-player-playerId-playerName',
@@ -61,7 +63,7 @@ export default {
       try {
         if (this.searchKeyword && this.searchKeyword.length >= 2) {
           this.isSearching = true;
-          this.suggestions = await this.searchPlayerByKeyword();
+          this.suggestions = await this.loadSuggestionsByKeyword();
         } else {
           this.suggestions = [];
         }

@@ -18,7 +18,7 @@
         </li>
       </ul>
 
-      <validation-observer v-slot="{ handleSubmit }">
+      <validation-observer v-slot="{ handleSubmit, invalid }">
         <form
           id="playerSearchForm"
           @submit.prevent="handleSubmit(searchPlayerByKeyword)"
@@ -26,14 +26,24 @@
           <div class="nos-search-modal__form">
             <nos-input
               type="text"
+              :rules="'required|min:3'"
               :value="searchKeyword"
               :autocomplete="'new-password'"
-              :placeholder="'Search'"
+              :placeholder="'Keyword'"
               :clearable="true"
               :is-loading="isSearching"
               :auto-focus="true"
+              :is-error-message="false"
               @input="searchKeyword = $event"
             />
+
+            <button
+              type="submit"
+              class="nos-search-modal__submit nos-modal__button"
+              :disabled="invalid"
+            >
+              Search
+            </button>
           </div>
         </form>
       </validation-observer>

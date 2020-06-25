@@ -53,6 +53,7 @@
               <nos-player-modal-info
                 :player="player"
                 :disabled="true"
+                :is-historical="true"
               />
 
               <!-- Comment Sorting -->
@@ -299,7 +300,7 @@
 </template>
 
 <script>
-import Base from '@/page-resources/history/player/playerId/playerName/_base';
+import Base from '@/page-resources/history/historyId/player/playerId/playerName/_base';
 
 export default {
   transition: {

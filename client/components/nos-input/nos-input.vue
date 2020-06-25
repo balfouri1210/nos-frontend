@@ -19,8 +19,11 @@
         :autocomplete="autocomplete"
         :disabled="disabled"
       >
-      
-      <p class="nos-input__error-message">
+
+      <p
+        v-if="isErrorMessage"
+        class="nos-input__error-message"
+      >
         {{ errors[0] }}
       </p>
     </validation-provider>
@@ -125,6 +128,11 @@ export default {
     autoFocus: {
       type: Boolean,
       default: false
+    },
+
+    isErrorMessage: {
+      type: Boolean,
+      default: true
     }
   },
 

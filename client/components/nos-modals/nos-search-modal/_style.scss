@@ -50,6 +50,21 @@
     line-height: 32px;
   }
 
+  &__submit {
+    margin-left: 6px;
+    padding: 8px 16px;
+    border: 1px solid $nos-main-theme;
+    border-radius: 4px;
+    background: rgba($nos-main-theme, 0.15);
+    color: $nos-main-theme;
+    line-height: 32px;
+  }
+  &__submit:disabled {
+    border: 1px solid rgba(black, 0.3);
+    background: rgba(black, 0.1);
+    color: rgba(black, 0.5);
+  }
+
   &__suggestion {
     ul {
       max-height: 320px;
@@ -150,7 +165,7 @@
       }
 
       img {
-        width: 24px;
+        width: 30px;
       }
     }
 
@@ -162,6 +177,12 @@
     .nos-input {
       font-size: 22px;
       line-height: 48px;
+    }
+
+    &__submit {
+      margin-left: 10px;
+      line-height: 48px;
+      font-size: 18px;
     }
 
     &__suggestion {

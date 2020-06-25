@@ -17,6 +17,13 @@ export default function (to, from) {
   if (from.name.indexOf('history-historyId-player-playerId-playerName') !== -1
   && to.name.indexOf('history-historyId') !== -1)  return;
 
+  // search와 search player modal을 오갈 때 스크롤 고정
+  if (from.name.indexOf('search') !== -1
+  && to.name.indexOf('search-player-playerId-playerName') !== -1)  return;
+
+  if (from.name.indexOf('search-player-playerId-playerName') !== -1
+  && to.name.indexOf('search') !== -1)  return;
+
   // 나머지 경우에는 scroll top
   else return { x: 0, y: 0 };
 }

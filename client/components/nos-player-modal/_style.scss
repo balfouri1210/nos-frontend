@@ -48,7 +48,7 @@
       color: rgba(0, 0, 0, 0.7);
     }
 
-    a {
+    button {
       display: flex;
       align-items: center;
       font-size: 12px;
@@ -59,6 +59,14 @@
       font-size: 14px;
       color: rgba(0, 0, 0, 0.7);
     }
+  }
+
+  &__right {
+    flex: none;
+    flex-basis: 360px;
+    height: 100%;
+    padding: 6px 4px 4px;
+    overflow: auto;
   }
 }
 
@@ -117,16 +125,13 @@
       height: 100%;
       overflow: auto;
     }
-
-    &__right {
-      flex: none;
-      flex-basis: 360px;
-      height: 100%;
-      overflow: auto;
-    }
-
     &__header {
       display: none;
     }
+
+    &__right {
+      padding: 10px 6px 0 2px;
+    }
   }
 }
+

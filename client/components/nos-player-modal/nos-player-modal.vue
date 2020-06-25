@@ -34,10 +34,10 @@
           <div class="player-modal__content">
             <div class="player-modal__left">
               <header class="player-modal__header">
-                <nuxt-link :to="localePath('index')">
+                <button @click="closeModal">
                   <v-icon>mdi-arrow-left</v-icon>
                   <span>Leaderboard</span>
-                </nuxt-link>
+                </button>
 
                 <nos-link-copy
                   :share-url="`${nosUrl}${$route.fullPath}`"
@@ -601,11 +601,16 @@
 
             <!-- YOUTUBE AREA -->
             <div class="player-modal__right ">
+              <nos-fixtures-area
+                :club-id="player.club_id"
+                :is-header="true"
+              />
+
               <nos-news-area
                 :search-keyword="$route.params.playerName"
               />
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

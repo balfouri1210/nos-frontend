@@ -103,7 +103,7 @@
             @click="showAllVotes"
           >
             <v-icon>mdi-plus</v-icon>
-            <span>More</span>
+            <span>React</span>
           </button>
         </div>
       </div>

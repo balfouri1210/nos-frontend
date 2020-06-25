@@ -3,6 +3,11 @@
 
 export default {
   props: {
+    topPlayer: {
+      type: Object,
+      default: () => {}
+    },
+
     initialPlayerList: {
       type: Array,
       default: () => []
@@ -14,16 +19,14 @@ export default {
     },
 
     historyId: {
-      type: Number,
+      type: String,
       default: null
     }
   },
 
   data() {
     return {
-      topPlayer: this.initialPlayerList[0],
-      topScore: this.initialPlayerList[0].score,
-      playerList: this.initialPlayerList.slice(1),
+      playerList: this.initialPlayerList.slice(0),
       isMorePlayersLoading: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
       totalPlayerCount: 0
@@ -43,10 +46,10 @@ export default {
       return score => {
         if (score <= 0) {
           return 0;
-        } else if (score === this.topScore) {
+        } else if (score === this.topPlayer.score && this.$route.name.indexOf('search') === -1) {
           return 906;
         } else {
-          return Math.round((907 * score) / this.topScore);
+          return Math.round((907 * score) / this.topPlayer.score);
         }
       };
     }
@@ -58,7 +61,7 @@ export default {
       if (this.$route.name.indexOf('history') === -1) {
         this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
       } else {
-        this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.$route.params.historyId}`)).total_player_count;
+        this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.historyId}`)).total_player_count;
       }
     } catch (err) {
       console.error(err);
@@ -66,7 +69,9 @@ export default {
   },
 
   mounted() {
-    window.addEventListener('scroll', this.detectScroll);
+    if (this.$route.name.indexOf('search') === -1) {
+      window.addEventListener('scroll', this.detectScroll);
+    }
   },
 
   destroyed() {
@@ -81,10 +86,20 @@ export default {
           this.$router.push(this.localePath({
             name: 'history-historyId-player-playerId-playerName',
             params: {
-              historyId: this.$route.params.historyId,
+              historyId: this.historyId,
               playerId: player.id,
               playerName: player.known_as.toLowerCase().replace(/ /g, '-')
             }
+          }));
+        } else if (this.$route.name.indexOf('search') !== -1) {
+          // Search 페이지에서 선수를 클릭했을 때
+          this.$router.push(this.localePath({
+            name: 'search-player-playerId-playerName',
+            params: {
+              playerId: player.id,
+              playerName: player.known_as.toLowerCase().replace(/ /g, '-'),
+            },
+            query: this.$route.query
           }));
         } else {
           // Main 페이지에서 선수를 클릭했을 때
@@ -108,7 +123,7 @@ export default {
       try {
         this.isMorePlayersLoading = true;
 
-        const apiUrl = this.isHistorical ? `/api/histories/player/${this.$route.params.historyId || this.historyId}` : '/api/players';
+        const apiUrl = this.isHistorical ? `/api/histories/player/${this.historyId}` : '/api/players';
         const loadedPlayers = await this.$axios.$get(apiUrl, {
           params: {
             previousPlayerIdList: this.previousPlayerIdList
@@ -126,18 +141,18 @@ export default {
 
     detectScroll() {
       let bottomOfWindow =
-        // 스크롤 위치 중 최대값
-        Math.max(
-          window.pageYOffset,
-          document.documentElement.scrollTop,
-          document.body.scrollTop
-        ) +
-          // 화면 높이
-          window.innerHeight >=
-
-        // player-list-wrapper 높이
-        document.getElementById('player-list-wrapper').offsetHeight;
-
+          // 스크롤 위치 중 최대값
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+            // 화면 높이
+            window.innerHeight >=
+  
+          // player-list-wrapper 높이
+          document.getElementById('player-list-wrapper').offsetHeight;
+  
       if (bottomOfWindow) this.loadMorePlayers();
     }
   }

@@ -12,7 +12,12 @@
         </nos-countdown>
       </client-only>
 
-      <nos-player-list :initial-player-list="initialPlayerList" />
+      <nos-top-player :top-player="topPlayer" />
+
+      <nos-player-list
+        :top-player="topPlayer"
+        :initial-player-list="restOfPlayers"
+      />
     </div>
 
     <nos-onboarding-ui />

@@ -3,10 +3,13 @@
 
 export default function({ $axios, store, redirect, app, error }) {
   $axios.onRequest(config => {
-    if (store.state.auth.jwt
-      && config.url.indexOf('youtube') === -1
-      && config.url.indexOf('azure') === -1)
+    if (config.url.indexOf('youtube') !== -1
+    || config.url.indexOf('azure') !== -1
+    || config.url.indexOf('football') !== -1) {
+      return;
+    } else if (store.state.auth.jwt) {
       config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
+    }
  
     store.commit('mutateIsLoading', true);
   });

@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Base from '@/page-resources/index/player/playerId/playerName/_base';
+import Base from '@/page-resources/search/player/playerId/playerName/_base';
 
 export default {
   mixins: [Base],
 
   head() {
     return {
-      title: `907Degrees - ${this.$route.params.playerName.replace(/-/g, ' ')}`,
+      title: `Search - ${this.$route.params.playerName.replace(/-/g, ' ')}`,
       meta: [
         {
           hid: 'description',

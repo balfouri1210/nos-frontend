@@ -4,6 +4,7 @@ import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loa
 import nosRequestLoginPopup from '@/components/nos-request-login-popup/nos-request-login-popup.vue';
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
+import nosFixturesArea from '@/components/nos-fixtures-area/nos-fixtures-area.vue';
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
@@ -29,6 +30,7 @@ export default {
     nosRequestLoginPopup,
     nosPlayerModalInfo,
     nosYoutubeArea,
+    nosFixturesArea,
     nosNewsArea,
     nosYoutubePlayer,
     nosLinkCopy
@@ -538,7 +540,16 @@ export default {
     },
 
     closeModal() {
-      this.$router.push(this.localePath('index'));
+      if (this.$route.name.indexOf('search-player-playerId-playerName') === -1) {
+        // normal modal
+        this.$router.push(this.localePath('index'));
+      } else {
+        // search player modal
+        this.$router.push(this.localePath({
+          name: 'search',
+          query: this.$route.query
+        }));
+      }
     }
   }
 };

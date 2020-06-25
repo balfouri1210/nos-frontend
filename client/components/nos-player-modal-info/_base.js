@@ -13,6 +13,11 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+
+    isHistorical: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -101,8 +106,13 @@ export default {
 
   async created() {
     try {
-      this.topScore = (await this.$axios.$get('/api/players/top-score')).score;
-      this.playerTemperature = Math.round((907 * this.player.score) / this.topScore);
+      this.topPlayerScore = (await this.$axios.$get('/api/players/top-player')).score;
+
+      if (this.isHistorical) {
+        this.playerTemperature = Math.round((907 * this.player.score) / this.player.top_player_score);
+      } else {
+        this.playerTemperature = Math.round((907 * this.player.score) / this.topPlayerScore);
+      }
     } catch (err) {
       console.error(err);
     }
