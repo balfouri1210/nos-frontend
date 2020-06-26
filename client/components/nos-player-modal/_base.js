@@ -120,6 +120,10 @@ export default {
     this.manipulateHits();
   },
 
+  beforeDestroy () {
+    document.removeEventListener('backbutton', this.backButtonListner);
+  },
+
   methods: {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 

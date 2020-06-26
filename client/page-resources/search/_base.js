@@ -108,10 +108,14 @@ export default {
     closePlayerModalHandler() {
       if (process.client) document.documentElement.style.overflow = 'auto';
       this.isPlayerModalOpen = false;
-    },
+    }
+  },
 
-    // Body scroll release
-    beforeRouteLeave(to, from ,next) {
+  // Body scroll release
+  beforeRouteLeave(to, from ,next) {
+    if (this.isPlayerModalOpen) {
+      this.isPlayerModalOpen = false;
+    } else {
       if (process.client) document.documentElement.style.overflow = 'auto';
       next();
     }
