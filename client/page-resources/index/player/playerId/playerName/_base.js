@@ -36,7 +36,7 @@ export default {
     if (process.client) document.documentElement.style.overflow = 'hidden';
     next();
   },
-  
+
   // Body scroll release
   beforeRouteLeave(to, from ,next) {
     if (process.client) document.documentElement.style.overflow = 'auto';
