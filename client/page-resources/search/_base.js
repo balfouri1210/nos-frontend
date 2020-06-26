@@ -114,7 +114,10 @@ export default {
   // Body scroll release
   beforeRouteLeave(to, from ,next) {
     if (this.isPlayerModalOpen) {
-      this.isPlayerModalOpen = false;
+      // Player modal이 열려있으면, 라우트 이동하는 대신 모달을 끈다.
+      // 모바일에서 무의식적으로 '뒤로'를 눌렀을 때 모달이 꺼지는게 아니라 페이지가 이동해버리는
+      // 불편현상을 해결하기 위함. 20200627
+      this.closePlayerModalHandler();
     } else {
       if (process.client) document.documentElement.style.overflow = 'auto';
       next();
