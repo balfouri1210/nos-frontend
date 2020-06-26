@@ -36,11 +36,12 @@
               <header class="player-modal__header">
                 <button @click="closeModal">
                   <v-icon>mdi-arrow-left</v-icon>
-                  <span>Leaderboard</span>
+                  <span v-if="$route.name.indexOf('search') !== -1">Search</span>
+                  <span v-else>Leaderboard</span>
                 </button>
 
                 <nos-link-copy
-                  :share-url="`${nosUrl}${$route.fullPath}`"
+                  :share-url="copyLink"
                   :font-size="12"
                 />
               </header>
@@ -607,7 +608,7 @@
               />
 
               <nos-news-area
-                :search-keyword="$route.params.playerName"
+                :news-keyword="playerName"
               />
             </div>
           </div> 

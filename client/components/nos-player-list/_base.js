@@ -93,14 +93,7 @@ export default {
           }));
         } else if (this.$route.name.indexOf('search') !== -1) {
           // Search 페이지에서 선수를 클릭했을 때
-          this.$router.push(this.localePath({
-            name: 'search-player-playerId-playerName',
-            params: {
-              playerId: player.id,
-              playerName: player.known_as.toLowerCase().replace(/ /g, '-'),
-            },
-            query: this.$route.query
-          }));
+          this.$emit('selectPlayer', player);
         } else {
           // Main 페이지에서 선수를 클릭했을 때
           this.$router.push(this.localePath({

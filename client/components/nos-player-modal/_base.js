@@ -38,7 +38,11 @@ export default {
 
   data() {
     return {
-      playerId: this.$route.params.playerId,
+      // playerId, playerName을 route param에서 먼저 찾도록 한 이유:
+      // url로 직접 들어왔을때 this.player가 없는 상태이기 때문
+      playerId: this.$route.params.playerId || this.player.id,
+      playerName: this.$route.params.playerName || this.player.known_as,
+
       comments: null,
       commentSortType: 'like',
       newCommentContent: '',
@@ -49,7 +53,6 @@ export default {
 
       isRequestLoginPopup: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
-      nosUrl: process.env.NOS_URL,
 
       isYoutubePlayer: false,
       selectedYoutubeVideoId: null,
@@ -96,6 +99,13 @@ export default {
       });
 
       return previousCommentIdList.toString();
+    },
+
+    copyLink() {
+      const link = this.$route.name.indexOf('search') !== -1 ?
+        `${process.env.NOS_URL}/player/${this.playerId}/${this.playerName.toLowerCase().replace(/ /g, '-')}`
+        : `${process.env.NOS_URL}${this.$route.fullPath}`;
+      return link;
     }
   },
 
@@ -540,15 +550,12 @@ export default {
     },
 
     closeModal() {
-      if (this.$route.name.indexOf('search-player-playerId-playerName') === -1) {
+      if (this.$route.name.indexOf('index-player-playerId-playerName') !== -1) {
         // normal modal
         this.$router.push(this.localePath('index'));
       } else {
         // search player modal
-        this.$router.push(this.localePath({
-          name: 'search',
-          query: this.$route.query
-        }));
+        this.$emit('closePlayerModal');
       }
     }
   }

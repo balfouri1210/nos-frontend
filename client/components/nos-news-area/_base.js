@@ -1,6 +1,6 @@
 export default {
   props: {
-    searchKeyword: {
+    newsKeyword: {
       type: String,
       default: null
     }
@@ -41,7 +41,7 @@ export default {
                 originalImg: true,
                 sortBy: this.newsSortCriteria,
                 offset: 0,
-                q: this.searchKeyword.replace(/-/g, ' ')
+                q: this.newsKeyword.replace(/-/g, ' ')
               }
             }
           ),
@@ -100,7 +100,7 @@ export default {
             originalImg: true,
             sortBy: this.newsSortCriteria,
             offset: (this.newsPage + 1) * 20,
-            q: this.searchKeyword.replace(/-/g, ' ')
+            q: this.newsKeyword.replace(/-/g, ' ')
           }
         }
       );
