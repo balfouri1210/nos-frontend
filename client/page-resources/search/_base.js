@@ -111,13 +111,33 @@ export default {
     }
   },
 
-  // Body scroll release
-  beforeRouteLeave(to, from ,next) {
+
+  // ROUTER HOOK의 존재 이유
+  // search페이지에서는 player modal이 별도의 url을 갖지 않는다. (일반 팝업으로 작동)
+  // 그렇기 때문에 모바일에서 뒤로가기를 누르면 팝업만 닫히는게 아니라 페이지가 이동되어 버리고
+  // 이건 존나 성가시다.
+  // 그렇기 때문에 팝업이 열려있을 때 route가 업데이트 되거나 (url query만 바뀌는 경우),
+  // 이동하면 player modal만 닫고 페이지는 유지한다.
+  // next(false)가 라우트를 막는 역할을 한다.
+  // 단, 'Update'의 경우 사용자가 뒤로가기를 누르면 url query가 바뀌었다가, 다시 원래대로 돌아오는데
+  // (/search?clubId=12 -> /search?clubId=15 -> /search?clubId=12)
+  // 이는 정상적인 현상으로 보기에 살짝 옥의 티처럼 느껴지긴 하지만 더 나은 해결책이 있을때까지는
+  // 그냥 두기로 한다.
+  // 참고 : https://router.vuejs.org/kr/guide/advanced/navigation-guards.html 여기에서 next(false)를 볼것
+  beforeRouteUpdate(to, from, next) {
     if (this.isPlayerModalOpen) {
-      // Player modal이 열려있으면, 라우트 이동하는 대신 모달을 끈다.
-      // 모바일에서 무의식적으로 '뒤로'를 눌렀을 때 모달이 꺼지는게 아니라 페이지가 이동해버리는
-      // 불편현상을 해결하기 위함. 20200627
       this.closePlayerModalHandler();
+      next(false);
+    } else {
+      if (process.client) document.documentElement.style.overflow = 'auto';
+      next();
+    }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (this.isPlayerModalOpen) {
+      this.closePlayerModalHandler();
+      next(false);
     } else {
       if (process.client) document.documentElement.style.overflow = 'auto';
       next();

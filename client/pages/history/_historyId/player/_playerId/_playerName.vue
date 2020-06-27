@@ -18,7 +18,7 @@
           class="player-modal__content-container"
           @click.stop
         >
-          <nos-youtube-player
+          <!-- <nos-youtube-player
             v-if="isYoutubePlayer"
             :video-id="selectedYoutubeVideoId"
             @closeYoutubeVideo="isYoutubePlayer = false"
@@ -27,7 +27,7 @@
           <div
             v-if="isYoutubePlayer"
             class="player-modal__airbag"
-          />
+          /> -->
 
           <div class="player-modal__content">
             <div class="player-modal__left">
@@ -289,7 +289,7 @@
 
             <div class="player-modal__right">
               <nos-news-area
-                :search-keyword="$route.params.playerName"
+                :news-keyword="$route.params.playerName"
               />
             </div>
           </div>

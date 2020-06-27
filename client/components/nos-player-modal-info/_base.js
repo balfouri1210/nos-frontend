@@ -25,6 +25,9 @@ export default {
     return {
       nosImageUrl: process.env.NOS_IMAGE_URL,
 
+      hitsList: [],
+      now: this.$moment.utc(),
+
       voteList: [
         {
           name: 'up',
@@ -91,6 +94,12 @@ export default {
   },
 
   computed: {
+    hitIndex() {
+      return this.hitsList.findIndex((item) => {
+        return item.id === this.player.id;
+      });
+    },
+
     playerVotes() {
       let result = this.voteList.map(vote => {
         vote.count = this.player[`vote_${vote.name}_count`];
@@ -106,13 +115,8 @@ export default {
 
   async created() {
     try {
-      this.topPlayerScore = (await this.$axios.$get('/api/players/top-player')).score;
-
-      if (this.isHistorical) {
-        this.playerTemperature = Math.round((907 * this.player.score) / this.player.top_player_score);
-      } else {
-        this.playerTemperature = Math.round((907 * this.player.score) / this.topPlayerScore);
-      }
+      this.manipulateHits();
+      this.calculatePlayerTemperature();
     } catch (err) {
       console.error(err);
     }
@@ -129,6 +133,68 @@ export default {
         return true;
       }
     },
+
+    async manipulateHits() {
+      if (window.localStorage.getItem('nos-hitsList')) {
+        this.hitsList = window.localStorage.getItem('nos-hitsList').split('_').map(item => {
+          return JSON.parse(item);
+        });
+      }
+
+      this.filteredExpiredHit();
+
+      try {
+        if (this.hitIndex === -1) {
+          this.hitsList.push({
+            id: this.player.id,
+            expires: this.$moment.utc().add(3, 'hours')
+          });
+          await this.increasePlayerHits();
+        }
+
+        this.hitsList = this.hitsList.map(item => {
+          return JSON.stringify(item);
+        });
+        window.localStorage.setItem('nos-hitsList', this.hitsList.join('_'));
+      } catch (err) {
+        console.error(err);
+        return this.$nuxt.error({ statusCode: 500 });
+      }
+    },
+
+    filteredExpiredHit() {
+      this.hitsList.forEach((item, index, obj) => {
+        if (this.$moment.utc(item.expires).isBefore(this.now)) {
+          obj.splice(index, 1);
+        }
+      });
+    },
+
+    increasePlayerHits() {
+      return this.$axios.$put(`/api/players/hits/${this.player.id}`);
+    },
+
+    async calculatePlayerTemperature() {
+      try {
+        if (this.isHistorical) {
+          // 히스토리모드일 때는 최고점이 박혀있으므로 요청필요 X
+          this.playerTemperature
+            = Math.round((907 * this.player.score) / this.player.top_player_score);
+        } else {
+          // 평상시에는 최고점을 그때그때 받아와야하므로 서버에 요청
+          const topPlayer = await this.$axios.$get('/api/players/top-player');
+          if (this.player.id === topPlayer.id) {
+            this.playerTemperature = 907;
+          } else {
+            this.playerTemperature
+              = Math.round((907 * this.player.score) / topPlayer.score);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
 
     showAllVotes() {
       if (this.$route.name.indexOf('history') === -1) {

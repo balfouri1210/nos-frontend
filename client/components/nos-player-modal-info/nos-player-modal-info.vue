@@ -28,7 +28,10 @@
             <span>{{ playerTemperature }}</span>
           </p>
 
-          <p class="player__hits-and-comment">
+          <p
+            v-if="player.hits > 0"
+            class="player__hits-and-comment"
+          >
             <v-icon>mdi-eye-outline</v-icon>
             <span>{{ player.hits | thousandSeparator }}</span>
           </p>

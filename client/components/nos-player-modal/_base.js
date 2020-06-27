@@ -57,9 +57,6 @@ export default {
       isYoutubePlayer: false,
       selectedYoutubeVideoId: null,
 
-      hitsList: [],
-      now: this.$moment.utc(),
-
       isReportDialog: false,
       reportTargetObject: null,
       reportReason: null,
@@ -87,11 +84,6 @@ export default {
       };
     },
 
-    hitIndex() {
-      return this.hitsList.findIndex((item) => {
-        return item.id === this.playerId;
-      });
-    },
 
     previousCommentIdList() {
       const previousCommentIdList = this.comments.map((comment) => {
@@ -116,10 +108,6 @@ export default {
     if (this.comments) this.commentMappingWithUiProperty(this.comments);
   },
 
-  mounted() {
-    this.manipulateHits();
-  },
-
   beforeDestroy () {
     document.removeEventListener('backbutton', this.backButtonListner);
   },
@@ -130,47 +118,6 @@ export default {
     copySuccess() {
       this.isShareUrlCopied = true;
     },
-
-    async manipulateHits() {
-      if (window.localStorage.getItem('nos-hitsList')) {
-        this.hitsList = window.localStorage.getItem('nos-hitsList').split('_').map(item => {
-          return JSON.parse(item);
-        });
-      }
-
-      this.filteredExpiredHit();
-
-      try {
-        if (this.hitIndex === -1) {
-          this.hitsList.push({
-            id: this.playerId,
-            expires: this.$moment.utc().add(3, 'hours')
-          });
-          await this.increasePlayerHits();
-        }
-
-        this.hitsList = this.hitsList.map(item => {
-          return JSON.stringify(item);
-        });
-        window.localStorage.setItem('nos-hitsList', this.hitsList.join('_'));
-      } catch (err) {
-        console.error(err);
-        return this.$nuxt.error({ statusCode: 500 });
-      }
-    },
-
-    filteredExpiredHit() {
-      this.hitsList.forEach((item, index, obj) => {
-        if (this.$moment.utc(item.expires).isBefore(this.now)) {
-          obj.splice(index, 1);
-        }
-      });
-    },
-
-    increasePlayerHits() {
-      return this.$axios.$put(`/api/players/hits/${this.playerId}`);
-    },
-
 
 
     // ///////////////// //

@@ -49,7 +49,7 @@ export default {
         } else if (score === this.topPlayer.score && this.$route.name.indexOf('search') === -1) {
           return 906;
         } else {
-          return Math.round((907 * score) / this.topPlayer.score);
+          return Math.round((907 * score) / Math.round(this.topPlayer.score));
         }
       };
     }

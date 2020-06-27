@@ -600,7 +600,7 @@
             </div>
 
 
-            <!-- YOUTUBE AREA -->
+            <!-- MODAL RIGHT -->
             <div class="player-modal__right ">
               <nos-fixtures-area
                 :club-id="player.club_id"
