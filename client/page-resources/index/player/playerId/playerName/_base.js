@@ -13,7 +13,7 @@ export default {
     function getComments() {
       return $axios.$get(`/api/comments/player/${params.playerId}`, {
         params: {
-          sortType: 'like'
+          sortType: 'date'
         }
       });
     }

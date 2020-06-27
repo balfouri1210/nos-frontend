@@ -44,7 +44,7 @@ export default {
       playerName: this.$route.params.playerName || this.player.known_as,
 
       comments: null,
-      commentSortType: 'like',
+      commentSortType: 'date',
       newCommentContent: '',
       isCommentsLoading: false,
       isMoreCommentsLoading: false,

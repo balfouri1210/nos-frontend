@@ -84,6 +84,35 @@
   &__comment-count {
     height: 30px;
   }
+  &__comment-sortby {
+    display: flex;
+    align-items: center;
+  }
+  &__sortby-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border: 1px solid rgba(0, 0, 0, 0.72);;
+    border-radius: 12px;
+
+    .v-icon {
+      font-size: 16px;
+    }
+
+    .v-icon, span {
+      color: rgba(0, 0, 0, 0.72);
+    }
+  }
+  &__sortby-button--active {
+    border: 1px solid $nos-main-theme;
+    background: rgba($nos-main-theme, 0.1);
+
+    .v-icon, span {
+      color: $nos-main-theme;
+    }
+  }
 
   &__no-comments {
     min-height: 180px;
@@ -198,6 +227,7 @@
       line-height: 1.1rem;
       font-size: 13px;
       font-style: normal;
+      word-break: break-all;
       overflow: hidden;
 
       ::v-deep a {
