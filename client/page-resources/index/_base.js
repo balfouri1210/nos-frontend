@@ -3,6 +3,7 @@ import nosPlayerList from '@/components/nos-player-list/nos-player-list.vue';
 import nosCountdown from '@/components/nos-countdown/nos-countdown';
 import nosPreseasonUi from '@/components/nos-preseason-ui/nos-preseason-ui.vue';
 import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vue';
+import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
 
 export default {
   layout: 'wide',
@@ -12,7 +13,8 @@ export default {
     nosPlayerList,
     nosCountdown,
     nosPreseasonUi,
-    nosOnboardingUi
+    nosOnboardingUi,
+    nosMainEvent
   },
 
   fetch({ store }) {

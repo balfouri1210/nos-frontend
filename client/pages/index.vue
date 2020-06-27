@@ -14,6 +14,8 @@
 
       <nos-top-player :top-player="topPlayer" />
 
+      <nos-main-event />
+
       <nos-player-list
         :top-player="topPlayer"
         :initial-player-list="restOfPlayers"
