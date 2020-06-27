@@ -155,7 +155,10 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    if (this.isPlayerModalOpen) {
+    if (to.name.indexOf('login') !== -1 || to.name.indexOf('signup') !== -1) {
+      if (process.client) document.documentElement.style.overflow = 'auto';
+      next();
+    } else if (this.isPlayerModalOpen) {
       this.closePlayerModalHandler();
       next(false);
     } else {
