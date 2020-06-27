@@ -1,9 +1,6 @@
 <template>
   <div class="search">
-    <div
-      v-if="searchPlayerList.length > 0"
-      class="search__body"
-    >
+    <div class="search__body">
       <div class="search__title">
         <h2 v-if="$route.query.keyword">
           <span>Search result for</span>"{{ $route.query.keyword }}"
@@ -40,6 +37,7 @@
       </div>
 
       <nos-player-list
+        v-if="searchPlayerList.length > 0"
         :top-player="topPlayer"
         :initial-player-list="searchPlayerList"
         @selectPlayer="selectPlayerHandler"
@@ -57,12 +55,22 @@
     </div>
 
 
+    <div class="search__progress-circular">
+      <v-progress-circular
+        v-if="!isSearchFinished"
+        :size="20"
+        :width="2"
+        :color="'#808080'"
+        indeterminate
+      />
+    </div>
+
+
     <!-- NO SEARCH RESULT UI -->
     <div
-      v-if="searchPlayerList.length === 0"
+      v-if="isSearchFinished && searchPlayerList.length === 0"
       class="search__empty"
     >
-      <h1>"{{ $route.query.keyword }}"</h1>
       <h2>No results found</h2>
       <p>Try different keywords or filter by club</p>
     </div>

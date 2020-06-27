@@ -41,9 +41,16 @@
     margin: 0 auto;
   }
 
+  &__progress-circular {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &__empty {
     position: absolute;
-    top: 42%;
+    top: 48%;
     left: 50%;
     width: 80%;
     transform: translate(-50%, -50%);

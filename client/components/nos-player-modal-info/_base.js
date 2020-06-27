@@ -197,7 +197,7 @@ export default {
 
 
     showAllVotes() {
-      if (this.$route.name.indexOf('history') === -1) {
+      if (!this.isHistorical) {
         if (!this.checkIsLoggedIn()) return;
       }
 
@@ -205,7 +205,7 @@ export default {
     },
 
     async addPlayerVote(vote) {
-      if (this.$route.name.indexOf('history') !== -1) return;
+      if (this.isHistorical) return;
       if (!this.checkIsLoggedIn()) return; 
 
       try {

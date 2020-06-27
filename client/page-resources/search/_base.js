@@ -30,51 +30,58 @@ export default {
   watchQuery: true,
   key: to => to.fullPath,
 
-  async asyncData({ $axios, error, route }) {
-    function getTopPlayer() {
-      return $axios.$get('/api/players/top-player');
-    }
-
-    function getPlayerList() {
-      return $axios.$get('/api/search', {
-        params: {
-          keyword: route.query.keyword,
-          clubId: route.query.clubId
-        }
-      });
-    }
-
-    try {
-      const [topPlayer, searchPlayerList] = await Promise.all([
-        getTopPlayer(), getPlayerList()
-      ]);
-
-      return { topPlayer, searchPlayerList };
-    } catch (err) {
-      console.error(err);
-      return error({ statusCode: 500 });
-    }
-  },
-
   data() {
     return {
       targetClub: {},
 
       isPlayerModalOpen: false,
       targetPlayer: {},
-      targetPlayerComments: []
+      targetPlayerComments: [],
+
+      topPlayer: {},
+      searchPlayerList: [],
+      isSearchFinished: false
     };
   },
 
   created() {
-    if (this.$route.query.clubId) {
-      this.targetClub = eplClubs.filter(club => {
-        return club.id === parseInt(this.$route.query.clubId);
-      })[0];
-    }
+    this.getSearchResult();
+    if (this.$route.query.clubId)
+      this.setTargetClub();
   },
 
   methods: {
+    // 이 로직은 원래 asyncData로 처리했지만
+    // /search?clubId=a 에서 모달이 열렸을때, 뒤로가기를 누르면 모달이 닫히면서 /search?clubId=b 에 해당하는
+    // asycnData가 호출되길래 created로 옮겨봤다.
+    // 이상하게 원치 않는 호출도 멈췄고, 비정상적인 url 재설정도 멈추었다. 
+    async getSearchResult() {
+      try {
+        const [topPlayer, searchPlayerList] = await Promise.all([
+          this.$axios.$get('/api/players/top-player'),
+          this.$axios.$get('/api/search', {
+            params: {
+              keyword: this.$route.query.keyword,
+              clubId: this.$route.query.clubId
+            }
+          })
+        ]);
+
+        this.isSearchFinished = true;
+        this.topPlayer = topPlayer;
+        this.searchPlayerList = searchPlayerList;
+      } catch (err) {
+        console.error(err);
+        return this.$nuxt.error({ statusCode: 500 });
+      }
+    },
+
+    setTargetClub() {
+      this.targetClub = eplClubs.filter(club => {
+        return club.id === parseInt(this.$route.query.clubId);
+      })[0];
+    },
+  
     async selectPlayerHandler(selectedPlayer) {
       try {
         if (process.client) document.documentElement.style.overflow = 'hidden';
@@ -124,6 +131,11 @@ export default {
   // 이는 정상적인 현상으로 보기에 살짝 옥의 티처럼 느껴지긴 하지만 더 나은 해결책이 있을때까지는
   // 그냥 두기로 한다.
   // 참고 : https://router.vuejs.org/kr/guide/advanced/navigation-guards.html 여기에서 next(false)를 볼것
+
+  // 작업중에 search페이지의 데이터 요청을 asyncData에서 created로 옮겼더니 위 현상이 해결되었다.
+  // 옮긴 이유 = routeUpdate시 원치않는 http 요청 발생 (이전 페이지의 asyncData에 있는 요청)
+  // asyncData와 뭔가 관련이 있는것은 확실해 보이는데 파고들지는 않았다. 일단 이걸로 너무 골머리를 썩어서
+  // 놔뒀다 나중에 알아보던가 할것이다.
   beforeRouteUpdate(to, from, next) {
     if (this.isPlayerModalOpen) {
       this.closePlayerModalHandler();
