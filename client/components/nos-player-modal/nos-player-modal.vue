@@ -115,8 +115,8 @@
 
                   <div class="player-modal__comment-sortby">
                     <button
-                      class="player-modal__sortby-button"
-                      :class="{'player-modal__sortby-button--active': commentSortType === 'like'}"
+                      class="player-modal__comment-sortby-btn"
+                      :class="{'player-modal__comment-sortby-btn--active': commentSortType === 'like'}"
                       @click="sortCommentBy('like')"
                     >
                       <v-icon>mdi-thumbs-up-down</v-icon>
@@ -124,8 +124,8 @@
                     </button>
 
                     <button
-                      class="player-modal__sortby-button"
-                      :class="{'player-modal__sortby-button--active': commentSortType === 'date'}"
+                      class="player-modal__comment-sortby-btn"
+                      :class="{'player-modal__comment-sortby-btn--active': commentSortType === 'date'}"
                       @click="sortCommentBy('date')"
                     >
                       <v-icon>mdi-octagram</v-icon>

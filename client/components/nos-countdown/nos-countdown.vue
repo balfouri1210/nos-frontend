@@ -2,7 +2,7 @@
   <div
     class="nos-countdown"
     :class="{
-      'nos-countdown--season': $store.getters.getAppStatus === 'season',
+      'nos-countdown--season': $store.getters.getAppStatus === 'season' || !$store.getters.getAppStatus,
       'nos-countdown--lastStage': $store.getters.getAppStatus === 'lastStage',
       'nos-countdown--preseason': $store.getters.getAppStatus === 'preseason'
     }"

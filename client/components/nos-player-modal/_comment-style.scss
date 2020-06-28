@@ -71,6 +71,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  &__comment-count {
+    height: 30px;
 
     .v-icon {
       margin-right: 4px;
@@ -81,14 +84,11 @@
       font-size: 13px;
     }
   }
-  &__comment-count {
-    height: 30px;
-  }
   &__comment-sortby {
     display: flex;
     align-items: center;
   }
-  &__sortby-button {
+  &__comment-sortby-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,14 +98,19 @@
     border-radius: 12px;
 
     .v-icon {
-      font-size: 16px;
+      margin-right: 4px;
+      font-size: 14px;
+    }
+
+    span {
+      font-size: 12px;
     }
 
     .v-icon, span {
       color: rgba(0, 0, 0, 0.72);
     }
   }
-  &__sortby-button--active {
+  &__comment-sortby-btn--active {
     border: 1px solid $nos-main-theme;
     background: rgba($nos-main-theme, 0.1);
 
@@ -222,7 +227,7 @@
 
     &-content {
       display: block;
-      max-height: 5.1rem;
+      max-height: 4.2rem;
       padding-right: 40px;
       line-height: 1.1rem;
       font-size: 13px;
@@ -237,7 +242,7 @@
       }
     }
     &-content--expanded {
-      max-height: unset;
+      max-height: unset !important;
       overflow: visible;
     }
   }
@@ -311,24 +316,6 @@
     }
   }
 
-  &__v-menu {
-    font-size: 13px;
-
-    .v-icon {
-      margin-right: 8px;
-      font-size: 18px;
-    }
-
-    .v-list-item {
-      min-width: 110px;
-      font-size: 15px;
-    }
-
-    .v-list-item__title {
-      font-size: unset;
-    }
-  }
-
   &--is-voted {
     .v-icon {
       color: $nos-main-theme !important;
@@ -369,6 +356,19 @@
       }
     }
 
+    &__comment-sortby-btn {
+      padding: 1px 8px;
+
+      .v-icon {
+        margin-right: 4px;
+        font-size: 16px;
+      }
+  
+      span {
+        font-size: 13px;
+      }
+    }
+
     &__no-comments {
       min-height: 300px;
     }
@@ -387,6 +387,7 @@
       }
 
       &-content {
+        max-height: 5.1rem;
         font-size: 14px;
         line-height: 1.3rem;
       }
