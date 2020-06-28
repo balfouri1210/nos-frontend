@@ -2,8 +2,11 @@ import U from '../lib/util';
 import jwtDecode from 'jwt-decode';
 
 export const state = () => ({
-  isLoading: false,
+  serviceStatus: 'maintenance', // normal, maintenance
+  comebackTime: '202006280930',
+
   appStatus: 'season',
+  isLoading: false,
   seasonEnd: null,
   seasonStart: null,
   durationToEvent: 0,
@@ -49,12 +52,21 @@ export const mutations = {
 };
 
 export const getters = {
-  getIsLoading(state) {
-    return state.isLoading;
+  getServiceStatus(state) {
+    return state.serviceStatus;
   },
+
+  getComebackTime(state) {
+    return state.comebackTime;
+  },
+
 
   getAppStatus(state) {
     return state.appStatus;
+  },
+
+  getIsLoading(state) {
+    return state.isLoading;
   },
 
   getSeasonEnd(state) {
@@ -101,9 +113,11 @@ export const actions = {
   // nuxtServerInit document
   // https://ko.nuxtjs.org/guide/vuex-store/#nuxtserverinit-%EC%95%A1%EC%85%98
   // params: vuexContext, context
-  nuxtServerInit ({ commit }, { req }) {
+  nuxtServerInit ({ commit }, { req, app, redirect, store }) {
     try {
-      if (req.headers.cookie) {
+      if (store.getters.getServiceStatus === 'maintenance') {
+        return redirect(app.localePath('maintenance'));
+      } else if (req.headers.cookie) {
         const cookie = U.cookieParser(req.headers.cookie);
         const jwt = cookie.nosJwt;
         if (jwt) {
