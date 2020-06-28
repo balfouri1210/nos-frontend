@@ -61,6 +61,14 @@
     }
   }
 
+  &__v-menu {
+    .v-icon {
+      margin-right: 4px;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
   &__right {
     flex: none;
     flex-basis: 360px;

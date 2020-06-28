@@ -62,46 +62,37 @@
                   v-if="comments.length"
                   class="player-modal__comment-option"
                 >
-                  <div>
+                  <div class="player-modal__comment-count">
                     <v-icon>mdi-message-reply-text</v-icon>
                     <span>{{ player.comment_count }}</span>
                   </div>
 
-                  <v-menu
-                    :content-class="'player-modal__v-menu'"
-                    transition="slide-y-transition"
-                    bottom
-                    left
-                    :offset-y="true"
-                  >
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        text
-                        v-on="on"
-                      >
-                        <v-icon>mdi-tune</v-icon>
-                        <span>Sort by</span>
-                      </v-btn>
-                    </template>
+                  <div class="player-modal__comment-sortby">
+                    <button
+                      class="player-modal__comment-sortby-btn"
+                      :class="{'player-modal__comment-sortby-btn--active': commentSortType === 'like'}"
+                      @click="sortCommentBy('like')"
+                    >
+                      <v-icon>mdi-thumbs-up-down</v-icon>
+                      <span>Like</span>
+                    </button>
 
-                    <v-list>
-                      <v-list-item @click="sortCommentBy('like')">
-                        <v-list-item-title>
-                          <v-icon>mdi-thumbs-up-down</v-icon>Like
-                        </v-list-item-title>
-                      </v-list-item>
-
-                      <v-list-item @click="sortCommentBy('date')">
-                        <v-list-item-title>
-                          <v-icon>mdi-update</v-icon>Date
-                        </v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
+                    <button
+                      class="player-modal__comment-sortby-btn"
+                      :class="{'player-modal__comment-sortby-btn--active': commentSortType === 'date'}"
+                      @click="sortCommentBy('date')"
+                    >
+                      <v-icon>mdi-octagram</v-icon>
+                      <span>New</span>
+                    </button>
+                  </div>
                 </div>
 
                 <!-- COMMENT LIST AREA -->
-                <div class="player-modal__comments">
+                <div
+                  class="player-modal__comments"
+                  :class="{'player-modal__comments--changing': isCommentsLoading}"
+                >
                   <!-- NO COMMENT UI -->
                   <div
                     v-if="!comments.length && !isCommentsLoading"

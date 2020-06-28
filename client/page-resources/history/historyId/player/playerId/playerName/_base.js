@@ -184,7 +184,7 @@ export default {
         parentComment.replies = await this.$axios.$get(
           `/api/histories/${this.historyId}/player/${this.playerId}/replies`, {
             params: {
-              parentCommentsId: parentComment.id
+              parentCommentId: parentComment.id
             }
           }
         );
@@ -203,7 +203,7 @@ export default {
         const moreReplise = await this.$axios.$get(`/api/histories/${this.historyId}/player/${this.playerId}/replies`, {
           params: {
             maxId: parentComment.replies[parentComment.replies.length - 1].id,
-            parentCommentsId: parentComment.id
+            parentCommentId: parentComment.id
           }
         });
         parentComment.replies = parentComment.replies.concat(moreReplise);

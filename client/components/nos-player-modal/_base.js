@@ -289,8 +289,8 @@ export default {
         const addReplyResult = await this.$axios.$post('/api/replies/player', {
           playerId: this.playerId,
           content: parentComment.replyContent,
-          parentCommentsId: parentComment.id,
-          parentAuthorId: parentComment.users_id
+          parentCommentId: parentComment.id,
+          parentAuthorId: parentComment.user_id
         });
 
         this.showAddedReply(parentComment, addReplyResult);
@@ -307,11 +307,11 @@ export default {
         id: addReplyResult.id,
         username: this.getUsername(),
         content: parentComment.replyContent,
-        parent_comments_id: parentComment.id,
+        parent_comment_id: parentComment.id,
         created_at: new Date(),
         vote_up_count: 0,
         vote_down_count: 0,
-        users_id: this.getId()
+        user_id: this.getId()
       };
 
       if (parentComment.isReply) parentComment.replies.unshift(addedReply);
@@ -357,7 +357,7 @@ export default {
       try {
         await this.$axios.$delete(`/api/replies/player/${targetReply.id}`, {
           params: {
-            parentCommentsId: parentComment.id
+            parentCommentId: parentComment.id
           }
         });
         alert('It was deleted successfully.');
@@ -431,8 +431,8 @@ export default {
 
     requestVotePlayerOpinion(opinion, vote) {
       return this.$axios.$post('/api/vote/opinion', {
-        targetAuthorId: opinion.users_id,
-        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+        targetAuthorId: opinion.user_id,
+        targetOpinion: opinion.parent_comment_id ? 'player_reply' : 'player_comment',
         targetOpinionId: opinion.id,
         vote
       });
@@ -440,7 +440,7 @@ export default {
 
     updateVotePlayerOpinion(opinion, previousVote, vote) {
       return this.$axios.$put('/api/vote/opinion', {
-        targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+        targetOpinion: opinion.parent_comment_id ? 'player_reply' : 'player_comment',
         targetOpinionId: opinion.id,
         previousVote,
         vote
@@ -450,7 +450,7 @@ export default {
     requestCancelVotePlayerOpinion(opinion, vote) {
       return this.$axios.$delete('/api/vote/opinion', {
         params: {
-          targetOpinion: opinion.parent_comments_id ? 'player_replies' : 'player_comments',
+          targetOpinion: opinion.parent_comment_id ? 'player_reply' : 'player_comment',
           targetOpinionId: opinion.id,
           vote
         }
@@ -478,7 +478,7 @@ export default {
 
     async saveReport() {
       try {
-        const type = this.reportTargetObject.parent_comments_id ? 'replies' : 'comments';
+        const type = this.reportTargetObject.parent_comment_id ? 'replies' : 'comments';
   
         await this.$axios.$post('/api/report', {
           object: `player_${type}`,

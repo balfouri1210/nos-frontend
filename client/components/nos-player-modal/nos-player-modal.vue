@@ -233,7 +233,7 @@
                                   </v-btn>
                                 </template>
 
-                                <v-list v-if="comment.users_id === getId()">
+                                <v-list v-if="comment.user_id === getId()">
                                   <v-list-item @click="editComment(comment)">
                                     <v-list-item-title>
                                       <v-icon>mdi-pencil</v-icon>Edit
@@ -451,7 +451,7 @@
                                       </v-btn>
                                     </template>
 
-                                    <v-list v-if="reply.users_id === getId()">
+                                    <v-list v-if="reply.user_id === getId()">
                                       <v-list-item @click="editReply(reply)">
                                         <v-list-item-title>
                                           <v-icon>mdi-pencil</v-icon>Edit

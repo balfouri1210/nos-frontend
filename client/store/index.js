@@ -2,7 +2,7 @@ import U from '../lib/util';
 import jwtDecode from 'jwt-decode';
 
 export const state = () => ({
-  serviceStatus: 'maintenance', // normal, maintenance
+  serviceStatus: 'normal', // normal, maintenance
   comebackTime: '202006280930',
 
   appStatus: 'season',
