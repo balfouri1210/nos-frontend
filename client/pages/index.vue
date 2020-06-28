@@ -12,13 +12,17 @@
         </nos-countdown>
       </client-only>
 
-      <nos-top-player :top-player="topPlayer" />
+      <nos-top-player
+        :top-player="topPlayer"
+        :need-player-comments-preview="true"
+      />
 
       <nos-main-event />
 
       <nos-player-list
         :top-player="topPlayer"
         :initial-player-list="restOfPlayers"
+        :need-player-comments-preview="true"
       />
     </div>
 

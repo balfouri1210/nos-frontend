@@ -44,6 +44,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      playerCommentsPreview: []
+    };
+  },
+
   methods: {
     seasonEndHandler() {
       window.location.reload();

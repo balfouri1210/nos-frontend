@@ -1,4 +1,4 @@
-.player-top {
+.top-player {
   position: relative;
   display: block;
   width: 100%;
@@ -33,10 +33,10 @@
     grid-column-start: 2;
     grid-column-end: 4;
   }
-
-  &__meta-content {
+  &__meta-body {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0 16px;
 
     img {
@@ -46,8 +46,30 @@
     }
   }
 
+  &__comments-preview {
+    margin-top: 8px;
+    padding: 0 16px;
+
+    p {
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 300;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 300;
+      color: $color-primary;
+    }
+  }
+
   &__profile-wrapper {
-    .player-top__known-as {
+    .top-player__known-as {
       font-size: 20px;
       font-weight: 300;
     }
@@ -190,7 +212,7 @@
 
 
 @media screen and (min-width: 680px) {
-  .player-top {
+  .top-player {
     &__div {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -198,7 +220,7 @@
 }
 
 @media screen and (min-width: $mobile-width) {
-  .player-top {
+  .top-player {
     margin-bottom: 12px;
 
     &__div {
@@ -208,22 +230,28 @@
     &__meta {
       grid-column-end: 5;
     }
-
-    &__meta-content {
-      align-items: center;
-
+    &__meta-body {
       img {
         width: 40px;
         margin-top: 0;
         margin-right: 14px;
       }
-   }
+    }
+    &__comments-preview {
+      width: 60%;
+      margin: 16px auto 0;
+
+      p {
+        margin-bottom: 2px;
+        font-size: 15px;
+      }
+    }
 
     &__profile-wrapper {
       display: flex;
       align-items: center;
 
-      .player-top__known-as {
+      .top-player__known-as {
         font-size: 32px;
       }
     }

@@ -1,9 +1,9 @@
 <template>
   <button
-    class="player-top"
+    class="top-player"
     @click="selectPlayer(topPlayer)"
   >
-    <div class="player-top__div">
+    <div class="top-player__div">
       <div class="player__header">
         <div class="player__hits-and-comment">
           <p>
@@ -19,7 +19,7 @@
       </div>
 
       <div
-        class="player-top__image"
+        class="top-player__image"
         :style="{
           backgroundImage: `url(${nosImageUrl}/players/${topPlayer.id}.jpg), url(${nosImageUrl}/players/default2.png)`,
           backgroundRepeat: 'no-repeat',
@@ -38,17 +38,37 @@
         </div>
       </div>
 
-      <div class="player-top__meta">
-        <div class="player-top__meta-content">
-          <img
-            :src="`/flags/${topPlayer.country_code.toLowerCase()}.png`"
-            :alt="topPlayer.country_code"
-          >
-          <div class="player-top__profile-wrapper">
-            <p class="player-top__known-as">
-              {{ topPlayer.known_as }}
-            </p>
+      <div class="top-player__meta">
+        <div style="width: 100%">
+          <div class="top-player__meta-body">
+            <img
+              :src="`/flags/${topPlayer.country_code.toLowerCase()}.png`"
+              :alt="topPlayer.country_code"
+            >
+            <div class="top-player__profile-wrapper">
+              <p class="top-player__known-as">
+                {{ topPlayer.known_as }}
+              </p>
+            </div>
           </div>
+
+          <transition name="fade">
+            <div
+              v-if="topPlayerCommentsPreview.length > 0"
+              class="top-player__comments-preview"
+            >
+              <ul>
+                <li
+                  v-for="(comment, index) in topPlayerCommentsPreview"
+                  :key="index"
+                >
+                  <p>"{{ comment.content }}"</p>
+                </li>
+              </ul>
+
+              <span>Show more</span>
+            </div>
+          </transition>
         </div>
       </div>
     </div> 
@@ -56,7 +76,7 @@
     <img
       src="https://images.907degrees.com/logos/logo.svg"
       alt="logo"
-      class="player-top__logo"
+      class="top-player__logo"
     >
   </button>
 </template>

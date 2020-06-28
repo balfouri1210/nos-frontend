@@ -51,17 +51,35 @@
             }"
           />
 
-          <div class="player__meta">
-            <div>
-              <img
-                v-if="player.image_url === 'n'"
-                :class="{'centered': player.image_url === 'n'}"
-                class="player__meta-club"
-                :src="player.club_image"
-                alt="club"
-              >
+          <img
+            v-if="player.image_url === 'n'"
+            :class="{'centered': player.image_url === 'n'}"
+            class="player__meta-club"
+            :src="player.club_image"
+            alt="club"
+          >
 
-              <p>
+          <div
+            class="player__meta"
+            :style="{
+              height: playerMetaHeight(player)
+            }"
+          >
+            <div>
+              <div class="player__meta-comments-preview">
+                <transition name="fade">
+                  <ul v-if="player.commentsPreview">
+                    <li
+                      v-for="(comment, commentIndex) in player.commentsPreview"
+                      :key="commentIndex"
+                    >
+                      <p>"{{ comment.content }}"</p>
+                    </li>
+                  </ul>
+                </transition>
+              </div>
+
+              <p class="player__meta-known-as">
                 <img
                   class="player__meta-flag"
                   :src="`/flags/${player.country_code.toLowerCase()}.png`"
@@ -69,7 +87,11 @@
                 >
                 {{ player.known_as }}
               </p>
-              <p>
+
+              <p
+                v-if="$route.name.indexOf('index') === -1"
+                class="player__meta-birth-height"
+              >
                 <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
                 <span v-if="player.height > 0"> / {{ player.height }}cm</span>
               </p>

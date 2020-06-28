@@ -5,6 +5,11 @@ export default {
       default: () => {}
     },
 
+    needPlayerCommentsPreview: {
+      type: Boolean,
+      default: false
+    },
+
     isHistorical: {
       type: Boolean,
       default: false
@@ -18,11 +23,29 @@ export default {
 
   data() {
     return {
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      nosImageUrl: process.env.NOS_IMAGE_URL,
+      topPlayerCommentsPreview: []
     };
   },
 
+  async created() {
+    try {
+      if (this.needPlayerCommentsPreview)
+        this.topPlayerCommentsPreview = await this.getPlayerCommentsPreview(this.topPlayer);
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
   methods: {
+    getPlayerCommentsPreview(player) {
+      return this.$axios.$get('/api/comments/preview/player', {
+        params: {
+          playerIdList: player.id
+        }
+      });
+    },
+
     async selectPlayer(player) {
       try {
         if (this.isHistorical) {

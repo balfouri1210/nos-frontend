@@ -1,6 +1,3 @@
-// import U from '@/lib/util';
-// import { PLAYER_LIST_MAX } from '@/lib/constants';
-
 export default {
   props: {
     topPlayer: {
@@ -8,9 +5,15 @@ export default {
       default: () => {}
     },
 
+    // 요놈이 존재하는 이유 : page에서 asyncData로 최초 데이터를 받아온 상태에서 렌더링하기 위함.
     initialPlayerList: {
       type: Array,
       default: () => []
+    },
+
+    needPlayerCommentsPreview: {
+      type: Boolean,
+      default: false
     },
 
     isHistorical: {
@@ -29,7 +32,8 @@ export default {
       playerList: this.initialPlayerList.slice(0),
       isMorePlayersLoading: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
-      totalPlayerCount: 0
+      totalPlayerCount: 0,
+      innerWidth: process.client? window.innerWidth : 0
     };
   },
 
@@ -52,12 +56,30 @@ export default {
           return Math.round((907 * score) / Math.round(this.topPlayer.score));
         }
       };
+    },
+
+    // meta영역의 height를 comments preview갯수에 따라 동적으로 설정하기 위한 변수.
+    playerMetaHeight() {
+      return (player) => {
+        if (player.commentsPreview) {
+          if (this.innerWidth < 865) {
+            return `${3 + (player.commentsPreview.length * 2)}rem`;
+          } else {
+            return `${6 + (player.commentsPreview.length * 3.5)}rem`;
+          }
+        }
+      };
     }
   },
 
   async created() {
-    // 총 선수 수를 할당 (선수가 모두 로딩되었을 때, 자동 로딩을 멈추기 위한 장치)
     try {
+      if (this.needPlayerCommentsPreview) {
+        const playerCommentsPreview = await this.getPlayerCommentsPreview(this.playerList);
+        this.playerCommentsPreviewMapping(this.playerList, playerCommentsPreview);
+      }
+
+      // 총 선수 수를 할당 (선수가 모두 로딩되었을 때, 자동 로딩을 멈추기 위한 장치)
       if (this.$route.name.indexOf('history') === -1) {
         this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
       } else {
@@ -69,9 +91,8 @@ export default {
   },
 
   mounted() {
-    if (this.$route.name.indexOf('search') === -1) {
+    if (this.$route.name.indexOf('search') === -1)
       window.addEventListener('scroll', this.detectScroll);
-    }
   },
 
   destroyed() {
@@ -79,6 +100,22 @@ export default {
   },
 
   methods: {
+    getPlayerCommentsPreview(playerList) {
+      const playerIdList = playerList.map(player => player.id);
+
+      return this.$axios.$get('/api/comments/preview/player', {
+        params: {
+          playerIdList: playerIdList.toString()
+        }
+      });
+    },
+
+    playerCommentsPreviewMapping(playerList, playerCommentsPreview) {
+      playerList.forEach(player => {
+        this.$set(player, 'commentsPreview', playerCommentsPreview.filter(comment => comment.player_id === player.id));
+      });
+    },
+
     async selectPlayer(player) {
       try {
         if (this.isHistorical) {
@@ -115,13 +152,28 @@ export default {
 
       try {
         this.isMorePlayersLoading = true;
+        let loadedPlayers;
 
-        const apiUrl = this.isHistorical ? `/api/histories/player/${this.historyId}` : '/api/players';
-        const loadedPlayers = await this.$axios.$get(apiUrl, {
-          params: {
-            previousPlayerIdList: this.previousPlayerIdList
+        if (this.isHistorical) {
+          // History에서의 Load more player
+          loadedPlayers = await this.$axios.$get(`/api/histories/player/${this.historyId}`, {
+            params: {
+              previousPlayerIdList: this.previousPlayerIdList
+            }
+          });
+        } else {
+          // 메인페이지에서의 Load more player
+          loadedPlayers = await this.$axios.$get('/api/players', {
+            params: {
+              previousPlayerIdList: this.previousPlayerIdList
+            }
+          });
+
+          if (this.needPlayerCommentsPreview) {
+            const loadedPlayerCommentsPreview = await this.getPlayerCommentsPreview(loadedPlayers);
+            this.playerCommentsPreviewMapping(loadedPlayers, loadedPlayerCommentsPreview);
           }
-        });
+        }
 
         this.playerList = this.playerList.concat(loadedPlayers);
       } catch (err) {
