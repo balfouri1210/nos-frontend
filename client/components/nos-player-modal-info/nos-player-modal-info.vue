@@ -9,7 +9,7 @@
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
         }"
-        @click="watchOnYoutube"
+        @click="watchOnYoutube(player.known_as)"
       >
         <div class="player__header">
           <p

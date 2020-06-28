@@ -13,6 +13,56 @@
     border-bottom: 1px solid black;
   }
 
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 2px 5px;
+    font-size: 13px;
+    font-weight: 300;
+    z-index: 1;
+
+    .v-icon {
+      margin-right: 3px;
+      font-size: 14px;
+    }
+  }
+  &__hits-and-comment {
+    * {
+      color: white;
+      font-size: 11px;
+      font-weight: 300;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+
+    .v-icon {
+      font-size: 12px;
+    }
+
+    span {
+      line-height: 13px;
+    }
+  }
+  &__temperature {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+
+    * {
+      color: #ff0102;
+    }
+  }
+
+
   &__image {
     position: relative;
     width: 100%;
@@ -85,131 +135,6 @@
   }
 }
 
-.player {
-  width: 100%;
-
-  button {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    padding: 2px 5px;
-    font-size: 13px;
-    font-weight: 300;
-    z-index: 1;
-
-    .v-icon {
-      margin-right: 3px;
-      font-size: 14px;
-    }
-  }
-  &__hits-and-comment {
-    * {
-      color: white;
-      font-size: 11px;
-      font-weight: 300;
-    }
-
-    p {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2px;
-    }
-
-    .v-icon {
-      font-size: 12px;
-    }
-
-    span {
-      line-height: 13px;
-    }
-  }
-  &__temperature {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-  }
-
-  &--degrees-over-0 { * { color: white; }}
-  &--degrees-over-100 { * { color: #eeff00; }}
-  &--degrees-over-200 { * { color: #fcc100; }}
-  &--degrees-over-400 { * { color: #ff9900; }}
-  &--degrees-over-600 { * { color: #ff7f16; }}
-  &--degrees-over-800 { * { color: #f44336; }}
-
-  &__image {
-    width: 100%;
-  }
-
-  &__image:before {
-    display: inline-block;
-    width: 100%;
-    height: 0;
-    padding-bottom: calc(100% / (1 / 1.47));
-    content: "";
-  }
-
-  &__meta {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 45%;
-    padding: 2px 4px 4px;
-    // background: rgba(0, 0, 0, 0.6);
-    background: linear-gradient(0, rgba(0, 0, 0, 0.75), transparent);
-    color: white;
-    text-align: center;
-
-    div {
-      width: 100%;
-    }
-
-    p {
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      word-break: break-all;
-    }
-    p:first-of-type {
-      font-size: 13px;
-      font-weight: 400;
-    }
-    p:last-of-type {
-      font-size: 11px;
-      font-weight: 300;
-      line-height: 13px;
-    }
-
-    &-flag {
-      width: 15px;
-      height: 10px;
-      margin-right: 4px;
-    }
-
-    span {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      word-break: break-all;
-      font-weight: 300;
-    }
-  }
-}
-
 
 @media screen and (min-width: 680px) {
   .top-player {
@@ -256,22 +181,6 @@
       }
     }
 
-    .player {
-      &__meta {
-        padding: 2px 8px 10px;
-        font-size: 13px;
-  
-        p:first-of-type {
-          margin-bottom: 2px;
-          font-size: 16px;
-        }
-        p:last-of-type {
-          font-size: 13px;
-          line-height: 16px;
-        }
-      }
-    }
-  
     // 선수 이미지가 없을 때 (image_url === 'n')를 위한 스타일
     .player--without-image {
       .player__meta {

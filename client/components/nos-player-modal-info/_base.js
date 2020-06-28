@@ -266,8 +266,8 @@ export default {
       });
     },
 
-    watchOnYoutube() {
-      const fallback = `https://youtube.com/results?search_query=${this.$route.params.playerName.replace(/-/g, ' ')}`;
+    watchOnYoutube(playerName) {
+      const fallback = `https://youtube.com/results?search_query=${playerName}`;
       window.open(fallback, '_blank');
 
       function killPopup() {

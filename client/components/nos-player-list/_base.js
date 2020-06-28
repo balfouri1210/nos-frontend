@@ -65,7 +65,7 @@ export default {
           if (this.innerWidth < 865) {
             return `${3 + (player.commentsPreview.length * 2)}rem`;
           } else {
-            return `${6 + (player.commentsPreview.length * 3.5)}rem`;
+            return `${6 + (player.commentsPreview.length * 2)}rem`;
           }
         }
       };

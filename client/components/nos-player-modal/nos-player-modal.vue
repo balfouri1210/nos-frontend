@@ -590,10 +590,10 @@
 
             <!-- MODAL RIGHT -->
             <div class="player-modal__right ">
-              <!-- <nos-fixtures-area
+              <nos-fixtures-area
                 :club-id="player.club_id"
                 :is-header="true"
-              /> -->
+              />
 
               <nos-news-area
                 :news-keyword="playerName"
