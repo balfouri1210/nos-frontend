@@ -12,6 +12,7 @@
       </div>
 
       <div class="fixture-area__body">
+        <!-- LAST FIXTURE -->
         <div
           class="fixture-wrapper"
           :style="{marginRight: '4px'}"
@@ -20,8 +21,18 @@
             class="fixture"
             @click="showLastFixtureInfo"
           >
-            <p class="fixture__timestamp">
-              {{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}
+            <p class="fixture__header">
+              <span
+                v-if="lastFixture.league.name === 'FA Cup'"
+                class="fixture__type fa"
+              >FA</span>
+              <span
+                v-if="lastFixture.league.name === 'Premier League'"
+                class="fixture__type epl"
+              >EPL</span>
+
+              <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
+
               <span
                 v-if="lastFixture.statusShort === '1H' || lastFixture.statusShort === '2H'"
                 class="fixture__live"
@@ -328,10 +339,20 @@
           </transition>
         </div>
 
+
+        <!-- NEXT FIXTURE -->
         <div class="fixture-wrapper">
           <div class="fixture">
-            <p class="fixture__timestamp">
-              {{ $moment.utc(nextFixture.event_date).format('YYYY.MM.DD HH:mm') }}
+            <p class="fixture__header">
+              <span
+                v-if="nextFixture.league.name === 'FA Cup'"
+                class="fixture__type fa"
+              >FA</span>
+              <span
+                v-if="nextFixture.league.name === 'Premier League'"
+                class="fixture__type epl"
+              >EPL</span>
+              <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
             </p>
 
             <div class="fixture__vs">

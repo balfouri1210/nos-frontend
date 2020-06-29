@@ -20,7 +20,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: `Weekly news and thoughts about ${this.$route.params.playerName.replace(
+          content: `Weekly news and fans' thoughts about ${this.$route.params.playerName.replace(
             /-/g,
             ' '
           )}.`

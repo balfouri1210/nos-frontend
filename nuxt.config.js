@@ -3,11 +3,15 @@ const env = require(`./config/${process.env.STAGE || 'local'}/env.js`);
 module.exports = {
   mode: 'universal',
   head: {
-    title: '907degrees',
+    title: '907degrees - Weekly Hottest Player',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '907degrees - Weekly Hottest Player' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Find out who is the most interested football player this week and Share thoughts with football fans'
+      },
       { name: 'theme-color', content: '#000000' },
       { name: 'google-site-verification', content: '3zp6wWo1KnDbOYUMSMGHw4TiYyXVEB7dEP-g89ifApg' },
 

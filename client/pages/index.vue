@@ -37,7 +37,20 @@
 import Base from '@/page-resources/index/_base';
 
 export default {
-  mixins: [Base]
+  mixins: [Base],
+  head() {
+    return {
+      title: '907degrees - Weekly Hottest Player',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Find out who is the most interested football player this week and Share thoughts with football fans'
+        }
+      ]
+    };
+  }
 };
 </script>
 
