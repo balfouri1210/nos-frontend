@@ -33,7 +33,7 @@ export default {
       isMorePlayersLoading: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
       totalPlayerCount: 0,
-      innerWidth: process.client? window.innerWidth : 0
+      innerWidth: process.client ? window.innerWidth : 0
     };
   },
 

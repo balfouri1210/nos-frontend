@@ -115,8 +115,9 @@ export default {
 
   async created() {
     try {
-      this.manipulateHits();
       this.calculatePlayerTemperature();
+      if (process.client)
+        this.manipulateHits();
     } catch (err) {
       console.error(err);
     }
