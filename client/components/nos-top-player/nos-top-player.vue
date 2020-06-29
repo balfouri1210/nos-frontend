@@ -16,7 +16,7 @@
         <div class="top-player__header">
           <div class="top-player__hits-and-comment">
             <p>
-              <v-icon>mdi-eye</v-icon>
+              <v-icon>mdi-eye-outline</v-icon>
               <span>{{ topPlayer.hits | thousandSeparator }}</span>
             </p>
 
@@ -28,7 +28,7 @@
 
           <p class="top-player__temperature">
             <v-icon>mdi-fire</v-icon>
-            <span>HOTTEST</span>
+            <span>Hottest</span>
           </p>
         </div>
 

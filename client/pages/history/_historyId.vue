@@ -16,6 +16,7 @@
         :top-player="topPlayer"
         :is-historical="true"
         :history-id="$route.params.historyId"
+        :need-player-comments-preview="true"
       />
 
       <nos-player-list
@@ -23,6 +24,7 @@
         :initial-player-list="restOfPlayers"
         :is-historical="true"
         :history-id="$route.params.historyId"
+        :need-player-comments-preview="true"
       />
 
       <!-- Nuxt child for player modal -->

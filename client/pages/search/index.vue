@@ -40,6 +40,8 @@
         v-if="searchPlayerList.length > 0"
         :top-player="topPlayer"
         :initial-player-list="searchPlayerList"
+        :need-player-comments-preview="true"
+        :need-player-meta="true"
         @selectPlayer="selectPlayerHandler"
       />
     </div>

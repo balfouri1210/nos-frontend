@@ -89,7 +89,7 @@
               </p>
 
               <p
-                v-if="$route.name.indexOf('index') === -1"
+                v-if="needPlayerMeta"
                 class="player__meta-birth-height"
               >
                 <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>

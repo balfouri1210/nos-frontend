@@ -16,6 +16,11 @@ export default {
       default: false
     },
 
+    needPlayerMeta: {
+      type: Boolean,
+      default: false
+    },
+
     isHistorical: {
       type: Boolean,
       default: false
@@ -103,11 +108,19 @@ export default {
     getPlayerCommentsPreview(playerList) {
       const playerIdList = playerList.map(player => player.id);
 
-      return this.$axios.$get('/api/comments/preview/player', {
-        params: {
-          playerIdList: playerIdList.toString()
-        }
-      });
+      if (this.isHistorical) {
+        return this.$axios.$get(`/api/histories/${this.historyId}/player/comments/preview`, {
+          params: {
+            playerIdList: playerIdList.toString()
+          }
+        });
+      } else {
+        return this.$axios.$get('/api/comments/preview/player', {
+          params: {
+            playerIdList: playerIdList.toString()
+          }
+        });
+      }
     },
 
     playerCommentsPreviewMapping(playerList, playerCommentsPreview) {
@@ -161,6 +174,11 @@ export default {
               previousPlayerIdList: this.previousPlayerIdList
             }
           });
+
+          if (this.needPlayerCommentsPreview) {
+            const loadedPlayerCommentsPreview = await this.getPlayerCommentsPreview(loadedPlayers);
+            this.playerCommentsPreviewMapping(loadedPlayers, loadedPlayerCommentsPreview);
+          }
         } else {
           // 메인페이지에서의 Load more player
           loadedPlayers = await this.$axios.$get('/api/players', {

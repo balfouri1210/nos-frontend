@@ -39,11 +39,19 @@ export default {
 
   methods: {
     getPlayerCommentsPreview(player) {
-      return this.$axios.$get('/api/comments/preview/player', {
-        params: {
-          playerIdList: player.id
-        }
-      });
+      if (this.isHistorical) {
+        return this.$axios.$get(`/api/histories/${this.historyId}/player/comments/preview`, {
+          params: {
+            playerIdList: player.id
+          }
+        });
+      } else {
+        return this.$axios.$get('/api/comments/preview/player', {
+          params: {
+            playerIdList: player.id
+          }
+        });
+      }
     },
 
     async selectPlayer(player) {

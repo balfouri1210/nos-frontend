@@ -27,8 +27,8 @@
     z-index: 1;
 
     .v-icon {
-      margin-right: 3px;
-      font-size: 14px;
+      margin-right: 2px;
+      font-size: 12px;
     }
   }
   &__hits-and-comment {
@@ -36,6 +36,7 @@
       color: white;
       font-size: 11px;
       font-weight: 300;
+      line-height: 13px;
     }
 
     p {
@@ -43,22 +44,18 @@
       align-items: center;
       margin-bottom: 2px;
     }
-
-    .v-icon {
-      font-size: 12px;
-    }
-
-    span {
-      line-height: 13px;
-    }
   }
   &__temperature {
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 11px;
 
     * {
       color: #ff0102;
+    }
+
+    span {
+      line-height: 13px;
     }
   }
 
