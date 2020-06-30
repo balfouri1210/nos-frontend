@@ -59,28 +59,42 @@
                   <!-- FAKE COMMENT FORM -->
                   <div
                     v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'"
-                    class="player-modal__comment-editor"
+                    style="margin-bottom: 16px;"
                   >
-                    <input
-                      v-model="fakeUsername"
-                      type="text"
-                      maxlength="20"
-                      placeholder="Username"
-                      :style="{
-                        marginRight: '4px',
-                        padding: '8px 12px',
-                        border: '1px solid #dbdbdf'
-                      }"
+                    <div
+                      class="player-modal__comment-editor"
                     >
-                    <textarea
-                      v-model="fakeCommentContent"
-                      cols="30"
-                      rows="2"
-                      maxlength="300"
-                      :placeholder="`How was ${player.known_as} this week?`"
-                    />
+                      <input
+                        v-model="fakeUsername"
+                        type="text"
+                        maxlength="20"
+                        placeholder="Username"
+                        :style="{
+                          maxWidth: '100px',
+                          height: '100%',
+                          marginRight: '4px',
+                          padding: '8px 12px',
+                          border: '1px solid #1976d2',
+                          fontSize: '12px'
+                        }"
+                      >
+                      <textarea
+                        v-model="fakeCommentContent"
+                        cols="30"
+                        rows="2"
+                        maxlength="300"
+                        :placeholder="`How was ${player.known_as} this week?`"
+                        style="border: 1px solid #1976d2"
+                      />
+                    </div>
 
                     <button
+                      :style="{
+                        width: '100%',
+                        padding: '8px',
+                        backgroundColor: '#1976d2',
+                        color: 'white'
+                      }"
                       @click="addFakeComment"
                     >
                       ADD
