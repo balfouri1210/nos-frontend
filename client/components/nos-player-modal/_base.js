@@ -106,7 +106,6 @@ export default {
   },
 
   created() {
-    console.log(this.$store.getters['auth/getId']);
     if (this.player.comment_count < 0) this.player.comment_count = 0;
 
     this.comments = this.initialComments.slice(); // 최초 댓글들 복사
@@ -519,7 +518,7 @@ export default {
     // FOR FAKE COMMENTS
     async addFakeComment() {
       try {
-        const addedComment = this.$axios.$post('/api/comments/player/fake', {
+        const addedComment = await this.$axios.$post('/api/comments/player/fake', {
           fakeUsername: this.fakeUsername,
           playerId: this.playerId,
           content: this.fakeCommentContent

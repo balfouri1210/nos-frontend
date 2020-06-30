@@ -72,7 +72,7 @@
                         :style="{
                           maxWidth: '100px',
                           height: '100%',
-                          marginRight: '4px',
+                          marginRight: '6px',
                           padding: '8px 12px',
                           border: '1px solid #1976d2',
                           fontSize: '12px'
@@ -95,6 +95,7 @@
                         backgroundColor: '#1976d2',
                         color: 'white'
                       }"
+                      :disabled="!fakeUsername || !fakeCommentContent"
                       @click="addFakeComment"
                     >
                       ADD
