@@ -151,12 +151,13 @@ export default {
         });
         this.insertNewComment(addedComment);
         this.newCommentContent = '';
-        this.isCommentAdding = false;
         this.player.comment_count ++;
         this.$refs.addCommentRef.reset();
       } catch (err) {
         this.isCommentMalfunction = true;
         console.error(err);
+      } finally {
+        this.isCommentAdding = false;
       }
     },
 
@@ -518,6 +519,7 @@ export default {
     // FOR FAKE COMMENTS
     async addFakeComment() {
       try {
+        this.isCommentAdding = true;
         const addedComment = await this.$axios.$post('/api/comments/player/fake', {
           fakeUsername: this.fakeUsername,
           playerId: this.playerId,
@@ -530,6 +532,8 @@ export default {
         this.player.comment_count ++;
       } catch (err) {
         console.error(err);
+      } finally {
+        this.isCommentAdding = false;
       }
     }
   }
