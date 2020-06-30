@@ -34,6 +34,7 @@
               <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
 
               <span
+                v-if="lastFixture.statusShort === '1H' || lastFixture.statusShort === '2H'"
                 class="fixture__live"
               >{{ lastFixture.statusShort }}</span>
             </p>
