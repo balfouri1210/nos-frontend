@@ -2,21 +2,52 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px;
-  padding: 8px 16px;
+  margin: 4px 3px;
   border-radius: 4px;
-  // background: #d71a21;
-  background-image: url('/images/liverpool_background.png');
-  background-size: cover;
+  background: linear-gradient(160deg, #1976d2 30%, #b800f2 90%);
+  // background-image: url('/images/liverpool_background.png');
+  // background-size: cover;
 
   img {
     width: 20px;
     margin-right: 4px;
   }
 
+  button {
+    width: 100%;
+    padding: 8px 16px;
+  }
+
   p {
     color: white;
     font-size: 14px;
+    font-weight: 300;
+  }
+
+  &__dialog {
+    .v-card__title {
+      font-weight: 400;
+    }
+    .main-event__desc {
+      padding: 10px 28px 18px;
+      
+      p {
+        font-size: 13px;
+        font-weight: 300;
+      }
+    }
+  }
+
+  &__user-badge {
+    margin-right: 4px;
+    padding: 0 6px 0;
+    border-radius: 5px;
+    background: $nos-main-gradient;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 15px;
+    font-family: 'Kanit', sans-serif !important;
   }
 }
 
@@ -30,7 +61,15 @@
     }
 
     p {
-      font-size: 18px;
+      font-size: 16px;
+    }
+
+    &__dialog {
+      .main-event__desc {
+        p {
+          font-size: 16px;
+        }
+      }
     }
   }
 }
