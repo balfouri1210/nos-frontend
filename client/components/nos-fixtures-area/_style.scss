@@ -38,17 +38,16 @@
       margin-bottom: 8px;
     }
     &__timestamp {
+      display: inline-block;
+      margin: 0 4px;
       font-size: 12px;
       font-weight: 300;
-      line-height: 13px;
+      line-height: 15px;
     }
     &__type, &__live {
       display: inline-block;
-      padding: 1px 4px 0;
+      padding: 0.5px 4px;
       border-radius: 8px;
-    }
-    &__type {
-      margin-right: 4px;
       font-size: 11px;
       line-height: 11px;
     }
@@ -63,12 +62,9 @@
       color: #4d033d;
     }
     &__live {
-      margin-left: 4px;
       border: 1px solid #2cb6ff;
       background: rgba(#2cb6ff, 0.1);
       color: #2cb6ff;
-      font-size: 12px;
-      line-height: 13px;
     }
 
     &__vs {
