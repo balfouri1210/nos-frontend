@@ -54,6 +54,41 @@
                 <div class="player-modal__add-comment">
                   <label for="comment">Add a Comment</label>
 
+
+                  <!-- CAUTION !!!!!!!!! -->
+                  <!-- FAKE COMMENT FORM -->
+                  <div
+                    v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'"
+                    class="player-modal__comment-editor"
+                  >
+                    <input
+                      v-model="fakeUsername"
+                      type="text"
+                      maxlength="20"
+                      placeholder="Username"
+                      :style="{
+                        marginRight: '4px',
+                        padding: '8px 12px',
+                        border: '1px solid #dbdbdf'
+                      }"
+                    >
+                    <textarea
+                      v-model="fakeCommentContent"
+                      cols="30"
+                      rows="2"
+                      maxlength="300"
+                      :placeholder="`How was ${player.known_as} this week?`"
+                    />
+
+                    <button
+                      @click="addFakeComment"
+                    >
+                      ADD
+                    </button>
+                  </div>
+                  <!-- FAKE COMMENT FORM END -->
+
+
                   <validation-observer ref="addCommentRef">
                     <validation-provider
                       v-slot="{ errors, invalid }"
@@ -195,7 +230,7 @@
                               1°c
                             </span>
                             <p class="player-modal__comment-username">
-                              {{ comment.username }}
+                              {{ comment.fake_username || comment.username }}
                             </p>
                             <p class="player-modal__comment-moment">
                               {{ $moment(comment.created_at).fromNow() }}

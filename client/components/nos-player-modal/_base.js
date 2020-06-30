@@ -65,7 +65,11 @@ export default {
       isOpinionVoting: false,
       isCommunityGuide: false,
 
-      isShareUrlCopied: false
+      isShareUrlCopied: false,
+
+      // FOR FAKE COMMENT
+      fakeUsername: '',
+      fakeCommentContent: ''
     };
   },
 
@@ -102,6 +106,7 @@ export default {
   },
 
   created() {
+    console.log(this.$store.getters['auth/getId']);
     if (this.player.comment_count < 0) this.player.comment_count = 0;
 
     this.comments = this.initialComments.slice(); // 최초 댓글들 복사
@@ -507,6 +512,25 @@ export default {
       } else {
         // search player modal
         this.$emit('closePlayerModal');
+      }
+    },
+
+
+    // FOR FAKE COMMENTS
+    async addFakeComment() {
+      try {
+        const addedComment = this.$axios.$post('/api/comments/player/fake', {
+          fakeUsername: this.fakeUsername,
+          playerId: this.playerId,
+          content: this.fakeCommentContent
+        });
+        this.insertNewComment(addedComment);
+        this.fakeUsername = '';
+        this.fakeCommentContent = '';
+        this.isCommentAdding = false;
+        this.player.comment_count ++;
+      } catch (err) {
+        console.error(err);
       }
     }
   }

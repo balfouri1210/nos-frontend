@@ -27,7 +27,7 @@
   .fixture {
     width: 100%;
     height: 90px;
-    padding: 7px 12px 4px;
+    padding: 7px 6px 4px;
     border: 1px solid #e8e8e8;
     border-radius: 6px;
 
@@ -62,16 +62,16 @@
       color: #4d033d;
     }
     &__live {
-      border: 1px solid #2cb6ff;
-      background: rgba(#2cb6ff, 0.1);
-      color: #2cb6ff;
+      border: 1px solid $nos-main-theme;
+      background: rgba($nos-main-theme, 0.1);
+      color: $nos-main-theme;
     }
 
     &__vs {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      padding: 0 3px;
+      padding: 0 11px;
     }
 
     &__team {
@@ -254,7 +254,7 @@
 
     .fixture {
       &__vs {
-        padding: 0 6px;
+        padding: 0 9px;
       }
     }
 
