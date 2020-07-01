@@ -14,24 +14,29 @@
   }
 
   &__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
-    padding: 2px 5px;
+  }
+  &__header-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 3px 5px;
     font-size: 13px;
     font-weight: 300;
     z-index: 1;
 
     .v-icon {
       margin-right: 2px;
-      font-size: 12px;
+      font-size: 11.5px;
     }
   }
   &__hits-and-comment {
+    display: flex;
+    align-items: center;
+
     * {
       color: white;
       font-size: 11px;
@@ -42,7 +47,7 @@
     p {
       display: flex;
       align-items: center;
-      margin-bottom: 2px;
+      margin-right: 4px;
     }
   }
   &__temperature {
@@ -56,6 +61,16 @@
 
     span {
       line-height: 13px;
+    }
+  }
+  &__new-comment {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 6px;
+
+    span {
+      font-size: 10px;
+      line-height: 12px;
     }
   }
 
@@ -147,6 +162,25 @@
 
     &__div {
       grid-gap: 12px;
+    }
+
+    &__hits-and-comment {
+      * {
+        font-size: 13px;
+      }
+
+      p {
+        margin-right: 6px;
+      }
+    }
+    &__temperature {
+      font-size: 13px;
+    }
+    &__new-comment {
+      span {
+        font-size: 11px;
+        line-height: 13px;
+      }
     }
 
     &__meta {

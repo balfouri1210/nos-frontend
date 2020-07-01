@@ -14,22 +14,37 @@
         }"
       >
         <div class="top-player__header">
-          <div class="top-player__hits-and-comment">
-            <p>
-              <v-icon>mdi-eye-outline</v-icon>
-              <span>{{ topPlayer.hits | thousandSeparator }}</span>
-            </p>
+          <div class="top-player__header-content">
+            <div class="top-player__hits-and-comment">
+              <p>
+                <v-icon>mdi-message-processing-outline</v-icon>
+                <span>{{ topPlayer.comment_count | thousandSeparator }}</span>
+              </p>
 
-            <p>
-              <v-icon>mdi-message-processing-outline</v-icon>
-              <span>{{ topPlayer.comment_count | thousandSeparator }}</span>
+              <p>
+                <v-icon>mdi-eye-outline</v-icon>
+                <span>{{ topPlayer.hits | thousandSeparator }}</span>
+              </p>
+            </div>
+
+            <p class="top-player__temperature">
+              <v-icon>mdi-fire</v-icon>
+              <span>Hottest</span>
             </p>
           </div>
 
-          <p class="top-player__temperature">
-            <v-icon>mdi-fire</v-icon>
-            <span>Hottest</span>
-          </p>
+          <client-only>
+            <p
+              v-if="withIn12Hours(topPlayer)"
+              class="top-player__new-comment"
+            >
+              <span
+                class="nos-neon"
+                style="font-weight: 400"
+                :data-text="innerWidth > 865 ? 'NEW COMMENT' : 'NEW'"
+              >NEW <span v-if="innerWidth > 865">COMMENT</span></span>
+            </p>
+          </client-only>
         </div>
 
         <!-- <div

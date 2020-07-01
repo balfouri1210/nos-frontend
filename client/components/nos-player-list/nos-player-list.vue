@@ -11,33 +11,48 @@
       >
         <button @click="selectPlayer(player)">
           <div class="player__header">
-            <div class="player__hits-and-comment">
-              <p>
-                <v-icon>mdi-eye-outline</v-icon>
-                <span>{{ player.hits | thousandSeparator }}</span>
-              </p>
+            <div class="player__header-content">
+              <div class="player__hits-and-comment">
+                <p>
+                  <v-icon>mdi-message-processing-outline</v-icon>
+                  <span>{{ player.comment_count | thousandSeparator }}</span>
+                </p>
 
-              <p>
-                <v-icon>mdi-message-processing-outline</v-icon>
-                <span>{{ player.comment_count | thousandSeparator }}</span>
+                <p>
+                  <v-icon>mdi-eye-outline</v-icon>
+                  <span>{{ player.hits | thousandSeparator }}</span>
+                </p>
+              </div>
+
+              <p
+                v-if="degreeCalculator(player.score) > 0"
+                class="player__temperature"
+                :class="{
+                  'player--degrees-over-0': degreeCalculator(player.score) >= 0 && degreeCalculator(player.score) < 100,
+                  'player--degrees-over-100': degreeCalculator(player.score) >= 100 && degreeCalculator(player.score) < 300,
+                  'player--degrees-over-200': degreeCalculator(player.score) >= 300 && degreeCalculator(player.score) < 500,
+                  'player--degrees-over-400': degreeCalculator(player.score) >= 500 && degreeCalculator(player.score) < 700,
+                  'player--degrees-over-600': degreeCalculator(player.score) >= 700 && degreeCalculator(player.score) < 900,
+                  'player--degrees-over-800': degreeCalculator(player.score) >= 900
+                }"
+              >
+                <v-icon>mdi-fire</v-icon>
+                <span>{{ degreeCalculator(player.score) }}</span>
               </p>
             </div>
 
-            <p
-              v-if="degreeCalculator(player.score) > 0"
-              class="player__temperature"
-              :class="{
-                'player--degrees-over-0': degreeCalculator(player.score) >= 0 && degreeCalculator(player.score) < 100,
-                'player--degrees-over-100': degreeCalculator(player.score) >= 100 && degreeCalculator(player.score) < 300,
-                'player--degrees-over-200': degreeCalculator(player.score) >= 300 && degreeCalculator(player.score) < 500,
-                'player--degrees-over-400': degreeCalculator(player.score) >= 500 && degreeCalculator(player.score) < 700,
-                'player--degrees-over-600': degreeCalculator(player.score) >= 700 && degreeCalculator(player.score) < 900,
-                'player--degrees-over-800': degreeCalculator(player.score) >= 900
-              }"
-            >
-              <v-icon>mdi-fire</v-icon>
-              <span>{{ degreeCalculator(player.score) }}</span>
-            </p>
+            <client-only>
+              <p
+                v-if="withIn12Hours(player)"
+                class="player__new-comment"
+              >
+                <span
+                  class="nos-neon"
+                  style="font-weight: 400"
+                  :data-text="innerWidth > 865 ? 'NEW COMMENT' : 'NEW'"
+                >NEW <span v-if="innerWidth > 865">COMMENT</span></span>
+              </p>
+            </client-only>
           </div>
 
           <div

@@ -68,11 +68,18 @@ export default {
       return (player) => {
         if (player.commentsPreview) {
           if (this.innerWidth < 865) {
-            return `${3 + (player.commentsPreview.length * 2)}rem`;
+            return `${3 + (player.commentsPreview.length * 1.5)}rem`;
           } else {
             return `${6 + (player.commentsPreview.length * 2)}rem`;
           }
         }
+      };
+    },
+
+    withIn12Hours() {
+      return player => {
+        const criterionTime = this.$moment.utc().subtract(12, 'h');
+        return this.$moment.utc(player.last_comment_date).isAfter(criterionTime);
       };
     }
   },

@@ -348,3 +348,35 @@ strong {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.nos-neon {
+  position: relative;
+  display: inline-block;
+  border-radius: 6px;
+  color: white;
+  text-shadow: 0 0 5px $nos-main-theme;
+  z-index: 2;
+}
+.nos-neon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  color: $nos-main-theme;
+  filter: blur(0);
+  z-index: -1;
+  content: attr(data-text);
+}
+.nos-neon::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $nos-main-theme;
+  opacity: 0.5;
+  z-index: -2;
+  filter: blur(8px);
+  content: '';
+}

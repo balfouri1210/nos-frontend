@@ -34,7 +34,7 @@
         <div class="main-event__desc">
           <p>
             907Degrees has just been released and I've been making this space alone.
-            So I want to communicate with as many users as possible.
+            So I'd like to communicate with as many users as possible.
             If you like 907Degrees or want to experience better football community, please consider sending a feedback to
             <a
               mailto="support@907degrees.com"

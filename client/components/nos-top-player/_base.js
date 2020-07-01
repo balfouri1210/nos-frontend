@@ -24,8 +24,18 @@ export default {
   data() {
     return {
       nosImageUrl: process.env.NOS_IMAGE_URL,
-      topPlayerCommentsPreview: []
+      topPlayerCommentsPreview: [],
+      innerWidth: process.client ? window.innerWidth : 0
     };
+  },
+
+  computed: {
+    withIn12Hours() {
+      return player => {
+        const criterionTime = this.$moment.utc().subtract(12, 'h');
+        return this.$moment.utc(player.last_comment_date).isAfter(criterionTime);
+      };
+    }
   },
 
   async created() {
