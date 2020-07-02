@@ -9,7 +9,8 @@
     "serve": "STAGE=local NUXT_HOST=localhost nuxt",
     "serve-prod": "STAGE=prod NUXT_HOST=localhost nuxt build && nuxt start",
     "build": "nuxt build",
-    "deploy": "nuxt build && sls deploy"
+    "deploy": "nuxt build && sls deploy",
+    "deploy-dev": "nuxt build && sls deploy"
   },
   "author": "",
   "license": "ISC",
