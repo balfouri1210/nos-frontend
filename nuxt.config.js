@@ -66,6 +66,9 @@ module.exports = {
     transpile: [
       'vee-validate/dist/rules'
     ],
+
+    // Generate report when nuxt build
+    // analyze: true
   },
 
   srcDir: 'client/',

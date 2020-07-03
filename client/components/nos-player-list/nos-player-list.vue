@@ -97,7 +97,7 @@
               <p class="player__meta-known-as">
                 <img
                   class="player__meta-flag"
-                  :src="`url(${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png)`"
+                  :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                   :alt="player.country_code"
                 >
                 {{ player.known_as }}
