@@ -78,7 +78,7 @@
 
                   <span class="nos-search-modal__suggestion-info">
                     <img
-                      :src="`/flags/${item.country_code.toLowerCase()}.png`"
+                      :src="`${nosImageUrl}/flags/${item.country_code.toLowerCase()}.png`"
                       :alt="item.country_code"
                     >
                     {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}

@@ -102,7 +102,7 @@
 
                   <span class="histories__dob">
                     <img
-                      :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                      :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                       :alt="player.country_code"
                     >
                     {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} |

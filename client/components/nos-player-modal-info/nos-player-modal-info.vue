@@ -61,7 +61,7 @@
             <span>
               <img
                 class="player__meta-flag"
-                :src="`/flags/${player.country_code.toLowerCase()}.png`"
+                :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                 :alt="player.country_code"
               >
               {{ player.country_name }}

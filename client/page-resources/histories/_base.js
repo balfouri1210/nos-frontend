@@ -25,7 +25,8 @@ export default {
       months,
       selectedYear: this.$store.getters.getHistoryYear || this.$moment().format('YYYY'),
       selectedMonth: this.$store.getters.getHistoryMonth || this.$moment().format('M'),
-      isHistoryLoading: false
+      isHistoryLoading: false,
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 
