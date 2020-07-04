@@ -61,14 +61,11 @@ module.exports = {
 
   build: {
     // add the path to the cached files
-    publicPath: `/${env.STAGE}/_nuxt/`,
+    publicPath: '/_nuxt/',
 
     transpile: [
       'vee-validate/dist/rules'
     ],
-
-    // Generate report when nuxt build
-    // analyze: true
   },
 
   srcDir: 'client/',
