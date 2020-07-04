@@ -62,7 +62,7 @@
         <div style="width: 100%">
           <div class="top-player__meta-body">
             <img
-              :src="`/flags/${topPlayer.country_code.toLowerCase()}.png`"
+              :src="`${nosImageUrl}/flags/${topPlayer.country_code.toLowerCase()}.png`"
               :alt="topPlayer.country_code"
             >
             <div class="top-player__profile-wrapper">

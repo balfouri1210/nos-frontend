@@ -8,7 +8,8 @@ export default {
       suggestions: [],
       isSearching: false,
 
-      clubs: eplClubs
+      clubs: eplClubs,
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 

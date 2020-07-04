@@ -78,8 +78,10 @@ export default {
 
     withIn12Hours() {
       return player => {
-        const criterionTime = this.$moment.utc().subtract(12, 'h');
-        return this.$moment.utc(player.last_comment_date).isAfter(criterionTime);
+        if (player.last_comment_date) {
+          const criterionTime = this.$moment.utc().subtract(12, 'h');
+          return this.$moment.utc(player.last_comment_date).isAfter(criterionTime);
+        }
       };
     }
   },
