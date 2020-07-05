@@ -1,9 +1,12 @@
 // This code running on lambda
 // and return nuxt object
 const express = require('express');
+const xRequestId = require('express-request-id');
 const app = express();
 const { Nuxt } = require('nuxt');
 const path = require('path');
+
+app.use(xRequestId);
 
 app.use('/_nuxt', express.static(path.join(__dirname, '.nuxt', 'dist')));
 const config = require('./nuxt.config.js');
@@ -15,14 +18,3 @@ app.use(async (req, res, next) => {
 });
 
 module.exports = app;
-
-
-
-// 20200703
-// nuxt.js
-// app.use('/_nuxt', express.static(path.join(__dirname, '.nuxt', 'dist')));
-// const config = require('./nuxt.config.js');
-// const nuxt = new Nuxt(config);
-// app.use(nuxt.render);
-
-// module.exports = app;
