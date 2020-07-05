@@ -15,6 +15,33 @@ functions:
       - http: ANY /
       - http: ANY /{proxy+}
 
+resources:
+  Resources:
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: nos-frontend CloudFront Distribution
+          DefaultCacheBehavior:
+            TargetOriginId: nosFrontendOrigin
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 30
+            ForwardedValues:
+              QueryString: false
+          Enabled: true
+          Origins:
+            - Id: nosFrontendOrigin
+              DomainName:
+                Fn::Join:
+                  - "."
+                  - - Ref: ApiGatewayRestApi
+                    - execute-api.eu-west-2.amazonaws.com
+              OriginPath: /dev
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
+
 plugins:
   - serverless-apigw-binary
   - serverless-domain-manager
