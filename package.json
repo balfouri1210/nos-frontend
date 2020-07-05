@@ -10,7 +10,7 @@
     "serve-prod": "STAGE=prod NUXT_HOST=localhost nuxt build && nuxt start",
     "build": "nuxt build",
     "deploy-prod": "nuxt build && sls deploy",
-    "deploy-dev": "nuxt build && STAGE=dev sls deploy"
+    "deploy-dev": "STAGE=dev nuxt build && STAGE=dev sls deploy"
   },
   "author": "",
   "license": "ISC",
@@ -44,6 +44,6 @@
     "eslint-plugin-vue": "^6.0.1",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
-    "serverless-domain-manager": "^3.3.0"
+    "serverless-domain-manager": "^4.1.1"
   }
 }
