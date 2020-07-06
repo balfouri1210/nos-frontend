@@ -32,7 +32,7 @@
           </nuxt-link>
         </p>
         <p class="footer__contact">
-          support@907degrees.com
+          turtlesng@naver.com
         </p>
       </div>
     </div>
