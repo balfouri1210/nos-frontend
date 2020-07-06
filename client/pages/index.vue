@@ -8,7 +8,7 @@
     >
       <client-only>
         <nos-countdown @seasonEnd="seasonEndHandler">
-          <p>NEW LEADERBOARD - </p>
+          <p>NEW LEADERBOARD TEST - </p>
         </nos-countdown>
       </client-only>
 

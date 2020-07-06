@@ -21,21 +21,16 @@ resources:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
-          ViewerCertificate:
-            AcmCertificateArn: ${self:custom.serverlessEnv.CERTIFICATE_ARN}
-            SslSupportMethod: sni-only
-            MinimumProtocolVersion: TLSv1.1_2016
-          Aliases:
-            - ${self:custom.serverlessEnv.DOMAIN}
           Comment: nos-frontend CloudFront Distribution
           DefaultCacheBehavior:
             TargetOriginId: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
             ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 30
             ForwardedValues:
               QueryString: false
           Enabled: true
           Origins:
-            - Id: nosFrontendOrigin
+            - Id: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
               DomainName:
                 Fn::Join:
                   - "."
@@ -46,22 +41,10 @@ resources:
                 HTTPPort: 80
                 HTTPSPort: 443
                 OriginProtocolPolicy: https-only
-    Route53RecordSet:
-      Type: AWS::Route53::RecordSet
-      Condition: willCreateRecordSet
-      Properties:
-        Type: A
-        HostedZoneId: ${self:custom.serverlessEnv.HOSTED_ZONE_ID}
-        Name: ${self:custom.serverlessEnv.DOMAIN}.
-        AliasTarget:
-          HostedZoneId: ${self:custom.serverlessEnv.HOSTED_ZONE_ID}
-          DNSName:
-            !GetAtt CloudFrontDistribution.DomainName
-
 
 plugins:
   - serverless-apigw-binary
-  - serverless-domain-manager
+  # - serverless-domain-manager
 
 custom:
   serverlessEnv: ${file(./config/serverless-env-loader.js)}
