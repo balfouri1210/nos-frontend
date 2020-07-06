@@ -15,7 +15,6 @@ const nuxt = new Nuxt(config);
 app.use(async (req, res, next) => {
   await nuxt.ready();
   nuxt.render(req, res, next);
-  return {'statusCode': 200, 'body': 'results'};
 });
 
 module.exports = app;
