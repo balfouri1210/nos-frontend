@@ -15,17 +15,44 @@ functions:
       - http: ANY /
       - http: ANY /{proxy+}
 
+resources:
+  Resources:
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: nos-frontend CloudFront Distribution
+          DefaultCacheBehavior:
+            TargetOriginId: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 30
+            ForwardedValues:
+              QueryString: false
+          Enabled: true
+          Origins:
+            - Id: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
+              DomainName:
+                Fn::Join:
+                  - "."
+                  - - Ref: ApiGatewayRestApi
+                    - execute-api.${self:custom.serverlessEnv.REGION}.amazonaws.com
+              OriginPath: /${self:custom.serverlessEnv.STAGE}
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
+
 plugins:
   - serverless-apigw-binary
-  - serverless-domain-manager
+  # - serverless-domain-manager
 
 custom:
   serverlessEnv: ${file(./config/serverless-env-loader.js)}
   apigwBinary:
     types:
       - '*/*'
-  customDomain:
-    domainName: ${self:custom.serverlessEnv.DOMAIN}
-    basePath: ''
-    stage: ${self:custom.serverlessEnv.STAGE}
-    createRoute53Record: true
+  # customDomain:
+  #   domainName: ${self:custom.serverlessEnv.DOMAIN}
+  #   basePath: ''
+  #   stage: ${self:custom.serverlessEnv.STAGE}
+  #   createRoute53Record: true
