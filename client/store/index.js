@@ -119,6 +119,7 @@ export const actions = {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
         const cookie = U.cookieParser(req.headers.cookie);
+        console.log(cookie);
         const jwt = cookie.nosJwt;
         if (jwt) {
           commit('auth/mutateJwt', jwt);
