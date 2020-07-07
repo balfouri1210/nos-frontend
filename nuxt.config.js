@@ -2,23 +2,23 @@ const env = require(`./config/${process.env.STAGE || 'local'}/env.js`);
 
 module.exports = {
   mode: 'universal',
+  serverMiddleware: [
+    (req, res, next) => {
+      /**
+       * 기본적으로 서버사이드 랜더링되는 페이지는 캐시되지 않도록 함 (AWS Edge 캐시 불허 ex: index.html, xxx.html, etc)
+       * PATH 에 따라 캐시될 수 있는 페이지에서는 캐시를 허용하도록 해야함 (Paul, 20181210)
+       **/
+      res.setHeader('Cache-Control', [
+        'private',
+        'no-cache',
+        'no-store',
+        'must-revalidate',
+      ]);
+      next();
+    }
+  ],
   head: {
     title: '907degrees - Weekly Hottest Player',
-    serverMiddleware: [
-      (req, res, next) => {
-        /**
-         * 기본적으로 서버사이드 랜더링되는 페이지는 캐시되지 않도록 함 (AWS Edge 캐시 불허 ex: index.html, xxx.html, etc)
-         * PATH 에 따라 캐시될 수 있는 페이지에서는 캐시를 허용하도록 해야함 (Paul, 20181210)
-         **/
-        res.setHeader('Cache-Control', [
-          'private',
-          'no-cache',
-          'no-store',
-          'must-revalidate',
-        ]);
-        next();
-      }
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
