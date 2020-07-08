@@ -10,7 +10,7 @@ provider:
 
 functions:
   nuxt:
-    handler: index.nuxt
+    handler: index.handler
     events:
       - http: ANY /
       - http: ANY /{proxy+}
@@ -27,6 +27,10 @@ resources:
             ViewerProtocolPolicy: 'redirect-to-https'
             DefaultTTL: 30
             ForwardedValues:
+              Cookies:
+                Forward: whitelist
+                WhitelistedNames:
+                  - nosJwt
               QueryString: false
           Enabled: true
           Origins:
