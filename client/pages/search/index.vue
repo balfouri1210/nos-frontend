@@ -16,12 +16,9 @@
           >
 
           <div>
-            <h2 v-show="targetClub.clean_name">
-              {{ targetClub.clean_name }}
-            </h2>
+            <h2>{{ targetClub.clean_name }}</h2>
 
             <a
-              v-show="targetClub.official_site"
               :href="targetClub.official_site"
               target="_blank"
             >Official Website</a>

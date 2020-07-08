@@ -46,8 +46,10 @@ export default {
 
   created() {
     this.getSearchResult();
-    if (this.$route.query.clubId)
-      this.setTargetClub();
+  },
+
+  mounted() {
+    if (this.$route.query.clubId) this.setTargetClub();
   },
 
   methods: {
