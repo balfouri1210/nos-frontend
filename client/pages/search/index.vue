@@ -28,14 +28,13 @@
           </div>
         </div>
 
-        <client-only>
-          <div
-            v-if="$route.query.clubId"
-            class="search__fixtures-area"
-          >
-            <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />
-          </div>
-        </client-only>
+        <div
+          v-if="$route.query.clubId"
+          class="search__fixtures-area"
+        >
+          <span>FIXTURES AREA TEST</span>
+          <!-- <nos-fixtures-area :club-id="parseInt($route.query.clubId)" /> -->
+        </div>
       </div>
 
       <nos-player-list
