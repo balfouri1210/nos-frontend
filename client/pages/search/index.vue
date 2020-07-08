@@ -2,12 +2,12 @@
   <div class="search">
     <div class="search__body">
       <div class="search__title">
-        <h2 v-if="$route.query.keyword">
+        <h2 v-show="$route.query.keyword">
           <span>Search result for</span>"{{ $route.query.keyword }}"
         </h2>
 
         <div
-          v-else
+          v-show="$route.query.clubId"
           class="search__title-club"
         >
           <img
@@ -16,12 +16,12 @@
           >
 
           <div>
-            <h2 v-if="targetClub.clean_name">
+            <h2 v-show="targetClub.clean_name">
               {{ targetClub.clean_name }}
             </h2>
 
             <a
-              v-if="targetClub.clean_name"
+              v-show="targetClub.official_site"
               :href="targetClub.official_site"
               target="_blank"
             >Official Website</a>
@@ -29,11 +29,10 @@
         </div>
 
         <div
-          v-if="$route.query.clubId"
+          v-show="$route.query.clubId"
           class="search__fixtures-area"
         >
-          <span>FIXTURES AREA TEST</span>
-          <!-- <nos-fixtures-area :club-id="parseInt($route.query.clubId)" /> -->
+          <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />
         </div>
       </div>
 
