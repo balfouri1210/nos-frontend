@@ -23,7 +23,6 @@ functions:
       enabled:
         - prod
         - dev
-      prewarm: true
     handler: index.handler
     events:
       - http: ANY /
@@ -72,6 +71,8 @@ plugins:
 
 custom:
   serverlessEnv: ${file(./config/serverless-env-loader.js)}
+  warmup:
+    prewarm: true
   apigwBinary:
     types:
       - '*/*'
