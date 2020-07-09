@@ -37,7 +37,7 @@ resources:
             - ${self:custom.serverlessEnv.DOMAIN}
           ViewerCertificate:
             SslSupportMethod: sni-only
-            AcmCertificateArn: 	arn:aws:acm:eu-west-2:592854792012:certificate/97d40aac-fa26-486e-bfd4-57ed6989ce74
+            AcmCertificateArn: 	arn:aws:acm:us-east-1:592854792012:certificate/048a6320-e34b-43b7-8102-dd3b69fd29ba
           Comment: nos-frontend CloudFront Distribution
           DefaultCacheBehavior:
             TargetOriginId: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
