@@ -8,8 +8,19 @@ provider:
   environment:
     STAGE: ${self:custom.serverlessEnv.STAGE}
 
+iamRoleStatements:
+  - Effect: 'Allow'
+    Action:
+      - 'lambda:InvokeFunction'
+    Resource: "*"
+
 functions:
   nuxt:
+    # warmup관련 설정 참고 : https://github.com/FidelLimited/serverless-plugin-warmup#options
+    warmup:
+      enabled:
+        - prod
+        - dev
     handler: index.handler
     events:
       - http: ANY /
@@ -54,15 +65,10 @@ resources:
 
 plugins:
   - serverless-apigw-binary
-  # - serverless-domain-manager
+  - serverless-plugin-warmup
 
 custom:
   serverlessEnv: ${file(./config/serverless-env-loader.js)}
   apigwBinary:
     types:
       - '*/*'
-  # customDomain:
-  #   domainName: ${self:custom.serverlessEnv.DOMAIN}
-  #   basePath: ''
-  #   stage: ${self:custom.serverlessEnv.STAGE}
-  #   createRoute53Record: true
