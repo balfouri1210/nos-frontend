@@ -22,6 +22,7 @@ functions:
     warmup:
       enabled:
         - prod
+      prewarm: true
     handler: index.handler
     events:
       - http: ANY /
