@@ -22,6 +22,10 @@
                   <v-icon>mdi-eye-outline</v-icon>
                   <span>{{ player.hits | thousandSeparator }}</span>
                 </p>
+
+                <p v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'">
+                  ID : {{ player.id }}
+                </p>
               </div>
 
               <p

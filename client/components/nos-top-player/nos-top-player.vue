@@ -25,6 +25,10 @@
                 <v-icon>mdi-eye-outline</v-icon>
                 <span>{{ topPlayer.hits | thousandSeparator }}</span>
               </p>
+
+              <p v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'">
+                ID : {{ topPlayer.id }}
+              </p>
             </div>
 
             <p class="top-player__temperature">
