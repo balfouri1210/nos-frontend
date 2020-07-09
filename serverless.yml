@@ -16,7 +16,9 @@ iamRoleStatements:
 
 functions:
   nuxt:
-    # warmup관련 설정 참고 : https://github.com/FidelLimited/serverless-plugin-warmup#options
+    # warmup관련 설정 참고
+    # https://www.serverless.com/blog/keep-your-lambdas-warm
+    # https://github.com/FidelLimited/serverless-plugin-warmup#options
     warmup:
       enabled:
         - prod
@@ -31,6 +33,8 @@ resources:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
+          Aliases:
+            - ${self:custom.serverlessEnv.DOMAIN}
           Comment: nos-frontend CloudFront Distribution
           DefaultCacheBehavior:
             TargetOriginId: nosFrontendOrigin-${self:custom.serverlessEnv.STAGE}
