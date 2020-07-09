@@ -36,6 +36,7 @@ resources:
           Aliases:
             - ${self:custom.serverlessEnv.DOMAIN}
           ViewerCertificate:
+            SslSupportMethod: sni-only
             AcmCertificateArn: 	arn:aws:acm:eu-west-2:592854792012:certificate/97d40aac-fa26-486e-bfd4-57ed6989ce74
           Comment: nos-frontend CloudFront Distribution
           DefaultCacheBehavior:
