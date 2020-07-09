@@ -27,6 +27,12 @@ resources:
             ViewerProtocolPolicy: 'redirect-to-https'
             DefaultTTL: 30
             ForwardedValues:
+            # cloudfront에서 request header의 cookie중 어떤걸 오리진으로 넘겨줄지 설정하는 부분.
+            # 작업하다보니까 serverless.yml 설정을 바꾼 후 배포하면 새로운 환경이 만들어지고,
+            # CNAME이 blank로 설정되어 접속이 불가능해진다. (이후 aws 콘솔에서 수동 설정해주면 다시 잘 됨)
+            # 찾아보면 분명 serverless.yml에서 아예 처음부터 CNAME, 도메인 인증서 설정하는 부분이 있을 것이다.
+            # 지금은 일단 설정을 바꿀 것 같지 않아 놔둔다. 필요할 때 찾아서 적용하는게 어려울 것 같지 않기 때문이다.
+            # 프론트 배포 뜯어고치고 삽질하느라 피로가 너무 쌓였다.
               Cookies:
                 Forward: whitelist
                 WhitelistedNames:
