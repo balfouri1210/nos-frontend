@@ -2,30 +2,30 @@ service: ${self:custom.serverlessEnv.APP_NAME}
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: ${self:custom.serverlessEnv.STAGE}
   region: ${self:custom.serverlessEnv.REGION}
   environment:
     STAGE: ${self:custom.serverlessEnv.STAGE}
-
-iamRoleStatements:
-  - Effect: 'Allow'
-    Action:
-      - 'lambda:InvokeFunction'
-    Resource: "*"
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource: "*"
 
 functions:
   nuxt:
-    # warmup관련 설정 참고
-    # https://www.serverless.com/blog/keep-your-lambdas-warm
-    # https://github.com/FidelLimited/serverless-plugin-warmup#options
-    warmup:
-      enabled:
-        - prod
     handler: index.handler
     events:
       - http: ANY /
       - http: ANY /{proxy+}
+    warmup:
+      enabled:
+        - prod
+        - dev
+    # warmup관련 설정 참고
+    # https://www.serverless.com/blog/keep-your-lambdas-warm
+    # https://github.com/FidelLimited/serverless-plugin-warmup#options
 
 resources:
   Resources:
@@ -70,6 +70,8 @@ plugins:
 
 custom:
   serverlessEnv: ${file(./config/serverless-env-loader.js)}
+  warmup:
+    prewarm: true
   apigwBinary:
     types:
       - '*/*'
