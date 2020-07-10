@@ -109,7 +109,7 @@ export default {
     getComments(selectedPlayer) {
       return this.$axios.$get(`/api/comments/player/${selectedPlayer.id}`, {
         params: {
-          sortType: 'like'
+          sortType: 'date'
         }
       });
     },
