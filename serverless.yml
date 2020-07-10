@@ -16,12 +16,8 @@ iamRoleStatements:
 
 functions:
   nuxt:
-    # warmup관련 설정 참고
-    # https://www.serverless.com/blog/keep-your-lambdas-warm
-    # https://github.com/FidelLimited/serverless-plugin-warmup#options
     warmup:
       enabled:
-        - prod
         - dev
     handler: index.handler
     events:
