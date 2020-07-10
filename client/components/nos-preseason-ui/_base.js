@@ -12,7 +12,8 @@ export default {
     return {
       searchKeyword: null,
       suggestions: [],
-      isSearching: false
+      isSearching: false,
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 
