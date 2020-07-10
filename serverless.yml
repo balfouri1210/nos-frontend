@@ -41,7 +41,6 @@ resources:
             ViewerProtocolPolicy: 'redirect-to-https'
             DefaultTTL: 30
             ForwardedValues:
-            # cloudfront에서 request header의 cookie중 어떤걸 오리진으로 넘겨줄지 설정하는 부분.
               Cookies:
                 Forward: whitelist
                 WhitelistedNames:
