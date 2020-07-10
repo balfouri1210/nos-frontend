@@ -2,7 +2,7 @@ service: ${self:custom.serverlessEnv.APP_NAME}
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: ${self:custom.serverlessEnv.STAGE}
   region: ${self:custom.serverlessEnv.REGION}
   environment:
