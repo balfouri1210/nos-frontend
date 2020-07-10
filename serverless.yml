@@ -7,26 +7,25 @@ provider:
   region: ${self:custom.serverlessEnv.REGION}
   environment:
     STAGE: ${self:custom.serverlessEnv.STAGE}
-
-iamRoleStatements:
-  - Effect: 'Allow'
-    Action:
-      - 'lambda:InvokeFunction'
-    Resource: "*"
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource: "*"
 
 functions:
   nuxt:
-    # warmup관련 설정 참고
-    # https://www.serverless.com/blog/keep-your-lambdas-warm
-    # https://github.com/FidelLimited/serverless-plugin-warmup#options
-    warmup:
-      enabled:
-        - prod
-        - dev
     handler: index.handler
     events:
       - http: ANY /
       - http: ANY /{proxy+}
+    warmup:
+      enabled:
+        - prod
+        - dev
+    # warmup관련 설정 참고
+    # https://www.serverless.com/blog/keep-your-lambdas-warm
+    # https://github.com/FidelLimited/serverless-plugin-warmup#options
 
 resources:
   Resources:
