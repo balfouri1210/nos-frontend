@@ -22,7 +22,6 @@ functions:
     warmup:
       enabled:
         - prod
-        - dev
     # warmup관련 설정 참고
     # https://www.serverless.com/blog/keep-your-lambdas-warm
     # https://github.com/FidelLimited/serverless-plugin-warmup#options
