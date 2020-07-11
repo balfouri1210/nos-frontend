@@ -19,7 +19,7 @@
     <button
       @click="showDialog = true"
     >
-      <p>We wait for your feedback!</p>
+      <p>Waiting for your feedback!</p>
     </button>
 
     <!-- SHOW ALL OF VOTES -->
