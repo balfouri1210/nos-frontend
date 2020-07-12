@@ -15,7 +15,8 @@ export default {
       moreNewsListContainer: null,
       newsPage: 0,
       isAllNewsLoaded: false,
-      newsCountPerRequest: 20
+      newsCountPerRequest: 20,
+      isNewLoadFailed: false
     };
   },
 
@@ -56,6 +57,7 @@ export default {
         if (this.newsList.length < 20) this.isAllNewsLoaded = true;
       } catch (err) {
         console.error(err);
+        this.isNewLoadFailed = true;
       } finally {
         this.isNewsLoading = false;
       }

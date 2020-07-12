@@ -47,6 +47,18 @@
     </div>
 
     <div
+      v-if="isNewLoadFailed"
+      class="centered news-area__load-failed"
+    >
+      <v-icon>
+        mdi-alert-circle-outline
+      </v-icon>
+      <p>
+        Sorry, looks like we’re having some issues :( Please try again after a while.
+      </p>
+    </div> 
+
+    <div
       v-if="isNewsLoading"
       class="centered"
     >

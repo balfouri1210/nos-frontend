@@ -123,6 +123,24 @@
       font-family: 'Open Sans', sans-serif;
     }
   }
+
+  &__load-failed {
+    width: 80%;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    text-align: center;
+
+    .v-icon {
+      font-size: 30px;
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      margin-top: 16px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
 }
 
 @media screen and (min-width: 500px) {
