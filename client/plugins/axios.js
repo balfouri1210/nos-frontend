@@ -19,7 +19,11 @@ export default function({ $axios, store, redirect, app, error }) {
     const code = parseInt(error.response && error.response.status);
 
     // Token 만료 등의 권한 에러시 자동 로그아웃
-    if ([401].includes(code)) {
+    if (
+      [401].includes(code)
+      && error.response.config.url.indexOf('localhost:3002') !== -1
+      && error.response.config.url.indexOf('nos-api') !== -1) {
+
       return redirect(app.localePath({
         name: 'login'
       }));
