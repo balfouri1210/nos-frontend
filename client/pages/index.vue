@@ -40,7 +40,7 @@ export default {
   mixins: [Base],
   head() {
     return {
-      title: '907degrees - Weekly Hottest Player',
+      title: '907degrees - Hottest Player of The Week',
       meta: [
         {
           hid: 'description',
