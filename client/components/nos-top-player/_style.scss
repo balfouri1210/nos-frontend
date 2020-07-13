@@ -153,6 +153,10 @@
     &__div {
       grid-template-columns: repeat(4, 1fr);
     }
+
+    &__meta {
+      grid-column: span 3;
+    }
   }
 }
 
