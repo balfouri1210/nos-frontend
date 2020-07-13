@@ -109,7 +109,9 @@
   }
 
   &__comments-preview {
-    margin-top: 8px;
+    width: 100%;
+    max-width: 250px;
+    margin: 8px auto 0;
     padding: 0 16px;
 
     p {
@@ -147,6 +149,13 @@
   }
 }
 
+@media screen and (min-width: 500px) {
+  .top-player {&__comments-preview { max-width: 300px; }}
+}
+
+@media screen and (min-width: 600px) {
+  .top-player {&__comments-preview { max-width: 360px; }}
+}
 
 @media screen and (min-width: 680px) {
   .top-player {
@@ -156,6 +165,10 @@
 
     &__meta {
       grid-column: span 3;
+    }
+
+    &__comments-preview {
+      max-width: 420px;
     }
   }
 }
@@ -196,6 +209,7 @@
     }
     &__comments-preview {
       width: 60%;
+      max-width: unset;
       margin: 16px auto 0;
 
       p {
