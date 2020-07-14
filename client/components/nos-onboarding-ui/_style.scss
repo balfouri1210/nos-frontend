@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 160px;
+  height: 260px;
   background: rgba($nos-main-theme, 0.9);
   z-index: 200;
 
@@ -13,6 +13,7 @@
 
   &__content {
     width: 100%;
+    padding: 16px;
     text-align: center;
 
     img {
@@ -21,49 +22,68 @@
     }
   }
 
+  &__title {
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: 300;
+
+    .v-icon {
+      margin-right: 2px;
+      font-size: 20px;
+    }
+  }
+
+  &__desc-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__desc {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
 
-    .v-icon {
-      margin-right: 4px;
-      font-size: 20px;
-    }
-
     a, button {
       display: flex;
       align-items: center;
-      padding: 3px 16px 4px;
+      padding: 7px 16px 8px;
       border: 2px solid white;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.15);
-      font-weight: 500;
+      font-weight: 400;
     }
   }
   &__desc:first-of-type {
-    margin-bottom: 8px;
+    margin-right: 8px;
   }
 }
 
 @media screen and (min-width: $mobile-width) {
   .onboarding-ui {
     &__content {
+      max-width: 600px;
+      margin: 0 auto;
+
       img {
         width: 240px;
       }
     }
 
-    &__desc-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    &__title {
+      font-size: 16px;
+
+      .v-icon {
+        font-size: 22px;
+      }
     }
 
     &__desc {
+      flex: unset;
+
       a, button {
-        padding: 4px 24px 5px;
+        padding: 9px 24px 10px;
       }
     }
     &__desc:first-of-type {

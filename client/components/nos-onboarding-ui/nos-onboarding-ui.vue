@@ -9,20 +9,24 @@
         alt="logo"
       >
 
+      <p class="onboarding-ui__title">
+        <v-icon>mdi-party-popper</v-icon>
+        Welcome! 907Degrees is a community designed for the football fans to explore their interest for the players on a weekly basis.
+      </p>
+
       <div class="onboarding-ui__desc-wrapper">
         <div class="onboarding-ui__desc">
           <nuxt-link
             :to="localePath('about')"
             @click.native="closeOnboardingUi"
           >
-            <v-icon>mdi-party-popper</v-icon>
-            Welcome! Learn more about 907.
+            Learn more about 907Degrees
           </nuxt-link>
         </div>
 
         <div class="onboarding-ui__desc">
           <button @click="closeOnboardingUi">
-            I'm good, I’ll try it later.
+            I'm good, I’ll try it later
           </button>
         </div>
       </div>
