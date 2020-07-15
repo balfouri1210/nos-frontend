@@ -376,7 +376,7 @@
             </div>
 
             <p class="fixture__detail">
-              {{ nextFixture.venue }}
+              {{ nextFixture.venue || nextFixture.round }}
             </p>
 
             <div
