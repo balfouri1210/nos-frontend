@@ -36,11 +36,11 @@ export default {
         this.notifications.forEach((noti) => {
           switch (noti.type) {
           case 'reply':
-            noti.text = `${noti.username} add ${noti.type} to your comment: "${noti.content}"`;
+            noti.text = `${noti.username} added reply to your comment: "${noti.content}", ${this.$moment(noti.created_at).fromNow()}`;
             break;
-              
+
           case 'vote_up':
-            noti.text = `Your comment got ${noti.content} Likes!`;
+            noti.text = `${noti.username} likes your comment, ${this.$moment(noti.created_at).fromNow()}`;
           }
         });
 
