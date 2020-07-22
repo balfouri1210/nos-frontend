@@ -177,7 +177,7 @@
                 <th>
                   <v-icon>mdi-table-of-contents</v-icon>
                 </th>
-                <th>Team</th>
+                <th>Club</th>
                 <th>Points</th>
                 <th>W</th>
                 <th>D</th>
@@ -188,23 +188,23 @@
 
               <tbody>
                 <tr
-                  v-for="(team, index) in leagueTable"
+                  v-for="(club, index) in leagueTable"
                   :key="index"
                 >
                   <td>{{ index + 1 }}</td>
                   <td>
                     <img
-                      :src="team.logo"
-                      :alt="team.teamName"
+                      :src="club.logo"
+                      :alt="club.teamName"
                     >
-                    {{ team.teamName }}
+                    {{ club.teamName }}
                   </td>
-                  <td>{{ team.points }}</td>
-                  <td>{{ team.all.win }}</td>
-                  <td>{{ team.all.draw }}</td>
-                  <td>{{ team.all.lose }}</td>
-                  <td>{{ team.goalsDiff }}</td>
-                  <td>{{ team.all.matchsPlayed }}</td>
+                  <td>{{ club.points }}</td>
+                  <td>{{ club.all.win }}</td>
+                  <td>{{ club.all.draw }}</td>
+                  <td>{{ club.all.lose }}</td>
+                  <td>{{ club.goalsDiff }}</td>
+                  <td>{{ club.all.matchsPlayed }}</td>
                 </tr>
               </tbody>
             </table>
