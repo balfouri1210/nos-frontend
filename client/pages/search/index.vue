@@ -29,7 +29,7 @@
           v-show="$route.query.clubId"
           class="search__fixtures-area"
         >
-          <!-- <nos-fixtures-area :club-id="parseInt($route.query.clubId)" /> -->
+          <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />
         </div>
       </div>
 
