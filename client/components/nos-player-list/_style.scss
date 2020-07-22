@@ -1,6 +1,6 @@
 #player-list-wrapper {
   max-width: $web-body-content-width;
-  margin: 0 auto;
+  margin: 0 auto 4px;
 }
 
 .player-list {
@@ -197,9 +197,12 @@
 
 
 @media screen and (min-width: $mobile-width) {
+  #player-list-wrapper {
+    margin-bottom: 12px;
+  }
+
   .player-list {
     grid-gap: 12px;
-    margin-bottom: 100px !important;
   }
 
   .player {

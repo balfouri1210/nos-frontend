@@ -161,7 +161,7 @@
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: $web-body-content-width + 1px) {
   .nos-header {
     &__content {
       padding: 0;

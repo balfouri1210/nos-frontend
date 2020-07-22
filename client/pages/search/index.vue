@@ -29,14 +29,14 @@
           v-show="$route.query.clubId"
           class="search__fixtures-area"
         >
-          <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />
+          <!-- <nos-fixtures-area :club-id="parseInt($route.query.clubId)" /> -->
         </div>
       </div>
 
       <nos-player-list
         v-if="searchPlayerList.length > 0"
-        :top-player="topPlayer"
-        :initial-player-list="searchPlayerList"
+        :top-player-score="parseInt(topPlayer.score)"
+        :player-list-prop="searchPlayerList"
         :need-player-comments-preview="true"
         :need-player-meta="true"
         @selectPlayer="selectPlayerHandler"
