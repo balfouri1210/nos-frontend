@@ -1,3 +1,15 @@
+export const apiFootballRequestHeader = {
+  headers: {
+    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+    'x-rapidapi-key': process.env.RAPID_API_KEY
+  }
+};
+
+export const apiFootballLeagueId = {
+  epl1920: 524,
+  faCup1920: 1063
+};
+
 export const TOKEN_EXPIRES = 3;
 // export const VERIFICATION_CODE_EXPIRES = 1000 * 60 * 5;
 // export const PLAYER_LIST_MAX = 100;
@@ -145,3 +157,4 @@ export const eplClubs = [
     api_football_team_id: 62
   }
 ];
+

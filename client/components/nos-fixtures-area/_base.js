@@ -1,4 +1,4 @@
-import { eplClubs } from '@/lib/constants';
+import { eplClubs, apiFootballRequestHeader } from '@/lib/constants';
 
 export default {
   props: {
@@ -26,13 +26,6 @@ export default {
       lastFixtureEvents: null,
       getLastFixtureInfoFailed: false,
       isLastFixtureInfoLoaded: false,
-
-      apiFootballRequestHeader: {
-        headers: {
-          'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-          'x-rapidapi-key': process.env.RAPID_API_KEY
-        }
-      }
     }; 
   },
 
@@ -58,11 +51,11 @@ export default {
 
   methods: {
     getLastFixture(apiFootballTeamId) {
-      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/last/1`, this.apiFootballRequestHeader);
+      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/last/1`, apiFootballRequestHeader);
     },
 
     getNextFixture(apiFootballTeamId) {
-      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`, this.apiFootballRequestHeader);
+      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`, apiFootballRequestHeader);
     },
 
     async showLastFixtureInfo() {
@@ -76,8 +69,8 @@ export default {
 
           const [lastFixtureInfo, lastFixtureEvents]
             = await Promise.all([
-              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/statistics/fixture/${this.lastFixture.fixture_id}`, this.apiFootballRequestHeader),
-              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/events/${this.lastFixture.fixture_id}`, this.apiFootballRequestHeader)
+              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/statistics/fixture/${this.lastFixture.fixture_id}`, apiFootballRequestHeader),
+              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/events/${this.lastFixture.fixture_id}`, apiFootballRequestHeader)
             ]);
 
           this.lastFixtureInfo = lastFixtureInfo.api.statistics;

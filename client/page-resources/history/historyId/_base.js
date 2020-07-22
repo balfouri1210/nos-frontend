@@ -30,6 +30,46 @@ export default {
     }
   },
 
+  mounted() {
+    window.addEventListener('scroll', this.detectScroll);
+  },
+
+  destroyed() {
+    window.removeEventListener('scroll', this.detectScroll);
+  },
+
+  data() {
+    return {
+      isBottomOfWindow: false
+    };
+  },
+
+  computed: {
+    previousPlayerIdList() {
+      return [this.topPlayer.id];
+    }
+  },
+
+  methods: {
+    detectScroll() {
+      let bottomOfWindow =
+          // 스크롤 위치 중 최대값
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+          // 화면 높이
+          window.innerHeight >=
+
+          // player-list-wrapper 높이
+          document.getElementById('history-page').offsetHeight;
+
+      if (bottomOfWindow)
+        this.isBottomOfWindow = true;
+    }
+  },
+
   head() {
     return {
       title: `907Degrees - History: ${this.$moment(this.startDate).format(

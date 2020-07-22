@@ -1,40 +1,57 @@
 export default {
   props: {
-    topPlayer: {
-      type: Object,
-      default: () => {}
+    // 선수들의 온도를 계산할 때 필요 (기준값)
+    topPlayerScore: {
+      type: Number,
+      default: 0
     },
 
-    // 요놈이 존재하는 이유 : page에서 asyncData로 최초 데이터를 받아온 상태에서 렌더링하기 위함.
-    initialPlayerList: {
+    // 원하는 플레이어 리스트
+    playerListProp: {
       type: Array,
       default: () => []
     },
 
+    // 최근 3개의 커멘트를 미리 보여줄지 선택
     needPlayerCommentsPreview: {
       type: Boolean,
       default: false
     },
 
+    // 메타정보를 보여줄지 선택
     needPlayerMeta: {
       type: Boolean,
       default: false
     },
 
+    // 일반 요청과 history페이지 에서의 요청을 구분하기 위한 옵션
     isHistorical: {
       type: Boolean,
       default: false
     },
 
+    // isHistorical 옵션과 함께 활용
     historyId: {
       type: String,
       default: null
+    },
+
+    // loadMorePlayer 요청시 사용하는 값
+    previousPlayerIdListProp: {
+      type: Array,
+      default: () => []
+    },
+
+    // 부모 페이지에서 scrollToBottom을 감지하고 loadMorePlayer를 요청하라고 지시
+    loadMorePlayerSwitch: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
-      playerList: this.initialPlayerList.slice(0),
+      playerList: this.playerListProp.slice(0),
       isMorePlayersLoading: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
       totalPlayerCount: 0,
@@ -47,7 +64,8 @@ export default {
       let playerIdList = this.playerList.map(player => {
         return player.id;
       });
-      playerIdList.unshift(this.topPlayer.id);
+
+      playerIdList = this.previousPlayerIdListProp.concat(playerIdList);
       return playerIdList.toString();
     },
 
@@ -55,10 +73,10 @@ export default {
       return score => {
         if (score <= 0) {
           return 0;
-        } else if (score === this.topPlayer.score && this.$route.name.indexOf('search') === -1) {
+        } else if (parseInt(score) === this.topPlayerScore && this.$route.name.indexOf('search') === -1) {
           return 906;
         } else {
-          return Math.round((907 * score) / Math.round(this.topPlayer.score));
+          return Math.round((907 * score) / Math.round(this.topPlayerScore));
         }
       };
     },
@@ -102,15 +120,6 @@ export default {
     } catch (err) {
       console.error(err);
     }
-  },
-
-  mounted() {
-    if (this.$route.name.indexOf('search') === -1)
-      window.addEventListener('scroll', this.detectScroll);
-  },
-
-  destroyed() {
-    window.removeEventListener('scroll', this.detectScroll);
   },
 
   methods: {
@@ -170,7 +179,13 @@ export default {
     },
 
     async loadMorePlayers() {
-      if (this.isMorePlayersLoading || this.playerList.length + 1 >= this.totalPlayerCount) return;
+      if (this.isMorePlayersLoading) {
+        return;
+      } else if (this.previousPlayerIdListProp.length > 0) {
+        if (this.playerList.length + this.previousPlayerIdListProp.length >= this.totalPlayerCount) return;
+      } else {
+        if (this.playerList.length + 1 >= this.totalPlayerCount) return;
+      }
 
       try {
         this.isMorePlayersLoading = true;
@@ -207,25 +222,16 @@ export default {
         console.error(err);
         return this.$nuxt.error({ statusCode: 500 });
       } finally {
+        this.$emit('morePlayerLoaded');
         this.isMorePlayersLoading = false;
       }
-    },
+    }
+  },
 
-    detectScroll() {
-      let bottomOfWindow =
-          // 스크롤 위치 중 최대값
-          Math.max(
-            window.pageYOffset,
-            document.documentElement.scrollTop,
-            document.body.scrollTop
-          ) +
-            // 화면 높이
-            window.innerHeight >=
-  
-          // player-list-wrapper 높이
-          document.getElementById('player-list-wrapper').offsetHeight;
-  
-      if (bottomOfWindow) this.loadMorePlayers();
+  watch: {
+    loadMorePlayerSwitch() {
+      if (this.loadMorePlayerSwitch)
+        this.loadMorePlayers();
     }
   }
 };

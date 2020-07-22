@@ -214,6 +214,20 @@ strong {
 }
 // Vue transition fade styles end
 
+// Vue transition slide-fade styles
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(20px);
+  opacity: 0;
+}
+// Vue transition slide-fade styles end
+
 
 // Vuetify customizing
 .theme--light.v-application {
@@ -379,4 +393,8 @@ strong {
   z-index: -2;
   filter: blur(8px);
   content: '';
+}
+
+.transparent {
+  opacity: 0;
 }

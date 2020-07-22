@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="history-page">
     <div class="history">
       <div class="history__period">
         <div class="history__period-content">
@@ -20,11 +20,14 @@
       />
 
       <nos-player-list
-        :top-player="topPlayer"
-        :initial-player-list="restOfPlayers"
+        :top-player-score="parseInt(topPlayer.score)"
+        :player-list-prop="restOfPlayers"
         :is-historical="true"
         :history-id="$route.params.historyId"
         :need-player-comments-preview="true"
+        :load-more-player-switch="isBottomOfWindow"
+        :previous-player-id-list-prop="previousPlayerIdList"
+        @morePlayerLoaded="isBottomOfWindow = false"
       />
 
       <!-- Nuxt child for player modal -->
