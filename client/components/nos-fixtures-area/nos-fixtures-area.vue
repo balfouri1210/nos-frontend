@@ -308,11 +308,11 @@
 
 
         <!-- NEXT FIXTURE -->
-        <div
-          v-if="nextFixture"
-          class="fixture-wrapper"
-        >
-          <div class="fixture">
+        <div class="fixture-wrapper">
+          <div
+            v-if="nextFixture"
+            class="fixture"
+          >
             <p class="fixture__header">
               <span
                 v-if="nextFixture.league.name === 'FA Cup'"
@@ -355,6 +355,14 @@
             >
               <h2>next fixture tooltip</h2>
             </div>
+          </div>
+
+          <div
+            v-else
+            class="fixture-empty"
+          >
+            <v-icon>mdi-whistle</v-icon>
+            <p>No fixtures<br>currently available</p>
           </div>
         </div>
       </div>
