@@ -191,7 +191,6 @@ export default {
           ) +
           // 화면 높이
           window.innerHeight >=
-
           // player-list-wrapper 높이
           document.getElementById('home-body').offsetHeight;
 

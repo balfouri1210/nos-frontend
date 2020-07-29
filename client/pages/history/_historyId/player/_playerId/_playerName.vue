@@ -122,7 +122,7 @@
                       >
                         <div>
                           <div class="player-modal__comment-meta">
-                            <span class="player-modal__comment-username">{{ comment.username }}</span>
+                            <span class="player-modal__comment-username">{{ comment.fake_username || comment.username }}</span>
                             <span class="player-modal__comment-moment">{{ $moment(comment.created_at).fromNow() }}</span>
                           </div>
 

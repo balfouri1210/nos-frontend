@@ -125,7 +125,10 @@ export default {
         });
 
         this.mutateJwt(data.token);
-        Cookies.set('nosJwt', data.token, { expires: TOKEN_EXPIRES });
+        Cookies.set('nosJwt', data.token, {
+          expires: TOKEN_EXPIRES,
+          sameSite: 'lax'
+        });
 
         const decodedJwt = jwtDecode(data.token);
         this.mutateId(decodedJwt.id);

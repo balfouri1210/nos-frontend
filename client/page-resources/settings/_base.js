@@ -90,7 +90,10 @@ export default {
 
     applyNewJWT(newToken) {
       this.mutateJwt(newToken);
-      Cookies.set('nosJwt', newToken, { expires: TOKEN_EXPIRES });
+      Cookies.set('nosJwt', newToken, {
+        expires: TOKEN_EXPIRES,
+        sameSite: 'lax'
+      });
 
       const decodedJwt = jwtDecode(newToken);
       this.mutateId(decodedJwt.id);

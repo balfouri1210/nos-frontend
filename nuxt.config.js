@@ -4,10 +4,8 @@ module.exports = {
   mode: 'universal',
   serverMiddleware: [
     (req, res, next) => {
-      /**
-       * 기본적으로 서버사이드 랜더링되는 페이지는 캐시되지 않도록 함 (AWS Edge 캐시 불허 ex: index.html, xxx.html, etc)
-       * PATH 에 따라 캐시될 수 있는 페이지에서는 캐시를 허용하도록 해야함 (Paul, 20181210)
-       **/
+      // 기본적으로 서버사이드 랜더링되는 페이지는 캐시되지 않도록 함 (AWS Edge 캐시 불허 ex: index.html, xxx.html, etc)
+      // PATH 에 따라 캐시될 수 있는 페이지에서는 캐시를 허용하도록 해야함 (Paul, 20181210)
       res.setHeader('Cache-Control', [
         'private',
         'no-cache',
@@ -15,6 +13,10 @@ module.exports = {
         'must-revalidate',
       ]);
       next();
+      // 위 코드는 폴이 만든 설정을 그대로 가져다 쓴 것이다.
+      // 캐싱에 대해 좀더 자세히 알고 싶다면
+      // https://vueschool.io/articles/vuejs-tutorials/vue-js-performance-mastering-cache/?utm_source=drip&utm_medium=email&utm_campaign=Mastering+Browser+Cache
+      // 여기를 참고할 것. 읽어보기만 하고 시도는 안했는데 나중에 도움이 될 것 같아서 적어놓는다.
     }
   ],
   head: {
