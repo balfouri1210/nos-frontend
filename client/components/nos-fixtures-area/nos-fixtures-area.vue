@@ -14,6 +14,7 @@
       <div class="fixture-area__body">
         <!-- LAST FIXTURE -->
         <div
+          v-if="lastFixture"
           class="fixture-wrapper"
           :style="{marginRight: '4px'}"
         >
@@ -228,41 +229,7 @@
                         }"
                       >{{ lastFixtureInfo['Passes %'].away }}</span>
                     </div>
-                    <!-- <div class="tooltip__graph">
-                      <div
-                        class="home"
-                        :style="{
-                          flex: lastFixtureInfo['Passes %'].home.replace(/'%'/g, '')
-                        }"
-                      />
-                      <div
-                        class="blank"
-                        :style="{
-                          flex: 100 - parseInt(lastFixtureInfo['Passes %'].home.replace(/'%'/g, ''))
-                        }"
-                      />
-                    </div> -->
-                    <!-- <span>{{ lastFixtureInfo['Passes %'].home }}</span> -->
                   </div>
-
-                  <!-- <div class="tooltip__graph-wrapper">
-                    <span>{{ lastFixture.awayTeam.team_name.slice(0, 3) }}</span>
-                    <div class="tooltip__graph">
-                      <div
-                        class="away-alone"
-                        :style="{
-                          flex: lastFixtureInfo['Passes %'].away.replace(/'%'/g, '')
-                        }"
-                      />
-                      <div
-                        class="blank"
-                        :style="{
-                          flex: 100 - parseInt(lastFixtureInfo['Passes %'].home.replace(/'%'/g, ''))
-                        }"
-                      />
-                    </div>
-                    <span>{{ lastFixtureInfo['Passes %'].away }}</span>
-                  </div> -->
                 </div>
 
 
@@ -341,7 +308,10 @@
 
 
         <!-- NEXT FIXTURE -->
-        <div class="fixture-wrapper">
+        <div
+          v-if="nextFixture"
+          class="fixture-wrapper"
+        >
           <div class="fixture">
             <p class="fixture__header">
               <span
