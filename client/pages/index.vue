@@ -263,6 +263,29 @@ export default {
           name: 'description',
           content:
             'Find out who is the most interested football player this week and Share thoughts with football fans'
+        },
+
+        // Opengraph
+        {
+          property: 'og:title',
+          content:
+            "Hottest Player of The Week - Leaderboard, News & Fans' Reaction"
+        },
+        {
+          property: 'og:site_name',
+          content: '907Degrees'
+        },
+        // {
+        //   'property':  'og:description',
+        //   'content': 'Community designed for the football fans to explore their interest for the players on a weekly basis'
+        // },
+        {
+          property: 'og:url',
+          content: '907degrees.com'
+        },
+        {
+          property: 'og:image',
+          content: 'opengraph.png'
         }
       ]
     };
