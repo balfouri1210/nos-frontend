@@ -285,7 +285,7 @@ export default {
         },
         {
           property: 'og:image',
-          content: 'opengraph.png'
+          content: 'https://907degrees.com/opengraph.png'
         }
       ]
     };
