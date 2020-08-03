@@ -24,6 +24,29 @@ export default {
             /-/g,
             ' '
           )}.`
+        },
+
+        // Opengraph
+        {
+          property: 'og:title',
+          content: `907Degrees - ${this.$route.params.playerName.replace(
+            /-/g,
+            ' '
+          )}`
+        },
+        {
+          property: 'og:site_name',
+          content: '907Degrees'
+        },
+        {
+          property: 'og:url',
+          content: `${process.env.NOS_URL}${this.$route.fullPath}`
+        },
+        {
+          property: 'og:image',
+          content:
+            `${process.env.NOS_IMAGE_URL}/players/${this.player.id}.jpg` ||
+            `${process.env.NOS_IMAGE_URL}/players/default2.png`
         }
       ]
     };
