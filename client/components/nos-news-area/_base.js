@@ -10,7 +10,7 @@ export default {
     return {
       isNewsLoading: true,
       isMoreNewsLoading: false,
-      newsSortCriteria: 'date',
+      newsSortCriteria: null,
       newsList: [],
       moreNewsListContainer: null,
       newsPage: 0,
