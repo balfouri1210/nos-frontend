@@ -5,44 +5,22 @@
         <span>News</span>
       </div>
 
-      <div
-        class="news-area__sorting"
-      >
-        <v-menu
-          :content-class="'news-area__v-menu'"
-          transition="slide-y-transition"
-          bottom
-          left
-          :offset-y="true"
+      <div class="news-area__sorting">
+        <button
+          class="news-area__sortby-btn"
+          :class="{'news-area__sortby-btn--active': newsSortCriteria === 'date'}"
+          @click="setNewsSortCriteria('date')"
         >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              text
-              v-on="on"
-            >
-              <v-icon>mdi-tune</v-icon>
-              <span>Sort</span>
-            </v-btn>
-          </template>
+          <span>Date</span>
+        </button>
 
-          <v-list>
-            <v-list-item @click="setNewsSortCriteria()">
-              <v-list-item-title
-                :class="{'news-area__period--selected': !newsSortCriteria}"
-              >
-                Best Match
-              </v-list-item-title>
-            </v-list-item>
-
-            <v-list-item @click="setNewsSortCriteria('Date')">
-              <v-list-item-title
-                :class="{'news-area__period--selected': newsSortCriteria === 'Date'}"
-              >
-                Most Recent
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+        <button
+          class="news-area__sortby-btn"
+          :class="{'news-area__sortby-btn--active': !newsSortCriteria}"
+          @click="setNewsSortCriteria()"
+        >
+          <span>Relevance</span>
+        </button>
       </div>
     </div>
 
