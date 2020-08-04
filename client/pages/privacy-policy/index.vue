@@ -30,12 +30,12 @@
       </div>
 
       <div class="privacy-policy__item">
-        (1) Personal information items to be collected
+        (1) Personal information items to be collected<br>
         Personal information items to be collected by the Company are as follows:
       </div>
 
       <div class="privacy-policy__sub-item">
-        • Information provided by the users
+        • Information provided by the users<br>
         The Company may collect the information directly provided by the users.
         <p class="privacy-policy__accented">
           [Option to select 'personal information items' in Appendix &lt;1-1&gt; of Personal Privacy Policy]
@@ -43,7 +43,7 @@
       </div>
 
       <div class="privacy-policy__sub-item">
-        • Information collected while the users use services
+        • Information collected while the users use services<br>
         Besides of information directly provided by the users, the Company may collect information in
         the course that the users use the service provided by the Company.
         <p class="privacy-policy__accented">
@@ -53,7 +53,7 @@
 
 
       <div class="privacy-policy__item">
-        (2) Method of collection
+        (2) Method of collection<br>
         The Company collects the information of users in a way of the followings:
         <p class="privacy-policy__accented">
           [Option to select 'method of collection' in Appendix &lt;2&gt; of Personal Privacy Policy]
@@ -63,7 +63,7 @@
 
     <section>
       <div class="privacy-policy__desc">
-        2. Use of collected information
+        2. Use of collected information<br>
         The Company uses the collected information of users for the following purposes:
         <p class="privacy-policy__accented">
           [Option to select 'use of collected information' in Appendix &lt;3&gt; of Personal Privacy Policy]
@@ -75,7 +75,7 @@
 
     <section>
       <div class="privacy-policy__desc">
-        3. Sharing collected information
+        3. Sharing collected information<br>
         Except for the following cases, the Company will not share personal information with a 3rd
         party:
       </div>
@@ -95,7 +95,7 @@
       </div>
 
       <div class="privacy-policy__item">
-        • when the sharing is required by the laws
+        • when the sharing is required by the laws<br>
         - if required to be disclosed by the laws and regulations; or
         - if required to be disclosed by the investigative agencies for detecting crimes in
         accordance with the procedure and method as prescribed in the laws and regulations
@@ -105,7 +105,7 @@
     <section>
       <div class="privacy-policy__desc">
         <p>
-          4. Cookies, Beacons and Similar Technologies
+          4. Cookies, Beacons and Similar Technologies<br>
           The Company may collect collective and impersonal information through 'cookies' or 'web
           beacons'.
           Cookies are very small text files to be sent to the browser of the users by the server used for
@@ -140,7 +140,7 @@
 
     <section>
       <div class="privacy-policy__desc">
-        5. Users' right to access and option
+        5. Users' right to access and option<br>
         The users or their legal representatives, as main agents of the information, may exercise the
         following options regarding the collection, use and sharing of personal information by the
         Company:
@@ -174,7 +174,7 @@
 
     <section>
       <div class="privacy-policy__desc">
-        6. Security
+        6. Security<br>
         The Company regards the security of personal information of uses as very important. The
         company constructs the following security measures to protect the users' personal information
         from any unauthorized access, release, use or modification
@@ -187,7 +187,7 @@
     <section>
       <div class="privacy-policy__desc">
         <p>
-          7. Protection of personal information of children
+          7. Protection of personal information of children<br>
           In principle, the Company does not collect any information from the children under 13 or
           equivalent minimum age as prescribed in the laws in relevant jurisdiction. The website, products
           and services of the Company are the ones to be provided to ordinary people, in principle. 
@@ -232,7 +232,7 @@
 
     <section>
       <div class="privacy-policy__desc">
-        8. Modification of Privacy Protection Policy
+        8. Modification of Privacy Protection Policy<br>
         The Company has the right to amend or modify this Policy from time to time and, in such case,
         the Company will make a public notice of it through bulletin board of its website (or through
         individual notice such as written document, fax or e-mail) and obtain consent from the users if
@@ -262,7 +262,7 @@
     <section>
       <div class="privacy-policy__desc">
         <p>
-          10. Responsible department of Company
+          10. Responsible department of Company<br>
           The Company designates the following department and person in charge of personal
           information in order to protect personal information of customers and deal with complaints
           from customers:
@@ -277,6 +277,25 @@
         </p>
       </div>
     </section>
+
+    <section>
+      <div class="privacy-policy__desc">
+        <p>
+          11. YouTube Terms of Service<br>
+          The Company brings YouTube videos by using YouTube API Services. Customers can check
+          <a
+            href="https://www.youtube.com/t/terms"
+            style="color: #1976d2"
+          >YouTube Terms of Service</a>
+          and
+          <a
+            href="https://policies.google.com/privacy"
+            style="color: #1976d2"
+          >Google privacy policy</a>.
+        </p>
+      </div>
+    </section>
+
 
     <p>The latest update date: 1st June, 2020</p>
 
