@@ -236,6 +236,7 @@
 
       ::v-deep a {
         color: #1976d2;
+        font-size: 12px;
         font-weight: 500;
         font-style: italic;
       }
@@ -389,6 +390,10 @@
         max-height: 5.1rem;
         font-size: 14px;
         line-height: 1.3rem;
+
+        ::v-deep a {
+          font-size: 13px;
+        }
       }
     }
 

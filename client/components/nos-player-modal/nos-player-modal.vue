@@ -264,6 +264,13 @@
                                 v-html="$options.filters.commentFormatter(comment.content)"
                               />
 
+                              <!-- Link Preview -->
+                              <nos-link-preview
+                                v-if="comment.linkMeta"
+                                style="margin: 8px 0 10px 8px;"
+                                :meta="comment.linkMeta"
+                              />
+
                               <!-- Comment more menu -->
                               <v-menu
                                 v-if="getJwt()"

@@ -8,6 +8,7 @@ import nosFixturesArea from '@/components/nos-fixtures-area/nos-fixtures-area.vu
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
+import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
 // import Cookies from 'js-cookie';
 
 export default {
@@ -33,7 +34,8 @@ export default {
     nosFixturesArea,
     nosNewsArea,
     nosYoutubePlayer,
-    nosLinkCopy
+    nosLinkCopy,
+    nosLinkPreview
   },
 
   data() {
@@ -128,15 +130,31 @@ export default {
     // COMMENT 관련 메소드  //
     // ///////////////// //
     commentMappingWithUiProperty(comments) {
-      comments.forEach(comment => {
-        this.$set(comment, 'isReply', false);
-        this.$set(comment, 'isNewReply', false);
-        this.$set(comment, 'replies', []);
-        this.$set(comment, 'replyContent', '');
-        this.$set(comment, 'isRepliesLoaded', false);
+      comments.forEach(async (comment) => {
+        try {
+          let links = comment.content.match(/\bhttps?:\/\/\S+/gi);
+          console.log(links);
 
-        this.$set(comment, 'needReadMore', this.isNewLineExceed(comment.content));
-        this.$set(comment, 'expanded', false);
+          if (links) {
+            this.$set(comment, 'linkMeta', (await this.$axios.$get('https://og-crawler.907degrees.com/link', {
+              params: {
+                url: links[0]
+              }
+            })).body);
+            console.log(comment);
+          }
+  
+          this.$set(comment, 'isReply', false);
+          this.$set(comment, 'isNewReply', false);
+          this.$set(comment, 'replies', []);
+          this.$set(comment, 'replyContent', '');
+          this.$set(comment, 'isRepliesLoaded', false);
+  
+          this.$set(comment, 'needReadMore', this.isNewLineExceed(comment.content));
+          this.$set(comment, 'expanded', false);
+        } catch (err) {
+          console.error(err);
+        }
       });
     },
 
