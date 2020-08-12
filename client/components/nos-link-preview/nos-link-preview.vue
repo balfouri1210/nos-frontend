@@ -9,7 +9,9 @@
         <img
           v-if="meta.icon"
           :src="meta.icon"
-        ><span>{{ meta.title }}</span>
+        >
+        <span v-if="meta.title">{{ meta.title }}</span>
+        <span v-else>{{ meta.provider }} Content</span>
       </p>
       <p class="link-preview__desc">
         {{ meta.description }}
