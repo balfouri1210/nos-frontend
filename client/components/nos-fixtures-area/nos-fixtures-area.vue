@@ -20,7 +20,7 @@
         >
           <button
             class="fixture"
-            @click="showLastFixtureInfo"
+            @click="getLastFixtureInfo"
           >
             <p class="fixture__header">
               <span
@@ -62,7 +62,7 @@
 
             <p
               class="fixture__detail"
-              :class="{'fixture__detail--activate': isLastFixtureInfo}"
+              :class="{'fixture__detail--activate': showLastFixtureInfo}"
             >
               Details <v-icon>mdi-chevron-down</v-icon>
             </p>
@@ -70,11 +70,11 @@
 
           <transition name="fade">
             <div
-              v-if="isLastFixtureInfo"
+              v-if="showLastFixtureInfo"
               class="tooltip"
             >
               <v-progress-circular
-                v-if="!isLastFixtureInfoLoaded"
+                v-if="!showLastFixtureInfoLoaded"
                 :size="20"
                 :width="2"
                 :color="'white'"
@@ -96,142 +96,158 @@
                   >
                 </div>
 
-                <!-- SHOTS ON GOAL -->
-                <div class="tooltip__item">
-                  <p>Shots on Goal</p>
-
-                  <div class="tooltip__graph-wrapper">
-                    <span>{{ lastFixtureInfo['Shots on Goal'].home }}</span>
-
-                    <div class="tooltip__graph">
-                      <div
-                        class="home"
-                        :style="{
-                          flex: lastFixtureInfo['Shots on Goal'].home / totalPropertyCountOfFixture('Shots on Goal') * 100,
-                          borderRadius: lastFixtureInfo['Shots on Goal'].home / totalPropertyCountOfFixture('Shots on Goal') * 100 === 100 ? '4px' : 0
-                        }"
-                      />
-                      <div
-                        class="away"
-                        :style="{
-                          flex: lastFixtureInfo['Shots on Goal'].away / totalPropertyCountOfFixture('Shots on Goal') * 100,
-                          borderRadius: lastFixtureInfo['Shots on Goal'].away / totalPropertyCountOfFixture('Shots on Goal') * 100 === 100 ? '4px' : 0
-                        }"
-                      />
-                    </div>
-                    <span>{{ lastFixtureInfo['Shots on Goal'].away }}</span>
-                  </div>
-                </div>
-
-                <!-- BALL POSSESSION -->
-                <div class="tooltip__item">
-                  <p>Ball Possession</p>
-
-                  <div class="tooltip__graph-wrapper">
-                    <span>{{ lastFixtureInfo['Ball Possession'].home }}</span>
-
-                    <div class="tooltip__graph">
-                      <div
-                        class="home"
-                        :style="{
-                          flex: lastFixtureInfo['Ball Possession'].home.replace(/'%'/g, '')
-                        }"
-                      />
-                      <div
-                        class="away"
-                        :style="{
-                          flex: lastFixtureInfo['Ball Possession'].away.replace(/'%'/g, '')
-                        }"
-                      />
-                    </div>
-                    <span>{{ lastFixtureInfo['Ball Possession'].away }}</span>
-                  </div>
-                </div>
-
-                <!-- FOULS -->
-                <div class="tooltip__item">
-                  <p>Fouls</p>
-
-                  <div class="tooltip__graph-wrapper">
-                    <span>{{ lastFixtureInfo['Fouls'].home }}</span>
-                    <div class="tooltip__graph">
-                      <div
-                        class="home"
-                        :style="{
-                          flex: lastFixtureInfo['Fouls'].home / totalPropertyCountOfFixture('Fouls') * 100
-                        }"
-                      />
-                      <div
-                        class="away"
-                        :style="{
-                          flex: lastFixtureInfo['Fouls'].away / totalPropertyCountOfFixture('Fouls') * 100
-                        }"
-                      />
-                    </div>
-                    <span>{{ lastFixtureInfo['Fouls'].away }}</span>
-                  </div>
-                </div>
-
-                <!-- TOTAL PASSES -->
-                <div class="tooltip__item">
-                  <p>Total Passes</p>
-
-                  <div class="tooltip__graph-wrapper">
-                    <span>{{ lastFixtureInfo['Total passes'].home }}</span>
-                    <div class="tooltip__graph">
-                      <div
-                        class="home"
-                        :style="{
-                          flex: lastFixtureInfo['Total passes'].home / totalPropertyCountOfFixture('Total passes') * 100
-                        }"
-                      />
-                      <div
-                        class="away"
-                        :style="{
-                          flex: lastFixtureInfo['Total passes'].away / totalPropertyCountOfFixture('Total passes') * 100
-                        }"
-                      />
-                    </div>
-                    <span>{{ lastFixtureInfo['Total passes'].away }}</span>
-                  </div>
-                </div>
-
-                <!-- PASS ACCURACY -->
-                <div class="tooltip__item">
-                  <p style="margin-bottom: 8px">
-                    Pass Accuracy
-                  </p>
-
+                <section class="tooltip__statistics">
+                  <!-- SHOTS ON GOAL -->
                   <div
-                    class="tooltip__graph-wrapper"
-                    style="margin-bottom: 2px"
+                    v-if="lastFixtureInfo['Shots on Goal']"
+                    class="tooltip__item"
                   >
-                    <div style="margin-right: 12px">
-                      <span>{{ lastFixture.homeTeam.team_name.slice(0, 3) }}</span>
-                      <span
-                        :style="{
-                          display: 'inline-block',
-                          marginLeft: '4px',
-                          fontSize: '20px',
-                          color: '#2cb6ff'
-                        }"
-                      >{{ lastFixtureInfo['Passes %'].home }}</span>
-                    </div>
+                    <p>Shots on Goal</p>
 
-                    <div>
-                      <span>{{ lastFixture.awayTeam.team_name.slice(0, 3) }}</span>
-                      <span
-                        :style="{
-                          display: 'inline-block',
-                          marginLeft: '4px',
-                          fontSize: '20px',
-                          color: '#8ced03'
-                        }"
-                      >{{ lastFixtureInfo['Passes %'].away }}</span>
+                    <div class="tooltip__graph-wrapper">
+                      <span>{{ lastFixtureInfo['Shots on Goal'].home }}</span>
+
+                      <div class="tooltip__graph">
+                        <div
+                          class="home"
+                          :style="{
+                            flex: lastFixtureInfo['Shots on Goal'].home / totalPropertyCountOfFixture('Shots on Goal') * 100,
+                            borderRadius: lastFixtureInfo['Shots on Goal'].home / totalPropertyCountOfFixture('Shots on Goal') * 100 === 100 ? '4px' : 0
+                          }"
+                        />
+                        <div
+                          class="away"
+                          :style="{
+                            flex: lastFixtureInfo['Shots on Goal'].away / totalPropertyCountOfFixture('Shots on Goal') * 100,
+                            borderRadius: lastFixtureInfo['Shots on Goal'].away / totalPropertyCountOfFixture('Shots on Goal') * 100 === 100 ? '4px' : 0
+                          }"
+                        />
+                      </div>
+                      <span>{{ lastFixtureInfo['Shots on Goal'].away }}</span>
                     </div>
                   </div>
-                </div>
 
+                  <!-- BALL POSSESSION -->
+                  <div
+                    v-if="lastFixtureInfo['Ball Possession']"
+                    class="tooltip__item"
+                  >
+                    <p>Ball Possession</p>
+
+                    <div class="tooltip__graph-wrapper">
+                      <span>{{ lastFixtureInfo['Ball Possession'].home }}</span>
+
+                      <div class="tooltip__graph">
+                        <div
+                          class="home"
+                          :style="{
+                            flex: lastFixtureInfo['Ball Possession'].home.replace(/'%'/g, '')
+                          }"
+                        />
+                        <div
+                          class="away"
+                          :style="{
+                            flex: lastFixtureInfo['Ball Possession'].away.replace(/'%'/g, '')
+                          }"
+                        />
+                      </div>
+                      <span>{{ lastFixtureInfo['Ball Possession'].away }}</span>
+                    </div>
+                  </div>
+
+                  <!-- FOULS -->
+                  <div
+                    v-if="lastFixtureInfo['Fouls']"
+                    class="tooltip__item"
+                  >
+                    <p>Fouls</p>
+
+                    <div class="tooltip__graph-wrapper">
+                      <span>{{ lastFixtureInfo['Fouls'].home }}</span>
+                      <div class="tooltip__graph">
+                        <div
+                          class="home"
+                          :style="{
+                            flex: lastFixtureInfo['Fouls'].home / totalPropertyCountOfFixture('Fouls') * 100
+                          }"
+                        />
+                        <div
+                          class="away"
+                          :style="{
+                            flex: lastFixtureInfo['Fouls'].away / totalPropertyCountOfFixture('Fouls') * 100
+                          }"
+                        />
+                      </div>
+                      <span>{{ lastFixtureInfo['Fouls'].away }}</span>
+                    </div>
+                  </div>
+
+                  <!-- TOTAL PASSES -->
+                  <div
+                    v-if="lastFixtureInfo['Total passes']"
+                    class="tooltip__item"
+                  >
+                    <p>Total Passes</p>
+
+                    <div class="tooltip__graph-wrapper">
+                      <span>{{ lastFixtureInfo['Total passes'].home }}</span>
+                      <div class="tooltip__graph">
+                        <div
+                          class="home"
+                          :style="{
+                            flex: lastFixtureInfo['Total passes'].home / totalPropertyCountOfFixture('Total passes') * 100
+                          }"
+                        />
+                        <div
+                          class="away"
+                          :style="{
+                            flex: lastFixtureInfo['Total passes'].away / totalPropertyCountOfFixture('Total passes') * 100
+                          }"
+                        />
+                      </div>
+                      <span>{{ lastFixtureInfo['Total passes'].away }}</span>
+                    </div>
+                  </div>
+
+                  <!-- PASS ACCURACY -->
+                  <div
+                    v-if="lastFixtureInfo['Passes %']"
+                    class="tooltip__item"
+                  >
+                    <p style="margin-bottom: 8px">
+                      Pass Accuracy
+                    </p>
+
+                    <div
+                      class="tooltip__graph-wrapper"
+                      style="margin-bottom: 2px"
+                    >
+                      <div style="margin-right: 12px">
+                        <span>{{ lastFixture.homeTeam.team_name.slice(0, 3) }}</span>
+                        <span
+                          :style="{
+                            display: 'inline-block',
+                            marginLeft: '4px',
+                            fontSize: '20px',
+                            color: '#2cb6ff'
+                          }"
+                        >{{ lastFixtureInfo['Passes %'].home }}</span>
+                      </div>
+
+                      <div>
+                        <span>{{ lastFixture.awayTeam.team_name.slice(0, 3) }}</span>
+                        <span
+                          :style="{
+                            display: 'inline-block',
+                            marginLeft: '4px',
+                            fontSize: '20px',
+                            color: '#8ced03'
+                          }"
+                        >{{ lastFixtureInfo['Passes %'].away }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
 
                 <!-- EVENTS -->
                 <section
@@ -348,13 +364,6 @@
             <p class="fixture__detail">
               {{ nextFixture.venue || nextFixture.round }}
             </p>
-
-            <div
-              v-if="isNextFixtureInfo"
-              class="fixture__tooltip"
-            >
-              <h2>next fixture tooltip</h2>
-            </div>
           </div>
 
           <div

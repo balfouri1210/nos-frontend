@@ -133,7 +133,6 @@ export default {
       comments.forEach(async (comment) => {
         try {
           let links = comment.content.match(/\bhttps?:\/\/\S+/gi);
-          console.log(links);
 
           if (links) {
             this.$set(comment, 'linkMeta', (await this.$axios.$get('https://og-crawler.907degrees.com/link', {
@@ -141,7 +140,6 @@ export default {
                 url: links[0]
               }
             })).body);
-            console.log(comment);
           }
   
           this.$set(comment, 'isReply', false);

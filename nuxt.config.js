@@ -162,7 +162,9 @@ module.exports = {
       }
     ],
 
-    ['vue-scrollto/nuxt', { duration: 300 }]
+    ['vue-scrollto/nuxt', { duration: 300 }],
+
+    '@nuxtjs/sentry'
   ],
 
   env: {
@@ -181,5 +183,10 @@ module.exports = {
   loading: {
     color: '#f4991e',
     failedColor: 'black'
+  },
+
+  sentry: {
+    dsn: 'https://956bc90a363346b99f6e33670ef400a3@o437600.ingest.sentry.io/5400387', // Enter your project's DSN here
+    config: {}, // Additional config
   }
 };

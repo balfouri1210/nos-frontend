@@ -19,13 +19,12 @@ export default {
       nextFixture: null,
       areFixturesLoaded: false,
 
-      isLastFixtureInfo: false,
-      isNextFixtureInfo: false,
+      showLastFixtureInfo: false,
 
       lastFixtureInfo: null,
       lastFixtureEvents: null,
       getLastFixtureInfoFailed: false,
-      isLastFixtureInfoLoaded: false,
+      showLastFixtureInfoLoaded: false,
     }; 
   },
 
@@ -58,14 +57,14 @@ export default {
       return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`, apiFootballRequestHeader);
     },
 
-    async showLastFixtureInfo() {
+    async getLastFixtureInfo() {
       try {
-        if (this.isLastFixtureInfo) {
-          this.isLastFixtureInfo = false;
+        if (this.showLastFixtureInfo) {
+          this.showLastFixtureInfo = false;
         } else {
-          this.isLastFixtureInfo = true;
+          this.showLastFixtureInfo = true;
           // 한번 로드되면 닫고 다시 열더라도 기존에 로드된 정보 보여주기 (api request 감소)
-          if (this.isLastFixtureInfoLoaded) return;
+          if (this.showLastFixtureInfoLoaded) return;
 
           const [lastFixtureInfo, lastFixtureEvents]
             = await Promise.all([
@@ -76,17 +75,17 @@ export default {
           this.lastFixtureInfo = lastFixtureInfo.api.statistics;
           this.lastFixtureEvents = this.fixtureEventsManipulate(lastFixtureEvents);
 
-          this.isLastFixtureInfoLoaded = true;
+          this.showLastFixtureInfoLoaded = true;
         }
       } catch (err) {
         console.error(err);
-        this.isLastFixtureInfoLoaded = true;
+        this.showLastFixtureInfoLoaded = true;
         this.getLastFixtureInfoFailed = true;
       }
     },
 
     totalPropertyCountOfFixture(property) {
-      if (this.isLastFixtureInfo)
+      if (this.showLastFixtureInfo)
         return parseInt(this.lastFixtureInfo[property].home) + parseInt(this.lastFixtureInfo[property].away);
     },
 
