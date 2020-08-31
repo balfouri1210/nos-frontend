@@ -1,32 +1,35 @@
 <template>
   <div class="nos-comment-unit">
     <div class="nos-comment-unit__header">
-      <p>
-        <!-- <span v-if="sortType === 'date'">New</span> -->
-        Comments
-        <!-- <span v-if="sortType === 'vote'">got more than 10 ups</span> -->
-      </p>
+      <div style="display: flex">
+        <p>Comments</p>
 
-      <div class="nos-comment-unit__sort-type">
-        <button
-          class="nos-comment-unit__sort-type-btn"
-          :class="{'nos-comment-unit__sort-type-btn--active': sortType === 'date'}"
-          @click="getCommentsBySortType('date')"
-        >
-          <v-icon>mdi-octagram</v-icon>
-          <span>New</span>
-        </button>
+        <div class="nos-comment-unit__sort-type">
+          <button
+            class="nos-comment-unit__sort-type-btn"
+            :class="{'nos-comment-unit__sort-type-btn--active': sortType === 'date'}"
+            @click="getCommentsBySortType('date')"
+          >
+            <v-icon>mdi-octagram</v-icon>
+            <span>New</span>
+          </button>
 
-        <button
-          class="nos-comment-unit__sort-type-btn"
-          :class="{'nos-comment-unit__sort-type-btn--active': sortType === 'vote'}"
-          @click="getCommentsBySortType('vote')"
-        >
-          <v-icon>mdi-fire</v-icon>
-          <span>Hot</span>
-        </button>
+          <button
+            class="nos-comment-unit__sort-type-btn"
+            :class="{'nos-comment-unit__sort-type-btn--active': sortType === 'vote'}"
+            @click="getCommentsBySortType('vote')"
+          >
+            <v-icon>mdi-fire</v-icon>
+            <span>Hot</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nos-comment-unit__more">
+        <span>More</span><v-icon>mdi-chevron-right</v-icon>
       </div>
     </div>
+
 
     <div class="nos-comment-unit__body">
       <ul>
@@ -72,7 +75,7 @@ export default {
   data() {
     return {
       sortType: 'date',
-      comments: null
+      comments: []
     };
   },
 
