@@ -6,6 +6,7 @@ import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vu
 import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
 import { apiFootballRequestHeader, apiFootballLeagueId } from '@/lib/constants';
 import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
+import nosCommentUnit from '@/components/nos-comment-unit/nos-comment-unit.vue';
 
 export default {
   layout: 'wide',
@@ -16,7 +17,8 @@ export default {
     nosCountdown,
     nosPreseasonUi,
     nosOnboardingUi,
-    nosMainEvent
+    nosMainEvent,
+    nosCommentUnit
   },
 
   fetch({ store }) {

@@ -18,6 +18,8 @@
         :need-player-comments-preview="true"
       />
 
+      <nos-comment-unit />
+
       <div class="home__info">
         <div class="home__info-menus">
           <button
