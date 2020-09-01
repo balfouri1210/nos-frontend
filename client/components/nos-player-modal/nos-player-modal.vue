@@ -245,6 +245,10 @@
                               1°c
                             </span>
                             <p class="player-modal__comment-username">
+                              <span 
+                                v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'"
+                                style="color: #1976d2"
+                              >{{ comment.id }}</span>
                               {{ comment.fake_username || comment.username }}
                             </p>
                             <p class="player-modal__comment-moment">
