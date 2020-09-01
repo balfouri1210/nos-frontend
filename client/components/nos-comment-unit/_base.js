@@ -40,7 +40,8 @@ export default {
       try {
         this.comments = await this.$axios.$get('/api/comments/player', {
           params: {
-            sortType
+            sortType,
+            quantityPerRequest: 5
           }
         });
       } catch (err) {
