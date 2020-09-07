@@ -144,6 +144,9 @@
         </p>
       </nos-comment-unit>
     </div>
+
+    <!-- Nuxt child for player modal -->
+    <nuxt-child />
   </div>
 </template>
 

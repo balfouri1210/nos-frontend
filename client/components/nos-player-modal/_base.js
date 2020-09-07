@@ -517,9 +517,10 @@ export default {
     },
 
     closeModal() {
-      if (this.$route.name.indexOf('index-player-playerId-playerName') !== -1) {
-        // normal modal
+      if (this.$route.name.indexOf('index-player') !== -1) {
         this.$router.push(this.localePath('index'));
+      } else if (this.$route.name.indexOf('comment-player') !== -1) {
+        this.$router.push(this.localePath('comment'));
       } else {
         // search player modal
         this.$emit('closePlayerModal');

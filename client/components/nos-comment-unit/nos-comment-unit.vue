@@ -57,7 +57,7 @@
         >
           <nuxt-link
             :to="localePath({
-              name: 'index-player-playerId-playerName',
+              name: 'comment-player-playerId-playerName',
               params: {
                 playerId: comment.player_id,
                 playerName: comment.player_name.toLowerCase().replace(/ /g, '-')
