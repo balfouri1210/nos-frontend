@@ -27,9 +27,7 @@ export default {
   data() {
     return {
       sortType: null,
-      comments: [],
-
-      isCommentVoting: false
+      comments: []
     };
   },
 

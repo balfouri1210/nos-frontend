@@ -9,9 +9,10 @@
 
 <script>
 import Base from '@/page-resources/index/player/playerId/playerName/_base';
+import nosPlayerModalMixin from '@/mixins/nos-player-modal-mixin';
 
 export default {
-  mixins: [Base],
+  mixins: [Base, nosPlayerModalMixin],
 
   head() {
     return {
