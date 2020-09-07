@@ -66,10 +66,13 @@
             </div>
 
             <div>
-              <span class="nos-comment-unit__statistics">
+              <button
+                class="nos-comment-unit__statistics"
+                @click="votePlayerComment('up')"
+              >
                 <v-icon>mdi-thumb-up</v-icon>
                 {{ comment.vote_up_count }}
-              </span>
+              </button>
             </div>
           </div>
 
