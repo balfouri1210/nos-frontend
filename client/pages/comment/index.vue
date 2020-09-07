@@ -3,7 +3,7 @@
     <!-- Quick comment -->
     <div class="quick-comment">
       <p class="quick-comment__title">
-        Quick Comment
+        Leave Quick Comment
       </p>
       <validation-observer v-slot="{ handleSubmit }">
         <form

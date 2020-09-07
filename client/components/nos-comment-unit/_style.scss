@@ -74,7 +74,7 @@
 
   &__empty {
     text-align: center;
-    padding: 24px 0;
+    margin: 36px 0;
 
     * {
       color: rgba(0, 0, 0, 0.2);
@@ -138,7 +138,7 @@
     flex: 50;
 
     &__header {
-      padding: 4px 0 8px;
+      padding: 4px 8px 8px;
     }
   
     &__header-title {
@@ -150,11 +150,15 @@
     }
   
     &__comment {
-      padding: 8px 4px;
+      padding: 8px;
   
       * {
         font-size: 14px;
       }
+    }
+
+    &__empty {
+      margin: 64px 0;
     }
   
     &__created-at {
