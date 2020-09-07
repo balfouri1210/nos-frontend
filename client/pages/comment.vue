@@ -145,6 +145,15 @@
       </nos-comment-unit>
     </div>
 
+    <!-- LOGIN POPUP (for Guest) -->
+    <transition name="fade">
+      <nos-request-login-popup
+        v-if="isRequestLoginPopup"
+        @closeRequestLoginPopup="isRequestLoginPopup = false"
+      />
+    </transition>
+
+
     <!-- Nuxt child for player modal -->
     <nuxt-child />
   </div>

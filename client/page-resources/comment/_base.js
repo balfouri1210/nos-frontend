@@ -22,7 +22,8 @@ export default {
 
       selectedPlayer: null,
       quickCommentContent: null,
-      isCommentAdding: false
+      isCommentAdding: false,
+      isRequestLoginPopup: false
     };
   },
 
@@ -51,7 +52,7 @@ export default {
     },
 
     async addQuickComment() {
-      if (!this.getJwt()) return;
+      if (!this.getJwt()) this.isRequestLoginPopup = true;
 
       try {
         this.isCommentAdding = true;
