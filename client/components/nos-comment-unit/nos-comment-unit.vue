@@ -55,30 +55,37 @@
           :key="index"
           class="nos-comment-unit__comment"
         >
-          <div class="nos-comment-unit__meta">
-            <div>
-              <img
-                :src="comment.club_image"
-                alt="club emblem"
-              >
-              <span>{{ comment.player_name }}</span>
-              <span class="nos-comment-unit__created-at">{{ $moment(comment.created_at).fromNow() }}</span>
+          <nuxt-link
+            :to="localePath({
+              name: 'index-player-playerId-playerName',
+              params: {
+                playerId: comment.player_id,
+                playerName: comment.player_name.toLowerCase().replace(/ /g, '-')
+              }
+            })"
+          >
+            <div class="nos-comment-unit__meta">
+              <div>
+                <img
+                  :src="comment.club_image"
+                  alt="club emblem"
+                >
+                <span>{{ comment.player_name }}</span>
+                <span class="nos-comment-unit__created-at">{{ $moment(comment.created_at).fromNow() }}</span>
+              </div>
+
+              <div>
+                <span class="nos-comment-unit__statistics">
+                  <v-icon>mdi-thumb-up</v-icon>
+                  {{ comment.vote_up_count }}
+                </span>
+              </div>
             </div>
 
-            <div>
-              <button
-                class="nos-comment-unit__statistics"
-                @click="votePlayerComment('up')"
-              >
-                <v-icon>mdi-thumb-up</v-icon>
-                {{ comment.vote_up_count }}
-              </button>
-            </div>
-          </div>
-
-          <p class="nos-comment-unit__content">
-            {{ comment.content }}
-          </p>
+            <p class="nos-comment-unit__content">
+              {{ comment.content }}
+            </p>
+          </nuxt-link>
         </li>
       </ul>
     </div>
