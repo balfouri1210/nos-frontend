@@ -332,6 +332,7 @@
                                   id="comment"
                                   v-model="comment.editCommentContent"
                                   name="edit-comment"
+                                  maxlength="300"
                                   :rows="calculateRowsOfEditCommentTextarea(comment)"
                                 />
 

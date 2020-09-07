@@ -169,7 +169,7 @@
             </div>
           </div>
 
-          <!-- TABLE AREA -->
+          <!-- LEAGUE TABLE AREA -->
           <div
             v-if="isTable && leagueTable.length > 0"
             class="home__table"

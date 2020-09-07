@@ -13,6 +13,11 @@ export default {
     moreLink: {
       type: Boolean,
       default: false
+    },
+
+    quantityPerRequest: {
+      type: Number,
+      default: 5
     }
   },
 
@@ -41,7 +46,7 @@ export default {
         this.comments = await this.$axios.$get('/api/comments/player', {
           params: {
             sortType,
-            quantityPerRequest: 5
+            quantityPerRequest: this.quantityPerRequest
           }
         });
       } catch (err) {

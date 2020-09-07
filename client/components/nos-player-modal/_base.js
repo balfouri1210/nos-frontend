@@ -171,7 +171,6 @@ export default {
         this.$refs.addCommentRef.reset();
       } catch (err) {
         this.isCommentMalfunction = true;
-        console.error(err);
       } finally {
         this.isCommentAdding = false;
       }
@@ -477,8 +476,6 @@ export default {
         }
       });
     },
-
-
 
     checkIsLoggedIn() {
       if (!this.getJwt()) {

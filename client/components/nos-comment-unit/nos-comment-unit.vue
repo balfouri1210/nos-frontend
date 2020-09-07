@@ -34,12 +34,22 @@
         v-if="moreLink"
         class="nos-comment-unit__more"
       >
-        <span>More</span><v-icon>mdi-chevron-right</v-icon>
+        <nuxt-link :to="localePath('comment')">
+          <span>More</span><v-icon>mdi-chevron-right</v-icon>
+        </nuxt-link>
       </div>
     </div>
 
     <div class="nos-comment-unit__body">
-      <ul>
+      <div
+        v-if="comments.length === 0"
+        class="nos-comment-unit__empty"
+      >
+        <v-icon>mdi-message-processing-outline</v-icon>
+        <p>No comments yet</p>
+      </div>
+
+      <ul v-else>
         <li
           v-for="(comment, index) in comments"
           :key="index"

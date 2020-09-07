@@ -72,16 +72,26 @@
     }
   }
 
+  &__empty {
+    text-align: center;
+    padding: 24px 0;
+
+    * {
+      color: rgba(0, 0, 0, 0.2);
+    }
+
+    .v-icon {
+      font-size: 30px;
+    }
+  }
+
   &__comment {
     padding: 8px 16px;
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
 
     * {
       font-size: 12px;
     }
-  }
-  &__comment:last-of-type {
-    border: 0;
   }
 
   &__meta {
@@ -116,6 +126,9 @@
   }
 
   &__content {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-style: normal;
     line-height: 1.3rem;
   }
 }
