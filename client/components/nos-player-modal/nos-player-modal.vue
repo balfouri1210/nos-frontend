@@ -668,9 +668,7 @@
 
 
     <!-- LOGIN POPUP (for Guest) -->
-    <transition
-      name="fade"
-    >
+    <transition name="fade">
       <nos-request-login-popup
         v-if="isRequestLoginPopup"
         @closeRequestLoginPopup="isRequestLoginPopup = false"
