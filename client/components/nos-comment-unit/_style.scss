@@ -89,6 +89,9 @@
   &__comment:last-of-type {
     border: 0;
   }
+  &__comment:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 
   &__meta {
     display: flex;
@@ -161,7 +164,6 @@
 
     &__body {
       min-height: 100px;
-      padding: 4px 0;
       border: 0.5px solid rgba(0, 0, 0, 0.1);
       border-radius: 6px;
     }
@@ -173,6 +175,8 @@
         font-size: 14px;
       }
     }
+    &__comment:first-of-type { padding-top: 10px; }
+    &__comment:last-of-type { padding-bottom: 10px; }
 
     &__created-at {
       font-size: 12px;
