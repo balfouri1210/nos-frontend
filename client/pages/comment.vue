@@ -3,6 +3,7 @@
     <!-- Quick comment -->
     <div class="quick-comment">
       <p class="quick-comment__title">
+        <v-icon>mdi-comment-flash-outline</v-icon>
         Leave Quick Comment
       </p>
       <validation-observer v-slot="{ handleSubmit }">
@@ -114,7 +115,13 @@
                 :disabled="invalid"
                 @click="addQuickComment"
               >
-                ADD
+                <span v-if="!isQuickCommentAdding">ADD</span>
+              
+                <pulse-loader
+                  v-if="isQuickCommentAdding"
+                  :color="'#f4991e'"
+                  :size="'6px'"
+                />
               </button>
             </div>
           </validation-observer>
@@ -125,6 +132,7 @@
 
     <div class="comment__content">
       <nos-comment-unit
+        :key="newCommentUnitKey"
         :initial-sort-type="'date'"
         :quantity-per-request="20"
       >

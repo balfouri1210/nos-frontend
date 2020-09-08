@@ -43,10 +43,20 @@
     <div class="nos-comment-unit__body">
       <div
         v-if="comments.length === 0"
-        class="nos-comment-unit__empty"
+        class="nos-comment-unit__empty centered"
       >
-        <v-icon>mdi-message-processing-outline</v-icon>
-        <p>No comments yet</p>
+        <v-progress-circular
+          v-if="!isCommentLoaded"
+          :size="20"
+          :width="2"
+          color="#808080"
+          indeterminate
+        />
+
+        <div v-else>
+          <v-icon>mdi-message-processing-outline</v-icon>
+          <p>No comments yet</p>
+        </div>
       </div>
 
       <ul v-else>
@@ -57,7 +67,7 @@
         >
           <nuxt-link
             :to="localePath({
-              name: 'comment-player-playerId-playerName',
+              name: routeName,
               params: {
                 playerId: comment.player_id,
                 playerName: comment.player_name.toLowerCase().replace(/ /g, '-')

@@ -36,13 +36,17 @@ export default {
 @media screen and (min-width: $mobile-width) {
   .nos-comment-unit-desktop-wrapper {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
     max-width: $web-body-content-width;
-    margin: 0 auto 16px;
+    margin: 0 auto 12px;
+
+    .nos-comment-unit {
+      display: flex;
+      flex-direction: column;
+    }
 
     .nos-comment-unit:last-of-type {
-      margin-left: 50px;
+      margin-left: 12px;
     }
   }
 }

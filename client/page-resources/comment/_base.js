@@ -22,8 +22,10 @@ export default {
 
       selectedPlayer: null,
       quickCommentContent: null,
-      isCommentAdding: false,
-      isRequestLoginPopup: false
+      isQuickCommentAdding: false,
+      isRequestLoginPopup: false,
+
+      newCommentUnitKey: 0
     };
   },
 
@@ -52,21 +54,26 @@ export default {
     },
 
     async addQuickComment() {
-      if (!this.getJwt()) this.isRequestLoginPopup = true;
+      if (!this.getJwt()) { this.isRequestLoginPopup = true; return; }
 
       try {
-        this.isCommentAdding = true;
+        this.isQuickCommentAdding = true;
         await this.$axios.$post('/api/comments/player', {
           playerId: this.selectedPlayer.id,
           content: this.quickCommentContent,
         });
         this.quickCommentContent = '';
         this.$refs.quickCommentRef.reset();
+        this.forceRerender();
       } catch (err) {
-        console.error(err);
+        this.$nuxt.error({ statusCode: 500 });
       } finally {
-        console.log('finally');
+        this.isQuickCommentAdding = false;
       }
+    },
+
+    forceRerender() {
+      this.newCommentUnitKey ++;
     }
   },
 

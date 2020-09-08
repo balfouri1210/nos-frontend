@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 8px 8px 16px;
+    padding: 6px 12px;
   }
 
   &__header-title {
@@ -23,6 +23,12 @@
       font-size: 16px;
       color: black;
     }
+  }
+
+  &__body {
+    position: relative;
+    flex: 1;
+    min-height: 100px;
   }
 
   &__sort-type {
@@ -72,26 +78,16 @@
     }
   }
 
-  &__empty {
-    text-align: center;
-    margin: 32px 0;
-
-    * {
-      color: rgba(0, 0, 0, 0.2);
-    }
-
-    .v-icon {
-      font-size: 30px;
-    }
-  }
-
   &__comment {
-    padding: 8px 16px;
-    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+    padding: 6px 14px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
 
     * {
       font-size: 12px;
     }
+  }
+  &__comment:last-of-type {
+    border: 0;
   }
 
   &__meta {
@@ -131,14 +127,28 @@
     font-style: normal;
     line-height: 1.3rem;
   }
+
+  &__empty {
+    text-align: center;
+
+    * {
+      color: rgba(0, 0, 0, 0.2);
+    }
+
+    .v-icon {
+      font-size: 30px;
+    }
+  }
 }
 
 @media screen and (min-width: $mobile-width) {
   .nos-comment-unit {
-    flex: 50;
+    flex: 1;
+    margin: 0;
 
     &__header {
-      padding: 4px 8px 8px;
+      margin-bottom: 8px;
+      padding: 0;
     }
   
     &__header-title {
@@ -148,19 +158,22 @@
         color: black;
       }
     }
+
+    &__body {
+      min-height: 100px;
+      padding: 4px 0;
+      border: 0.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
   
     &__comment {
-      padding: 8px;
+      padding: 6px 14px;
   
       * {
         font-size: 14px;
       }
     }
 
-    &__empty {
-      margin: 40px 0;
-    }
-  
     &__created-at {
       font-size: 12px;
     }

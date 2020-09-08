@@ -106,7 +106,7 @@
 
                   <validation-observer ref="addCommentRef">
                     <validation-provider
-                      v-slot="{ errors, invalid }"
+                      v-slot="{ invalid }"
                       :rules="'required|newline_limit:10|min:10|max:300'"
                       name="comment"
                     >

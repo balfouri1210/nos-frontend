@@ -1,14 +1,22 @@
 .comment {
   max-width: $web-header-content-width;
-  margin: 16px auto 120px;
+  margin: 0 auto 120px;
 }
 
 .quick-comment {
   position: relative;
-  padding: 0 8px;
+  margin: 18px auto 12px;
+  padding: 0 12px;
 
   &__title {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    font-weight: 300;
+
+    .v-icon {
+      margin-right: 4px;
+      color: black;
+      font-size: 16px;
+    }
   }
 
   &__search-form {
@@ -34,11 +42,11 @@
 
   .nos-search-modal__suggestion {
     position: absolute;
-    top: 84px;
+    top: 76px;
     left: 0;
     width: 100%;
     max-height: 320px;
-    padding: 4px 8px;
+    padding: 4px 16px;
     z-index: 5;
 
     ul {
@@ -139,19 +147,34 @@
 
 @media screen and (min-width: $mobile-width) {
   .comment {
+    padding: 0 16px;
+
     &__content {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
       margin-top: 32px;
     }
 
+    .nos-comment-unit {
+      display: flex;
+      flex-direction: column;
+    }
+
     .nos-comment-unit:last-of-type {
-      margin-lefT: 50px;
+      margin-left: 50px;
     }
   }
 
   .quick-comment {
+    margin: 36px auto 24px;
+    padding: 0;
+
+    &__title {
+      .v-icon {
+        font-size: 18px;
+      }
+    }
+
     &__search-form {
       margin-bottom: 18px;
       padding: 2px 0;

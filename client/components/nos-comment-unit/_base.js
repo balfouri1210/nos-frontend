@@ -27,8 +27,19 @@ export default {
   data() {
     return {
       sortType: null,
-      comments: []
+      comments: [],
+      isCommentLoaded: false
     };
+  },
+
+  computed: {
+    routeName() {
+      if (this.$route.name.indexOf('comment') !== -1) {
+        return 'comment-player-playerId-playerName';
+      } else {
+        return 'index-player-playerId-playerName';
+      }
+    }
   },
 
   created() {
@@ -41,6 +52,8 @@ export default {
 
     changeSortType(selectedSortType) {
       if (this.sortType !== selectedSortType) {
+        this.comments = [];
+        this.isCommentLoaded = false;
         this.sortType = selectedSortType;
         this.getComments(selectedSortType);
       }
@@ -54,10 +67,10 @@ export default {
             quantityPerRequest: this.quantityPerRequest
           }
         });
-
-        console.log(this.comments);
       } catch (err) {
         this.$nuxt.error({ statusCode: 500 });
+      } finally {
+        this.isCommentLoaded = true;
       }
     }
   }
