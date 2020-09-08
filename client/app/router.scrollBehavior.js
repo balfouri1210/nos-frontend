@@ -24,6 +24,13 @@ export default function (to, from) {
   if (from.name.indexOf('search-player-playerId-playerName') !== -1
   && to.name.indexOf('search') !== -1)  return;
 
+  // comment와 player modal을 오갈 때 스크롤 고정
+  if (from.name.indexOf('comment') !== -1
+  && to.name.indexOf('comment-player-playerId-playerName') !== -1)  return;
+
+  if (from.name.indexOf('comment-player-playerId-playerName') !== -1
+  && to.name.indexOf('comment') !== -1)  return;
+
   // 나머지 경우에는 scroll top
   else return { x: 0, y: 0 };
 }
