@@ -1,0 +1,64 @@
+.nos-textarea {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    padding: 4px 8px;
+  }
+
+  &__error-message {
+    position: absolute;
+    bottom: 0;
+    left: 8px;
+    color: $color-warning;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  &--outlined {
+    textarea {
+      border: 1px solid $nos-main-theme;
+    }
+
+    textarea:disabled {
+      border: 1px solid black !important;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .nos-textarea__error-message {
+      top: 42px;
+      left: 8px;
+      color: #c62828;
+    }
+  }
+  &--extra-padding {
+    padding-bottom: 18px;
+  }
+
+  &__char-counter {
+    position: absolute;
+    bottom: 2px;
+    right: 6px;
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .nos-textarea {
+    textarea {
+      padding: 6px 10px;
+    }
+
+    &__char-counter {
+      bottom: 3px;
+      right: 8px;
+    }
+  }
+}
