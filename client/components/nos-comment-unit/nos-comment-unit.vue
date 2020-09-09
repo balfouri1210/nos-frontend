@@ -46,7 +46,7 @@
         class="nos-comment-unit__empty centered"
       >
         <v-progress-circular
-          v-if="!isCommentLoaded"
+          v-if="isCommentLoading"
           :size="20"
           :width="2"
           color="#808080"
@@ -98,6 +98,62 @@
           </nuxt-link>
         </li>
       </ul>
+    </div>
+
+    <div
+      v-if="pagination"
+      class="nos-comment-unit__pagination-wrapper"
+    >
+      <div
+        v-if="totalPages > pagesPerLoad"
+        class="nos-comment-unit__page-navigation"
+      >
+        <button @click="changeCurrentBigPage('prev')">
+          <v-icon>mdi-chevron-double-left</v-icon>
+          <span>Prev 7 pages</span>
+        </button>
+
+        <button
+          style="margin-left: 36px"
+          @click="changeCurrentBigPage('next')"
+        >
+          <span>Next 7 pages</span>
+          <v-icon>mdi-chevron-double-right</v-icon>
+        </button>
+      </div>
+
+      <div class="nos-comment-unit__pagination">
+        <button
+          style="margin-right: 12px"
+          @click="movePage('prev')"
+        >
+          <v-icon>mdi-chevron-left</v-icon>
+          <span>Prev</span>
+        </button>
+
+        <ul>
+          <li
+            v-for="index in pageIndexRange"
+            :key="index"
+          >
+            <button
+              class="nos-comment-unit__page"
+              :class="{'nos-comment-unit__page--active': currentPage === calculatedPage(index) }"
+              @click="selectPage(calculatedPage(index))"
+            >
+              {{ calculatedPage(index) }}
+            </button>
+          </li>
+        </ul>
+
+        <button
+          style="margin-left: 12px"
+          @click="movePage('next')"
+        >
+          <span>Next</span>
+          <v-icon>mdi-chevron-right</v-icon>
+        </button>
+      </div>
     </div>
   </div>
 </template>

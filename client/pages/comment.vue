@@ -132,9 +132,13 @@
 
     <div class="comment__content">
       <nos-comment-unit
+        :id="'new-comment-unit'"
         :key="newCommentUnitKey"
         :initial-sort-type="'date'"
-        :quantity-per-request="20"
+        :comments-per-request="15"
+        :pagination="true"
+        :total-comments-count="totalCommentsCount"
+        @newCommentsLoaded="$scrollTo('#new-comment-unit', 300, { offset: -70 })"
       >
         <p>
           <v-icon>mdi-octagram</v-icon>
@@ -143,8 +147,12 @@
       </nos-comment-unit>
 
       <nos-comment-unit
+        :id="'hot-comment-unit'"
         :initial-sort-type="'vote'"
-        :quantity-per-request="20"
+        :comments-per-request="15"
+        :pagination="true"
+        :total-comments-count="totalHotCommentsCount"
+        @newCommentsLoaded="$scrollTo('#hot-comment-unit', 300, { offset: -70 })"
       >
         <p>
           <v-icon>mdi-fire</v-icon>

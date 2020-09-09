@@ -1,6 +1,10 @@
 .comment {
   max-width: $web-header-content-width;
-  margin: 0 auto 120px;
+  margin: 0 auto 16px;
+
+  .nos-comment-unit {
+    margin-bottom: 60px;
+  }
 }
 
 .quick-comment {
@@ -25,11 +29,11 @@
     justify-content: space-between;
     margin-bottom: 6px;
     padding: 2px 0;
-  
+
     .nos-input {
       width: 100%;
       padding: 6px 0 6px 12px;
-      border: 0.5px solid #e4e4e4;
+      border: 1px solid #e4e4e4;
       border-radius: 6px;
       font-size: 14px;
       line-height: 24px;
@@ -46,7 +50,7 @@
     left: 0;
     width: 100%;
     max-height: 320px;
-    padding: 4px 16px;
+    padding: 4px 14px;
     z-index: 5;
 
     ul {
@@ -64,7 +68,7 @@
 
     ::v-deep textarea {
       width: 100%;
-      border: 0.5px solid #e4e4e4;
+      border: 1px solid #e4e4e4;
       border-radius: 6px;
       font-family: 'Open Sans', sans-serif;
       font-size: 13px;
@@ -212,6 +216,10 @@
         width: 118px;
         padding: 5px 4px;
       }
+    }
+
+    .nos-search-modal__suggestion {
+      padding: 4px 8px;
     }
   }
 }

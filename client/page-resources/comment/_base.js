@@ -25,8 +25,15 @@ export default {
       isQuickCommentAdding: false,
       isRequestLoginPopup: false,
 
-      newCommentUnitKey: 0
+      totalCommentsCount: 0,
+      totalHotCommentsCount: 0,
+
+      newCommentUnitKey: 0 // 컴포넌트 강제 reload를 위한 변수
     };
+  },
+
+  created() {
+    this.getTotalCommentsCount();
   },
 
   methods: {
@@ -69,6 +76,16 @@ export default {
         this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isQuickCommentAdding = false;
+      }
+    },
+
+    async getTotalCommentsCount() {
+      try {
+        const result = await this.$axios.$get('/api/comments/count');
+        this.totalCommentsCount = result.totalCommentsCount;
+        this.totalHotCommentsCount = result.totalHotCommentsCount;
+      } catch (err) {
+        this.$nuxt.error({ statusCode: 500 });
       }
     },
 
