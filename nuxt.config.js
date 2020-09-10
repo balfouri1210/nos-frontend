@@ -20,7 +20,7 @@ module.exports = {
     }
   ],
   head: {
-    title: '907degrees - Hottest Player of The Week',
+    title: '907degrees - The most on fire player this week',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -35,7 +35,7 @@ module.exports = {
       // Opengraph
       {
         'property':  'og:title',
-        'content':  'Hottest Player of The Week - Leaderboard, News & Fans\' Reaction',
+        'content':  'The most on fire player this week - Leaderboard, News & Fans\' Reaction',
       },
       {
         'property':  'og:site_name',

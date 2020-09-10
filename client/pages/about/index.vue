@@ -7,7 +7,7 @@
           mdi-fire
         </v-icon>
         <h1>
-          HOTTEST PLAYER<br>OF THE WEEK
+          The most on fire player this week
         </h1>
       </div>
 
