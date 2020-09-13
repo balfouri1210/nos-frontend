@@ -133,9 +133,12 @@
   &__fixture-sub-info {
     margin: 4px 0;
     text-align: center;
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(0, 0, 0, 0.6);
+
+    span {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.6);
+    }
   }
   &__fixture-tip {
     display: flex;
@@ -267,11 +270,6 @@
       justify-content: center;
       margin-bottom: 0;
       padding: 14px 28px 6px;
-    }
-    &__fixture-meta {
-      p {
-        font-size: 16px;
-      }
     }
     &__fixture-tip {
       padding: 1px 4px;

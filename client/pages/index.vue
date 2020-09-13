@@ -75,16 +75,7 @@
                   <v-icon>mdi-chevron-left</v-icon>
                 </button>
 
-                <!-- <v-progress-circular
-                  v-if="isFixturesLoading"
-                  :size="20"
-                  :width="2"
-                  :style="{ margin: '0 20px' }"
-                  color="black"
-                  indeterminate
-                /> -->
                 <p>
-                  <!-- {{ $moment.unix(fixtures[0].event_timestamp).format('YYYY. MM. DD, ddd') }} -->
                   {{ $moment.utc(selectedLeagueSchedule[targetScheduleIndex]).format('YYYY. MM, DD, ddd') }}
                 </p>
 
@@ -127,11 +118,14 @@
                       margin: '4px 8px'
                     }"
                   >
+                    <div v-if="fixture.statusShort === 'PST'">
+                      PST
+                    </div>
                     <div
-                      v-if="fixture.statusShort !== 'NS'"
+                      v-else-if="fixture.statusShort !== 'NS'"
                       class="fixture__score"
                     >
-                      {{ fixture.goalsHomeTeam }} : {{ fixture.goalsAwayTeam }}
+                      {{ fixture.goalsHomeTeam || 0 }} : {{ fixture.goalsAwayTeam || 0 }}
                     </div>
                     <div v-else>
                       VS
@@ -157,7 +151,8 @@
                 </div>
 
                 <p class="home__fixture-sub-info">
-                  {{ $moment.unix(fixture.event_timestamp).format('HH:mm') }}, {{ fixture.venue || fixture.round }}
+                  <span v-if="fixture.statusShort === 'PST'">Match Postponed</span>
+                  <span v-else>{{ $moment.unix(fixture.event_timestamp).format('HH:mm') }}, {{ fixture.venue || fixture.round }}</span>
                 </p>
               </div>
             </div>
