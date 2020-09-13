@@ -95,7 +95,7 @@ export default {
       if (this.isFixtures && this.fixtures.length === 0) {
         this.selectedLeagueSchedule = premierLeagueSchedule;
         this.initiateTargetScheduleIndex();
-        this.getFixturesByLeagueId(apiFootballLeagueId.epl1920);
+        this.getFixturesByLeagueId(apiFootballLeagueId.epl2021);
       }
     },
 
@@ -114,14 +114,15 @@ export default {
       if (this.selectedLeague === 'pl') {
         this.selectedLeagueSchedule = premierLeagueSchedule;
         this.initiateTargetScheduleIndex();
-        this.getFixturesByLeagueId(apiFootballLeagueId.epl1920);
+        this.getFixturesByLeagueId(apiFootballLeagueId.epl2021);
       } else {
         this.selectedLeagueSchedule = faCupSchedule;
         this.initiateTargetScheduleIndex();
-        this.getFixturesByLeagueId(apiFootballLeagueId.faCup1920);
+        this.getFixturesByLeagueId(apiFootballLeagueId.faCup2021);
       }
     },
 
+    // fixture area의 시작 날짜를 설정하는 함수
     initiateTargetScheduleIndex() {
       for (const [index, el] of this.selectedLeagueSchedule.entries()) {
         if (this.$moment(el).format('YYYYMMDD') >= this.$moment.utc().format('YYYYMMDD')) {
@@ -130,7 +131,7 @@ export default {
         }
       }
 
-      if (!this.targetScheduleIndex)
+      if (this.targetScheduleIndex === null)
         this.targetScheduleIndex = this.selectedLeagueSchedule.length - 1;
     },
 
@@ -140,6 +141,7 @@ export default {
       try {
         this.fixtures =
           (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
+        console.log(this.fixtures);
       } catch (err) {
         console.error(err);
       } finally {
@@ -152,9 +154,9 @@ export default {
         this.targetScheduleIndex --;
 
         if (this.selectedLeague === 'pl') {
-          this.getFixturesByLeagueId(apiFootballLeagueId.epl1920);
+          this.getFixturesByLeagueId(apiFootballLeagueId.epl2021);
         } else {
-          this.getFixturesByLeagueId(apiFootballLeagueId.faCup1920);
+          this.getFixturesByLeagueId(apiFootballLeagueId.faCup2021);
         }
       }
     },
@@ -164,9 +166,9 @@ export default {
         this.targetScheduleIndex ++;
 
         if (this.selectedLeague === 'pl') {
-          this.getFixturesByLeagueId(apiFootballLeagueId.epl1920);
+          this.getFixturesByLeagueId(apiFootballLeagueId.epl2021);
         } else {
-          this.getFixturesByLeagueId(apiFootballLeagueId.faCup1920);
+          this.getFixturesByLeagueId(apiFootballLeagueId.faCup2021);
         }
       }
     },
@@ -175,7 +177,7 @@ export default {
       this.isTableLoading = true;
 
       try {
-        this.leagueTable = (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/leagueTable/${apiFootballLeagueId.epl1920}`, apiFootballRequestHeader)).api.standings[0];
+        this.leagueTable = (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/leagueTable/${apiFootballLeagueId.epl2021}`, apiFootballRequestHeader)).api.standings[0];
       } catch (err) {
         console.error(err);
       } finally {

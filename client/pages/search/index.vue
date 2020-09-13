@@ -26,7 +26,7 @@
         </div>
 
         <div
-          v-show="$route.query.clubId"
+          v-if="$route.query.clubId"
           class="search__fixtures-area"
         >
           <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />

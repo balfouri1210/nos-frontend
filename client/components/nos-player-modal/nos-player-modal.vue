@@ -104,31 +104,28 @@
                   <!-- FAKE COMMENT FORM END -->
 
 
-                  <validation-observer ref="addCommentRef">
-                    <validation-provider
-                      v-slot="{ invalid }"
-                      :rules="'required|newline_limit:10|min:10|max:300'"
-                      name="comment"
-                    >
-                      <div class="player-modal__comment-editor">
-                        <textarea
-                          v-model="newCommentContent"
-                          cols="30"
-                          rows="2"
-                          maxlength="300"
-                          :placeholder="`How was ${player.known_as} this week?`"
-                          @focus="isCommunityGuide = true"
-                          @blur="isCommunityGuide = false"
-                        />
+                  <validation-observer
+                    ref="addCommentRef"
+                    v-slot="{ invalid }"
+                  >
+                    <div class="player-modal__comment-editor">
+                      <nos-textarea
+                        v-model="newCommentContent"
+                        cols="30"
+                        rows="2"
+                        :rules="'required|newline_limit:10|min:10|max:300'"
+                        :max-length="300"
+                        :placeholder="`How was ${player.known_as} this week?`"
+                        @textarea="newCommentContent = $event"
+                      />
 
-                        <button
-                          :disabled="invalid || !newCommentContent || isCommentAdding"
-                          @click="addComment"
-                        >
-                          ADD
-                        </button>
-                      </div>
-                    </validation-provider>
+                      <button
+                        :disabled="invalid || !newCommentContent || isCommentAdding"
+                        @click="addComment"
+                      >
+                        ADD
+                      </button>
+                    </div>
                   </validation-observer>
 
                   <transition

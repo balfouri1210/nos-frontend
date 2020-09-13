@@ -20,7 +20,6 @@
               :placeholder="'Search Player'"
               :clearable="true"
               :is-loading="isSearching"
-              :auto-focus="true"
               :is-error-message="false"
               @input="searchKeyword = $event"
             />

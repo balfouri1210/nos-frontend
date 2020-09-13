@@ -49,7 +49,7 @@
               </div>
 
               <div class="fixture__score">
-                {{ lastFixture.goalsHomeTeam }} : {{ lastFixture.goalsAwayTeam }}
+                {{ lastFixture.goalsHomeTeam || 0 }} : {{ lastFixture.goalsAwayTeam || 0 }}
               </div>
 
               <div class="fixture__team">

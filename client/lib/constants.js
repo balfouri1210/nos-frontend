@@ -7,7 +7,9 @@ export const apiFootballRequestHeader = {
 
 export const apiFootballLeagueId = {
   epl1920: 524,
-  faCup1920: 1063
+  epl2021: 2790,
+  faCup1920: 1063,
+  faCup2021: 2791,
 };
 
 export const TOKEN_EXPIRES = 3;
@@ -72,12 +74,12 @@ export const eplClubs = [
     league_id: 1,
     api_football_team_id: 41
   }, {
-    id: 9,
-    clean_name: 'AFC Bournemouth',
-    image: 'https://cdn.footystats.org/img/teams/england-afc-bournemouth.png',
-    official_site: 'https://www.afcb.co.uk/',
+    id: 28,
+    clean_name: 'Fulham',
+    image: 'https://cdn.footystats.org/img/teams/england-fulham-fc.png',
+    official_site: 'https://www.fulhamfc.com/',
     league_id: 1,
-    api_football_team_id: 35
+    api_football_team_id: 36
   }, {
     id: 10,
     clean_name: 'Manchester United',
@@ -107,12 +109,12 @@ export const eplClubs = [
     league_id: 1,
     api_football_team_id: 48
   }, {
-    id: 14,
-    clean_name: 'Watford',
-    image: 'https://cdn.footystats.org/img/teams/england-watford-fc.png',
-    official_site: 'https://www.watfordfc.com/',
+    id: 22,
+    clean_name: 'West Bromwich Albion',
+    image: 'https://cdn.footystats.org/img/teams/england-west-bromwich-albion-fc.png',
+    official_site: 'https://www.wba.co.uk/',
     league_id: 1,
-    api_football_team_id: 38
+    api_football_team_id: 60
   }, {
     id: 15,
     clean_name: 'Newcastle United',
@@ -128,10 +130,10 @@ export const eplClubs = [
     league_id: 1,
     api_football_team_id: 66
   }, {
-    id: 17,
-    clean_name: 'Norwich City',
-    image: 'https://cdn.footystats.org/img/teams/england-norwich-city-fc.png',
-    official_site: 'https://www.canaries.co.uk/',
+    id: 41,
+    clean_name: 'Leeds United',
+    image: 'https://cdn.footystats.org/img/teams/england-leeds-united-fc.png',
+    official_site: 'https://www.leedsunited.com/',
     league_id: 1,
     api_football_team_id: 71
   }, {

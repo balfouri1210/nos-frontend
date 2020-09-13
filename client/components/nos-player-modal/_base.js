@@ -7,6 +7,7 @@ import nosFixturesArea from '@/components/nos-fixtures-area/nos-fixtures-area.vu
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
+import nosTextarea from '@/components/nos-textarea/nos-textarea.vue';
 import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
 // import Cookies from 'js-cookie';
 
@@ -33,6 +34,7 @@ export default {
     nosNewsArea,
     nosYoutubePlayer,
     nosLinkCopy,
+    nosTextarea,
     nosLinkPreview
   },
 

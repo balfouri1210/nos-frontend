@@ -158,8 +158,8 @@ export default {
   },
 
   watch: {
-    currentPage() {
-      this.getComments(this.sortType, this.currentPage);
+    async currentPage() {
+      await this.getComments(this.sortType, this.currentPage);
       this.$emit('newCommentsLoaded');
     }
   }

@@ -167,6 +167,7 @@
 
     button {
       font-size: 12px;
+      line-height: 22px;
     }
   }
   &__page {
@@ -236,6 +237,15 @@
 
     &__created-at {
       font-size: 12px;
+    }
+
+    &__pagination {
+      button {
+        font-size: 15px;
+      }
+      .v-icon {
+        font-size: 22px;
+      }
     }
   }
 }

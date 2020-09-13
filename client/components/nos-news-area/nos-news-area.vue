@@ -36,18 +36,6 @@
       </p>
     </div> 
 
-    <div
-      v-if="isNewsLoading"
-      class="centered"
-    >
-      <v-progress-circular
-        :size="20"
-        :width="2"
-        color="#808080"
-        indeterminate
-      />
-    </div>
-
     <div class="news-area__news-list">
       <ul>
         <li
@@ -100,8 +88,21 @@
       </button>
     </div>
 
+
     <div
-      v-if="isAllNewsLoaded && newsList.length === 0"
+      v-if="isNewsLoading"
+      class="centered"
+    >
+      <v-progress-circular
+        :size="20"
+        :width="2"
+        color="#808080"
+        indeterminate
+      />
+    </div>
+
+    <div
+      v-if="!isNewsLoading && isAllNewsLoaded && newsList.length === 0"
       class="news-area__empty centered"
     >
       No results found

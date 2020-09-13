@@ -70,13 +70,13 @@
             }"
           />
 
-          <img
-            v-if="player.image_url === 'n'"
-            :class="{'centered': player.image_url === 'n'}"
-            class="player__meta-club"
-            :src="player.club_image"
-            alt="club"
-          >
+          <div class="player__club-emblem">
+            <img
+              v-if="player.image_url === 'n'"
+              :src="player.club_image"
+              alt="club"
+            >
+          </div>
 
           <div
             class="player__meta"

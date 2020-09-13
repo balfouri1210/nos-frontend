@@ -75,16 +75,17 @@
                   <v-icon>mdi-chevron-left</v-icon>
                 </button>
 
-                <v-progress-circular
+                <!-- <v-progress-circular
                   v-if="isFixturesLoading"
                   :size="20"
                   :width="2"
                   :style="{ margin: '0 20px' }"
                   color="black"
                   indeterminate
-                />
-                <p v-else>
-                  {{ $moment.unix(fixtures[0].event_timestamp).format('YYYY. MM. DD, ddd') }}
+                /> -->
+                <p>
+                  <!-- {{ $moment.unix(fixtures[0].event_timestamp).format('YYYY. MM. DD, ddd') }} -->
+                  {{ $moment.utc(selectedLeagueSchedule[targetScheduleIndex]).format('YYYY. MM, DD, ddd') }}
                 </p>
 
                 <button
