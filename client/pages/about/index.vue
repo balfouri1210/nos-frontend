@@ -1,15 +1,5 @@
 <template>
   <div class="about">
-    <div
-      :style="{
-        width: '300px',
-      }"
-    >
-      <h2 style="text-align: left">
-        asdnjf knaskdjfn kasndfkj sadkfn sanfkjasn dkfjnas kdfjnksa dfnkjasn dfkjansdkfnakdjf
-      </h2>
-    </div>
-
     <!-- INTRO -->
     <div class="about__intro">
       <div class="about__title">
@@ -17,7 +7,7 @@
           mdi-fire
         </v-icon>
         <h1>
-          The most on fire player this week
+          The most on fire player of the week
         </h1>
       </div>
 

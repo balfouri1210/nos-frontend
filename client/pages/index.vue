@@ -260,7 +260,7 @@ export default {
   mixins: [Base],
   head() {
     return {
-      title: '907degrees - Hottest Player of The Week',
+      title: '907degrees - The most on fire player of the week',
       meta: [
         {
           hid: 'description',
@@ -273,7 +273,7 @@ export default {
         {
           property: 'og:title',
           content:
-            "Hottest Player of The Week - Leaderboard, News & Fans' Reaction"
+            "The most on fire player of the week - Leaderboard, News & Fans' Reaction"
         },
         {
           property: 'og:site_name',

@@ -61,7 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 12px 48px;
   }
   &__emblem {
     height: 50px;
@@ -71,9 +71,11 @@
     font-size: 24px;
     font-weight: 600;
     text-align: left;
-    line-height: 30px;
+    line-height: 26px;
+    word-break: break-all;
   }
   &__meta {
+    margin-top: 4px;
     font-size: 13px;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
@@ -144,21 +146,22 @@
 
     &__left {
       flex: 1 0 50%;
-      padding: 0 0 0 16px;
+      padding: 0 18px 0 32px;
     }
     &__emblem {
       height: 80px;
     }
     &__title {
       justify-content: flex-start;
-      margin-bottom: -2px;
+      margin-bottom: 2px;
       font-size: 16px;
     }
     &__name {
       font-size: 36px;
-      line-height: 46px;
+      line-height: 36px;
     }
     &__meta {
+      margin-top: 4px;
       font-size: 16px;
 
       span {
