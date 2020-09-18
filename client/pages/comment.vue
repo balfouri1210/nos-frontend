@@ -65,7 +65,7 @@
         <div
           class="quick-comment__player-image"
           :style="{
-            backgroundImage: selectedPlayer.image_url === 'y' ? `url(${nosImageUrl}/players/${selectedPlayer.id}.jpg)` : `url(${nosImageUrl}/players/default2.png)`,
+            backgroundImage: selectedPlayer.image_url === 'y' ? `url(${nosImageUrl}/players/${selectedPlayer.id}.jpg), url(${nosImageUrl}/players/default2.png)` : `url(${nosImageUrl}/players/default2.png)`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center center'

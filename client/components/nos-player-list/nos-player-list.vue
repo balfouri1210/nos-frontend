@@ -1,132 +1,86 @@
 <template>
-  <div id="player-list-wrapper">
-    <ul
-      class="player-list"
-    >
+  <div class="nos-player-list">
+    <ul class="nos-player-list__content">
       <li
         v-for="(player, index) in playerList"
         :key="index"
-        class="player"
-        :class="{'player--without-image': player.image_url === 'n'}"
+        class="nos-player"
       >
         <button @click="selectPlayer(player)">
-          <div class="player__header">
-            <div class="player__header-content">
-              <div class="player__hits-and-comment">
-                <p>
-                  <v-icon>mdi-message-processing-outline</v-icon>
-                  <span>{{ player.comment_count | thousandSeparator }}</span>
-                </p>
+          <div class="nos-player__header">
+            <div class="nos-player__header-left">
+              <span class="nos-player__comment-count">
+                <v-icon>mdi-message-processing-outline</v-icon>
+                {{ player.comment_count }}
+              </span>
 
-                <p>
-                  <v-icon>mdi-eye-outline</v-icon>
-                  <span>{{ player.hits | thousandSeparator }}</span>
-                </p>
+              <span
+                v-if="withIn12Hours(player)"
+                class="nos-player__new-comment"
+              >NEW</span>
+            </div>
+            <span class="nos-player__temperature"><v-icon>mdi-fire</v-icon>{{ degreeCalculator(player.score) }}</span>
+          </div>
 
-                <p v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'">
-                  ID : {{ player.id }}
-                </p>
+          <div class="nos-player__body">
+            <div>
+              <div class="nos-player__upper">
+                <img
+                  :src="player.club_image"
+                  alt="club emblem"
+                  class="nos-player__emblem"
+                >
+
+                <div>
+                  <h2 class="nos-player__name">
+                    {{ player.known_as }}
+                  </h2>
+
+                  <p class="nos-player__meta">
+                    {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} / {{ player.height }} cm /
+                    <img
+                      :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
+                      :alt="player.country_code"
+                    >
+                  </p>
+                </div>
               </div>
 
-              <p
-                v-if="degreeCalculator(player.score) > 0"
-                class="player__temperature"
-                :class="{
-                  'player--degrees-over-0': degreeCalculator(player.score) >= 0 && degreeCalculator(player.score) < 100,
-                  'player--degrees-over-100': degreeCalculator(player.score) >= 100 && degreeCalculator(player.score) < 300,
-                  'player--degrees-over-200': degreeCalculator(player.score) >= 300 && degreeCalculator(player.score) < 500,
-                  'player--degrees-over-400': degreeCalculator(player.score) >= 500 && degreeCalculator(player.score) < 700,
-                  'player--degrees-over-600': degreeCalculator(player.score) >= 700 && degreeCalculator(player.score) < 900,
-                  'player--degrees-over-800': degreeCalculator(player.score) >= 900
-                }"
+              <div
+                v-if="player.commentsPreview"
+                class="nos-player__comments-preview"
               >
-                <v-icon>mdi-fire</v-icon>
-                <span>{{ degreeCalculator(player.score) }}</span>
-              </p>
-            </div>
-
-            <client-only>
-              <p
-                v-if="withIn12Hours(player)"
-                class="player__new-comment"
-              >
-                <span
-                  class="nos-neon"
-                  style="font-weight: 400"
-                  :data-text="innerWidth > 865 ? 'NEW COMMENT' : 'NEW'"
-                >NEW <span v-if="innerWidth > 865">COMMENT</span></span>
-              </p>
-            </client-only>
-          </div>
-
-          <div
-            v-if="player.image_url === 'y'"
-            class="player__image"
-            :style="{
-              backgroundImage: `url(${nosImageUrl}/players/${player.id}.jpg), url(${nosImageUrl}/players/default2.png)`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center'
-            }"
-          />
-
-          <div class="player__club-emblem">
-            <img
-              v-if="player.image_url === 'n'"
-              :src="player.club_image"
-              alt="club"
-            >
-          </div>
-
-          <div
-            class="player__meta"
-            :style="{
-              height: playerMetaHeight(player)
-            }"
-          >
-            <div>
-              <div class="player__meta-comments-preview">
                 <transition name="fade">
-                  <ul v-if="player.commentsPreview">
+                  <ul v-if="player.commentsPreview.length > 0">
                     <li
                       v-for="(comment, commentIndex) in player.commentsPreview"
                       :key="commentIndex"
                     >
-                      <p>"{{ comment.content }}"</p>
+                      <p>" {{ comment.content }} "</p>
                     </li>
                   </ul>
+
+                  <div
+                    v-else
+                    class="nos-player__no-comments"
+                  >
+                    <p>... No comments yet</p>
+                  </div>
                 </transition>
               </div>
-
-              <p class="player__meta-known-as">
-                <img
-                  class="player__meta-flag"
-                  :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
-                  :alt="player.country_code"
-                >
-                {{ player.known_as }}
-              </p>
-
-              <p
-                v-if="needPlayerMeta"
-                class="player__meta-birth-height"
-              >
-                <span>{{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}</span>
-                <span v-if="player.height > 0"> / {{ player.height }}cm</span>
-              </p>
             </div>
-          </div>
+          </div> 
         </button>
       </li>
     </ul>
 
     <div
       v-if="isMorePlayersLoading"
-      class="player-list__loader"
+      class="nos-player-list__loader"
     >
       <v-progress-circular
         :size="26"
-        :width="3"
+        :width="2"
         color="#808080"
         indeterminate
       />
@@ -143,5 +97,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./_style.scss";
+@import './_style.scss';
 </style>

@@ -22,10 +22,7 @@
             small
             style="cursor: pointer"
           >
-            <v-icon left>
-              mdi-information-outline
-            </v-icon>
-            About 907
+            What is 907 ?
           </v-chip>
         </nuxt-link>
       </div>

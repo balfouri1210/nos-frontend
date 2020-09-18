@@ -15,22 +15,24 @@ export default function({ $axios, store, redirect, app, error }) {
   });
 
   $axios.onError(error => {
+    console.error(error);
     store.commit('mutateIsLoading', false);
-    const code = parseInt(error.response && error.response.status);
+    let errorCode;
+    if (error.respons) errorCode = parseInt(error.response.status);
 
     // Token 만료 등의 권한 에러시 자동 로그아웃
-    if (
-      [401].includes(code)
-      && error.response.config.url.indexOf('localhost:3002') !== -1
-      && error.response.config.url.indexOf('nos-api') !== -1) {
-
-      return redirect(app.localePath({
-        name: 'login'
-      }));
+    if (error.response.config.url.indexOf('localhost:3002') !== -1 || error.response.config.url.indexOf('nos-api') !== -1) {
+      if (errorCode === 401) {
+        return redirect(app.localePath({
+          name: 'login'
+        }));
+      } else {
+        error({ statusCode: 500, message: 'Server error' });
+      }
     }
 
     // 기타 서버에러는 에러 페이지로
-    else if (code === 500) {
+    else {
       error({ statusCode: 500, message: 'Server error' });
     }
 

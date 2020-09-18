@@ -1,5 +1,5 @@
 <template>
-  <div class="nos-comment-unit-desktop-wrapper">
+  <div class="nos-comment-unit-wrapper">
     <nos-comment-unit
       :more-link="true"
       :sort-type-selector="true"
@@ -20,8 +20,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nos-comment-unit-desktop-wrapper {
+.nos-comment-unit-wrapper {
   max-width: $web-body-content-width;
-  margin: 0 auto 16px;
+  margin: 8px auto;
+}
+
+@media screen and (min-width: $mobile-width) {
+  .nos-comment-unit-wrapper {
+    margin: 12px auto;
+  }
 }
 </style>

@@ -1,5 +1,15 @@
 <template>
   <div class="about">
+    <div
+      :style="{
+        width: '300px',
+      }"
+    >
+      <h2 style="text-align: left">
+        asdnjf knaskdjfn kasndfkj sadkfn sanfkjasn dkfjnas kdfjnksa dfnkjasn dfkjansdkfnakdjf
+      </h2>
+    </div>
+
     <!-- INTRO -->
     <div class="about__intro">
       <div class="about__title">

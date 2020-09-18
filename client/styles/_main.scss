@@ -271,11 +271,6 @@ strong {
 .v-input .v-label {
   height: auto;
 }
-
-// .v-application p {
-//   margin: 0;
-// }
-
 // Vuetify customizing end
 
 
@@ -399,3 +394,26 @@ strong {
 .transparent {
   opacity: 0;
 }
+
+.border-1 {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.only-small-screen { display: block !important; }
+.only-medium-screen { display: none !important; }
+.only-big-screen { display: none !important; }
+
+.from-medium-screen { display: none !important; }
+
+@media screen and (min-width: $mobile-width) {
+  .only-small-screen { display: none !important; }
+  .only-medium-screen { display: block !important; }
+  
+  .from-medium-screen { display: block !important; }
+}
+
+@media screen and (min-width: 1024px) {
+  .only-medium-screen { display: none !important; }
+  .only-big-screen { display: block !important; }
+}
+

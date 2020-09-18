@@ -18,6 +18,12 @@
         :need-player-comments-preview="true"
       />
 
+      <nos-player-list
+        :top-player-score="parseInt(topPlayer.score)"
+        :player-list-prop="high4Players"
+        :need-player-comments-preview="true"
+      />
+
       <nos-landing-comment-area />
 
       <div class="home__info">
@@ -76,7 +82,7 @@
                 </button>
 
                 <p>
-                  {{ $moment.utc(selectedLeagueSchedule[targetScheduleIndex]).format('YYYY. MM, DD, ddd') }}
+                  {{ $moment.utc(selectedLeagueSchedule[targetScheduleIndex]).format('YYYY. MM. DD, ddd') }}
                 </p>
 
                 <button
@@ -224,7 +230,7 @@
 
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"
-        :player-list-prop="high12Players"
+        :player-list-prop="high8Players"
         :need-player-comments-preview="true"
       />
 

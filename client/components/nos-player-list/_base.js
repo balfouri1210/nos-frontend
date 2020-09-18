@@ -81,7 +81,17 @@ export default {
       };
     },
 
+    withIn12Hours() {
+      return player => {
+        if (player.last_commented_at) {
+          const criterionTime = this.$moment.utc().subtract(12, 'h');
+          return this.$moment.utc(player.last_commented_at).isAfter(criterionTime);
+        }
+      };
+    },
+
     // meta영역의 height를 comments preview갯수에 따라 동적으로 설정하기 위한 변수.
+    // legacy player list 에서 쓰이는 변수지만 나중에 구현하려면 귀찮으니까 일단 남겨둔다.
     playerMetaHeight() {
       return (player) => {
         if (player.commentsPreview) {
@@ -90,15 +100,6 @@ export default {
           } else {
             return `${6 + (player.commentsPreview.length * 2)}rem`;
           }
-        }
-      };
-    },
-
-    withIn12Hours() {
-      return player => {
-        if (player.last_commented_at) {
-          const criterionTime = this.$moment.utc().subtract(12, 'h');
-          return this.$moment.utc(player.last_commented_at).isAfter(criterionTime);
         }
       };
     }

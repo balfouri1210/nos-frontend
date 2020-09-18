@@ -21,7 +21,7 @@
 
   &__left {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 
     .v-icon {
       font-size: 18px;
@@ -44,7 +44,7 @@
       display: inline-block;
       width: 50px;
       height: 26px;
-      background-image: url('https://images.907degrees.com/logos/logo_short2.svg');
+      background-image: url('https://images.907degrees.com/logos/logo_short_black.svg');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: left center;
@@ -147,7 +147,7 @@
       a {
         width: 166px;
         height: 23px;
-        background-image: url('https://images.907degrees.com/logos/logo2.svg');
+        background-image: url('https://images.907degrees.com/logos/logo_black.svg');
       }
     }
   }

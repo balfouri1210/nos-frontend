@@ -2,11 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px 3px;
-  border-radius: 4px;
+  margin: 4px 0;
   background: linear-gradient(160deg, #1976d2 10%, #b800f2 90%);
-  // background-image: url('/images/liverpool_background.png');
-  // background-size: cover;
 
   img {
     width: 20px;
@@ -54,7 +51,8 @@
 @media screen and (min-width: $mobile-width) {
   .main-event {
     max-width: $web-body-content-width;
-    margin: 4px auto 12px;
+    margin: 16px auto;
+    border-radius: 6px;
 
     img {
       width: 30px;

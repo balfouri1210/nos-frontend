@@ -135,7 +135,7 @@ export const eplClubs = [
     image: 'https://cdn.footystats.org/img/teams/england-leeds-united-fc.png',
     official_site: 'https://www.leedsunited.com/',
     league_id: 1,
-    api_football_team_id: 71
+    api_football_team_id: 63
   }, {
     id: 18,
     clean_name: 'Brighton & Hove Albion',

@@ -65,11 +65,15 @@
 
 @media screen and (min-width: $mobile-width) {
   .search {
+    &__body {
+      padding: 0 16px;
+    }
+
     &__title {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px;
+      padding: 18px 0 0;
 
       h2 {
         font-size: 18px;

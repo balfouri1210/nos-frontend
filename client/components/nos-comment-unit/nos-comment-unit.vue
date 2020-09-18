@@ -101,7 +101,7 @@
     </div>
 
     <div
-      v-if="pagination"
+      v-show="pagination && comments.length > 0"
       class="nos-comment-unit__pagination-wrapper"
     >
       <div

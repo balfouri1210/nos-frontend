@@ -54,13 +54,15 @@ export default {
       if (this.isHistorical) {
         return this.$axios.$get(`/api/histories/${this.historyId}/player/comments/preview`, {
           params: {
-            playerIdList: player.id
+            playerIdList: player.id,
+            count: 6
           }
         });
       } else {
         return this.$axios.$get('/api/comments/preview/player', {
           params: {
-            playerIdList: player.id
+            playerIdList: player.id,
+            count: 6
           }
         });
       }

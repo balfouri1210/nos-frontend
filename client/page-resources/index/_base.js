@@ -38,9 +38,10 @@ export default {
         const wholePlayerList = await $axios.$get('/api/players');
         const topPlayer = wholePlayerList[0];
 
-        const high12Players = wholePlayerList.slice(1, 13);
+        const high4Players = wholePlayerList.slice(1, 5);
+        const high8Players = wholePlayerList.slice(5, 13);
         const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
-        return { topPlayer, high12Players, restOfPlayers };
+        return { topPlayer, high4Players, high8Players, restOfPlayers };
       } catch (err) {
         console.error(err);
         return error({ statusCode: 500 });
@@ -69,8 +70,7 @@ export default {
 
   computed: {
     previousPlayerIdList() {
-      const result = this.high12Players.map(player => player.id);
-      result.unshift(this.topPlayer.id);
+      const result = this.high4Players.concat(this.high8Players).map(player => player.id).concat(this.topPlayer.id);
       return result;
     }
   },
@@ -141,7 +141,6 @@ export default {
       try {
         this.fixtures =
           (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
-        console.log(this.fixtures);
       } catch (err) {
         console.error(err);
       } finally {

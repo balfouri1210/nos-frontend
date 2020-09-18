@@ -1,5 +1,5 @@
 <template>
-  <div class="nos-comment-unit-desktop-wrapper">
+  <div class="nos-comment-unit-wrapper">
     <nos-comment-unit
       :initial-sort-type="'date'"
       :more-link="true"
@@ -33,12 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nos-comment-unit-wrapper {
+  margin: 8px auto;
+}
+
 @media screen and (min-width: $mobile-width) {
-  .nos-comment-unit-desktop-wrapper {
+  .nos-comment-unit-wrapper {
     display: flex;
     justify-content: space-between;
     max-width: $web-body-content-width;
-    margin: 0 auto 12px;
+    margin: 0 auto 16px;
 
     .nos-comment-unit {
       display: flex;
@@ -46,7 +50,7 @@ export default {
     }
 
     .nos-comment-unit:last-of-type {
-      margin-left: 12px;
+      margin-left: 16px;
     }
   }
 }
