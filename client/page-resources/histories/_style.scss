@@ -56,10 +56,11 @@
   }
 
   &__empty {
+    top: 55%;
     width: 85%;
 
     h1 {
-      font-size: 26px;
+      font-size: 16px;
       font-weight: 300;
       text-align: center;
     }
@@ -200,6 +201,12 @@
 
     &__month {
       height: 44px;
+    }
+
+    &__empty {
+      h1 {
+        font-size: 26px;
+      }
     }
 
     &__item {
