@@ -2,12 +2,11 @@
   <div>
     <button
       v-if="isBasedOnMobileDevice"
-      v-clipboard:copy="shareUrl"
-      v-clipboard:success="copySuccess"
       class="nos-link-share"
       :style="{
         fontSize: `${fontSize}px`
       }"
+      @click="shareLink"
     >
       <v-icon
         :style="{
@@ -56,6 +55,11 @@ export default {
     fontSize: {
       type: Number,
       default: 12
+    },
+
+    data: {
+      type: Object,
+      default: () => {}
     }
   },
 
@@ -74,6 +78,18 @@ export default {
   methods: {
     copySuccess() {
       this.isShareUrlCopied = true;
+    },
+
+    shareLink() {
+      if (navigator.share) {
+        navigator.share({
+          title: `907Degrees - ${this.data.known_as}`,
+          text: `Check out what the fans thought about the ${this.data.known_as} this week`,
+          url: this.linkToShare,
+        })
+          .then(() => console.log('Successful share'))
+          .catch((error) => console.log('Error sharing', error));
+      }
     }
   }
 };

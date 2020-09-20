@@ -41,8 +41,9 @@
                 </button>
 
                 <nos-link-share
-                  :share-url="copyLink"
+                  :share-url="linkToShare"
                   :font-size="12"
+                  :data="player"
                 />
               </header>
 
