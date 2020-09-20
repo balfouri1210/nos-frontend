@@ -20,7 +20,7 @@
 
     <button
       v-else
-      v-clipboard:copy="shareUrl"
+      v-clipboard:copy="link"
       v-clipboard:success="copySuccess"
       class="nos-link-share"
       :style="{
@@ -28,14 +28,14 @@
       }"
     >
       <v-icon
-        v-if="!isShareUrlCopied"
+        v-if="!isLinkCopied"
         :style="{
           fontSize: `${fontSize + 2}px`
         }"
       >
         mdi-link-variant
       </v-icon>
-      <span v-if="!isShareUrlCopied">Copy Link</span>
+      <span v-if="!isLinkCopied">Copy Link</span>
       <span
         v-else
         style="color: #f4991e"
@@ -47,7 +47,7 @@
 <script>
 export default {
   props: {
-    shareUrl: {
+    link: {
       type: String,
       default: ''
     },
@@ -65,7 +65,7 @@ export default {
 
   data() {
     return {
-      isShareUrlCopied: false,
+      isLinkCopied: false,
       isBasedOnMobileDevice: false
     };
   },
@@ -77,7 +77,7 @@ export default {
 
   methods: {
     copySuccess() {
-      this.isShareUrlCopied = true;
+      this.isLinkCopied = true;
     },
 
     shareLink() {
@@ -85,7 +85,7 @@ export default {
         navigator.share({
           title: `907Degrees - ${this.data.known_as}`,
           text: `Check out what the fans thought about the ${this.data.known_as} this week`,
-          url: this.linkToShare,
+          url: this.link,
         })
           .then(() => console.log('Successful share'))
           .catch((error) => console.log('Error sharing', error));
@@ -104,11 +104,6 @@ export default {
   .v-icon {
     margin-right: 4px;
     color: rgba(0, 0, 0, 0.7);
-  }
-}
-
-@media screen and (min-width: $mobile-width) {
-  .nos-link-share {
   }
 }
 </style>

@@ -41,7 +41,7 @@
                 </button>
 
                 <nos-link-share
-                  :share-url="linkToShare"
+                  :link="linkToShare"
                   :font-size="12"
                   :data="player"
                 />
