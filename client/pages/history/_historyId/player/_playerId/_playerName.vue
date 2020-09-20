@@ -44,7 +44,7 @@
                   <span>Leaderboard</span>
                 </nuxt-link>
 
-                <nos-link-copy
+                <nos-link-share
                   :share-url="`${nosUrl}${$route.fullPath}`"
                   :font-size="12"
                 />

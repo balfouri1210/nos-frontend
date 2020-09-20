@@ -1,0 +1,396 @@
+.nos-player-modal-info {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.npmi {
+  &__header {
+    position: relative;
+    padding: 60px 16px 38px;
+    text-align: center;
+  }
+
+  &__header-ranking {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 6px;
+    left: 8px;
+
+    span {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  &__name {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 32px;
+  }
+
+  &__on-youtube {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    color: #FF0000;
+    font-size: 11px;
+
+    img {
+      height: 11px;
+      margin-right: 6px;
+    }
+  }
+
+  &__body {
+    padding: 0 8px;
+  }
+
+  &__ranking-and-reactions {
+  }
+  &__body-ranking {
+    display: none;
+  }
+  &__reactions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 12px;
+
+    span {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  &__vote {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 28px;
+      margin-left: 5px;
+      padding: 0px 15px;
+      border-radius: 8px;
+    }
+
+    .v-icon--is-component, .v-icon--svg {
+      width: unset;
+      height: unset;
+    }
+  }
+ 
+  &__vote-btn {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.78);
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 17px;
+      color: rgba(0, 0, 0, 0.78);
+    }
+
+    span {
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+  &__vote-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  &__vote--voted {
+    border: 1px solid $nos-main-theme !important;
+    background: rgba($nos-main-theme, 0.05) !important;
+    color: $nos-main-theme !important;
+
+    .v-icon {
+      color: $nos-main-theme !important;
+    }
+  }
+  &__vote--thumb {
+    .v-icon {
+      font-size: 15px;
+    }
+  }
+  &__vote--disabled:hover {
+    background: unset !important;
+  }
+
+  &__vote-more-btn {
+    background: rgba(0, 0, 0, 0.1);
+
+    .v-icon {
+      font-size: 14px;
+      font-weight: 600;
+      color: black;
+    }
+
+    span {
+      font-size: 11px;
+      font-weight: 400;
+    }
+  }
+
+  &__all-votes-dialog {
+    .v-card__title {
+      font-weight: 300;
+    }
+  }
+  &__all-votes {
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3px;
+    padding: 16px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 32px;
+      padding: 0 8px;
+      border-radius: 8px;
+    }
+
+    .v-icon--is-component, .v-icon--svg {
+      width: unset;
+      height: unset;
+    }
+  }
+
+
+  &__personal-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+  }
+  &__personal-detail-item {
+    p {
+      text-align: center;
+    }
+  }
+  &__personal-detail-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .v-icon {
+      margin-right: 4px;
+      font-size: 12px;
+    }
+
+    span {
+      font-size: 10px;
+      font-weight: 300;
+    }
+
+    * { color: rgba(0, 0, 0, 0.5); }
+  }
+  &__personal-detail-info {
+    font-size: 16px;
+    font-weight: 300;
+  }
+  &__height, &__temperature {
+    span {
+      padding-left: 3px;
+      font-size: 10px;
+    }
+  }
+
+  &__affiliation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+  }
+  &__affiliation-club, &__affiliation-nation {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.5);
+      .v-icon {
+        margin-right: 2px;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      p {
+        display: block;
+        max-width: 70px;
+        font-weight: 300;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        }
+      .v-icon {
+        margin-left: 3px;
+        font-size: 12px;
+        color: black;
+      }
+    }
+  }
+  &__affiliation-club {
+    button {
+      img {
+        height: 14px;
+        margin-right: 4px;
+      }
+    }
+  }
+  &__affiliation-nation {
+    button {
+      border: 1px solid black;
+
+      img {
+        width: 13px;
+        height: 9px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nos-player-modal-info {
+  }
+
+  .npmi {
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    &__header-ranking {
+      display: none;
+    }
+
+    &__on-youtube {
+      position: unset;
+      font-size: 15px;
+
+      img { height: 14px;}
+    }
+
+    &__body {
+      padding: 18px 16px;
+    }
+
+    &__ranking-and-reactions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__body-ranking {
+      display: flex;
+      align-items: center;
+  
+      span {
+        display: inline-block;
+        margin-right: 8px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+    &__reactions {
+      justify-content: flex-end;
+      margin: 0;
+      span { font-size: 18px; }
+    }
+
+    &__vote {
+      button {
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &__personal-detail {
+      margin-top: 20px;
+    }
+    &__personal-detail-title {
+      .v-icon { font-size: 17px; margin-right: 6px; }
+      span {font-size: 14px; }
+    }
+    &__personal-detail-info {
+      font-size: 23px;
+    }
+    &__height, &__temperature {
+      span { font-size: 14px; }
+    }
+
+    &__affiliation {
+      margin-top: 20px;
+    }
+    &__affiliation-club, &__affiliation-nation {
+      span {
+        font-size: 14px;
+        .v-icon {
+          font-size: 17px;
+          margin-right: 8px;
+        }
+      }
+      button {
+        margin-left: 12px;
+        padding: 4px 14px;
+        font-size: 14px;
+
+        p {
+          max-width: 160px;
+        }
+        .v-icon {
+          font-size: 14px;
+          margin-left: 8px;
+        }
+      }
+    }
+    &__affiliation-club {
+      button {
+        img {
+          height: 18px;
+          margin-right: 8px;
+        }
+      }
+    }
+    &__affiliation-nation {
+      button {
+        img {
+          width: 15px;
+          height: 11px;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}

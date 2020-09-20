@@ -6,7 +6,7 @@ import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosFixturesArea from '@/components/nos-fixtures-area/nos-fixtures-area.vue';
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
-import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
+import nosLinkShare from '@/components/nos-link-share/nos-link-share.vue';
 import nosTextarea from '@/components/nos-textarea/nos-textarea.vue';
 import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
 // import Cookies from 'js-cookie';
@@ -33,7 +33,7 @@ export default {
     nosFixturesArea,
     nosNewsArea,
     nosYoutubePlayer,
-    nosLinkCopy,
+    nosLinkShare,
     nosTextarea,
     nosLinkPreview
   },

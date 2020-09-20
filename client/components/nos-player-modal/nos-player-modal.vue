@@ -40,7 +40,7 @@
                   <span v-else>Leaderboard</span>
                 </button>
 
-                <nos-link-copy
+                <nos-link-share
                   :share-url="copyLink"
                   :font-size="12"
                 />
@@ -52,7 +52,7 @@
               <div class="comment">
                 <!-- Add Comment Area -->
                 <div class="player-modal__add-comment">
-                  <label for="comment">Add a Comment</label>
+                  <label for="comment">Comments</label>
 
 
                   <!-- CAUTION !!!!!!!!! -->
@@ -649,10 +649,10 @@
 
             <!-- MODAL RIGHT -->
             <div class="player-modal__right ">
-              <nos-fixtures-area
+              <!-- <nos-fixtures-area
                 :club-id="player.club_id"
                 :is-header="true"
-              />
+              /> -->
 
               <nos-news-area
                 :news-keyword="playerName"

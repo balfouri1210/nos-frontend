@@ -5,7 +5,7 @@ import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loa
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
-import nosLinkCopy from '@/components/nos-link-copy/nos-link-copy.vue';
+import nosLinkShare from '@/components/nos-link-share/nos-link-share.vue';
 
 export default {
   components: {
@@ -14,7 +14,7 @@ export default {
     nosNewsArea,
     nosYoutubeArea,
     nosYoutubePlayer,
-    nosLinkCopy
+    nosLinkShare
   },
 
   async asyncData({ $axios, error, params }) {

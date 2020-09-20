@@ -129,6 +129,7 @@
 
 @media screen and (min-width: $mobile-width) {
   .nos-top-player {
+    min-height: 260px;
     padding: 46px 0 40px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -150,6 +151,7 @@
     }
     &__emblem {
       height: 80px;
+      margin-right: 26px;
     }
     &__title {
       justify-content: flex-start;

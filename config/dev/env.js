@@ -1,6 +1,6 @@
 const env = {
   STAGE: 'dev',
-  NOS_URL: 'http://localhost:3000',
+  NOS_URL: 'https://dev.907degrees.com',
   NOS_API_URL: 'https://api.907degrees.com',
   NOS_IMAGE_URL: 'https://images.907degrees.com',
 
