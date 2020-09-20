@@ -62,17 +62,7 @@
         v-if="selectedPlayer"
         class="quick-comment__content"
       >
-        <div
-          class="quick-comment__player-image"
-          :style="{
-            backgroundImage: selectedPlayer.image_url === 'y' ? `url(${nosImageUrl}/players/${selectedPlayer.id}.jpg), url(${nosImageUrl}/players/default2.png)` : `url(${nosImageUrl}/players/default2.png)`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center'
-          }"
-        />
-
-        <div style="width: 100%">
+        <div>
           <div class="quick-comment__player-meta">
             <img
               class="quick-comment__club-image"

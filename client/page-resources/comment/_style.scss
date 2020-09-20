@@ -62,12 +62,9 @@
   }
 
   &__content {
-    display: flex;
-    align-items: center;
-    height: 126px;
-
     ::v-deep textarea {
       width: 100%;
+      padding: 8px;
       border: 1px solid #e4e4e4;
       border-radius: 6px;
       font-family: 'Open Sans', sans-serif;
@@ -77,31 +74,10 @@
     }
   }
 
-  &__player-image {
-    position: relative;
-    max-width: 86px;
-    width: 100%;
-    height: 100%;
-    margin-top: -1px;
-    margin-right: 8px;
-    border-radius: 6px;
-  }
-
-  &__player-image:before {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding-bottom: calc(100% / (1 / 1.47));
-    content: "";
-  }
-
   &__player-meta {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    margin: 14px 0 8px;
     font-size: 14px;
   }
   &__club-image {
@@ -143,9 +119,9 @@
     transition: all 0.3s ease-out;
   }
   &__action-add:disabled {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    background: rgba(0, 0, 0, 0.15);
-    color: black;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -154,8 +130,6 @@
     padding: 0 16px;
 
     &__content {
-      display: flex;
-      justify-content: space-between;
       margin-top: 32px;
     }
 
@@ -185,16 +159,9 @@
     }
 
     &__content {
-      height: 176px;
-
       ::v-deep textarea {
         font-size: 14px;
       }
-    }
-
-    &__player-image {
-      max-width: 120px;
-      margin-right: 18px;
     }
 
     &__player-meta {

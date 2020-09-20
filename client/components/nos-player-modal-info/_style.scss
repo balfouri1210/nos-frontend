@@ -337,21 +337,21 @@
     }
 
     &__personal-detail {
-      margin-top: 20px;
+      margin-top: 24px;
     }
     &__personal-detail-title {
       .v-icon { font-size: 17px; margin-right: 6px; }
       span {font-size: 14px; }
     }
     &__personal-detail-info {
-      font-size: 23px;
+      font-size: 22px;
     }
     &__height, &__temperature {
       span { font-size: 14px; }
     }
 
     &__affiliation {
-      margin-top: 20px;
+      margin-top: 24px;
     }
     &__affiliation-club, &__affiliation-nation {
       span {
@@ -367,7 +367,7 @@
         font-size: 14px;
 
         p {
-          max-width: 160px;
+          max-width: 120px;
         }
         .v-icon {
           font-size: 14px;

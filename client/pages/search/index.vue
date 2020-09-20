@@ -1,14 +1,23 @@
 <template>
   <div class="search">
     <div class="search__body">
-      <div class="search__title">
-        <h2 v-show="$route.query.keyword">
-          <span>Search result for</span>"{{ $route.query.keyword }}"
+      <div class="search__header">
+        <h2 v-if="searchKeyword || !isEmpty(targetCountry)">
+          <span>Search result for</span>
+          <span v-if="searchKeyword">"{{ searchKeyword }}"</span>
+
+          <span v-else-if="!isEmpty(targetCountry)">
+            {{ targetCountry.name }}
+            <img
+              :src="`${nosImageUrl}/flags/${targetCountry.code.toLowerCase()}.png`"
+              :alt="targetCountry.code"
+            >
+          </span>
         </h2>
 
         <div
-          v-show="$route.query.clubId"
-          class="search__title-club"
+          v-else-if="!isEmpty(targetClub)"
+          class="search__header-club"
         >
           <img
             :src="targetClub.image"
@@ -26,10 +35,10 @@
         </div>
 
         <div
-          v-if="$route.query.clubId"
+          v-if="!isEmpty(targetClub)"
           class="search__fixtures-area"
         >
-          <nos-fixtures-area :club-id="parseInt($route.query.clubId)" />
+          <nos-fixtures-area :club-id="parseInt(targetClub.id)" />
         </div>
       </div>
 

@@ -1,8 +1,9 @@
-import { debounce } from 'lodash';
+import { debounce, isEmpty } from 'lodash';
 // import Cookies from 'js-cookie';
 
 export default {
   debounce,
+  isEmpty,
 
   cookieParser(cookie) {
     if (cookie) {

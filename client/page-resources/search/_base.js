@@ -1,7 +1,9 @@
 import nosPlayerList from '@/components/nos-player-list/nos-player-list.vue';
 import { eplClubs } from '@/lib/constants';
+import countries from '@/lib/countries';
 import nosFixturesArea from '@/components/nos-fixtures-area/nos-fixtures-area.vue';
 import nosPlayerModal from '@/components/nos-player-modal/nos-player-modal.vue';
+import U from '@/lib/util';
 
 export default {
   head() {
@@ -32,7 +34,9 @@ export default {
 
   data() {
     return {
+      searchKeyword: this.$route.query.keyword,
       targetClub: {},
+      targetCountry: {},
 
       isPlayerModalOpen: false,
       targetPlayer: {},
@@ -40,16 +44,20 @@ export default {
 
       topPlayer: {},
       searchPlayerList: [],
-      isSearchFinished: false
+      isSearchFinished: false,
+
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 
   created() {
-    this.getSearchResult();
-  },
+    if (this.$route.query.country) {
+      this.setTargetCountry();
+    } else if (this.$route.query.clubId) {
+      this.setTargetClub();
+    }
 
-  mounted() {
-    if (this.$route.query.clubId) this.setTargetClub();
+    this.getSearchResult();
   },
 
   methods: {
@@ -64,7 +72,8 @@ export default {
           this.$axios.$get('/api/search', {
             params: {
               keyword: this.$route.query.keyword,
-              clubId: this.$route.query.clubId
+              clubId: this.$route.query.clubId,
+              countryId: this.targetCountry.id
             }
           })
         ]);
@@ -79,9 +88,12 @@ export default {
     },
 
     setTargetClub() {
-      this.targetClub = eplClubs.filter(club => {
-        return club.id === parseInt(this.$route.query.clubId);
-      })[0];
+      this.targetClub = eplClubs.find(club => club.id === parseInt(this.$route.query.clubId));
+    },
+
+    setTargetCountry() {
+      const countryInfo = this.$route.query.country.split('-');
+      this.targetCountry = countries.find(country => country.id === parseInt(countryInfo[1]));
     },
   
     async selectPlayerHandler(selectedPlayer) {
@@ -117,6 +129,10 @@ export default {
     closePlayerModalHandler() {
       if (process.client) document.documentElement.style.overflow = 'auto';
       this.isPlayerModalOpen = false;
+    },
+
+    isEmpty(obj) {
+      return U.isEmpty(obj, true);
     }
   },
 

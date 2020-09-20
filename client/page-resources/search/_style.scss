@@ -1,5 +1,5 @@
 .search {
-  &__title {
+  &__header {
     display: block;
     padding: 10px 8px 12px;
 
@@ -12,11 +12,18 @@
 
     span {
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 6px;
       font-weight: 300;
+
+      img {
+        width: 17px;
+        height: 12px;
+        margin-left: 2px;
+        box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.15);
+      }
     }
   }
-  &__title-club {
+  &__header-club {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +76,7 @@
       padding: 0 16px;
     }
 
-    &__title {
+    &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -104,8 +111,12 @@
 
 @media screen and (min-width: 1024px) {
   .search {
-    &__title {
-      padding: 20px 0;
+    &__header {
+      padding: 20px 0 6px;
+    }
+
+    &__body {
+      margin-bottom: 100px;
     }
   }
 }

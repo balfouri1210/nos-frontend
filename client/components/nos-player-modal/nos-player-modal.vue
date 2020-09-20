@@ -82,7 +82,7 @@
                         v-model="fakeCommentContent"
                         cols="30"
                         rows="2"
-                        maxlength="300"
+                        maxlength="200"
                         :placeholder="`How was ${player.known_as} this week?`"
                         style="border: 1px solid #1976d2"
                       />
@@ -113,8 +113,8 @@
                         v-model="newCommentContent"
                         cols="30"
                         rows="2"
-                        :rules="'required|newline_limit:10|min:10|max:300'"
-                        :max-length="300"
+                        :rules="'required|newline_limit:10|min:10|max:200'"
+                        :max-length="200"
                         :placeholder="`How was ${player.known_as} this week?`"
                         @textarea="newCommentContent = $event"
                       />
@@ -322,14 +322,14 @@
                             >
                               <validation-provider
                                 v-slot="{ errors, invalid }"
-                                :rules="'required|max:300|newline_limit:10'"
+                                :rules="'required|max:200|newline_limit:10'"
                                 name="comment"
                               >
                                 <textarea
                                   id="comment"
                                   v-model="comment.editCommentContent"
                                   name="edit-comment"
-                                  maxlength="300"
+                                  maxlength="200"
                                   :rows="calculateRowsOfEditCommentTextarea(comment)"
                                 />
 
@@ -415,7 +415,7 @@
                               type="text"
                               name="comment"
                               :rules="'required'"
-                              maxlength="300"
+                              maxlength="200"
                             >
 
                             <div class="player-modal__opinion-action">
@@ -545,7 +545,7 @@
                                     type="text"
                                     name="edit-reply"
                                     :rules="'required'"
-                                    maxlength="300"
+                                    maxlength="200"
                                   >
 
                                   <div class="player-modal__opinion-action">

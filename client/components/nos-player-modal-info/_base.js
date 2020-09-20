@@ -267,12 +267,22 @@ export default {
       });
     },
 
-    selectClub() {
-
+    goToSearchWithClub(clubId) {
+      this.$router.push(this.localePath({
+        name: 'search',
+        query: {
+          clubId
+        }
+      }));
     },
 
-    selectNation() {
-
+    goToSearchWithCountry(countryCode, countryId) {
+      this.$router.push(this.localePath({
+        name: 'search',
+        query: {
+          country: `${countryCode}-${countryId}`
+        }
+      }));
     },
 
     hexToRgb(hex) {

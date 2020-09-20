@@ -127,7 +127,7 @@
               border: `1px solid ${player.club_color}`,
               backgroundColor: `rgba(${hexToRgb(player.club_color)}, 0.1)`
             }"
-            @click="selectClub"
+            @click="goToSearchWithClub(player.club_id)"
           >
             <img
               :src="player.club_image"
@@ -144,7 +144,7 @@
             Nationality
           </span>
 
-          <button @click="selectNation">
+          <button @click="goToSearchWithCountry(player.country_code.toLowerCase(), player.country_id)">
             <img
               :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
               :alt="player.country_code"
