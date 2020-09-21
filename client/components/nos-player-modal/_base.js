@@ -65,7 +65,6 @@ export default {
       isReportSaved: false,
 
       isOpinionVoting: false,
-      isCommunityGuide: false,
 
       isShareUrlCopied: false,
 
@@ -100,10 +99,7 @@ export default {
     },
 
     linkToShare() {
-      const link = this.$route.name.indexOf('search') !== -1 ?
-        `${process.env.NOS_URL}/player/${this.playerId}/${this.playerName.toLowerCase().replace(/ /g, '-')}`
-        : `${process.env.NOS_URL}${this.$route.fullPath}`;
-      return link;
+      return `${process.env.NOS_URL}${this.$route.fullPath}`;
     }
   },
 

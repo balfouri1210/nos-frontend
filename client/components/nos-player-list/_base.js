@@ -162,7 +162,14 @@ export default {
           }));
         } else if (this.$route.name.indexOf('search') !== -1) {
           // Search 페이지에서 선수를 클릭했을 때
-          this.$emit('selectPlayer', player);
+          this.$router.push(this.localePath({
+            name: 'search-searchData-player-playerId-playerName',
+            params: {
+              searchData: this.$route.params.searchData ? this.$route.params.searchData : null,
+              playerId: player.id,
+              playerName: player.known_as.toLowerCase().replace(/ /g, '-')
+            }
+          }));
         } else {
           // Main 페이지에서 선수를 클릭했을 때
           this.$router.push(this.localePath({

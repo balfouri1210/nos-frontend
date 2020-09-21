@@ -146,6 +146,7 @@
 
           <button @click="goToSearchWithCountry(player.country_code.toLowerCase(), player.country_id)">
             <img
+              style="box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.15);"
               :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
               :alt="player.country_code"
             >

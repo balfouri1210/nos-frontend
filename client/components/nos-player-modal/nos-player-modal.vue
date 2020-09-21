@@ -134,7 +134,7 @@
                     name="fade"
                   >
                     <nuxt-link
-                      v-if="isCommunityGuide"
+                      v-if="newCommentContent.length > 3"
                       class="player-modal__add-comment-community-guide"
                       :to="localePath({
                         name: 'about',

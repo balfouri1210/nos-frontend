@@ -269,18 +269,18 @@ export default {
 
     goToSearchWithClub(clubId) {
       this.$router.push(this.localePath({
-        name: 'search',
-        query: {
-          clubId
+        name: 'search-searchData',
+        params: {
+          searchData: `clubId_${clubId}`
         }
       }));
     },
 
     goToSearchWithCountry(countryCode, countryId) {
       this.$router.push(this.localePath({
-        name: 'search',
-        query: {
-          country: `${countryCode}-${countryId}`
+        name: 'search-searchData',
+        params: {
+          searchData: `country_${countryCode}-${countryId}`
         }
       }));
     },

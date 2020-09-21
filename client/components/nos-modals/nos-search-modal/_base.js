@@ -26,9 +26,9 @@ export default {
       this.$emit('closeModal');
 
       this.$router.push(this.localePath({
-        name: 'search',
-        query: {
-          clubId: club.id
+        name: 'search-searchData',
+        params: {
+          searchData: `clubId_${club.id}`
         }
       }));
     },
@@ -37,9 +37,9 @@ export default {
       this.$emit('closeModal');
 
       this.$router.push(this.localePath({
-        name: 'search',
-        query: {
-          keyword: this.searchKeyword
+        name: 'search-searchData',
+        params: {
+          searchData: `keyword_${this.searchKeyword}`
         }
       }));
     },

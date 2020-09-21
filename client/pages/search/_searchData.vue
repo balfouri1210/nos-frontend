@@ -44,21 +44,10 @@
 
       <nos-player-list
         v-if="searchPlayerList.length > 0"
-        :top-player-score="parseInt(topPlayer.score)"
+        :top-player-score="parseInt(topPlayerScore)"
         :player-list-prop="searchPlayerList"
         :need-player-comments-preview="true"
         :need-player-meta="true"
-        @selectPlayer="selectPlayerHandler"
-      />
-    </div>
-
-
-    <!-- PLAYER MODAL  -->
-    <div v-if="isPlayerModalOpen">
-      <nos-player-modal
-        :player="targetPlayer"
-        :initial-comments="targetPlayerComments"
-        @closePlayerModal="closePlayerModalHandler"
       />
     </div>
 
@@ -82,6 +71,8 @@
       <h2>No results found</h2>
       <p>Try different keywords or filter by club</p>
     </div>
+
+    <nuxt-child />
   </div>
 </template>
 

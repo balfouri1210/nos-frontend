@@ -18,11 +18,11 @@ export default function (to, from) {
   && to.name.indexOf('history-historyId') !== -1)  return;
 
   // search와 search player modal을 오갈 때 스크롤 고정
-  if (from.name.indexOf('search') !== -1
-  && to.name.indexOf('search-player-playerId-playerName') !== -1)  return;
+  if (from.name.indexOf('search-searchData') !== -1
+  && to.name.indexOf('search-searchData-player-playerId-playerName') !== -1)  return;
 
-  if (from.name.indexOf('search-player-playerId-playerName') !== -1
-  && to.name.indexOf('search') !== -1)  return;
+  if (from.name.indexOf('search-searchData-player-playerId-playerName') !== -1
+  && to.name.indexOf('search-searchData') !== -1)  return;
 
   // comment와 player modal을 오갈 때 스크롤 고정
   if (from.name.indexOf('comment') !== -1

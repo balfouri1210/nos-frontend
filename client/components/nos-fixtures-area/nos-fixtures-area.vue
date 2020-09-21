@@ -266,9 +266,9 @@
                     >
                       <nuxt-link
                         :to="localePath({
-                          name: 'search',
-                          query: {
-                            keyword: event.splitted_name[event.splitted_name.length - 1]
+                          name: 'search-searchData',
+                          params: {
+                            searchData: `keyword_${event.splitted_name[event.splitted_name.length - 1]}`
                           }
                         })"
                       >
