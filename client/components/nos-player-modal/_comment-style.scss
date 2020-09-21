@@ -5,12 +5,12 @@
     padding: 4px 11px;
   }
 
-  &__add-comment {
+  &__comment-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
 
-    label {
-      font-size: 14px;
-      font-weight: 600;
-    }
+  &__add-comment {
   }
 
   &__comment-editor {
@@ -342,13 +342,15 @@
 @media screen and (min-width: $mobile-width) {
   .player-modal {
     .comment {
-      margin-top: 20px;
+      margin-top: 16px;
       padding: 0 16px;
     }
+
+    &__comment-title {
+      font-size: 18px;
+    }
+
     &__add-comment {
-      label {
-        font-size: 18px;
-      }
     }
 
     &__comment-editor {
@@ -362,7 +364,7 @@
     }
 
     &__comment-option {
-      margin: 12px 0 4px;
+      margin: 8px 0 4px;
     }
 
     &__comment-sortby-btn {

@@ -52,10 +52,11 @@
 
               <div class="comment">
                 <!-- Add Comment Area -->
+                <p class="player-modal__comment-title">
+                  Comments
+                </p>
+
                 <div class="player-modal__add-comment">
-                  <label for="comment">Comments</label>
-
-
                   <!-- CAUTION !!!!!!!!! -->
                   <!-- FAKE COMMENT FORM -->
                   <div

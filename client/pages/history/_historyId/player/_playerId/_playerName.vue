@@ -58,6 +58,10 @@
 
               <!-- Comment Sorting -->
               <div class="comment">
+                <p class="player-modal__comment-title">
+                  Comments
+                </p>
+
                 <div
                   v-if="comments.length"
                   class="player-modal__comment-option"

@@ -49,6 +49,10 @@
     margin-bottom: 80px;
     margin-top: 58px;
 
+    &__body {
+      padding: 0 8px;
+    }
+
     &__period {
       top: $web-header-height;
     }
