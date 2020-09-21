@@ -337,12 +337,10 @@ export default {
           property: 'og:url',
           content: `${process.env.NOS_URL}${this.$route.fullPath}`
         },
-        {
-          property: 'og:image',
-          content:
-            `${process.env.NOS_IMAGE_URL}/players/${this.player.id}.jpg` ||
-            `${process.env.NOS_IMAGE_URL}/players/default2.png`
-        }
+{
+  property: 'og:image',
+  content: 'https://907degrees.com/opengraph.png'
+}
       ]
     };
   }
