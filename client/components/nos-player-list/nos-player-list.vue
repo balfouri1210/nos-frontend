@@ -37,7 +37,7 @@
                   </h2>
 
                   <p class="nos-player__meta">
-                    {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} / {{ player.height }} cm /
+                    {{ $moment.unix(player.birthday).format('DD / MM / YYYY') }}, {{ player.height }} cm,
                     <img
                       :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                       :alt="player.country_code"

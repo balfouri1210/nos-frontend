@@ -4,10 +4,18 @@
     @click="selectPlayer(topPlayer)"
   >
     <div class="nos-top-player__header">
-      <span class="nos-top-player__comment-count">
-        <v-icon>mdi-message-processing-outline</v-icon>
-        {{ topPlayer.comment_count }}
-      </span>
+      <div style="display: flex; align-items: center">
+        <span class="nos-top-player__comment-count">
+          <v-icon>mdi-message-processing-outline</v-icon>
+          {{ topPlayer.comment_count }}
+        </span>
+
+        <span
+          v-if="withIn12Hours(topPlayer)"
+          class="nos-top-player__new-comment"
+        >NEW</span>
+      </div>
+
       <span class="nos-top-player__temperature"><v-icon>mdi-fire</v-icon>907</span>
     </div>
 
@@ -39,7 +47,7 @@
           </h2>
 
           <p class="nos-top-player__meta">
-            {{ $moment.unix(topPlayer.birthday).format('YYYY. MM. DD') }} / {{ topPlayer.height }} cm / <span>{{ topPlayer.country_name }}</span>
+            {{ $moment.unix(topPlayer.birthday).format('DD / MM / YYYY') }}, {{ topPlayer.height }} cm, <span>{{ topPlayer.country_name }}</span>
             <img
               :src="`${nosImageUrl}/flags/${topPlayer.country_code.toLowerCase()}.png`"
               :alt="topPlayer.country_code"

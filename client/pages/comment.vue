@@ -50,8 +50,8 @@
                   :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                   :alt="player.country_code"
                 >
-                {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }}
-                <span class="nos-search-modal__suggestion-info-detail"> / {{ player.height }}cm / {{ player.position }}</span>
+                {{ $moment.unix(player.birthday).format('DD / MM / YYYY') }}
+                <span class="nos-search-modal__suggestion-info-detail">, {{ player.height }}cm, {{ player.position }}</span>
               </span>
             </button>
           </li>
@@ -72,7 +72,7 @@
             <div>
               <p>{{ selectedPlayer.known_as }}</p>
               <p class="quick-comment__sub-info">
-                {{ selectedPlayer.country_name }}, {{ $moment.unix(selectedPlayer.birthday).format('YYYY/MM/DD') }}, {{ selectedPlayer.height }}cm, {{ selectedPlayer.position }}
+                {{ selectedPlayer.country_name }}, {{ $moment.unix(selectedPlayer.birthday).format('DD / MM / YYYY') }}, {{ selectedPlayer.height }}cm, {{ selectedPlayer.position }}
               </p>
             </div>
           </div>

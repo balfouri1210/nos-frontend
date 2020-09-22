@@ -81,7 +81,7 @@
                       :src="`${nosImageUrl}/flags/${item.country_code.toLowerCase()}.png`"
                       :alt="item.country_code"
                     >
-                    {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}
+                    {{ $moment.unix(item.birthday).format('DD / MM / YYYY') }}
                   </span>
                 </button>
               </li>

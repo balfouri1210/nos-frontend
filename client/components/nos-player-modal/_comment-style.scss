@@ -2,7 +2,9 @@
   // COMMENT
   .comment {
     margin: 30px 0 16px;
-    padding: 4px 11px;
+    padding: 14px 11px;
+    border-top: 5px solid rgba(0, 0, 0, 0.03);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.03);
   }
 
   &__comment-title {
@@ -342,8 +344,9 @@
 @media screen and (min-width: $mobile-width) {
   .player-modal {
     .comment {
-      margin-top: 16px;
+      margin-top: 22px;
       padding: 0 16px;
+      border: 0;
     }
 
     &__comment-title {

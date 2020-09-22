@@ -24,7 +24,19 @@
     * { color: black; }
     .v-icon { font-size: 15px; }
   }
+  &__new-comment {
+    margin-left: 4px;
+    padding: 0 2px;
+    background: linear-gradient(to right, #ea5514, #f4991e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 13px;
+    font-weight: 600;
+  }
   &__temperature {
+    display: flex;
+    align-items: center;
     font-size: 14px;
     font-weight: 600;
     color: $nos-main-theme-deep;
@@ -186,7 +198,7 @@
       margin: 0;
 
       li {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
 
       p {

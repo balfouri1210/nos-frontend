@@ -40,12 +40,23 @@
     align-items: center;
   }
 
-  &__comment-count {
+  &__comment-count,
+  &__temperature {
+    display: flex;
+    align-items: center;
     font-size: 12px;
     font-weight: 600;
 
     * { color: black; }
-    .v-icon { font-size: 12px; }
+    .v-icon {
+      font-size: 12.5px;
+    }
+  }
+  &__comment-count {
+    .v-icon { margin-right: 3px; }
+  }
+  &__temperature {
+    .v-icon { margin-right: 1px; }
   }
   &__new-comment {
     margin-left: 4px;
@@ -54,17 +65,8 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 11px;
-    font-weight: 600;
-  }
-  &__temperature {
     font-size: 12px;
     font-weight: 600;
-
-    .v-icon {
-      font-size: 12px;
-      color: black;
-    }
   }
 
   &__body {
@@ -159,6 +161,10 @@
 
     &__upper {
       margin-bottom: 16px;
+    }
+    &__comment-count, &__temperature {
+      font-size: 13px;
+      .v-icon { font-size: 14px; }
     }
     &__body {
       padding: 32px 53px 24px;

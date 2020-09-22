@@ -71,8 +71,8 @@
                   :src="`${nosImageUrl}/flags/${item.country_code.toLowerCase()}.png`"
                   :alt="item.country_code"
                 >
-                {{ $moment.unix(item.birthday).format('YYYY. MM. DD') }}
-                <span class="nos-search-modal__suggestion-info-detail"> / {{ item.height }}cm / {{ item.position }}</span>
+                {{ $moment.unix(item.birthday).format('DD / MM / YYYY') }}
+                <span class="nos-search-modal__suggestion-info-detail">, {{ item.height }}cm, {{ item.position }}</span>
               </span>
             </button>
           </li>

@@ -90,7 +90,7 @@
             <span>Day of Birth</span>
           </p>
           <p class="npmi__personal-detail-info">
-            {{ $moment.unix(player.birthday).format('DD. MMM. YYYY') }}
+            {{ $moment.unix(player.birthday).format('DD. MM. YYYY') }}
           </p>
         </div>
 
