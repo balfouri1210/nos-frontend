@@ -27,6 +27,10 @@
     position: relative;
     flex: 1;
     min-height: 100px;
+
+    ul {
+      transition: all 0.2s ease-out;
+    }
   }
 
   &__sort-type {
@@ -196,6 +200,10 @@
     .v-icon {
       font-size: 30px;
     }
+  }
+
+  &--changing {
+    opacity: 0.4;
   }
 }
 

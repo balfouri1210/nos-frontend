@@ -59,7 +59,10 @@
         </div>
       </div>
 
-      <ul v-else>
+      <ul
+        v-else
+        :class="{ 'nos-comment-unit--changing': currentPageIsChanging }"
+      >
         <li
           v-for="(comment, index) in comments"
           :key="index"
@@ -108,14 +111,14 @@
         v-if="totalPages > pagesPerLoad"
         class="nos-comment-unit__page-navigation"
       >
-        <button @click="changeCurrentBigPage('prev')">
+        <button @click="changecurrentPageGroup('prev')">
           <v-icon>mdi-chevron-double-left</v-icon>
           <span>Prev 7 pages</span>
         </button>
 
         <button
           style="margin-left: 36px"
-          @click="changeCurrentBigPage('next')"
+          @click="changecurrentPageGroup('next')"
         >
           <span>Next 7 pages</span>
           <v-icon>mdi-chevron-double-right</v-icon>

@@ -41,8 +41,9 @@ export default {
       isCommentLoading: false,
 
       currentPage: 1,
-      currentBigPage: 1, // 1~7, 8~14를 결정하는 변수
-      pagesPerLoad: 7 // 한번에 몇개의 페이지를 로드할건지 결정하는 변수
+      currentPageGroup: 1, // 1~7, 8~14를 결정하는 변수
+      pagesPerLoad: 7, // 한번에 몇개의 페이지를 로드할건지 결정하는 변수
+      currentPageIsChanging: false
     };
   },
 
@@ -61,7 +62,7 @@ export default {
 
     calculatedPage() {
       return (index) => {
-        return index + (this.pagesPerLoad * (this.currentBigPage - 1));
+        return index + (this.pagesPerLoad * (this.currentPageGroup - 1));
       };
     },
 
@@ -76,7 +77,7 @@ export default {
     },
 
     isLastBigPage() {
-      return this.currentBigPage === Math.ceil(this.totalPages / this.pagesPerLoad);
+      return this.currentPageGroup === Math.ceil(this.totalPages / this.pagesPerLoad);
     }
   },
 
@@ -128,7 +129,7 @@ export default {
           return;
         } else if (this.currentPage % this.pagesPerLoad === 1) {
           this.currentPage --;
-          this.currentBigPage --;
+          this.currentPageGroup --;
         } else {
           this.currentPage --;
         }
@@ -137,29 +138,31 @@ export default {
           return;
         } else if (this.currentPage % this.pagesPerLoad === 0) { 
           this.currentPage ++;
-          this.currentBigPage ++;
+          this.currentPageGroup ++;
         } else {
           this.currentPage ++;
         }
       }
     },
 
-    changeCurrentBigPage(direction) {
+    changecurrentPageGroup(direction) {
       if (direction === 'prev') {
-        if (this.currentBigPage === 1) return;
-        this.currentBigPage --;
-        this.currentPage = (this.pagesPerLoad * (this.currentBigPage - 1)) + 1;
+        if (this.currentPageGroup === 1) return;
+        this.currentPageGroup --;
+        this.currentPage = (this.pagesPerLoad * (this.currentPageGroup - 1)) + 1;
       } else {
         if (this.isLastBigPage) return;
-        this.currentBigPage ++;
-        this.currentPage = (this.pagesPerLoad * (this.currentBigPage - 1)) + 1;
+        this.currentPageGroup ++;
+        this.currentPage = (this.pagesPerLoad * (this.currentPageGroup - 1)) + 1;
       }
     }
   },
 
   watch: {
     async currentPage() {
+      this.currentPageIsChanging = true;
       await this.getComments(this.sortType, this.currentPage);
+      this.currentPageIsChanging = false;
       this.$emit('newCommentsLoaded');
     }
   }
