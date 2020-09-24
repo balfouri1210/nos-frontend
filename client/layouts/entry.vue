@@ -25,6 +25,8 @@
             alt="logo"
           >
         </nuxt-link>
+
+        <nuxt />
       </div>
 
       <nos-footer />

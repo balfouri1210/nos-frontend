@@ -10,9 +10,7 @@
     <div class="nos-header__content">
       <div class="nos-header__left">
         <div class="nos-header__logo">
-          <nuxt-link
-            :to="localePath('index')"
-          />
+          <button @click="goToHome" />
         </div>
 
         <nuxt-link :to="localePath('about')">
@@ -22,7 +20,7 @@
             small
             style="cursor: pointer"
           >
-            What is 907 ?
+            About 907
           </v-chip>
         </nuxt-link>
       </div>

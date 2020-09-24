@@ -25,6 +25,14 @@ export default {
     ...mapGetters(['getJwt', 'getId', 'getUnreadNotificationCount']),
     ...mapActions(['mutateUnreadNotificationCountAction']),
 
+    goToHome() {
+      if (this.$route.name.indexOf('index') !== -1) {
+        window.location.reload();
+      } else {
+        this.$router.push(this.localePath('index'));
+      }
+    },
+
     async updateUnreadNotificationCount() {
       try {
         if (this.getJwt()) {
