@@ -10,63 +10,24 @@ export default {
   },
 
   async asyncData({ $axios, route, error }) {
-    try {
-      const [wholePlayerList, history] = await Promise.all([
-        $axios.$get(`/api/histories/player/${route.params.historyId}`),
-        $axios.$get(`/api/histories/${route.params.historyId}`)
-      ]);
+    const [wholePlayerList, history] = await Promise.all([
+      $axios.$get(`/api/histories/player/${route.params.historyId}`),
+      $axios.$get(`/api/histories/${route.params.historyId}`)
+    ]);
 
-      const topPlayer = wholePlayerList[0];
-      wholePlayerList.shift();
-      const restOfPlayers = wholePlayerList;
+    const topPlayer = wholePlayerList[0];
+    wholePlayerList.shift();
+    const restOfPlayers = wholePlayerList;
 
-      const startDate = history.start_date;
-      const endDate = history.end_date;
+    const startDate = history.start_date;
+    const endDate = history.end_date;
 
-      return { topPlayer, restOfPlayers, startDate, endDate };
-    } catch (err) {
-      console.error(err);
-      return error({ statusCode: 500 });
-    }
-  },
-
-  mounted() {
-    window.addEventListener('scroll', this.detectScroll);
-  },
-
-  destroyed() {
-    window.removeEventListener('scroll', this.detectScroll);
-  },
-
-  data() {
-    return {
-      isBottomOfWindow: false
-    };
+    return { topPlayer, restOfPlayers, startDate, endDate };
   },
 
   computed: {
     previousPlayerIdList() {
       return [this.topPlayer.id];
-    }
-  },
-
-  methods: {
-    detectScroll() {
-      let bottomOfWindow =
-          // 스크롤 위치 중 최대값
-          Math.max(
-            window.pageYOffset,
-            document.documentElement.scrollTop,
-            document.body.scrollTop
-          ) +
-          // 화면 높이
-          window.innerHeight >=
-
-          // player-list-wrapper 높이
-          document.getElementById('history-page').offsetHeight;
-
-      if (bottomOfWindow)
-        this.isBottomOfWindow = true;
     }
   },
 

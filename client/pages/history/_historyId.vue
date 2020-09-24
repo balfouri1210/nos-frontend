@@ -26,9 +26,8 @@
           :is-historical="true"
           :history-id="$route.params.historyId"
           :need-player-comments-preview="true"
-          :load-more-player-switch="isBottomOfWindow"
+          :activate-load-more="true"
           :previous-player-id-list-prop="previousPlayerIdList"
-          @morePlayerLoaded="isBottomOfWindow = false"
         />
 
         <!-- Nuxt child for player modal -->
