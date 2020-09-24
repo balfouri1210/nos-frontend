@@ -62,5 +62,35 @@ export default {
     }
   }
   // ---------------------------------------------------------- //
+};
 
+export const detectScroll = {
+  // 페이지 로드시 detect scroll 등록
+  mounted() {
+    window.addEventListener('scroll', this.detectScroll);
+  },
+
+  // 페이지 이동시 detect scroll 해제
+  destroyed() {
+    window.removeEventListener('scroll', this.detectScroll);
+  },
+
+  methods: {
+    detectScroll() {
+      let bottomOfWindow =
+          // 스크롤 위치 중 최대값
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+          // 화면 높이
+          window.innerHeight >=
+          // player-list-wrapper 높이
+          document.getElementById('home-body').offsetHeight;
+
+      if (bottomOfWindow)
+        this.isBottomOfWindow = true;
+    }
+  }
 };

@@ -75,6 +75,15 @@
     </ul>
 
     <div
+      v-if="activateLoadMore && !isMorePlayersLoading"
+      class="nos-player-list__load-more"
+    >
+      <button @click="loadMorePlayers">
+        Load More Players, <span>{{ previousPlayerIdList.length }} / {{ totalPlayerCount }}</span>
+      </button>
+    </div>
+
+    <div
       v-if="isMorePlayersLoading"
       class="nos-player-list__loader"
     >

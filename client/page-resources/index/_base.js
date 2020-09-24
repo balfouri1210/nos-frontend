@@ -35,7 +35,11 @@ export default {
       return;
     } else {
       try {
-        const wholePlayerList = await $axios.$get('/api/players');
+        const wholePlayerList = await $axios.$get('/api/players', {
+          params: {
+            size: 21
+          }
+        });
         const topPlayer = wholePlayerList[0];
 
         const high4Players = wholePlayerList.slice(1, 5);
@@ -52,7 +56,6 @@ export default {
   data() {
     return {
       playerCommentsPreview: [],
-      isBottomOfWindow: false,
 
       isFixtures: false,
       isTable: false,
@@ -73,14 +76,6 @@ export default {
       const result = this.high4Players.concat(this.high8Players).map(player => player.id).concat(this.topPlayer.id);
       return result;
     }
-  },
-
-  mounted() {
-    window.addEventListener('scroll', this.detectScroll);
-  },
-
-  destroyed() {
-    window.removeEventListener('scroll', this.detectScroll);
   },
 
   methods: {
@@ -182,23 +177,6 @@ export default {
       } finally {
         this.isTableLoading = false;
       }
-    },
-
-    detectScroll() {
-      let bottomOfWindow =
-          // 스크롤 위치 중 최대값
-          Math.max(
-            window.pageYOffset,
-            document.documentElement.scrollTop,
-            document.body.scrollTop
-          ) +
-          // 화면 높이
-          window.innerHeight >=
-          // player-list-wrapper 높이
-          document.getElementById('home-body').offsetHeight;
-
-      if (bottomOfWindow)
-        this.isBottomOfWindow = true;
     }
   }
 };

@@ -42,8 +42,8 @@ export default {
       default: () => []
     },
 
-    // 부모 페이지에서 scrollToBottom을 감지하고 loadMorePlayer를 요청하라고 지시
-    loadMorePlayerSwitch: {
+    // load more버튼으로 플레이어를 추가로딩하는 옵션
+    activateLoadMore: {
       type: Boolean,
       default: false
     }
@@ -66,7 +66,7 @@ export default {
       });
 
       playerIdList = this.previousPlayerIdListProp.concat(playerIdList);
-      return playerIdList.toString();
+      return playerIdList;
     },
 
     degreeCalculator() {
@@ -203,7 +203,7 @@ export default {
           // History에서의 Load more player
           loadedPlayers = await this.$axios.$get(`/api/histories/player/${this.historyId}`, {
             params: {
-              previousPlayerIdList: this.previousPlayerIdList
+              previousPlayerIdList: this.previousPlayerIdList.toString()
             }
           });
 
@@ -233,13 +233,6 @@ export default {
         this.$emit('morePlayerLoaded');
         this.isMorePlayersLoading = false;
       }
-    }
-  },
-
-  watch: {
-    loadMorePlayerSwitch() {
-      if (this.loadMorePlayerSwitch)
-        this.loadMorePlayers();
     }
   }
 };
