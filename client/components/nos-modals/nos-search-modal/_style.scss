@@ -13,19 +13,24 @@
   }
 
   &__clubs {
-    text-align: center;
-
-    li {
-      display: inline-block;
-    }
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 0;
+    width: 100%;
 
     button {
-      margin: 4px;
+      width: 100%;
+      padding: 4px 3px;
+      text-align: center;
     }
 
     img {
-      display: list-item;
       width: 20px;
+    }
+
+    span {
+      display: none;
     }
   }
 
@@ -147,17 +152,34 @@
 
     &__clubs {
       button {
-        margin: 8px;
+        padding: 8px 2px 4px;
+        border-radius: 5px;
+        transition: all 0.15s ease-out;
+      }
+      button:hover {
+        background: rgba($nos-main-theme, 0.1);
       }
 
       img {
         width: 30px;
       }
+
+      span {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 14px;
+      }
     }
 
     &__form {
       max-width: $web-header-content-width;
-      margin: 16px auto 0;
+      margin: 32px auto 0;
     }
 
     .nos-input {
@@ -182,6 +204,7 @@
 
       li {
         padding: 0 16px;
+        border-radius: 6px;
 
         button {
           padding: 12px 0;

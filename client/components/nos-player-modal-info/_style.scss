@@ -45,6 +45,17 @@
     }
   }
 
+  &__history-notice {
+    margin-bottom: 20px;
+    padding: 4px 32px;
+    background: #d57c59;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    a { font-weight: 600; }
+  }
+
   &__body {
     padding: 0 8px;
   }
@@ -300,6 +311,12 @@
       font-size: 15px;
 
       img { height: 14px;}
+    }
+
+    &__history-notice {
+      margin-bottom: 12px;
+      padding: 4px 64px;
+      font-size: 14px;
     }
 
     &__body {

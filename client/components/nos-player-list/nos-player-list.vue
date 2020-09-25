@@ -78,7 +78,10 @@
       v-if="activateLoadMore && totalPlayerCount && !isMorePlayersLoading"
       class="nos-player-list__load-more"
     >
-      <button @click="loadMorePlayers">
+      <button
+        :disabled="previousPlayerIdList.length === totalPlayerCount"
+        @click="loadMorePlayers"
+      >
         <span v-if="previousPlayerIdList.length !== totalPlayerCount">Load More Players, <span>{{ previousPlayerIdList.length }} / {{ totalPlayerCount }}</span></span>
         <span v-else>All players have been loaded</span>
       </button>

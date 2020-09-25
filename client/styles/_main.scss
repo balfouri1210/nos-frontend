@@ -215,6 +215,22 @@ strong {
 }
 // Vue transition fade styles end
 
+// Vue transition fade(only enter) styles
+// https://kr.vuejs.org/v2/guide/transitions.html
+.fade-oe {
+  transition: all 0.25s;
+}
+.fade-oe-enter-active {
+  transition: opacity .3s;
+}
+.fade-oe-leave-active {
+  transition: opacity 0s;
+}
+.fade-oe-enter, .fade-oe-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+// Vue transition fade styles end
+
 // Vue transition slide-fade styles
 .slide-fade-enter-active {
   transition: all .3s ease;

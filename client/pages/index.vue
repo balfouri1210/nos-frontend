@@ -13,6 +13,56 @@
         </nos-countdown>
       </client-only>
 
+      <div class="how-to-use">
+        <button
+          v-if="!showHowToUse"
+          class="how-to-use__btn"
+          @click="showHowToUse = true"
+        >
+          <v-icon>mdi-information-outline</v-icon>
+          <span>How to Use</span>
+        </button>
+
+        <transition name="fade-oe">
+          <div
+            v-if="showHowToUse"
+            class="how-to-use__container"
+          >
+            <div class="how-to-use__header">
+              <div class="how-to-use__title">
+                <v-icon>mdi-information-outline</v-icon>
+                <span>How to Use</span>
+              </div>
+
+              <button
+                class="how-to-use__close-btn"
+                @click="showHowToUse = false"
+              >
+                <v-icon>mdi-close</v-icon>
+              </button>
+            </div>
+
+            <div
+              v-if="showHowToUse"
+              class="how-to-use__body"
+            >
+              <div class="how-to-use__content">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                <br>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.
+              </div>
+
+              <button
+                class="how-to-use__confirm"
+                @click="showHowToUse = false"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </transition>
+      </div>
+
       <nos-top-player
         :top-player="topPlayer"
         :need-player-comments-preview="true"
@@ -194,6 +244,7 @@
                 <tr
                   v-for="(club, index) in leagueTable"
                   :key="index"
+                  @click="selectClubInTable(club)"
                 >
                   <td>{{ index + 1 }}</td>
                   <td>
@@ -202,6 +253,7 @@
                       :alt="club.teamName"
                     >
                     {{ club.teamName }}
+                    <v-icon>mdi-open-in-new</v-icon>
                   </td>
                   <td>{{ club.points }}</td>
                   <td>{{ club.all.win }}</td>
@@ -298,4 +350,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/page-resources/index/_style.scss";
+@import "@/page-resources/index/_how-to-use.scss";
 </style>

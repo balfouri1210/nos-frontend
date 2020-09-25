@@ -74,6 +74,10 @@
     margin: 80px auto $web-footer-height;
     padding-bottom: 160px;
 
+    &__form {
+      margin-bottom: 80px;
+    }
+
     h1 {
       margin-bottom: 42px;
       font-size: 30px;

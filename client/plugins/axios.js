@@ -28,16 +28,18 @@ export default function({ $axios, store, redirect, app, error }) {
           name: 'login'
         }));
       } else {
-        error({ statusCode: 500, message: 'Server error' });
+        return redirect(app.localePath({
+          name: 'bugs'
+        }));
       }
     }
 
     // 기타 서버에러는 에러 페이지로
     else {
-      error({ statusCode: 500, message: 'Server error' });
+      return redirect(app.localePath({
+        name: 'bugs'
+      }));
     }
-
-    return Promise.reject(error);
   });
 
   // 모든 곳에서 사용할 수 있는 변수 (지금 데이터가 송수신 중인지)

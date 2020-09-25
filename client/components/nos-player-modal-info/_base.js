@@ -116,7 +116,7 @@ export default {
   async created() {
     try {
       this.calculatePlayerTemperature();
-      if (process.client)
+      if (process.client && this.$route.name.indexOf('history') === -1)
         this.manipulateHits();
     } catch (err) {
       console.error(err);

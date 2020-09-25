@@ -109,7 +109,7 @@
   background: transparent;
 
   .nos-header__logo {
-    a {
+    button {
       background-image: url('https://images.907degrees.com/logos/logo_short_white2.svg');
     }
   }
@@ -145,7 +145,7 @@
     &__logo {
       margin-right: 20px;
 
-      a {
+      button {
         width: 166px;
         height: 23px;
         background-image: url('https://images.907degrees.com/logos/logo_black.svg');
@@ -155,7 +155,7 @@
   
   .nos-header--preseason {
     .nos-header__logo {
-      a {
+      button {
         background-image: url('https://images.907degrees.com/logos/logo_white2.svg');
       }
     }

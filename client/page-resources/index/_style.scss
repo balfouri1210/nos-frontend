@@ -2,7 +2,9 @@
   position: relative;
 
   &__body {
+    position: relative;
     margin-top: 38px;
+    padding-top: 30px;
   }
 
   &__info {
@@ -225,7 +227,7 @@
   .home {
     &__body {
       margin-top: 58px;
-      padding: 0 8px;
+      padding: 30px 8px 0;
     }
 
     &__info {

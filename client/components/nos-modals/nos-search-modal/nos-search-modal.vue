@@ -14,6 +14,7 @@
               :src="club.image"
               :alt="club.name"
             >
+            <span>{{ club.clean_name }}</span>
           </button>
         </li>
       </ul>

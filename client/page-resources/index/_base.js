@@ -34,22 +34,17 @@ export default {
     if (store.getters.getAppStatus === 'preseason') {
       return;
     } else {
-      try {
-        const wholePlayerList = await $axios.$get('/api/players', {
-          params: {
-            size: 21
-          }
-        });
-        const topPlayer = wholePlayerList[0];
+      const wholePlayerList = await $axios.$get('/api/players', {
+        params: {
+          size: 21
+        }
+      });
+      const topPlayer = wholePlayerList[0];
 
-        const high4Players = wholePlayerList.slice(1, 5);
-        const high8Players = wholePlayerList.slice(5, 13);
-        const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
-        return { topPlayer, high4Players, high8Players, restOfPlayers };
-      } catch (err) {
-        console.error(err);
-        return error({ statusCode: 500 });
-      }
+      const high4Players = wholePlayerList.slice(1, 5);
+      const high8Players = wholePlayerList.slice(5, 13);
+      const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
+      return { topPlayer, high4Players, high8Players, restOfPlayers };
     }
   },
 
@@ -57,6 +52,7 @@ export default {
     return {
       playerCommentsPreview: [],
 
+      showHowToUse: false,
       isFixtures: false,
       isTable: false,
 
@@ -177,6 +173,15 @@ export default {
       } finally {
         this.isTableLoading = false;
       }
+    },
+
+    selectClubInTable(club) {
+      this.$router.push(this.localePath({
+        name: 'search-searchData',
+        params: {
+          searchData: `clubId_${club.id}`
+        }
+      }));
     }
   }
 };

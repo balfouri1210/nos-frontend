@@ -22,6 +22,23 @@
       </button>
     </div>
 
+    <div
+      v-if="isHistorical"
+      class="npmi__history-notice"
+    >
+      Here is history page. you can leave new opinion or reaction about {{ player.known_as }} <nuxt-link
+        :to="localePath({
+          name: 'index-player-playerId-playerName',
+          params: {
+            playerId: player.id,
+            playerName: player.known_as.toLowerCase().replace(/ /g, '-')
+          }
+        })"
+      >
+        Here
+      </nuxt-link>
+    </div> 
+
     <div class="npmi__body">
       <div class="npmi__ranking-and-reactions">
         <div class="npmi__body-ranking">
