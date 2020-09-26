@@ -26,7 +26,7 @@
       v-if="isHistorical"
       class="npmi__history-notice"
     >
-      This is the page to check the records from September 20th to September 26th. You can leave new comments or reactions about {{ player.known_as }} <nuxt-link
+      This is history page. ({{ $moment(history.start_date).format('DD. MM. YYYY') }} ~ {{ $moment(history.end_date).format('DD. MM. YYYY') }}) You can leave new comments or reactions about {{ player.known_as }} <nuxt-link
         :to="localePath({
           name: 'index-player-playerId-playerName',
           params: {

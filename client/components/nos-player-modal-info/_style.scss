@@ -53,6 +53,7 @@
     font-size: 12px;
     font-weight: 300;
     text-align: center;
+    line-height: 16px;
     a { font-weight: 600; }
   }
 
@@ -314,9 +315,10 @@
     }
 
     &__history-notice {
-      margin-bottom: 12px;
-      padding: 4px 64px;
-      font-size: 14px;
+      margin-bottom: 8px;
+      padding: 6px 64px;
+      font-size: 13.5px;
+      line-height: 19px;
     }
 
     &__body {

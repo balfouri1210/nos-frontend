@@ -18,6 +18,11 @@ export default {
     isHistorical: {
       type: Boolean,
       default: false
+    },
+
+    history: {
+      type: Object,
+      default: () => {}
     }
   },
 
@@ -114,13 +119,10 @@ export default {
   },
 
   async created() {
-    try {
-      this.calculatePlayerTemperature();
-      if (process.client && this.$route.name.indexOf('history') === -1)
-        this.manipulateHits();
-    } catch (err) {
-      console.error(err);
-    }
+    console.log(this.history);
+    this.calculatePlayerTemperature();
+    if (process.client && this.$route.name.indexOf('history') === -1)
+      this.manipulateHits();
   },
 
   methods: {

@@ -51,9 +51,10 @@
               </header>
 
               <nos-player-modal-info
-                :player="player"
+                :player="playerHistory"
                 :disabled="true"
                 :is-historical="true"
+                :history="history"
               />
 
               <!-- Comment Sorting -->
@@ -68,7 +69,7 @@
                 >
                   <div class="player-modal__comment-count">
                     <v-icon>mdi-message-reply-text</v-icon>
-                    <span>{{ player.comment_count }}</span>
+                    <span>{{ playerHistory.comment_count }}</span>
                   </div>
 
                   <div class="player-modal__comment-sortby">
@@ -263,7 +264,7 @@
                   </div>
 
                   <div
-                    v-if="comments.length && (player.comment_count > comments.length)"
+                    v-if="comments.length && (playerHistory.comment_count > comments.length)"
                     class="player-modal__more-comment-btn"
                   >
                     <button
@@ -315,10 +316,10 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: `Check previous fans' reaction about ${this.$route.params.playerName.replace(
+          content: `Check out what fans thought about ${this.$route.params.playerName.replace(
             /-/g,
             ' '
-          )}`
+          )} this week`
         },
 
         // Opengraph
@@ -337,10 +338,10 @@ export default {
           property: 'og:url',
           content: `${process.env.NOS_URL}${this.$route.fullPath}`
         },
-{
-  property: 'og:image',
-  content: 'https://907degrees.com/opengraph.png'
-}
+        {
+          property: 'og:image',
+          content: 'https://907degrees.com/opengraph.png'
+        }
       ]
     };
   }

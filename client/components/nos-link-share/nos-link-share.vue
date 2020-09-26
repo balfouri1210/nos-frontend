@@ -84,7 +84,7 @@ export default {
       if (navigator.share) {
         navigator.share({
           title: `907Degrees - ${this.data.known_as}`,
-          text: `Check out what the fans thought about the ${this.data.known_as} this week`,
+          text: `Check out what fans thought about ${this.data.known_as} this week`,
           url: this.link,
         })
           .then(() => console.log('Successful share'))

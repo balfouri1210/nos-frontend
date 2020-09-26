@@ -21,6 +21,10 @@ export default {
     const historyId = params.historyId;
     const playerId = params.playerId;
 
+    function getHistory() {
+      return $axios.$get(`/api/histories/${historyId}`);
+    }
+
     function getPlayerHistory() {
       return $axios.$get(`/api/histories/${historyId}/player/${playerId}`);
     }
@@ -34,12 +38,13 @@ export default {
     }
 
     try {
-      const [player, comments] = await Promise.all([
+      const [history, playerHistory, comments] = await Promise.all([
+        getHistory(),
         getPlayerHistory(),
         getCommentHistories()
       ]);
 
-      return { historyId, playerId, player, comments };
+      return { historyId, history, playerId, playerHistory, comments };
     } catch (err) {
       console.error(err);
       error({ statusCode: 500 });
