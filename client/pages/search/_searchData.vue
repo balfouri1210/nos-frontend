@@ -69,7 +69,8 @@
       class="search__empty"
     >
       <h2>No results found</h2>
-      <p>Try different keywords or filter by club</p>
+      <p>Try different keywords or filter by club.</p>
+      <p>Currently, only PL players being uploaded.</p>
     </div>
 
     <nuxt-child />

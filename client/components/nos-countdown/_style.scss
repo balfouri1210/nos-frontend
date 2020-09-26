@@ -21,7 +21,6 @@
 
   &--season,
   &--lastStage {
-    top: $mobile-header-height;
     left: 0;
     width: 100%;
     padding: 0 16px;
@@ -51,12 +50,15 @@
 
   &--season {
     position: absolute;
+    top: -38px;
     color: black;
     background: rgba(0, 0, 0, 0.03);
+    z-index: 10;
   }
 
   &--lastStage {
     position: fixed;
+    top: $mobile-header-height;
     background: $nos-main-gradient;
     color: white;
     z-index: 10;
@@ -108,8 +110,6 @@
 
     &--season,
     &--lastStage {
-      top: $web-header-height;
-
       .nos-countdown__slot {
         ::v-deep * {
           font-size: 18px;
@@ -121,6 +121,12 @@
           font-size: 18px;
         }
       }
+    }
+    &--season {
+      top: -58px;
+    }
+    &--lastStage {
+      top: $web-header-height;
     }
   }
 }

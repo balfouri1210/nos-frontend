@@ -73,6 +73,12 @@
 
             <span class="nos-top-player__show-more">Show more</span>
           </div>
+
+          <div v-else>
+            <p style="color: rgba(0, 0, 0, 0.5); font-weight: 300">
+              ... No comments yet
+            </p>
+          </div>
         </transition>
       </div>
     </div>

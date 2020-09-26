@@ -47,9 +47,21 @@
               class="how-to-use__body"
             >
               <div class="how-to-use__content">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                The 907 Leaderboard indicates who received the most attention from fans this week.
+                <br><br>
+
+                Click on the players you are interested in to leave a comment. A player's temperature rises in proportion to views, reactions and comments, and your opinions are immediately reflected in the temperature.
                 <br>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.
+                You can also reply to other people's opinions or check news and match schedules.
+
+                <br><br>
+                If there are no players you are interested in on the Leaderboard, search for them through the magnifying glass <v-icon>mdi-magnify</v-icon> in the header. You can find the player you want by keyword or team.
+
+                <br><br>
+                If you are curious about what fans think regardless of the player, scroll down and click 'More' in the comment area. You can check the latest comments and comments that received a lot of recommendations.
+
+                <br><br>
+                Would you like to check past results? Go to the history page via the time icon <v-icon>mdi-history</v-icon> in the header. You can view the weekly leaderboard at any time you would like.
               </div>
 
               <button
