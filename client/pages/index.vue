@@ -62,6 +62,12 @@
 
                 <br><br>
                 Would you like to check past results? Go to the history page via the time icon <v-icon>mdi-history</v-icon> in the header. You can view the weekly leaderboard at any time you would like.
+
+                <br><br>
+                If you have any further questions, please contact us <a
+                  href="mailto: support@907degrees.com"
+                  style="font-weight: 600"
+                > support@907degrees.com</a>
               </div>
 
               <button
@@ -256,10 +262,12 @@
                 <tr
                   v-for="(club, index) in leagueTable"
                   :key="index"
-                  @click="selectClubInTable(club)"
                 >
                   <td>{{ index + 1 }}</td>
-                  <td>
+                  <td
+                    style="cursor: pointer"
+                    @click="selectClubInTable(club)"
+                  >
                     <img
                       :src="club.logo"
                       :alt="club.teamName"

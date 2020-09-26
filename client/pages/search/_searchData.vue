@@ -42,6 +42,13 @@
         </div>
       </div>
 
+      <h2
+        v-if="!isEmpty(targetClub)"
+        class="search__squad"
+      >
+        Squad
+      </h2>
+
       <nos-player-list
         v-if="searchPlayerList.length > 0"
         :top-player-score="parseInt(topPlayerScore)"

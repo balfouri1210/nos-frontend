@@ -657,6 +657,7 @@
               />
 
               <nos-news-area
+                style="margin-top: 8px"
                 :news-keyword="playerName"
               />
             </div>

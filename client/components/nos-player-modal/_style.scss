@@ -72,7 +72,6 @@
 
   &__right {
     flex: none;
-    flex-basis: 360px;
     height: 100%;
     padding: 12px 4px 4px;
     overflow: auto;
@@ -118,7 +117,7 @@
     }
   
     &__inner {
-      max-width: 960px;
+      max-width: 980px;
       height: 83%;
     }
 
@@ -143,7 +142,12 @@
     }
 
     &__right {
+      flex-basis: 380px;
       padding: 8px 6px 0 2px;
+
+      .fixtures__vs {
+        padding: 0 4px;
+      }
     }
   }
 }

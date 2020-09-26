@@ -7,6 +7,7 @@ import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
 import { apiFootballRequestHeader, apiFootballLeagueId } from '@/lib/constants';
 import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
 import nosLandingCommentArea from '@/components/nos-landing-comment-area/nos-landing-comment-area.vue';
+import { eplClubs } from '@/lib/constants';
 
 export default {
   layout: 'wide',
@@ -175,11 +176,17 @@ export default {
       }
     },
 
-    selectClubInTable(club) {
+    selectClubInTable(selectedClub) {
+      eplClubs.forEach(club => {
+        if (club.api_football_team_id === selectedClub.team_id) {
+          selectedClub.nos_team_id = club.id;
+        }
+      });
+
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `clubId_${club.id}`
+          searchData: `clubId_${selectedClub.nos_team_id}`
         }
       }));
     }

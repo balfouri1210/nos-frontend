@@ -415,6 +415,8 @@ strong {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+
+// Wanna make rendering only specific size 
 .only-small-screen { display: block !important; }
 .only-medium-screen { display: none !important; }
 .only-big-screen { display: none !important; }
@@ -432,4 +434,11 @@ strong {
   .only-medium-screen { display: none !important; }
   .only-big-screen { display: block !important; }
 }
+//
 
+
+.flex-basic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

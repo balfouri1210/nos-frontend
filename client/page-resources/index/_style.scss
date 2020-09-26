@@ -183,12 +183,14 @@
     }
 
     th, td {
-      padding: 4px 0;
+      padding: 5px 0;
       font-size: 12px;
       font-weight: 300;
     }
     th {
       text-align: center;
+
+      .v-icon { font-size: 15px; color: black; }
     }
     th:first-of-type {
       text-align: left;
@@ -196,10 +198,10 @@
     th:nth-of-type(3) {
       color: $color-primary;
     }
-    .v-icon {
-      font-size: 15px;
-    }
 
+    td {
+      .v-icon { margin-left: 4px; font-size: 10px; color: black; }
+    }
     td:first-of-type {
       padding-right: 6px;
     }
@@ -291,8 +293,12 @@
     &__table {
       padding: 0 0 26px;
 
-      .v-icon {
-        font-size: 20px;
+      th {
+        .v-icon { font-size: 20px; }
+      }
+
+      td {
+        .v-icon { font-size: 12px; }
       }
 
       th, td {

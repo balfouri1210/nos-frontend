@@ -22,7 +22,6 @@
       <img
         v-if="meta.image"
         :src="meta.image"
-        class="link-preview__image"
       >
     </div>
   </a>
@@ -87,7 +86,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 40;
+    flex: 37;
 
     img {
       width: 100%;
@@ -128,6 +127,7 @@ export default {
 
     &__image {
       flex: 30;
+      max-width: 154px;
     }
   }
 

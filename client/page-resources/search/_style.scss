@@ -44,9 +44,18 @@
 
   &__fixtures-area {
     width: 100%;
-    max-width: 500px;
+    max-width: 490px;
     margin: 0 auto;
     z-index: 10;
+  }
+
+  &__squad {
+    margin-bottom: 2px;
+    padding: 3px 8px;
+    background: black;
+    font-size: 15px;
+    color: white;
+    text-align: center;
   }
 
   &__progress-circular {
@@ -97,7 +106,6 @@
     }
 
     &__fixtures-area {
-      max-width: 400px;
       margin: 0;
     }
 
@@ -117,6 +125,12 @@
 
     &__body {
       margin-bottom: 100px;
+    }
+
+    &__squad {
+      margin-top: 24px;
+      padding: 6px 8px;
+      border-radius: 4px;
     }
   }
 }

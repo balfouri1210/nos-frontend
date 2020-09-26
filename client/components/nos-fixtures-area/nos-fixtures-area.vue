@@ -22,23 +22,30 @@
             class="fixture"
             @click="getLastFixtureInfo"
           >
-            <p class="fixture__header">
-              <span
-                v-if="lastFixture.league.name === 'FA Cup'"
-                class="fixture__type fa"
-              >FA</span>
-              <span
-                v-if="lastFixture.league.name === 'Premier League'"
-                class="fixture__type epl"
-              >EPL</span>
+            <div class="fixture__header flex-basic">
+              <img
+                v-if="lastFixture.league.name !== 'League Cup'"
+                :src="lastFixture.league.logo"
+                :alt="lastFixture.league.name"
+              >
+              <div>
+                <p class="fixture__league-name">
+                  {{ lastFixture.league.name }}
+                </p>
+                <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
+              </div>
 
-              <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
-
-              <span
-                v-if="lastFixture.statusShort === '1H' || lastFixture.statusShort === '2H'"
-                class="fixture__live"
-              >{{ lastFixture.statusShort }}</span>
-            </p>
+              <!-- <p
+                class="fixture__type"
+                :class="{
+                  'cup': lastFixture.league.name === 'League Cup',
+                  'fa': lastFixture.league.name === 'FA Cup',
+                  'epl': lastFixture.league.name === 'Premier League',
+                  'uel': lastFixture.league.name === 'UEFA Europa League',
+                  'ucl': lastFixture.league.name === 'UEFA Champions League'
+                }"
+              >{{ lastFixture.league.name }}</p> -->
+            </div>
 
             <div class="fixture__vs">
               <div class="fixture__team">
@@ -46,10 +53,18 @@
                   :src="lastFixture.homeTeam.logo"
                   alt="hometeam"
                 >
+                <span>{{ lastFixture.homeTeam.team_name }}</span>
               </div>
 
               <div class="fixture__score">
-                {{ lastFixture.goalsHomeTeam || 0 }} : {{ lastFixture.goalsAwayTeam || 0 }}
+                <div>
+                  {{ lastFixture.goalsHomeTeam || 0 }} : {{ lastFixture.goalsAwayTeam || 0 }}
+                </div>
+
+                <span
+                  v-if="lastFixture.statusShort === '1H' || lastFixture.statusShort === '2H'"
+                  class="fixture__live"
+                >{{ lastFixture.statusShort }}</span>
               </div>
 
               <div class="fixture__team">
@@ -57,6 +72,7 @@
                   :src="lastFixture.awayTeam.logo"
                   alt="awayteam"
                 >
+                <span>{{ lastFixture.awayTeam.team_name }}</span>
               </div> 
             </div>
 
@@ -329,17 +345,19 @@
             v-if="nextFixture"
             class="fixture"
           >
-            <p class="fixture__header">
-              <span
-                v-if="nextFixture.league.name === 'FA Cup'"
-                class="fixture__type fa"
-              >FA</span>
-              <span
-                v-if="nextFixture.league.name === 'Premier League'"
-                class="fixture__type epl"
-              >EPL</span>
-              <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
-            </p>
+            <div class="fixture__header flex-basic">
+              <img
+                v-if="nextFixture.league.name !== 'League Cup'"
+                :src="nextFixture.league.logo"
+                :alt="nextFixture.league.name"
+              >
+              <div>
+                <p class="fixture__league-name">
+                  {{ nextFixture.league.name }}
+                </p>
+                <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
+              </div>
+            </div>
 
             <div class="fixture__vs">
               <div class="fixture__team">
@@ -347,6 +365,7 @@
                   :src="nextFixture.homeTeam.logo"
                   alt="hometeam"
                 >
+                <span>{{ nextFixture.homeTeam.team_name }}</span>
               </div>
 
               <div class="fixture__score">
@@ -358,7 +377,8 @@
                   :src="nextFixture.awayTeam.logo"
                   alt="awayteam"
                 >
-              </div> 
+                <span>{{ nextFixture.awayTeam.team_name }}</span>
+              </div>
             </div>
 
             <p class="fixture__detail">
