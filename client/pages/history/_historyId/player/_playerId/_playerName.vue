@@ -47,6 +47,7 @@
                 <nos-link-share
                   :share-url="`${nosUrl}${$route.fullPath}`"
                   :font-size="12"
+                  :data="playerHistory"
                 />
               </header>
 
