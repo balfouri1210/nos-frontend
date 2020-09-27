@@ -25,6 +25,8 @@ export default {
       lastFixtureEvents: null,
       getLastFixtureInfoFailed: false,
       showLastFixtureInfoLoaded: false,
+
+      isLocalEnv: process.env.STAGE === 'local'
     }; 
   },
 
