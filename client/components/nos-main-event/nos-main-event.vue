@@ -18,7 +18,7 @@
         <div class="main-event__desc">
           <p>
             907Degrees has just been released and I've been making this space alone.
-            So I'd like to communicate with as many users as possible.
+            I'd like to communicate with as many users as possible.
             If you like 907Degrees or want to experience better football community, please consider sending a feedback to
             <a
               mailto="support@907degrees.com"
@@ -27,7 +27,6 @@
           </p>
 
           <p>
-            Your feedback definitely will encourage and motivate me 😀
             I'll give a special badge
             <span class="main-event__user-badge">1°c</span>
             to those who have given a great feedback.
