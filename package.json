@@ -9,6 +9,7 @@
     "serve": "STAGE=local NUXT_HOST=localhost nuxt",
     "serve-prod": "STAGE=prod NUXT_HOST=localhost nuxt build && nuxt start",
     "build": "nuxt build",
+    "deploy-prod": "STAGE=prod nuxt build && STAGE=prod sls deploy",
     "deploy-dev": "STAGE=dev nuxt build && STAGE=dev sls deploy"
   },
   "author": "",
