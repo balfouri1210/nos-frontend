@@ -116,7 +116,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
+    ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername', 'mutateAuthorization']),
 
     async onSubmit() {
       try {
@@ -134,6 +134,7 @@ export default {
         this.mutateId(decodedJwt.id);
         this.mutateEmail(decodedJwt.email);
         this.mutateUsername(decodedJwt.username);
+        this.mutateAuthorization(decodedJwt.authorization);
 
         gtag('event', 'login', {
           event_category: 'account',
@@ -142,6 +143,7 @@ export default {
 
         this.$emit('loginSuccess');
       } catch (err) {
+        console.error(err);
         if (err.response) {
           switch (err.response.data.code) {
           case 'u003':

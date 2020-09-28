@@ -119,7 +119,6 @@ export default {
   },
 
   async created() {
-    console.log(this.history);
     this.calculatePlayerTemperature();
     if (process.client && this.$route.name.indexOf('history') === -1)
       this.manipulateHits();
@@ -303,6 +302,16 @@ export default {
       }
 
       window.addEventListener('pagehide', killPopup);
+    },
+
+
+
+
+    requestAddPlayerFakeVote(vote) {
+      return this.$axios.$post('/api/vote/player/fake', {
+        playerId: this.player.id,
+        vote
+      });
     }
   }
 };

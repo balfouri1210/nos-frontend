@@ -36,15 +36,17 @@ export default {
     })[0];
 
     try {
-      [this.lastFixture, this.nextFixture] =
-      await Promise.all([
-        this.getLastFixture(targetClub.api_football_team_id),
-        this.getNextFixture(targetClub.api_football_team_id)
-      ]);
-
-      this.lastFixture = this.lastFixture.api.fixtures[0];
-      this.nextFixture = this.nextFixture.api.fixtures[0];
-      this.areFixturesLoaded = true;
+      if (!this.isLocalEnv) {
+        [this.lastFixture, this.nextFixture] =
+        await Promise.all([
+          this.getLastFixture(targetClub.api_football_team_id),
+          this.getNextFixture(targetClub.api_football_team_id)
+        ]);
+  
+        this.lastFixture = this.lastFixture.api.fixtures[0];
+        this.nextFixture = this.nextFixture.api.fixtures[0];
+        this.areFixturesLoaded = true;
+      }
     } catch (err) {
       console.error(err);
     }

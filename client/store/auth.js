@@ -3,6 +3,7 @@ export const state = () => ({
   id: null,
   email: null,
   username: null,
+  authorization: null,
   unreadNotificationCount: null
 });
 
@@ -23,6 +24,10 @@ export const mutations = {
     state.username = username;
   },
 
+  mutateAuthorization(state, authorization) {
+    state.authorization = authorization;
+  },
+
   mutateUnreadNotificationCount(state, unreadNotificationCount) {
     state.unreadNotificationCount = unreadNotificationCount;
   },
@@ -32,6 +37,7 @@ export const mutations = {
     state.id = null;
     state.email = null;
     state.username = null;
+    state.authorization = null;
     state.unreadNotificationCount = null;
   }
 };
@@ -62,6 +68,10 @@ export const getters = {
 
   getUsername(state) {
     return state.username;
+  },
+
+  getAuthorization(state) {
+    return state.authorization;
   },
 
   getUnreadNotificationCount(state) {

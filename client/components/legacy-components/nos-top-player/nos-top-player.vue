@@ -26,7 +26,7 @@
                 <span>{{ topPlayer.hits | thousandSeparator }}</span>
               </p>
 
-              <p v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'">
+              <p v-if="$store.getters['auth/getAuthorization'] === 3">
                 ID : {{ topPlayer.id }}
               </p>
             </div>

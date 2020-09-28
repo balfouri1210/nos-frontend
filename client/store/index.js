@@ -127,6 +127,7 @@ export const actions = {
           commit('auth/mutateId', decodedJwt.id);
           commit('auth/mutateEmail', decodedJwt.email);
           commit('auth/mutateUsername', decodedJwt.username);
+          commit('auth/mutateAuthorization', decodedJwt.authorization);
         }
       }
     } catch (err) {

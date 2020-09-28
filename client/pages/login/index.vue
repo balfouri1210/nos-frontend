@@ -106,7 +106,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername']),
+    ...mapMutations(['mutateJwt', 'mutateId', 'mutateEmail', 'mutateUsername', 'mutateAuthorization']),
     ...mapActions(['mutateUnreadNotificationCountAction']),
 
     async onSubmit() {
@@ -125,6 +125,8 @@ export default {
         this.mutateId(decodedJwt.id);
         this.mutateEmail(decodedJwt.email);
         this.mutateUsername(decodedJwt.username);
+        this.mutateAuthorization(decodedJwt.authorization);
+
         await this.mutateUnreadNotificationCountAction();
         this.$router.push(this.localePath('index'));
       } catch (err) {

@@ -22,6 +22,8 @@
       </button>
     </div>
 
+
+    <!-- History Notice -->
     <div
       v-if="isHistorical"
       class="npmi__history-notice"
@@ -39,12 +41,14 @@
       </nuxt-link>
     </div> 
 
+
     <div class="npmi__body">
       <div class="npmi__ranking-and-reactions">
         <div class="npmi__body-ranking">
           <span>Weekly Ranking</span>
           <p>{{ player.ranking | thousandSeparator }}</p>
         </div>
+
         <div class="npmi__reactions">
           <span>Reactions</span>
 
@@ -77,6 +81,32 @@
         </div>
       </div>
 
+
+      <!-- Fake Votes -->
+      <div
+        v-if="$store.getters['auth/getAuthorization'] === 3 && !isHistorical"
+        class="npmi__all-votes"
+        style="grid-template-columns: repeat(6, 1fr); margin-top: 12px; padding: 0"
+      >
+        <button
+          v-for="(vote, index) in playerVotes"
+          :key="index"
+          class="npmi__vote-btn"
+          :class="{
+            'npmi__vote--thumb': vote.name === 'up' || vote.name === 'down',
+          }"
+          :disabled="disabled || isVoting"
+          style="border-color: #1976d2"
+          @click="requestAddPlayerFakeVote(vote.name)"
+        >
+          <v-icon style="color: #1976d2">
+            {{ vote.iconName }}
+          </v-icon>
+          <span>{{ player[`vote_${vote.name}_count`] | thousandSeparator }}</span>
+        </button>
+      </div>
+
+
       <div class="npmi__personal-detail">
         <div class="npmi__personal-detail-item">
           <p class="npmi__personal-detail-title">
@@ -84,7 +114,13 @@
             <span>Views</span>
           </p>
           <p class="npmi__personal-detail-info">
-            {{ player.hits | thousandSeparator }}
+            <span>{{ player.hits | thousandSeparator }}</span>
+            <button
+              v-if="$store.getters['auth/getAuthorization'] === 3"
+              @click="increasePlayerHits"
+            >
+              <v-icon>mdi-chevron-up</v-icon>
+            </button>
           </p>
         </div>
 

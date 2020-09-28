@@ -60,7 +60,7 @@
                   <!-- CAUTION !!!!!!!!! -->
                   <!-- FAKE COMMENT FORM -->
                   <div
-                    v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'"
+                    v-if="$store.getters['auth/getAuthorization'] === 3"
                     style="margin-bottom: 16px;"
                   >
                     <div
@@ -73,7 +73,7 @@
                         placeholder="Username"
                         :style="{
                           maxWidth: '100px',
-                          height: '100%',
+                          height: '48px',
                           marginRight: '6px',
                           padding: '8px 12px',
                           border: '1px solid #1976d2',
@@ -86,7 +86,7 @@
                         rows="2"
                         maxlength="200"
                         :placeholder="`How was ${player.known_as} this week?`"
-                        style="border: 1px solid #1976d2"
+                        style="border: 1px solid #1976d2; height: 48px; padding: 2px 12px"
                       />
                     </div>
 
@@ -237,15 +237,15 @@
                       >
                         <div>
                           <div class="player-modal__comment-meta">
-                            <span
+                            <!-- <span
                               v-if="comment.user_authorization === 3"
                               class="player-modal__comment-user-badge"
                             >
                               1°c
-                            </span>
+                            </span> -->
                             <p class="player-modal__comment-username">
                               <span 
-                                v-if="$store.getters['auth/getId'] === 3 && $store.getters['auth/getEmail'] === 'turtlesng@naver.com'"
+                                v-if="$store.getters['auth/getAuthorization'] === 3"
                                 style="color: #1976d2"
                               >{{ comment.id }}</span>
                               {{ comment.fake_username || comment.username }}
