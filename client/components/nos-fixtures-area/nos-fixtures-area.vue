@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      v-if="areFixturesLoaded && !isLocalEnv"
+      v-if="isFixtureRender"
       class="fixture-area"
     >
       <div

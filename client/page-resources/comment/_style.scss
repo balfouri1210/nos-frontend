@@ -118,11 +118,6 @@
     color: $nos-main-theme;
     transition: all 0.3s ease-out;
   }
-  &__action-add:disabled {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.3);
-  }
 }
 
 @media screen and (min-width: $mobile-width) {

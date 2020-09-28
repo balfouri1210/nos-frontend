@@ -101,11 +101,11 @@
 
               <button
                 class="quick-comment__action-add"
-                :disabled="invalid"
+                :disabled="invalid || !quickCommentContent || isQuickCommentAdding"
                 @click="addQuickComment"
               >
                 <span v-if="!isQuickCommentAdding">ADD</span>
-              
+
                 <pulse-loader
                   v-if="isQuickCommentAdding"
                   :color="'#f4991e'"

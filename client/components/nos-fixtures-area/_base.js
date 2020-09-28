@@ -24,10 +24,14 @@ export default {
       lastFixtureInfo: null,
       lastFixtureEvents: null,
       getLastFixtureInfoFailed: false,
-      showLastFixtureInfoLoaded: false,
-
-      isLocalEnv: process.env.STAGE === 'local'
+      showLastFixtureInfoLoaded: false
     }; 
+  },
+
+  computed: {
+    isFixtureRender() {
+      return this.areFixturesLoaded && this.$store.getters['auth/getAuthorization'] !== 3;
+    }
   },
 
   async created() {
@@ -36,13 +40,13 @@ export default {
     })[0];
 
     try {
-      if (!this.isLocalEnv) {
+      if (this.$store.getters['auth/getAuthorization'] !== 3) {
         [this.lastFixture, this.nextFixture] =
-        await Promise.all([
-          this.getLastFixture(targetClub.api_football_team_id),
-          this.getNextFixture(targetClub.api_football_team_id)
-        ]);
-  
+          await Promise.all([
+            this.getLastFixture(targetClub.api_football_team_id),
+            this.getNextFixture(targetClub.api_football_team_id)
+          ]);
+    
         this.lastFixture = this.lastFixture.api.fixtures[0];
         this.nextFixture = this.nextFixture.api.fixtures[0];
         this.areFixturesLoaded = true;
