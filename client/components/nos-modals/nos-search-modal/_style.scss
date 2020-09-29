@@ -16,13 +16,23 @@
     display: grid;
     list-style: none;
     grid-template-columns: repeat(10, 1fr);
-    grid-gap: 0;
+    grid-gap: 8px;
     width: 100%;
+    margin-bottom: 16px !important;
 
     button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      padding: 4px 3px;
+      padding: 7px 3px;
+      border-radius: 5px;
       text-align: center;
+      box-shadow: -3px -3px 13px 0 rgba(255, 255, 255, 0.83), 1px 1px 5px 0 rgba(217, 210, 200, 0.51);
+    }
+    button:hover {
+      background: rgba($nos-main-theme, 0.1);
     }
 
     img {
@@ -152,12 +162,8 @@
 
     &__clubs {
       button {
-        padding: 8px 2px 4px;
-        border-radius: 5px;
+        padding: 8px 6px 4px;
         transition: all 0.15s ease-out;
-      }
-      button:hover {
-        background: rgba($nos-main-theme, 0.1);
       }
 
       img {
@@ -166,14 +172,15 @@
 
       span {
         display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-bottom: 6px;
+        margin-top: 6px;
         font-size: 12px;
         font-weight: 300;
         line-height: 14px;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
       }
     }
 

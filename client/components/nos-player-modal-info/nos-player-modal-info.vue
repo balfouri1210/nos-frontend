@@ -117,7 +117,7 @@
             <span>{{ player.hits | thousandSeparator }}</span>
             <button
               v-if="$store.getters['auth/getAuthorization'] === 3"
-              @click="increasePlayerHits"
+              @click="requestPlayerFakeHits(player)"
             >
               <v-icon>mdi-chevron-up</v-icon>
             </button>

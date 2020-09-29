@@ -9,7 +9,10 @@
           v-for="(club, index) in clubs"
           :key="index"
         >
-          <button @click="selectClub(club)">
+          <button
+            class="btn-neumorphism"
+            @click="selectClub(club)"
+          >
             <img
               :src="club.image"
               :alt="club.name"

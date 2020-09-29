@@ -212,6 +212,10 @@
   &__personal-detail-info {
     font-size: 16px;
     font-weight: 300;
+
+    // for fake elements
+    .v-icon { color: black; }
+    .v-icon:hover { color: $nos-main-theme-deep; }
   }
   &__height, &__temperature {
     span {

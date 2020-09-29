@@ -307,11 +307,18 @@ export default {
 
 
 
+    // Functions for Fake
     requestAddPlayerFakeVote(vote) {
       return this.$axios.$post('/api/vote/player/fake', {
         playerId: this.player.id,
         vote
       });
+    },
+
+    async requestPlayerFakeHits(player) {
+      await this.increasePlayerHits();
+      // this.$set(player, 'hits', player.hits + 1);
+      player.hits ++;
     }
   }
 };

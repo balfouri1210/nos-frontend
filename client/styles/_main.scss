@@ -290,6 +290,8 @@ strong {
 // Vuetify customizing end
 
 
+
+// BUTTONS START
 .nos-basic-btn {
   display: inline-block;
   position: relative;
@@ -367,6 +369,13 @@ strong {
     font-weight: 700;
   }
 }
+
+.btn-neumorphism {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: -3px -3px 13px 0 rgba(255, 255, 255, 0.83), 3px 3px 8px 0 rgba(217, 210, 200, 0.51);
+}
+// BUTTONS END
 
 .centered {
   position: absolute;
