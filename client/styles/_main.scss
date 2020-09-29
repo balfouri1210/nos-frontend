@@ -1,3 +1,9 @@
+// 아이폰에서 페이지 전체의 스크롤은 부드럽게 잘 되는데, div의 스크롤은 뚝뚝 끊기는 느낌이 들어서 적용함
+// https://stackoverflow.com/questions/37313872/vertical-scrolling-in-ios-not-smooth
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 html,
 body,
