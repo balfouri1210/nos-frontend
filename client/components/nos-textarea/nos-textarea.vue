@@ -106,7 +106,7 @@ export default {
       },
 
       set(newValue) {
-        this.$emit('textarea', newValue);
+        this.$emit('textareaVal', newValue);
       }
     }
   }

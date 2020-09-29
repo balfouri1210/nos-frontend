@@ -118,7 +118,7 @@
                         :rules="'required|newline_limit:10|min:10|max:200'"
                         :max-length="200"
                         :placeholder="`How was ${player.known_as} this week?`"
-                        @textarea="newCommentContent = $event"
+                        @textareaVal="newCommentContent = $event"
                       />
 
                       <button

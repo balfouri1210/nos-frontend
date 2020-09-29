@@ -88,7 +88,7 @@
               :rules="'required|newline_limit:10|min:10|max:200'"
               :max-length="200"
               :placeholder="`How was ${selectedPlayer.known_as} this week?`"
-              @textarea="quickCommentContent = $event"
+              @textareaVal="quickCommentContent = $event"
             />
 
             <div class="quick-comment__action">
