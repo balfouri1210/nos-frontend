@@ -45,7 +45,7 @@
                 type="text"
                 name="username"
                 outlined
-                :rules="'required|min:2|max:30|alpha_dash|available_username'"
+                :rules="'required|min:3|max:30|alpha_dash|available_username'"
                 :value="userInfo.username"
                 :debounce="400"
                 :autocomplete="'off'"

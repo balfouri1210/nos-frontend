@@ -172,7 +172,7 @@ export const actions = {
     } else if (now.isBefore(seasonStartMoment)) {
       // 프리시즌일 경우
       durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
-      commit('mutateAppStatus', 'preseason');
+      // commit('mutateAppStatus', 'preseason');
       commit('mutateSeasonEnd', null);
       commit('mutateSeasonStart', seasonStartMoment);
       commit('mutateDurationToEvent', durationToEvent);
