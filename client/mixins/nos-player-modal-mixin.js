@@ -17,27 +17,11 @@ export default {
       });
     }
 
-    try {
-      const [player, comments] = await Promise.all([
-        getPlayer(),
-        getComments()
-      ]);
+    const [player, comments] = await Promise.all([
+      getPlayer(),
+      getComments()
+    ]);
 
-      return { player, comments };
-    } catch (err) {
-      error({ statusCode: 500 });
-    }
-  },
-
-  // Body scroll lock
-  beforeRouteEnter(to, from, next) {
-    if (process.client) document.documentElement.style.overflow = 'hidden';
-    next();
-  },
-
-  // Body scroll release
-  beforeRouteLeave(to, from ,next) {
-    if (process.client) document.documentElement.style.overflow = 'auto';
-    next();
+    return { player, comments };
   }
 };

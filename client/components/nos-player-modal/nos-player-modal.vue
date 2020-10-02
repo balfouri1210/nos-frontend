@@ -37,6 +37,7 @@
                 <button @click="closeModal">
                   <v-icon>mdi-arrow-left</v-icon>
                   <span v-if="$route.name.indexOf('search') !== -1">Search</span>
+                  <span v-else-if="$route.name.indexOf('comment') !== -1">Comments</span>
                   <span v-else>Leaderboard</span>
                 </button>
 

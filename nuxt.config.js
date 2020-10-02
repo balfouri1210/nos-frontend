@@ -21,6 +21,13 @@ module.exports = {
   ],
   head: {
     title: '907degrees - The most on fire player of the week',
+    htmlAttrs: {
+      class: 'nos-html'
+    },
+    bodyAttrs: {
+      class: 'nos-body'
+    },
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
@@ -172,6 +179,10 @@ module.exports = {
   },
 
   dev: false,
+
+  css: [
+    '@/styles/root.css'
+  ],
 
   styleResources: {
     scss: [

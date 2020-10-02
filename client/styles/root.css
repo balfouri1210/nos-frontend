@@ -1,0 +1,14 @@
+/* html, body에 스타일지정은 _main.scss에서 불가능했다. 이유는 모름 */
+/* 그래서 https://codesandbox.io/s/github/nuxt/nuxt.js/tree/dev/examples/global-css?from-embed=&file=/css/main.css:413-420 */
+/* 위 예제를 참고하여 nuxt에 root.css를 포함시키는 방향으로 했다. */
+/* 이 스타일의 목표는 html, body에 height 100%를 줘서 */
+/* instagam과 같은 환경을 만들고, 궁극적으로 모바일에서 열었을 때 */
+/* input focus시 비정상적인 scroll 움직임을 해결하기 위해서이다. */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: scroll;
+}

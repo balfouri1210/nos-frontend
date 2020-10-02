@@ -4,6 +4,10 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.nos-html, .nos-body {
+  height: 100%;
+}
+
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 html,
 body,
@@ -116,10 +120,6 @@ nav,
 section {
   display: block
 }
-
-// body {
-//   line-height: 1
-// }
 
 ol,
 ul {
