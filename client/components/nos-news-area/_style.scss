@@ -73,7 +73,7 @@
 
     &__thumbnail {
       position: relative;
-      flex: 45;
+      flex: 43;
       width: 100%;
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
@@ -195,10 +195,10 @@
         grid-template-columns: unset;
         grid-gap: unset;
       }
+    }
 
-      .news-item {
-        margin-bottom: 8px;
-      }
+    .news-item {
+      margin-bottom: 8px;
     }
   }
 }
