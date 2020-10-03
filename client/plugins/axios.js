@@ -12,6 +12,7 @@ export default function({ $axios, store, redirect, app, error }) {
       config.headers.common['Authorization'] = `Bearer ${store.state.auth.jwt}`;
     }
  
+    // http 통신중인지 store에 기록하여 모든 곳에서 쓸 수 있음
     store.commit('mutateIsLoading', true);
   });
 
@@ -19,23 +20,26 @@ export default function({ $axios, store, redirect, app, error }) {
     console.error(error);
     store.commit('mutateIsLoading', false);
     let errorCode;
-    if (error.response) errorCode = parseInt(error.response.status);
 
-    // Token 만료 등의 권한 에러시 자동 로그아웃
-    if (error.response.config.url.indexOf('localhost:3002') !== -1 || error.response.config.url.indexOf('nos-api') !== -1) {
-      if (errorCode === 401) {
-        return redirect(app.localePath({
-          name: 'login'
-        }));
-      } else if (errorCode === 500) {
-        return redirect(app.localePath({
-          name: 'bugs'
-        }));
+    if (error.response) {
+      errorCode = parseInt(error.response.status);
+
+      if (error.response.config.url.indexOf('localhost:3002') !== -1 || error.response.config.url.indexOf('nos-api') !== -1) {
+        // Token 만료 등의 권한 에러시 자동 로그아웃
+        if (errorCode === 401) {
+          return redirect(app.localePath({
+            name: 'login'
+          }));
+        } else if (errorCode === 500) {
+          return redirect(app.localePath({
+            name: 'bugs'
+          }));
+        }
       }
     }
   });
 
-  // 모든 곳에서 사용할 수 있는 변수 (지금 데이터가 송수신 중인지)
+  // http 통신 완료 후 store 초기화
   $axios.onResponse(response => {
     store.commit('mutateIsLoading', false);
   });
