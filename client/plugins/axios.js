@@ -19,23 +19,27 @@ export default function({ $axios, store, redirect, app, error }) {
   $axios.onError(error => {
     console.error(error);
     store.commit('mutateIsLoading', false);
-    let errorCode;
 
-    if (error.response) {
-      errorCode = parseInt(error.response.status);
+    const errorCode = parseInt(error.response && error.response.status);
 
-      if (error.response.config.url.indexOf('localhost:3002') !== -1 || error.response.config.url.indexOf('nos-api') !== -1) {
-        // Token 만료 등의 권한 에러시 자동 로그아웃
-        if (errorCode === 401) {
-          return redirect(app.localePath({
-            name: 'login'
-          }));
-        } else if (errorCode === 500) {
-          return redirect(app.localePath({
-            name: 'bugs'
-          }));
-        }
-      }
+    // 외부 API에서 에러발생시 페이지 이동없이 그대로 리턴
+    // 그렇기 때문에 각 외부 요청에서 try - catch로 잡아줘야 한다.
+    // 내부 API는 여기에서 처리하기 때문에 try - catch로 감싸지 않고 async await로만 처리하는 방향으로
+    // 구현하겠음.
+    if (error.response.config.url.indexOf('localhost:3002') === -1
+    && error.response.config.url.indexOf('907degrees') === -1)
+      return;
+
+    if (errorCode === 401) {
+      // Token 만료 등의 권한 에러시 로그인 페이지로 리다이렉트
+      redirect(app.localePath({
+        name: 'login'
+      }));
+    } else {
+      // 기타 에러시 bug 페이지로 리다이렉트
+      redirect(app.localePath({
+        name: 'bugs'
+      }));
     }
   });
 

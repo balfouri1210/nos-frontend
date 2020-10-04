@@ -14,9 +14,10 @@ export default {
 
   created() {
     if (this.error.statusCode === 404) {
+      // router.push 대신 router.replace를 썼다
       this.$router.replace(this.localePath('page-not-found'));
-    } else if (this.error.statusCode === 500) {
-      this.$router.replace(this.localePath('bugs'));
+    } else {
+      this.$router.push(this.localePath('bugs'));
     }
   }
 };
