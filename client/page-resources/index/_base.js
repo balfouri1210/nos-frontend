@@ -31,7 +31,6 @@ export default {
     if (browser === 'internet explorer')
       return redirect(app.localePath('unsupported-browser'));
 
-
     if (store.getters.getAppStatus === 'preseason') {
       return;
     } else {

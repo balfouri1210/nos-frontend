@@ -237,6 +237,43 @@
                         class="player-modal__comment"
                       >
                         <div>
+                          <!-- COMMENT ID FOR ADMIN, FAKE COMMENT VOTE -->
+                          <div
+                            v-if="$store.getters['auth/getAuthorization'] === 3"
+                            :style="{
+                              display: 'flex',
+                              alignItems: 'flex-end',
+                              marginBottom: '6px',
+                              fontSize: '13px'
+                            }"
+                          >
+                            <span 
+                              style="color: #1976d2"
+                            >{{ comment.id }}</span>
+
+                            <button
+                              style="margin-left: 16px; color: #1976d2"
+                              @click="requestFakeVotePlayerOpinion(comment, 'up')"
+                            >
+                              <v-icon style="color: #1976d2; font-size: 13px;">
+                                mdi-thumb-up
+                              </v-icon>
+                              UP
+                            </button>
+
+                            <button
+                              style="margin-left: 16px; color: #1976d2"
+                              @click="requestFakeVotePlayerOpinion(comment, 'down')"
+                            >
+                              <v-icon style="color: #1976d2; font-size: 13px;">
+                                mdi-thumb-down
+                              </v-icon>
+                              DN
+                            </button>
+                          </div>
+                          <!-- FAKE END -->
+
+
                           <div class="player-modal__comment-meta">
                             <!-- <span
                               v-if="comment.user_authorization === 3"
@@ -244,11 +281,8 @@
                             >
                               1°c
                             </span> -->
+
                             <p class="player-modal__comment-username">
-                              <span 
-                                v-if="$store.getters['auth/getAuthorization'] === 3"
-                                style="color: #1976d2"
-                              >{{ comment.id }}</span>
                               {{ comment.fake_username || comment.username }}
                             </p>
                             <p class="player-modal__comment-moment">
