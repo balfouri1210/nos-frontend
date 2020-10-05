@@ -35,7 +35,7 @@ export default function({ $axios, store, redirect, app, error }) {
       redirect(app.localePath({
         name: 'login'
       }));
-    } else {
+    } else if (errorCode === 500) {
       // 기타 에러시 bug 페이지로 리다이렉트
       redirect(app.localePath({
         name: 'bugs'

@@ -1,5 +1,8 @@
 <template>
-  <div class="about">
+  <div
+    id="about"
+    class="about"
+  >
     <!-- INTRO -->
     <div class="about__intro">
       <div class="about__title">
@@ -292,6 +295,7 @@
 export default {
   layout: 'wide',
   transition: 'fade',
+  scrollTotop: true,
 
   data() {
     return {

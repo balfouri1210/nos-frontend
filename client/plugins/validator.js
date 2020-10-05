@@ -53,7 +53,7 @@ export default function({ $axios }) {
         const isAvailable = await $axios.$get(`/api/auth/available-email/${value}`);
         return isAvailable;
       } catch (err) {
-        if (err.response.status === 400)
+        if (err.response && err.response.status === 400)
           return 'This email is already taken';
       }
     }
@@ -65,7 +65,7 @@ export default function({ $axios }) {
         const isAvailable = await $axios.$get(`/api/auth/available-username/${value}`);
         return isAvailable;
       } catch (err) {
-        if (err.response.status === 400)
+        if (err.response && err.response.status === 400)
           return 'This username is already taken';
       }
     }

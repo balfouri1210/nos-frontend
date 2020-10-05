@@ -546,6 +546,16 @@ export default {
       } finally {
         this.isCommentAdding = false;
       }
+    },
+
+    async requestFakeVotePlayerOpinion(opinion, vote) {
+      await this.$axios.$post('/api/vote/opinion/fake', {
+        targetOpinion: opinion.parent_comment_id ? 'player_reply' : 'player_comment',
+        targetOpinionId: opinion.id,
+        vote
+      });
+
+      opinion[`vote_${vote}_count`] ++;
     }
   }
 };
