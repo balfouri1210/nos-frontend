@@ -329,6 +329,6 @@ export default {
   },
 
   beforeDestroy() {
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = 'unset';
   }
 };
