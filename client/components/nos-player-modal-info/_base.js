@@ -322,5 +322,13 @@ export default {
       // this.$set(player, 'hits', player.hits + 1);
       player.hits ++;
     }
+  },
+
+  beforeCreate() {
+    document.body.style.overflow = 'scroll';
+  },
+
+  beforeDestroy() {
+    document.body.style.overflow = 'unset';
   }
 };

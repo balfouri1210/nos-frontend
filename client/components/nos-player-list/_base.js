@@ -112,11 +112,12 @@ export default {
         this.playerCommentsPreviewMapping(this.playerList, playerCommentsPreview);
       }
 
-      // 총 선수 수를 할당 (선수가 모두 로딩되었을 때, 자동 로딩을 멈추기 위한 장치)
-      if (this.$route.name.indexOf('history') === -1) {
-        this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
-      } else {
-        this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.historyId}`)).total_player_count;
+      if (this.activateLoadMore) {
+        if (this.$route.name.indexOf('history') === -1) {
+          this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
+        } else {
+          this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.historyId}`)).total_player_count;
+        }
       }
     } catch (err) {
       console.error(err);

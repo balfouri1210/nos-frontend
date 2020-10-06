@@ -27,7 +27,7 @@
               <div class="nos-player__upper">
                 <img
                   :src="player.club_image"
-                  alt="club emblem"
+                  :alt="player.club_name"
                   class="nos-player__emblem"
                 >
 
