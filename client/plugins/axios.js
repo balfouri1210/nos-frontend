@@ -26,8 +26,8 @@ export default function({ $axios, store, redirect, app, error }) {
     // 그렇기 때문에 각 외부 요청에서 try - catch로 잡아줘야 한다.
     // 내부 API는 여기에서 처리하기 때문에 try - catch로 감싸지 않고 async await로만 처리하는 방향으로
     // 구현하겠음.
-    if (error.response.config.url.indexOf('localhost:3002') === -1
-    && error.response.config.url.indexOf('907degrees') === -1)
+    if (error.response && error.response.config.url.indexOf('localhost:3002') === -1
+    && error.response && error.response.config.url.indexOf('907degrees') === -1)
       return;
 
     if (errorCode === 401) {
