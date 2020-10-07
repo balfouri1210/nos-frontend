@@ -110,10 +110,6 @@ export default {
     if (this.comments) this.commentMappingWithUiProperty(this.comments);
   },
 
-  beforeDestroy () {
-    document.removeEventListener('backbutton', this.backButtonListner);
-  },
-
   methods: {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
@@ -557,5 +553,15 @@ export default {
 
       opinion[`vote_${vote}_count`] ++;
     }
+  },
+
+  beforeCreate() {
+    if (process.client)
+      document.body.style.overflow = 'hidden';
+  },
+
+  beforeDestroy() {
+    if (process.client)
+      document.body.style.overflow = 'unset';
   }
 };

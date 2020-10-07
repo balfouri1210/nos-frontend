@@ -6,9 +6,11 @@
 /* input focus시 비정상적인 scroll 움직임을 해결하기 위해서이다. */
 html {
   height: 100%;
+  overflow-x: unset !important;
+  overflow-y: unset !important;
 }
 
 body {
   height: 100%;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
