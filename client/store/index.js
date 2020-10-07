@@ -147,7 +147,6 @@ export const actions = {
     var d = new Date();
     d.setDate(d.getDate() + (5 + 7 - d.getDay()) % 7);
     d = d.toISOString();
-    // console.log(d);
 
     let criterionTime;
     if (this.$moment.utc().day() === 5) {
@@ -172,7 +171,7 @@ export const actions = {
     } else if (now.isBefore(seasonStartMoment)) {
       // 프리시즌일 경우
       durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
-      // commit('mutateAppStatus', 'preseason');
+      commit('mutateAppStatus', 'preseason');
       commit('mutateSeasonEnd', null);
       commit('mutateSeasonStart', seasonStartMoment);
       commit('mutateDurationToEvent', durationToEvent);
