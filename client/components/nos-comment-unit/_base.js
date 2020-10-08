@@ -68,7 +68,8 @@ export default {
 
     pageIndexRange() {
       if (this.isLastBigPage) {
-        return this.totalPages % this.pagesPerLoad;
+        const result = this.totalPages % this.pagesPerLoad === 0 ? 7 : this.totalPages % this.pagesPerLoad;
+        return result;
       } else if (this.pagesPerLoad < this.totalPages) {
         return this.pagesPerLoad;
       } else {
@@ -84,6 +85,11 @@ export default {
   created() {
     this.sortType = this.initialSortType;
     this.getComments(this.initialSortType);
+  },
+
+  mounted() {
+    console.log(`total pages : ${this.totalPages}`);
+    console.log(`page index range : ${this.pageIndexRange}`);
   },
 
   methods: {
