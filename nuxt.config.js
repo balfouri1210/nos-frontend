@@ -59,6 +59,20 @@ module.exports = {
       {
         'property':  'og:image',
         'content': 'https://907degrees.com/opengraph.png'
+      },
+
+      // Twitter
+      {
+        'property': 'twitter:card',
+        'content': 'summary'
+      },
+      {
+        'property': 'twitter:site',
+        'content': '@907degrees'
+      },
+      {
+        'property': 'twitter:title',
+        'content': 'The most on fire player of the week - Leaderboard, News & Fans\' Reaction'
       }
     ],
     link: [
