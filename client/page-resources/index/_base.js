@@ -36,7 +36,7 @@ export default {
     } else {
       const wholePlayerList = await $axios.$get('/api/players', {
         params: {
-          size: 21
+          count: 21
         }
       });
       const topPlayer = wholePlayerList[0];
