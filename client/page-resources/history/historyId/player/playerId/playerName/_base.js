@@ -87,12 +87,8 @@ export default {
     }
   },
 
-  async created() {
-    try {
-      this.commentMappingWithUiProperty(this.comments);
-    } catch (err) {
-      console.error(err);
-    }
+  created() {
+    this.commentMappingWithUiProperty(this.comments);
   },
 
   methods: {
@@ -105,7 +101,6 @@ export default {
           historyId: this.$route.params.historyId
         }
       }));
-      // this.$router.go(-1);
     },
 
     commentMappingWithUiProperty(comments) {
@@ -217,23 +212,17 @@ export default {
         console.error(err);
         this.isCommentMalfunction = true;
       }
-    },
-
-    selectYoutubeVideoHandler(videoId) {
-      this.selectedYoutubeVideoId = videoId;
-      this.isYoutubePlayer = true;
     }
   },
 
-  // Body scroll lock
-  beforeRouteEnter(to, from, next) {
-    if (process.client) document.documentElement.style.overflow = 'hidden';
-    next();
+  // Scroll lock
+  beforeCreate() {
+    if (process.client)
+      document.body.style.overflow = 'hidden';
   },
-  
-  // Body scroll release
-  beforeRouteLeave(to, from ,next) {
-    if (process.client) document.documentElement.style.overflow = 'auto';
-    next();
+
+  beforeDestroy() {
+    if (process.client)
+      document.body.style.overflow = 'unset';
   }
 };

@@ -11,7 +11,11 @@ export default {
 
   async asyncData({ $axios, route, error }) {
     const [wholePlayerList, history] = await Promise.all([
-      $axios.$get(`/api/histories/player/${route.params.historyId}`),
+      $axios.$get(`/api/histories/player/${route.params.historyId}`, {
+        params: {
+          count: 21
+        }
+      }),
       $axios.$get(`/api/histories/${route.params.historyId}`)
     ]);
 
