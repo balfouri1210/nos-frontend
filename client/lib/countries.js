@@ -40,11 +40,6 @@ export default [
     'code': 'AI'
   },
   {
-    'id': 9,
-    'name': 'Antarctica',
-    'code': 'AQ'
-  },
-  {
     'id': 10,
     'name': 'Antigua and Barbuda',
     'code': 'AG'
