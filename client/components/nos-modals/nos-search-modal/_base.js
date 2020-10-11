@@ -21,8 +21,6 @@ export default {
     this.majorCountries = this.countries.filter(country => {
       return this.majorCountries.indexOf(country.id) !== -1;
     });
-
-    console.log(this.majorCountries);
   },
 
   methods: {
@@ -46,7 +44,7 @@ export default {
     },
 
     selectCountry(country) {
-      this.expendCountryList = false;
+      this.$emit('closeModal');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
