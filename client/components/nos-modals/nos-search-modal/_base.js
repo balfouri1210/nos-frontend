@@ -1,16 +1,28 @@
 import U from '@/lib/util';
 import { eplClubs } from '@/lib/constants';
+import countries from '@/lib/countries';
 
 export default {
   data() {
     return {
       searchKeyword: null,
+      expendCountryList: false,
       suggestions: [],
       isSearching: false,
 
       clubs: eplClubs,
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      nosImageUrl: process.env.NOS_IMAGE_URL,
+      countries,
+      majorCountries: [209, 250, 83, 110, 76, 178, 183, 22, 157, 233, 228, 15, 32, 238, 45, 49, 144, 11, 196, 61, 162, 4, 66, 84, 39, 55]
     };
+  },
+
+  created() {
+    this.majorCountries = this.countries.filter(country => {
+      return this.majorCountries.indexOf(country.id) !== -1;
+    });
+
+    console.log(this.majorCountries);
   },
 
   methods: {
@@ -29,6 +41,17 @@ export default {
         name: 'search-searchData',
         params: {
           searchData: `clubId_${club.id}`
+        }
+      }));
+    },
+
+    selectCountry(country) {
+      this.expendCountryList = false;
+
+      this.$router.push(this.localePath({
+        name: 'search-searchData',
+        params: {
+          searchData: `country_${country.code.toLowerCase()}-${country.id}`
         }
       }));
     },

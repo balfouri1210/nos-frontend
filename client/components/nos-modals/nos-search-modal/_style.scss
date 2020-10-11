@@ -3,13 +3,18 @@
   top: $mobile-header-height;
   left: 0;
   width: 100%;
-  // border-bottom: 1px solid #e4e4e4;
+  max-height: 600px;
+  padding: 12px 16px 18px;
   background: white;
   transition: all 0.3s ease-out;
   box-shadow: 0px 10px 8px -3px rgba(0, 0, 0, 0.15);
+  overflow: scroll;
 
   &__inner {
-    padding: 12px 16px 18px;
+    h2 {
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
   }
 
   &__clubs {
@@ -42,6 +47,75 @@
     span {
       display: none;
     }
+  }
+
+  &__country {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 4px 6px;
+    background: rgba($nos-main-theme, 0.1);
+    border: 1px solid $nos-main-theme;
+    border-radius: 6px;
+    color: $nos-main-theme;
+    font-size: 14px;
+
+    .v-icon {
+      margin-right: 4px;
+      color: $nos-main-theme;
+      font-size: 16px;
+    }
+  }
+  &__country-list {
+    margin: -8px 0 16px;
+    max-height: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: scroll;
+
+    p {
+      margin: 0;
+      padding: 8px 6px 2px;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  &__country-group {
+    display: grid;
+    padding: 6px;
+    list-style: none;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2px 0;
+  }
+  &__country-selector {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1 1 0px;
+    padding: 2px;
+    border-radius: 6px;
+
+    img {
+      width: 17px;
+      height: 12px;
+      margin-right: 6px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 2px 0px;
+    }
+
+    span {
+      display: block;
+      max-width: 120px;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+  }
+  &__country-selector:hover {
+    background: rgba($nos-main-theme, 0.1);
   }
 
   &__form {
@@ -153,11 +227,15 @@
 @media screen and (min-width: $mobile-width) {
   .nos-search-modal {
     top: $web-header-height;
+    padding: 36px 16px 56px;
 
     &__inner {
       max-width: $web-body-content-width;
       margin: 0 auto;
-      padding: 42px 16px 56px;
+
+      h2 {
+        font-size: 16px;
+      }
     }
 
     &__clubs {
@@ -185,9 +263,48 @@
       }
     }
 
+    &__country {
+      padding: 6px;
+
+      .v-icon {
+        margin-right: 8px;
+        font-size: 18px;
+      }
+    }
+    &__country-list {
+      margin: -8px 0 16px;
+      max-height: 300px;
+
+      p {
+        padding: 16px 24px 0;
+        font-size: 16px;
+      }
+    }
+    &__country-group {
+      padding: 12px 24px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 2px 0;
+    }
+    &__country-selector {
+      padding: 3px 8px;
+
+      img {
+        width: 22px;
+        height: 15px;
+        margin-right: 8px;
+      }
+  
+      span {
+        max-width: 170px;
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+  
+
     &__form {
       max-width: $web-header-content-width;
-      margin: 32px auto 0;
+      margin: 0 auto;
     }
 
     .nos-input {
@@ -215,7 +332,7 @@
         border-radius: 6px;
 
         button {
-          padding: 12px 0;
+          padding: 9px 0;
         }
       }
     }

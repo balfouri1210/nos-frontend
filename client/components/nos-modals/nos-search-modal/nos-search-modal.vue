@@ -4,6 +4,7 @@
     :class="{'nos-search-modal--preseason': $store.getters.getAppStatus === 'preseason'}"
   >
     <div class="nos-search-modal__inner">
+      <h2>Club</h2>
       <ul class="nos-search-modal__clubs">
         <li
           v-for="(club, index) in clubs"
@@ -22,6 +23,55 @@
         </li>
       </ul>
 
+      <h2>Country</h2>
+      <button
+        class="nos-search-modal__country flex-basic"
+        @click="expendCountryList = !expendCountryList"
+      >
+        <v-icon>mdi-web</v-icon>
+        Select Country
+      </button>
+
+      <div
+        v-if="expendCountryList"
+        class="nos-search-modal__country-list"
+      >
+        <p>Frequently searched countries</p>
+        <div
+          class="nos-search-modal__country-group"
+          style="border-bottom: 1px solid rgba(0, 0, 0, 0.1)"
+        >
+          <button
+            v-for="(majorCountry, majorIndex) in majorCountries"
+            :key="majorIndex"
+            class="nos-search-modal__country-selector"
+            @click="selectCountry(majorCountry)"
+          >
+            <img
+              :src="`${nosImageUrl}/flags/${majorCountry.code.toLowerCase()}.png`"
+              :alt="majorCountry.code"
+            >
+            <span>{{ majorCountry.name }}</span>
+          </button>
+        </div>
+
+        <div class="nos-search-modal__country-group">
+          <button
+            v-for="(country, index) in countries"
+            :key="index"
+            class="nos-search-modal__country-selector"
+            @click="selectCountry(country)"
+          >
+            <img
+              :src="`${nosImageUrl}/flags/${country.code.toLowerCase()}.png`"
+              :alt="country.code"
+            >
+            <span>{{ country.name }}</span>
+          </button>
+        </div>
+      </div>
+
+      <h2>Keyword</h2>
       <validation-observer v-slot="{ handleSubmit, invalid }">
         <form
           id="playerSearchForm"
