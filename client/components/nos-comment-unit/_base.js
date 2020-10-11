@@ -87,11 +87,6 @@ export default {
     this.getComments(this.initialSortType);
   },
 
-  mounted() {
-    console.log(`total pages : ${this.totalPages}`);
-    console.log(`page index range : ${this.pageIndexRange}`);
-  },
-
   methods: {
     ...mapGetters(['getJwt']),
 
