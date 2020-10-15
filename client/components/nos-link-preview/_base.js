@@ -18,27 +18,31 @@ export default {
   },
 
   async created() {
-    if (this.embedLink.indexOf('youtube.com') !== -1) {
-      this.youtubeVideoId = this.embedLink.substr(this.embedLink.indexOf('v=') + 2, 11);
-      const searchResult = await this.$axios.$get(
-        'https://www.googleapis.com/youtube/v3/videos', {
-          params: {
-            key: process.env.YOUTUBE_API_KEY,
-            part: 'status',
-            id: this.youtubeVideoId
+    try {
+      if (this.embedLink.indexOf('youtube.com') !== -1) {
+        this.youtubeVideoId = this.embedLink.substr(this.embedLink.indexOf('v=') + 2, 11);
+        const searchResult = await this.$axios.$get(
+          'https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+              key: process.env.YOUTUBE_API_KEY,
+              part: 'status',
+              id: this.youtubeVideoId
+            }
+          }
+        );
+  
+        if (searchResult && searchResult.items.length > 0) {
+          if (searchResult.items[0].status.embeddable) {
+            this.linkType = 'youtube';
+          } else {
+            this.requestMetadata(this.embedLink);
           }
         }
-      );
-
-      if (searchResult && searchResult.items.length > 0) {
-        if (searchResult.items[0].status.embeddable) {
-          this.linkType = 'youtube';
-        } else {
-          this.requestMetadata(this.embedLink);
-        }
+      } else {
+        this.requestMetadata(this.embedLink);
       }
-    } else {
-      this.requestMetadata(this.embedLink);
+    } catch (err) {
+      console.error(err);
     }
   },
 
@@ -49,8 +53,6 @@ export default {
           url: link
         }
       });
-
-      console.log(this.metaData);
 
       if (this.metaData.statusCode !== 500)
         this.setLinkType(link);
