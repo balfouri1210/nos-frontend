@@ -125,14 +125,7 @@ export default {
       comments.forEach(async (comment) => {
         try {
           let links = comment.content.match(/\bhttps?:\/\/\S+/gi);
-
-          if (links) {
-            this.$set(comment, 'linkMeta', (await this.$axios.$get('https://og-crawler.907degrees.com/link', {
-              params: {
-                url: links[0]
-              }
-            })).body);
-          }
+          if (links) this.$set(comment, 'embedLink', links[0]); 
   
           this.$set(comment, 'isReply', false);
           this.$set(comment, 'isNewReply', false);
@@ -503,11 +496,6 @@ export default {
       } finally {
         this.reportReason = null;
       }
-    },
-
-    selectYoutubeVideoHandler(videoId) {
-      this.selectedYoutubeVideoId = videoId;
-      this.isYoutubePlayer = true;
     },
 
     closeModal() {

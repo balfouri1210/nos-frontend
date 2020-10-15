@@ -105,7 +105,7 @@ export default {
     }
   },
 
-  async created() {
+  async mounted() {
     try {
       if (this.needPlayerCommentsPreview) {
         const playerCommentsPreview = await this.getPlayerCommentsPreview(this.playerList);

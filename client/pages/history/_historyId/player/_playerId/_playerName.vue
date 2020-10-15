@@ -144,6 +144,13 @@
                               :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
                               v-html="$options.filters.commentFormatter(comment.content)"
                             />
+
+                            <!-- Link Preview -->
+                            <nos-link-preview
+                              v-if="comment.embedLink"
+                              style="margin: 8px 0 10px 0;"
+                              :embed-link="comment.embedLink"
+                            />
                           </div>
                         </div>
 

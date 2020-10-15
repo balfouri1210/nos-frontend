@@ -1,0 +1,85 @@
+import U from '@/lib/util';
+
+export default {
+  props: {
+    embedLink: {
+      type: String,
+      default: ''
+    }
+  },
+
+  data() {
+    return {
+      linkType: null,
+      metaData: {},
+      youtubeVideoId: null,
+      expanded: false
+    };
+  },
+
+  async created() {
+    if (this.embedLink.indexOf('youtube.com') !== -1) {
+      this.youtubeVideoId = this.embedLink.substr(this.embedLink.indexOf('v=') + 2, 11);
+      const searchResult = await this.$axios.$get(
+        'https://www.googleapis.com/youtube/v3/videos', {
+          params: {
+            key: process.env.YOUTUBE_API_KEY,
+            part: 'status',
+            id: this.youtubeVideoId
+          }
+        }
+      );
+
+      if (searchResult && searchResult.items.length > 0) {
+        if (searchResult.items[0].status.embeddable) {
+          this.linkType = 'youtube';
+        } else {
+          this.requestMetadata(this.embedLink);
+        }
+      }
+    } else {
+      this.requestMetadata(this.embedLink);
+    }
+  },
+
+  methods: {
+    async requestMetadata(link) {
+      this.metaData = await this.$axios.$get('https://og-crawler.907degrees.com/link', {
+        params: {
+          url: link
+        }
+      });
+
+      console.log(this.metaData);
+
+      if (this.metaData.statusCode !== 500)
+        this.setLinkType(link);
+    },
+
+    setLinkType(link) {
+      if (link.indexOf('instagram.com') !== -1) {
+        this.linkType = 'instagram';
+      } else if (link.indexOf('twitter.com') !== -1) {
+        this.linkType = 'twitter';
+      } else {
+        this.linkType = 'normal';
+      }
+    },
+
+    renderEmbedLink() {
+      this.expanded = true;
+
+      if (this.linkType === 'instagram') {
+        setTimeout(() => {
+          window.instgrm.Embeds.process();
+        }, 10);
+      } else if (this.linkType === 'twitter') {
+        window.twttr.widgets.load();
+      }
+    },
+
+    isEmpty(obj) {
+      return U.isEmpty(obj, true);
+    }
+  }
+};

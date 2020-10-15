@@ -1,138 +1,139 @@
 <template>
-  <a
-    class="link-preview"
-    :href="meta.url"
-    target="_blank"
-  >
-    <div class="link-preview__text">
-      <p class="link-preview__title">
-        <img
-          v-if="meta.icon"
-          :src="meta.icon"
-        >
-        <span v-if="meta.title">{{ meta.title }}</span>
-        <span v-else>{{ meta.provider }} Content</span>
-      </p>
-      <p class="link-preview__desc">
-        {{ meta.description }}
-      </p>
+  <div v-if="!isEmpty(metaData) || linkType === 'youtube'">
+    <!-- Instagram -->
+    <div v-if="linkType === 'instagram'">
+      <div
+        v-if="expanded"
+        class="link-preview__embed"
+      >
+        <div
+          v-html="metaData.html"
+        />
+      </div>
+
+      <div
+        v-else
+        class="link-preview__instagram"
+      >
+        <div
+          class="link-preview__instagram-thumbnail"
+          :style="{
+            backgroundImage: `url(${metaData.thumbnail_url})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center'
+          }"
+        />
+
+        <div class="flex-basic">
+          <div class="link-preview__instagram-text">
+            <p>This is {{ metaData.author_name }}'s instagram post</p>
+            <p>You can preview this post via the expand button</p>
+          </div>
+
+          <button
+            class="link-preview__instagram-expand-btn"
+            @click="renderEmbedLink"
+          >
+            <img
+              class="icon"
+              src="/icons/instagram.png"
+              alt="instagram"
+            >
+            <span>Click to<br>Expand</span>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="link-preview__image">
-      <img
-        v-if="meta.image"
-        :src="meta.image"
+
+    <!-- Twitter -->
+    <div v-else-if="linkType === 'twitter'">
+      <div
+        class="link-preview__twitter"
+        :class="{ 'link-preview__twitter-expanded': expanded }"
       >
+        <div v-html="metaData.html" />
+
+        <button
+          v-if="!expanded"
+          class="link-preview__twitter-expand-btn"
+          @click="renderEmbedLink"
+        >
+          <img
+            class="icon"
+            src="/icons/twitter.png"
+            alt="twitter"
+          >
+          <span>Click to<br>Expand</span>
+        </button>
+      </div>
     </div>
-  </a>
+
+
+    <!-- Youtube -->
+    <div
+      v-else-if="linkType === 'youtube'"
+      class="video-container"
+    >
+      <iframe
+        width="560"
+        height="315"
+        :src="`https://www.youtube.com/embed/${youtubeVideoId}?origin=https://907degrees.com`"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    </div>
+
+
+    <!-- Normal -->
+    <div
+      v-else
+      class="link-preview"
+    >
+      <a
+        :href="embedLink"
+        target="_blank"
+        class="link-preview__link"
+      >
+        <!-- Normal -->
+        <div class="flex-space-between">
+          <div class="link-preview__text">
+            <div class="link-preview__title">
+              <img
+                v-if="metaData.icon"
+                :src="metaData.icon"
+              >
+              <span v-if="metaData.title">{{ metaData.title }}</span>
+              <span v-else>{{ metaData.provider }} Content</span>
+            </div>
+
+            <p class="link-preview__desc">
+              {{ metaData.description }}
+            </p>
+          </div>
+
+          <div class="link-preview__image">
+            <img
+              v-if="metaData.image"
+              :src="metaData.image"
+            >
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
+import Base from './_base';
+
 export default {
-  props: {
-    meta: {
-      type: Object,
-      default: () => {}
-    }
-  }
+  mixins: [Base]
 };
 </script>
 
 <style lang="scss" scoped>
-.link-preview {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  padding: 2px 12px 2px 14px;
-
-  &__title,
-  &__desc {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__text {
-    flex: 60;
-    margin-right: 12px;
-  }
-  &__title {
-    font-weight: 400;
-
-    img {
-      height: 20px;
-      margin-right: 5px;
-      vertical-align: middle;
-    }
-
-    span {
-      font-size: 13px;
-      vertical-align: middle;
-    }
-  }
-  &__desc {
-    margin-top: 4px;
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 18px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  &__image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 37;
-
-    img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 6px;
-    }
-  }
-}
-
-.link-preview::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  content: "";
-}
-
-@media screen and (min-width: $mobile-width) {
-  .link-preview {
-    padding: 2px 16px;
-
-    &__text {
-      flex: 70;
-    }
-
-    &__title {
-      span {
-        font-size: 14px;
-      }
-    }
-
-    &__desc {
-      font-size: 13px;
-    }
-
-    &__image {
-      flex: 30;
-      max-width: 154px;
-    }
-  }
-
-  .link-preview::before {
-    left: -2px;
-  }
-}
+@import './_style.scss';
 </style>

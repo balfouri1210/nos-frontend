@@ -6,6 +6,7 @@ import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
 import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player.vue';
 import nosLinkShare from '@/components/nos-link-share/nos-link-share.vue';
+import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
 
 export default {
   components: {
@@ -14,7 +15,8 @@ export default {
     nosNewsArea,
     nosYoutubeArea,
     nosYoutubePlayer,
-    nosLinkShare
+    nosLinkShare,
+    nosLinkPreview
   },
 
   async asyncData({ $axios, error, params }) {
@@ -104,17 +106,24 @@ export default {
     },
 
     commentMappingWithUiProperty(comments) {
-      comments.forEach(comment => {
-        this.$set(comment, 'isReply', false);
-        this.$set(comment, 'replies', []);
-        this.$set(comment, 'isRepliesLoaded', false);
+      comments.forEach(async (comment) => {
+        try {
+          let links = comment.content.match(/\bhttps?:\/\/\S+/gi);
+          if (links) this.$set(comment, 'embedLink', links[0]);
 
-        this.$set(
-          comment,
-          'needReadMore',
-          this.isNewLineExceed(comment.content)
-        );
-        this.$set(comment, 'expanded', false);
+          this.$set(comment, 'isReply', false);
+          this.$set(comment, 'replies', []);
+          this.$set(comment, 'isRepliesLoaded', false);
+  
+          this.$set(
+            comment,
+            'needReadMore',
+            this.isNewLineExceed(comment.content)
+          );
+          this.$set(comment, 'expanded', false);
+        } catch (err) {
+          console.error(err);
+        }
       });
     },
 

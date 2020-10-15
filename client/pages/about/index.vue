@@ -303,7 +303,7 @@ export default {
     };
   },
 
-  mounted() {
+  async mounted() {
     if (this.$route.hash === '#community-guide')
       this.$scrollTo('#community-guide', 300, { offset: -120 });
   },

@@ -6,7 +6,11 @@
 export default {
   async asyncData({ $axios, error, params }) {
     function getPlayer() {
-      return $axios.$get(`/api/players/${params.playerId}`);
+      return $axios.$get(`/api/players/${params.playerId}`, {
+        params: {
+          playerName: params.playerName
+        }
+      });
     }
 
     function getComments() {

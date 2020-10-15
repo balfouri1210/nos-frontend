@@ -305,9 +305,9 @@
 
                             <!-- Link Preview -->
                             <nos-link-preview
-                              v-if="comment.linkMeta"
-                              style="margin: 8px 0 10px 8px;"
-                              :meta="comment.linkMeta"
+                              v-if="comment.embedLink"
+                              :embed-link="comment.embedLink"
+                              style="margin: 8px 0 10px 0;"
                             />
 
                             <!-- Comment more menu -->
