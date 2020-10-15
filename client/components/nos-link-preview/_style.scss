@@ -92,6 +92,9 @@
   }
 
   &__twitter {
+    display: flex;
+    align-items: center;
+    min-height: 62px;
     padding: 0 68px 0 14px;
 
     ::v-deep .twitter-tweet {
@@ -206,7 +209,8 @@
     }
 
     &__twitter {
-      padding: 0 88px 0 18px;
+    min-height: 72px;
+    padding: 0 88px 0 18px;
 
       ::v-deep .twitter-tweet {
         font-size: 13px;

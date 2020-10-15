@@ -17,7 +17,7 @@ export default {
     };
   },
 
-  async created() {
+  async mounted() {
     try {
       if (this.embedLink.indexOf('youtube.com') !== -1) {
         this.youtubeVideoId = this.embedLink.substr(this.embedLink.indexOf('v=') + 2, 11);
