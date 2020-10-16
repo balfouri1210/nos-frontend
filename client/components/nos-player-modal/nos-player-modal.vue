@@ -306,6 +306,7 @@
                             <!-- Link Preview -->
                             <nos-link-preview
                               v-if="comment.embedLink"
+                              :key="linkPreviewResetKey"
                               :embed-link="comment.embedLink"
                               style="margin: 8px 0 10px 0;"
                             />

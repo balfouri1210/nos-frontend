@@ -52,6 +52,7 @@ export default {
       isMoreCommentsLoading: false,
       isCommentAdding: false,
       isCommentMalfunction: false,
+      linkPreviewResetKey: 0,
 
       isRequestLoginPopup: false,
       nosImageUrl: process.env.NOS_IMAGE_URL,
@@ -154,6 +155,7 @@ export default {
         this.newCommentContent = '';
         this.player.comment_count ++;
         this.$refs.addCommentRef.reset();
+        this.linkPreviewResetKey ++;
       } catch (err) {
         this.isCommentMalfunction = true;
       } finally {
@@ -208,6 +210,7 @@ export default {
         });
         if (idx > -1) this.comments.splice(idx, 1);
         this.player.comment_count --;
+        this.linkPreviewResetKey ++;
       } catch (err) {
         console.error(err);
         this.isCommentMalfunction = true;

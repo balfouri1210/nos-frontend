@@ -38,9 +38,10 @@
             <img
               class="icon"
               src="/icons/instagram.png"
+              style="padding: 1px;"
               alt="instagram"
             >
-            <span>Click to<br>Expand</span>
+            <span>Expand<br>Post</span>
           </button>
         </div>
       </div>
@@ -65,7 +66,7 @@
             src="/icons/twitter.png"
             alt="twitter"
           >
-          <span>Click to<br>Expand</span>
+          <span>Expand<br>Post</span>
         </button>
       </div>
     </div>
