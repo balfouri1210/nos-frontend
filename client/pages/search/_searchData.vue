@@ -34,6 +34,10 @@
           </div>
         </div>
 
+        <div v-else-if="targetClubIdList">
+          <span>Search result</span>
+        </div>
+
         <div
           v-if="!isEmpty(targetClub)"
           class="search__fixtures-area"

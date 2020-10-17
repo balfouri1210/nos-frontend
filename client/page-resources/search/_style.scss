@@ -77,6 +77,10 @@
     h2 { font-size: 24px; margin-bottom: 24px; }
     p { font-size: 14px; font-weight: 300; }
   }
+
+  ::v-deep .nos-fixture-stat {
+    width: 180%;
+  }
 }
 
 @media screen and (min-width: $mobile-width) {

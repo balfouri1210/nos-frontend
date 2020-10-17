@@ -220,6 +220,33 @@
                   <span v-if="fixture.statusShort === 'PST'">Match Postponed</span>
                   <span v-else>{{ $moment.unix(fixture.event_timestamp).format('HH:mm') }}, {{ fixture.venue || fixture.round }}</span>
                 </p>
+
+                <div style="margin-top: 8px;">
+                  <button
+                    class="home__fixture-players"
+                    @click="goToFixturePlayers(fixture)"
+                  >
+                    Players
+                  </button>
+
+                  <button
+                    v-if="fixture.status === 'Match Finished'"
+                    class="home__fixture-stat"
+                    :class="{'home__fixture-stat--activate': fixture.showFixtureInfo}"
+                    @click="fixture.showFixtureInfo = !fixture.showFixtureInfo"
+                  >
+                    Details <v-icon>mdi-chevron-down</v-icon>
+                  </button>
+                </div>
+
+                <transition
+                  v-if="fixture.showFixtureInfo"
+                  name="fade"
+                >
+                  <nos-fixture-stat
+                    :fixture="fixture"
+                  />
+                </transition>
               </div>
             </div>
 
@@ -230,6 +257,8 @@
               No fixture
             </div>
           </div>
+
+
 
           <!-- LEAGUE TABLE AREA -->
           <div

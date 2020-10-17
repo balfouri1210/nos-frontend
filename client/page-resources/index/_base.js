@@ -8,6 +8,7 @@ import { apiFootballRequestHeader, apiFootballLeagueId } from '@/lib/constants';
 import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
 import nosLandingCommentArea from '@/components/nos-landing-comment-area/nos-landing-comment-area.vue';
 import { eplClubs } from '@/lib/constants';
+import nosFixtureStat from '@/components/nos-fixture-stat/nos-fixture-stat.vue';
 
 export default {
   layout: 'wide',
@@ -19,7 +20,8 @@ export default {
     nosPreseasonUi,
     nosOnboardingUi,
     nosMainEvent,
-    nosLandingCommentArea
+    nosLandingCommentArea,
+    nosFixtureStat
   },
 
   fetch({ store }) {
@@ -132,6 +134,10 @@ export default {
       try {
         this.fixtures =
           (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
+
+        this.fixtures.forEach((fixture) => {
+          this.$set(fixture, 'showFixtureInfo', false);
+        });
       } catch (err) {
         console.error(err);
       } finally {
@@ -186,6 +192,20 @@ export default {
         name: 'search-searchData',
         params: {
           searchData: `clubId_${selectedClub.nos_team_id}`
+        }
+      }));
+    },
+
+    goToFixturePlayers(fixture) {
+      const result = eplClubs
+        .filter(club => club.api_football_team_id === fixture.homeTeam.team_id || club.api_football_team_id === fixture.awayTeam.team_id)
+        .map(item => item.id)
+        .join(',');
+
+      this.$router.push(this.localePath({
+        name: 'search-searchData',
+        params: {
+          searchData: `clubIdList_${result}`
         }
       }));
     }
