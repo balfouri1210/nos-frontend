@@ -28,8 +28,9 @@ export default {
   data() {
     return {
       searchKeyword: null,
-      targetClub: {},
       targetCountry: {},
+      targetClub: {},
+      targetClubIdList: null,
 
       targetPlayer: {},
       targetPlayerComments: [],
@@ -45,12 +46,15 @@ export default {
   created() {
     if (this.$route.params.searchData) {
       const [searchTarget, searchData] = this.$route.params.searchData.split('_');
+
       if (searchTarget === 'keyword') {
         this.searchKeyword = searchData;
       } else if (searchTarget === 'country') {
         this.setTargetCountry(searchData);
       } else if (searchTarget === 'clubId') {
         this.setTargetClub(searchData);
+      } else if (searchTarget === 'clubIdList') {
+        this.targetClubIdList = searchData;
       }
     }
 
@@ -65,8 +69,9 @@ export default {
           this.$axios.$get('/api/search', {
             params: {
               keyword: this.searchKeyword,
+              countryId: this.targetCountry.id,
               clubId: this.targetClub.id,
-              countryId: this.targetCountry.id
+              clubIdList: this.targetClubIdList
             }
           })
         ]);

@@ -86,14 +86,6 @@
         :need-player-comments-preview="true"
       />
 
-      <nos-player-list
-        :top-player-score="parseInt(topPlayer.score)"
-        :player-list-prop="high4Players"
-        :need-player-comments-preview="true"
-      />
-
-      <nos-landing-comment-area />
-
       <div class="home__info">
         <div class="home__info-menus">
           <button
@@ -299,6 +291,14 @@
           </div>
         </div>
       </div>
+
+      <nos-player-list
+        :top-player-score="parseInt(topPlayer.score)"
+        :player-list-prop="high4Players"
+        :need-player-comments-preview="true"
+      />
+
+      <nos-landing-comment-area />
 
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"

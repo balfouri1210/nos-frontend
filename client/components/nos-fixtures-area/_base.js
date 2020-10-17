@@ -1,4 +1,5 @@
 import { eplClubs, apiFootballRequestHeader } from '@/lib/constants';
+import nosFixtureStat from '@/components/nos-fixture-stat/nos-fixture-stat.vue';
 
 export default {
   props: {
@@ -13,6 +14,10 @@ export default {
     }
   },
 
+  components: {
+    nosFixtureStat
+  },
+
   data() {
     return {
       lastFixture: null,
@@ -23,7 +28,6 @@ export default {
 
       lastFixtureInfo: null,
       lastFixtureEvents: null,
-      getLastFixtureInfoFailed: false,
       showLastFixtureInfoLoaded: false
     }; 
   },
@@ -46,7 +50,7 @@ export default {
             this.getLastFixture(targetClub.api_football_team_id),
             this.getNextFixture(targetClub.api_football_team_id)
           ]);
-    
+
         this.lastFixture = this.lastFixture.api.fixtures[0];
         this.nextFixture = this.nextFixture.api.fixtures[0];
         this.areFixturesLoaded = true;
@@ -65,54 +69,18 @@ export default {
       return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`, apiFootballRequestHeader);
     },
 
-    async getLastFixtureInfo() {
-      try {
-        if (this.showLastFixtureInfo) {
-          this.showLastFixtureInfo = false;
-        } else {
-          this.showLastFixtureInfo = true;
-          // 한번 로드되면 닫고 다시 열더라도 기존에 로드된 정보 보여주기 (api request 감소)
-          if (this.showLastFixtureInfoLoaded) return;
+    goToFixturePlayers(fixture) {
+      const result = eplClubs
+        .filter(club => club.api_football_team_id === fixture.homeTeam.team_id || club.api_football_team_id === fixture.awayTeam.team_id)
+        .map(item => item.id)
+        .join(',');
 
-          const [lastFixtureInfo, lastFixtureEvents]
-            = await Promise.all([
-              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/statistics/fixture/${this.lastFixture.fixture_id}`, apiFootballRequestHeader),
-              this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/events/${this.lastFixture.fixture_id}`, apiFootballRequestHeader)
-            ]);
-
-          this.lastFixtureInfo = lastFixtureInfo.api.statistics;
-          this.lastFixtureEvents = this.fixtureEventsManipulate(lastFixtureEvents);
-
-          this.showLastFixtureInfoLoaded = true;
+      this.$router.push(this.localePath({
+        name: 'search-searchData',
+        params: {
+          searchData: `clubIdList_${result}`
         }
-      } catch (err) {
-        console.error(err);
-        this.showLastFixtureInfoLoaded = true;
-        this.getLastFixtureInfoFailed = true;
-      }
-    },
-
-    totalPropertyCountOfFixture(property) {
-      if (this.showLastFixtureInfo)
-        return parseInt(this.lastFixtureInfo[property].home) + parseInt(this.lastFixtureInfo[property].away);
-    },
-
-    fixtureEventsManipulate(events) {
-      let result = events.api.events.filter(event => {
-        return event.type === 'Goal';
-      });
-
-      if (result.length > 0) {
-        result.forEach(event => {
-          event.splitted_name = event.player.split(' ');
-          eplClubs.forEach(club => {
-            if (event.team_id === club.api_football_team_id)
-              event.nos_club_id = club.id;
-          });
-        });
-      }
-
-      return result;
+      }));
     },
 
     watchOnYoutube(homeTeam, awayTeam) {

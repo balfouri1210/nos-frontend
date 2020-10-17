@@ -9,8 +9,8 @@
 
   &__info {
     max-width: $web-body-content-width;
-    margin: 0 auto;
-    margin: 4px;
+    padding: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &__info-menus {
@@ -233,7 +233,8 @@
     }
 
     &__info {
-      margin: 0 auto;
+      margin: 16px auto 0;
+      border: 0;
     }
     &__info-selector {
       height: 38px;
