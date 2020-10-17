@@ -656,9 +656,10 @@
                           <p class="player-modal__added-reply-username">
                             {{ comment.addedReply.username }}
                           </p>
-                          <p class="player-modal__added-reply-content">
-                            {{ $options.filters.commentFormatter(comment.addedReply.content) }}
-                          </p>
+                          <p
+                            class="player-modal__added-reply-content"
+                            v-html="$options.filters.commentFormatter(comment.addedReply.content)"
+                          />
                         </div>
                       </div>
                     </li>
