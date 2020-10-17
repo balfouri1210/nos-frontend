@@ -34,17 +34,6 @@
                 </p>
                 <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
               </div>
-
-              <!-- <p
-                class="fixture__type"
-                :class="{
-                  'cup': lastFixture.league.name === 'League Cup',
-                  'fa': lastFixture.league.name === 'FA Cup',
-                  'epl': lastFixture.league.name === 'Premier League',
-                  'uel': lastFixture.league.name === 'UEFA Europa League',
-                  'ucl': lastFixture.league.name === 'UEFA Champions League'
-                }"
-              >{{ lastFixture.league.name }}</p> -->
             </div>
 
             <div class="fixture__vs">

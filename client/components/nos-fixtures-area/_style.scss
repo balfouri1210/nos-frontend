@@ -64,24 +64,12 @@
       font-weight: 300;
       color: rgba(0, 0, 0, 0.5);
     }
-    &__type, &__live {
+    &__live {
       display: inline-block;
       padding: 0.5px 4px;
       border-radius: 8px;
       font-size: 11px;
       line-height: 11px;
-    }
-    .fa {
-      border: 1px solid #6aade1;
-      background: rgba(#6aade1, 0.1);
-      color: #6aade1;
-    }
-    .epl {
-      border: 1px solid #4d033d;
-      background: rgba(#4d033d, 0.1);
-      color: #4d033d;
-    }
-    &__live {
       border: 1px solid $nos-main-theme;
       background: rgba($nos-main-theme, 0.1);
       color: $nos-main-theme;
