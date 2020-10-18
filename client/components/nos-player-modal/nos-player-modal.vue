@@ -117,7 +117,7 @@
                       v-model="newCommentContent"
                       cols="30"
                       rows="2"
-                      :rules="'required|newline_limit:10|min:10|max:200'"
+                      :rules="'required|newline_limit:10|min:5|max:200'"
                       :max-length="200"
                       :placeholder="`How was ${player.known_as} this week?`"
                       @textareaVal="newCommentContent = $event"
@@ -361,7 +361,7 @@
                           >
                             <validation-provider
                               v-slot="{ errors, invalid }"
-                              :rules="'required|max:200|newline_limit:10'"
+                              :rules="'required|min:5|max:200|newline_limit:10'"
                               name="comment"
                             >
                               <textarea
