@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      v-if="isFixtureRender"
+      v-if="areFixturesLoaded && this.$store.getters['auth/getAuthorization'] !== 3"
       class="fixture-area"
     >
       <div
@@ -16,7 +16,6 @@
         <div
           v-if="lastFixture"
           class="fixture-wrapper"
-          :style="{marginRight: '4px'}"
         >
           <div class="fixture">
             <div class="fixture__header flex-basic">
@@ -67,7 +66,7 @@
               style="margin-bottom: 4px;"
               @click="goToFixturePlayers(lastFixture)"
             >
-              Players
+              Search by Club
             </button>
 
             <button
@@ -87,6 +86,13 @@
               :fixture="lastFixture"
             />
           </transition>
+        </div>
+
+        <div
+          v-else-if="!lastFixture"
+          class="fixture-wrapper fixture-empty"
+        >
+          <p>Sorry, looks like we’re having some issues :( Please try again after a while.</p>
         </div>
 
 
@@ -137,7 +143,7 @@
               style="margin-bottom: 4px;"
               @click="goToFixturePlayers(nextFixture)"
             >
-              Players
+              Search by Club
             </button>
 
             <p class="fixture__detail">

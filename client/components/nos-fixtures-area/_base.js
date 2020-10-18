@@ -32,12 +32,6 @@ export default {
     }; 
   },
 
-  computed: {
-    isFixtureRender() {
-      return this.areFixturesLoaded && this.$store.getters['auth/getAuthorization'] !== 3;
-    }
-  },
-
   async created() {
     const targetClub = eplClubs.filter(club => {
       return club.id === this.clubId;
@@ -51,12 +45,16 @@ export default {
             this.getNextFixture(targetClub.api_football_team_id)
           ]);
 
-        this.lastFixture = this.lastFixture.api.fixtures[0];
-        this.nextFixture = this.nextFixture.api.fixtures[0];
-        this.areFixturesLoaded = true;
+        if (this.lastFixture)
+          this.lastFixture = this.lastFixture.api.fixtures[0];
+
+        if (this.nextFixture)
+          this.nextFixture = this.nextFixture.api.fixtures[0];
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      this.areFixturesLoaded = true;
     }
   },
 
