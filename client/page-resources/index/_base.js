@@ -29,24 +29,29 @@ export default {
   },
 
   async asyncData({ $axios, error, store, $ua, redirect, app }) {
-    const browser = $ua.browser().toLowerCase();
-    if (browser === 'internet explorer')
-      return redirect(app.localePath('unsupported-browser'));
+    try {
+      const browser = $ua.browser().toLowerCase();
+      if (browser === 'internet explorer')
+        return redirect(app.localePath('unsupported-browser'));
 
-    if (store.getters.getAppStatus === 'preseason') {
-      return;
-    } else {
-      const wholePlayerList = await $axios.$get('/api/players', {
-        params: {
-          count: 21
-        }
-      });
-      const topPlayer = wholePlayerList[0];
+      if (store.getters.getAppStatus === 'preseason') {
+        return;
+      } else {
+        const wholePlayerList = await $axios.$get('/api/players', {
+          params: {
+            count: 21
+          }
+        });
+        const topPlayer = wholePlayerList[0];
 
-      const high4Players = wholePlayerList.slice(1, 5);
-      const high8Players = wholePlayerList.slice(5, 13);
-      const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
-      return { topPlayer, high4Players, high8Players, restOfPlayers };
+        const high4Players = wholePlayerList.slice(1, 5);
+        const high8Players = wholePlayerList.slice(5, 13);
+        const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
+        return { topPlayer, high4Players, high8Players, restOfPlayers };
+      }
+    } catch (err) {
+      console.error(err);
+      error({ statusCode: 400 });
     }
   },
 
@@ -64,6 +69,7 @@ export default {
       isTableLoading: false,
       selectedLeague: 'pl',
       fixtures: [],
+      getFixturesFailed: false,
 
       leagueTable: []
     };
@@ -134,6 +140,11 @@ export default {
       try {
         this.fixtures =
           (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
+
+        if (!this.fixtures) {
+          this.getFixturesFailed = true;
+          return;
+        }
 
         this.fixtures.forEach((fixture) => {
           this.$set(fixture, 'showFixtureInfo', false);

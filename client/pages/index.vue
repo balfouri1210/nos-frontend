@@ -154,9 +154,15 @@
               </div>
             </div>
 
+            <div
+              v-if="getFixturesFailed"
+              class="home__no-fixture"
+            >
+              <p>Sorry, looks like we’re having some issues :( Please try again after a while.</p>
+            </div>
 
             <div
-              v-if="!isFixturesLoading && fixtures.length > 0"
+              v-else-if="!isFixturesLoading && fixtures.length > 0"
               class="home__fixtures"
               :class="{
                 'home__fixtures-grid-1': fixtures.length === 1,
@@ -226,11 +232,11 @@
                     class="home__fixture-players"
                     @click="goToFixturePlayers(fixture)"
                   >
-                    Players
+                    Search by Club
                   </button>
 
                   <button
-                    v-if="fixture.status === 'Match Finished'"
+                    v-if="fixture.status !== 'Not Started'"
                     class="home__fixture-stat"
                     :class="{'home__fixture-stat--activate': fixture.showFixtureInfo}"
                     @click="fixture.showFixtureInfo = !fixture.showFixtureInfo"
@@ -251,7 +257,7 @@
             </div>
 
             <div
-              v-if="!isFixturesLoading && fixtures.length === 0"
+              v-else-if="!isFixturesLoading && fixtures.length === 0"
               class="home__no-fixture"
             >
               No fixture
