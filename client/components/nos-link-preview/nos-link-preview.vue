@@ -7,6 +7,7 @@
         class="link-preview__embed"
       >
         <div
+          style="width: 100%"
           v-html="metaData.html"
         />
       </div>
@@ -54,7 +55,10 @@
         class="link-preview__twitter"
         :class="{ 'link-preview__twitter-expanded': expanded }"
       >
-        <div v-html="metaData.html" />
+        <div
+          style="width: 100%"
+          v-html="metaData.html"
+        />
 
         <button
           v-if="!expanded"
