@@ -252,7 +252,7 @@
   ::v-deep .nos-fixture-stat {
     width: 90%;
     position: absolute;
-    top: 160px;
+    top: 158px;
     left: 50%;
     transform: translate(-50%, 0);
   }
@@ -353,8 +353,8 @@
     }
 
     ::v-deep .nos-fixture-stat {
+      top: 182px;
       width: 95%;
-      top: 190px;
     }
   }
 }
