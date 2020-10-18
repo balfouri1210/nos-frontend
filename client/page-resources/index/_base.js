@@ -136,6 +136,7 @@ export default {
 
     async getFixturesByLeagueId(leagueId) {
       this.fixtures = [];
+      this.getFixturesFailed = false;
       this.isFixturesLoading = true;
 
       try {
