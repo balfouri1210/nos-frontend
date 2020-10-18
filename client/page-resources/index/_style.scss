@@ -191,8 +191,10 @@
     padding: 24px 12px;
     border: 1px solid #eaeaea;
     border-radius: 6px;
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.5);
     text-align: center;
+    font-size: 12px;
+    font-weight: 300;
   }
 
 
@@ -322,8 +324,12 @@
     &__fixtures-grid-3 { grid-template-columns: repeat(3, 1fr); }
 
     &__fixture-players, &__fixture-stat {
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       font-size: 13px;
+    }
+
+    &__no-fixture {
+      font-size: 14px;
     }
 
 
@@ -348,7 +354,7 @@
 
     ::v-deep .nos-fixture-stat {
       width: 95%;
-      top: 184px;
+      top: 190px;
     }
   }
 }

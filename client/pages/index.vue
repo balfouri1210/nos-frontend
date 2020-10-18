@@ -158,7 +158,14 @@
               v-if="getFixturesFailed"
               class="home__no-fixture"
             >
-              <p>Sorry, looks like we’re having some issues :( Please try again after a while.</p>
+              Sorry, looks like we’re having some issues :(<br>Please try again after a while.
+            </div>
+
+            <div
+              v-else-if="!isFixturesLoading && !fixtures"
+              class="home__no-fixture"
+            >
+              No fixture
             </div>
 
             <div
@@ -254,13 +261,6 @@
                   />
                 </transition>
               </div>
-            </div>
-
-            <div
-              v-else-if="!isFixturesLoading && fixtures.length === 0"
-              class="home__no-fixture"
-            >
-              No fixture
             </div>
           </div>
 

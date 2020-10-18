@@ -135,22 +135,22 @@ export default {
     },
 
     async getFixturesByLeagueId(leagueId) {
+      this.fixtures = [];
       this.isFixturesLoading = true;
 
       try {
         this.fixtures =
           (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
 
-        if (!this.fixtures) {
-          this.getFixturesFailed = true;
-          return;
-        }
+        if (!this.fixtures) return;
 
+        // detail info variable setting
         this.fixtures.forEach((fixture) => {
           this.$set(fixture, 'showFixtureInfo', false);
         });
       } catch (err) {
         console.error(err);
+        this.getFixturesFailed = true;
       } finally {
         this.isFixturesLoading = false;
       }
