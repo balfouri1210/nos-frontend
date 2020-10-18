@@ -20,6 +20,7 @@ export default {
         break;
 
       case 'u003':
+      default:
         isAccountActivationFailed = true;
         break;
       }
