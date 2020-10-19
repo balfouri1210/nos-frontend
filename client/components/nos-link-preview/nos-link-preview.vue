@@ -2,6 +2,7 @@
   <div v-if="!isEmpty(metaData) || linkType === 'youtube'">
     <!-- Instagram -->
     <div v-if="linkType === 'instagram'">
+      <h2>{{ expanded }}</h2>
       <div
         v-if="expanded"
         class="link-preview__embed"
@@ -56,8 +57,15 @@
         :class="{ 'link-preview__twitter-expanded': expanded }"
       >
         <div
+          v-if="expanded"
           style="width: 100%"
           v-html="metaData.html"
+        />
+
+        <div
+          v-if="!expanded"
+          style="width: 100%"
+          v-html="metaData.manipulatedHtml"
         />
 
         <button
