@@ -55,6 +55,15 @@
     background: rgba(white, 0.3) !important;
   }
 
+  &__desc {
+    background: rgba(0, 0, 0, 0.92);
+    padding: 6px 8px;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+  }
+
   &__empty {
     top: 55%;
     width: 85%;
@@ -201,6 +210,11 @@
 
     &__month {
       height: 44px;
+    }
+
+    &__desc {
+      padding: 14px;
+      font-size: 14px;
     }
 
     &__empty {

@@ -1,5 +1,9 @@
 <template>
   <div class="histories">
+    <div class="histories__desc">
+      <p>This is a page where you can check the past rankings. Select month and click on each section to see detailed rankings and fan reactions of the time.</p>
+    </div>
+
     <div class="histories__header">
       <div class="histories__year">
         <button
