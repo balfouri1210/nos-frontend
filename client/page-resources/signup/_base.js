@@ -23,9 +23,9 @@ export default {
 
   methods: {
     async onSubmit() {
-      this.signupFormSubmitting = true;
-
       try {
+        this.signupFormSubmitting = true;
+
         await this.$axios.$post('/api/users', {
           ...this.userInfo,
           birth: this.$moment(this.userInfo.birth).format('YYYYMMDD')

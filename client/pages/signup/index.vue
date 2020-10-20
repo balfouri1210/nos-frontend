@@ -129,8 +129,7 @@
             <button
               type="submit"
               class="nos-basic-btn"
-              :disabled="invalid"
-              @click="signupFormSubmitting = true"
+              :disabled="pending || invalid || signupFormSubmitting"
             >
               <v-progress-circular
                 v-if="signupFormSubmitting"
