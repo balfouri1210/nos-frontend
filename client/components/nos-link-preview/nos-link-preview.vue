@@ -2,7 +2,6 @@
   <div v-if="!isEmpty(metaData) || linkType === 'youtube'">
     <!-- Instagram -->
     <div v-if="linkType === 'instagram'">
-      <h2>{{ expanded }}</h2>
       <div
         v-if="expanded"
         class="link-preview__embed"
