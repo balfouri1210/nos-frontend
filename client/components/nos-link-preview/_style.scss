@@ -163,6 +163,20 @@
   height: 100%;
 }
 
+.twitter-collapsed {
+  width: 100%;
+
+  ::v-deep p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
 
 @media screen and (min-width: $mobile-width) {
   .link-preview {

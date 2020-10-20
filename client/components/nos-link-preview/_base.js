@@ -63,7 +63,7 @@ export default {
         this.linkType = 'instagram';
       } else if (link.indexOf('twitter.com') !== -1) {
         this.linkType = 'twitter';
-        this.metaData.manipulatedHtml = this.metaData.html.replace('class="twitter-tweet"', '');
+        this.metaData.manipulatedHtml = this.metaData.html.replace('class="twitter-tweet"', 'class="twitter-collapsed"');
       } else {
         this.linkType = 'normal';
       }

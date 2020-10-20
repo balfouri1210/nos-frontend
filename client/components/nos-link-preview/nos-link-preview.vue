@@ -63,7 +63,7 @@
 
         <div
           v-if="!expanded"
-          style="width: 100%"
+          class="twitter-collapsed"
           v-html="metaData.manipulatedHtml"
         />
 
