@@ -77,7 +77,7 @@
             src="/icons/twitter.png"
             alt="twitter"
           >
-          <span>Expand<br>tweet</span>
+          <span>Expand<br>Tweet</span>
         </button>
       </div>
     </div>
