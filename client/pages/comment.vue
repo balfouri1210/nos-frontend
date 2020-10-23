@@ -85,7 +85,7 @@
               v-model="quickCommentContent"
               cols="30"
               rows="2"
-              :rules="'required|newline_limit:10|min:10|max:200'"
+              :rules="'required|newline_limit:10|min:5|max:200'"
               :max-length="200"
               :placeholder="`How was ${selectedPlayer.known_as} this week?`"
               @textareaVal="quickCommentContent = $event"
