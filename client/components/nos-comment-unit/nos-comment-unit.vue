@@ -117,6 +117,7 @@
         </button>
 
         <button
+          v-if="!isLastBigPage"
           style="margin-left: 36px"
           @click="changecurrentPageGroup('next')"
         >
@@ -150,6 +151,7 @@
         </ul>
 
         <button
+          v-if="totalPages !== currentPage"
           style="margin-left: 12px"
           @click="movePage('next')"
         >
