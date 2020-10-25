@@ -59,7 +59,8 @@ export default {
     return {
       playerCommentsPreview: [],
 
-      showHowToUse: false,
+      showWhatIs907: false,
+      showGuide: false,
       isFixtures: false,
       isTable: false,
 
@@ -71,7 +72,9 @@ export default {
       fixtures: [],
       getFixturesFailed: false,
 
-      leagueTable: []
+      leagueTable: [],
+
+      nosImageUrl: process.env.NOS_IMAGE_URL
     };
   },
 

@@ -1,0 +1,190 @@
+.home__guide {
+  display: flex;
+  align-items: center;
+  justify-items: space-between;
+  position: relative;
+  max-width: $web-body-content-width;
+  margin: 0 auto;
+  padding: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &-introduce, &-qna {
+    position: relative;
+    padding: 4px 4px 8px 4px;
+    border-radius: 6px;
+    font-size: 13px;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 3px;
+      border-radius: 50px;
+    }
+  }
+
+  &-introduce {
+    flex: 50;
+  
+    span {
+      background: linear-gradient(to right, #ea5514, #f4991e);
+    }
+  }
+  &-qna {
+    flex: 50;
+    margin-left: 6px;
+  
+    span {
+      background: linear-gradient(to right, #1976d2 10%, #b800f2 90%);
+    }
+  }
+  &-wrapper {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    max-width: $web-body-content-width;
+    padding: 0 8px;
+    z-index: 10;
+  }
+  &-introduce-desc, &-qna-desc {
+    // padding: 2px;
+    border-radius: 6px;
+    box-shadow: 0px 3px 6px 2px rgba(0, 0, 0, 0.3);
+  }
+  &-introduce-desc {
+    width: 100%;
+    float: left;
+    // background: linear-gradient(160deg, #ea5514, #f4991e);
+
+    .home__guide-backdrop::before {
+      background-image: url(https://images.907degrees.com/etc/what_is_907.jpg);
+    }
+
+    img {
+      width: 120px;
+    }
+  }
+  &-qna-desc {
+    width: 100%;
+    float: right;
+    // background: linear-gradient(160deg, #1976d2 10%, #b800f2 90%);
+
+    .home__guide-backdrop::before {
+      background-image: url(https://images.907degrees.com/etc/guide.jpg);
+    }
+  }
+  &-backdrop {
+    position: relative;
+    padding: 36px 0;
+    border-radius: 6px;
+    background-size: cover;
+    filter: grayscale(1);
+  }
+  &-backdrop::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 6px;
+    background: rgba(black, 0.8);
+    z-index: -1;
+    content: '';
+  }
+  &-backdrop::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 6px;
+    background-size: cover;
+    background-position: 48%;
+    z-index: -1;
+    // opacity: 0.9;
+    content: '';
+  }
+  &-close {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+
+    .v-icon {
+      font-size: 18px;
+      color: white;
+    }
+  }
+
+  &-text {
+    max-height: 326px;
+    padding: 0 24px;
+    font-size: 12px;
+    color: white;
+    overflow: auto;
+
+    h2 {
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .v-icon {
+      font-size: 14px;
+      color: white;
+    }
+  }
+  &-detail {
+    margin-left: 8px;
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .home__guide {
+    margin-bottom: 12px;
+    border: 0;
+
+    button {
+      font-size: 15px;
+    }
+
+    &-wrapper {
+      top: 48px;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 2px;
+    }
+
+    &-close {
+      .v-icon {
+        font-size: 20px;
+      }
+    }
+
+    &-qna {
+      margin-left: 18px;
+    }
+
+    &-introduce-desc, &-qna-desc {
+      width: 49%;
+
+      img {
+        width: 160px;
+      }
+    }
+
+    &-text {
+      max-height: 460px;
+      font-size: 14px;
+
+      h2 {
+        font-size: 16px;
+      }
+
+      .v-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}
