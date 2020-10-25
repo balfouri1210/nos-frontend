@@ -47,8 +47,10 @@
                 </div>
 
                 <div style="margin-bottom: 24px;">
-                  907 is a space where you can check who is the player gets
-                  a lot of attention from football fans, and communicate with other fans.
+                  "The most on fire player of the week"
+                  <br>907 is a space where you can check who is the player gets
+                  a lot of attention from football fans, and communicate with other fans every week.
+                  That is why we named the community 907Degrees. (90Min + 7Days)
                 </div>
 
                 <div style="margin-bottom: 24px;">
@@ -61,7 +63,7 @@
 
                 <div style="margin-bottom: 24px; text-align: center">
                   New Star,
-                  <br>A Hero that will remain in history,
+                  <br>A Captain that will remain in history,
                   <br>Unsung Hero,
                   <br>Fighter,
                   <br>Troublemaker,
@@ -71,7 +73,7 @@
 
                 <div>
                   All of these people love football and that's why they have the right to enjoy football.
-                  <br>907 is welcome to all football fans. If you like football and want to communicate with other fans, please visit us anytime.
+                  <br>907 is welcome to all football fans. If you like football and want to communicate with other fans, please visit 907 anytime.
                 </div>
               </div>
             </div>
