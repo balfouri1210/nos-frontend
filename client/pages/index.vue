@@ -144,7 +144,7 @@
                 <div style="margin-bottom: 24px;">
                   <h2>When is the leaderboard reset?</h2>
                   <div class="home__guide-detail">
-                    6 hours after initialization, we have a pre-season period to prevent ranking by prime numbers.
+                    The Leaderboard resets every Friday at 18:00 UTC, 6 hours after initialization, we have a pre-season period to prevent ranking by a few.
                     You can't see the leaderboard for a while, but you can use all other features such as player inquiry and comments.
                   </div>
                 </div>
@@ -168,7 +168,7 @@
                   <h2>Are there any players from other leagues?</h2>
                   <div class="home__guide-detail">
                     No, only PL players are registered at this time.
-                    When a certain level of users is secured, we are considering expanding the league as a top priority.
+                    When a certain level of users gather, we are considering expanding the league as a top priority.
                   </div>
                 </div>
 
@@ -182,7 +182,7 @@
                 <div style="margin-bottom: 24px;">
                   <h2>How can I see all the comments at once</h2>
                   <div class="home__guide-detail">
-                    Scroll down and click 'More' in the comment area. You can check the latest comments and comments that received a lot of recommendations.
+                    Scroll down and click 'More' in the comment area. You can check the latest comments and comments that received a lot of likes.
                   </div>
                 </div>
 
@@ -196,7 +196,7 @@
                 <div style="margin-bottom: 24px;">
                   <h2>Can I include a link in the comment?</h2>
                   <div class="home__guide-detail">
-                    Yes, if you include the link you want in the comment, it will automatically detect the link and generate a preview
+                    Yes, if you include the link you want in the comment, it will automatically detect the link and generate a preview.
                     YouTube, Instagram, and Twitter support embed link to preview videos and photos.
                   </div>
                 </div>
