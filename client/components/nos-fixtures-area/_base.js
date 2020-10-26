@@ -79,17 +79,6 @@ export default {
           searchData: `clubIdList_${result}`
         }
       }));
-    },
-
-    watchOnYoutube(homeTeam, awayTeam) {
-      const fallback = `https://youtube.com/results?search_query=${homeTeam} ${awayTeam}`;
-      window.open(fallback, '_blank');
-
-      function killPopup() {
-        window.removeEventListener('pagehide', killPopup);
-      }
-
-      window.addEventListener('pagehide', killPopup);
     }
   }
 };
