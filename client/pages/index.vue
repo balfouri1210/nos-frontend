@@ -384,7 +384,10 @@
 
                 <p class="home__fixture-sub-info">
                   <span v-if="fixture.statusShort === 'PST'">Match Postponed</span>
-                  <span v-else>{{ $moment.unix(fixture.event_timestamp).format('HH:mm') }}, {{ fixture.venue || fixture.round }}</span>
+                  <span v-else>
+                    <span>{{ $moment.unix(fixture.event_timestamp).utc().format('HH:mm') }}, {{ fixture.venue || fixture.round }}</span>
+                    <span>( Local time : {{ $moment.unix(fixture.event_timestamp).format('MM. DD, ddd HH:mm') }} )</span>
+                  </span>
                 </p>
 
                 <div style="margin-top: 8px;">

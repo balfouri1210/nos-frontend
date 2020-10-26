@@ -28,9 +28,10 @@
                 <p class="fixture__league-name">
                   {{ lastFixture.league.name }}
                 </p>
-                <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
+                <span class="fixture__timestamp">{{ $moment.utc(lastFixture.event_date).format('MM.DD, ddd HH:mm') }}</span>
               </div>
             </div>
+            <span class="fixture__timestamp">(Local: {{ $moment(lastFixture.event_date).format('MM.DD, ddd HH:mm') }})</span>
 
             <div class="fixture__vs">
               <div class="fixture__team">
@@ -112,9 +113,10 @@
                 <p class="fixture__league-name">
                   {{ nextFixture.league.name }}
                 </p>
-                <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('YYYY.MM.DD HH:mm') }}</span>
+                <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('MM.DD, ddd HH:mm') }}</span>
               </div>
             </div>
+            <span class="fixture__timestamp">(Local: {{ $moment(lastFixture.event_date).format('MM.DD, ddd HH:mm') }})</span>
 
             <div class="fixture__vs">
               <div class="fixture__team">
