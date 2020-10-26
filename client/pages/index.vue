@@ -161,7 +161,7 @@
                 <div style="margin-bottom: 24px;">
                   <h2>There is no player I want on the leaderboard</h2>
                   <div class="home__guide-detail">
-                    Search for the player through the magnifying glass <v-icon>mdi-magnify</v-icon> in the header. You can find the player you want by keyword or team.
+                    Search for the player through the magnifying glass <v-icon>mdi-magnify</v-icon> in the header. You can find the player you want by keyword, team or country.
                     Find the player you want, search it, and leave a comment. If the player gets a lot of attention, he will gradually rise to the top of the leaderboard.
                   </div>
                 </div>
