@@ -109,7 +109,7 @@
                       :src="`${nosImageUrl}/flags/${player.country_code.toLowerCase()}.png`"
                       :alt="player.country_code"
                     >
-                    {{ $moment.unix(player.birthday).format('YYYY. MM. DD') }} |
+                    {{ $moment.unix(player.birthday).format('DD. MM. YYYY') }} |
                     {{ player.position }}
                   </span>
                 </li>
