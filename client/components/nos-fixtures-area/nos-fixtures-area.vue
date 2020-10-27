@@ -116,7 +116,7 @@
                 <span class="fixture__timestamp">{{ $moment.utc(nextFixture.event_date).format('MM.DD, ddd HH:mm') }}</span>
               </div>
             </div>
-            <span class="fixture__timestamp">(Local: {{ $moment(lastFixture.event_date).format('MM.DD, ddd HH:mm') }})</span>
+            <span class="fixture__timestamp">(Local: {{ $moment(nextFixture.event_date).format('MM.DD, ddd HH:mm') }})</span>
 
             <div class="fixture__vs">
               <div class="fixture__team">
