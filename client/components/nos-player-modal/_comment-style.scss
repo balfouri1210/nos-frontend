@@ -175,7 +175,7 @@
   }
 
   &__comment {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 
     &-meta {
       display: flex;
@@ -314,7 +314,7 @@
       font-size: 15px;
       color: rgba(0, 0, 0, 0.5);
     }
-    .v-icon:active {
+    .v-icon:hover, .v-icon:active {
       color: $nos-main-theme;
     }
   }
