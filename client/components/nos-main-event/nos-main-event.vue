@@ -21,7 +21,7 @@
             I'd like to communicate with as many users as possible.
             If you like 907Degrees or want to experience better football community, please consider sending a feedback to
             <a
-              mailto="support@907degrees.com"
+              href="mailto:support@907degrees.com"
               style="color: #f4991e"
             >support@907degrees.com</a>.
           </p>

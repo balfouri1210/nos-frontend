@@ -3,7 +3,11 @@
     <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
 
     <h1>You've been signed up succeessfully!</h1>
-    <p>Please activate your account through the link in Email.</p>
+    <span>Please verify your email address</span>
+    <span style="color: #EB6217">
+      {{ $route.params.email }}
+    </span>
+    <span>by clicking on the verification link sent to your inbox.</span>
 
     <button
       class="nos-basic-btn"
@@ -18,7 +22,10 @@
         color="rgb(255, 255, 255)"
         indeterminate
       />
-      <span v-else>
+      <span
+        v-else
+        style="font-weight: 400"
+      >
         Resend verification email
       </span>
     </button>
@@ -38,6 +45,13 @@ export default {
 .signup-complete {
   margin-top: 32px;
   text-align: center;
+
+  h1, span {
+    font-weight: 300;
+  }
+
+  h1 { margin-bottom: 14px; font-size: 20px; }
+  span { display: block; font-size: 15px; }
 
   .v-icon {
     margin-bottom: 16px;

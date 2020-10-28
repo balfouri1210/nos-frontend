@@ -1,8 +1,8 @@
 <template>
   <div class="account-delete">
     <v-icon>mdi-human-greeting</v-icon>
-    <p>Your account deleted successfully. Thanks for coming 907degrees and Sorry for not satisfying you.</p>
-    <p>Your account will be logged out automatically.</p>
+    <h1>Your account deleted successfully.</h1>
+    <span>Thanks for coming 907degrees and Sorry for not satisfying you. Your account will be logged out automatically.</span>
   </div>
 </template>
 
@@ -17,7 +17,14 @@ export default {
   margin-top: 32px;
   text-align: center;
 
-  .v-icon {
+  h1, span {
+    font-weight: 300;
+  }
+
+  h1 { margin-bottom: 14px; font-size: 20px; }
+  span { display: block; font-size: 15px; }
+
+.v-icon {
     margin-bottom: 16px;
     color: $nos-main-theme;
     font-size: 46px;

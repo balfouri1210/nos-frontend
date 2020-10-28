@@ -2,15 +2,36 @@
   margin-top: 32px;
   text-align: center;
 
+  h1, span {
+    font-weight: 300;
+  }
+
+  h1 { margin-bottom: 14px; font-size: 20px; }
+  span { display: block; font-size: 15px; }
+
   .v-icon {
     margin-bottom: 16px;
     color: $nos-main-theme;
     font-size: 46px;
   }
 
+  a {
+    font-size: 15px;
+  }
+
   &__link {
     display: inline-block;
     margin-top: 32px;
-    padding: 12px 32px;
+    height: 40px;
+  }
+
+  &__mailto {
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+    margin-top: 12px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.87);
+    color: white !important;
   }
 }

@@ -3,17 +3,18 @@
     <div v-if="isAccountActivated">
       <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
       <h1>Thanks for join us!</h1>
-      <p>Your account has been activated Successfully!</p>
+      <span>Your account has been activated Successfully!</span>
     </div>
 
     <div v-if="isAccountAlreadyActivated">
       <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-      <p>This account has already been activated.</p>
+      <span>This account has already been activated.</span>
     </div>
-    
-    <p v-if="isAccountActivationFailed">
-      Sorry, this account doesn't belong to an user database or this email is expired. Please check again or contact us.
-    </p>
+
+    <div v-if="isAccountActivationFailed">
+      <h1>Activation Failed</h1>
+      <span>Sorry, this account doesn't belong to an user database or this verification code has been expired. Please check again or contact us.</span>
+    </div>
 
     <nuxt-link
       v-if="activationFinished"
@@ -22,6 +23,12 @@
     >
       Go Home
     </nuxt-link>
+
+    <a
+      v-if="isAccountActivationFailed"
+      href="mailto:support@907degrees.com"
+      class="account-activation__mailto"
+    >Contact Us</a>
   </div>
 </template>
 
