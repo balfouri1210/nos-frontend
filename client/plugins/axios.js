@@ -3,9 +3,9 @@
 
 export default function({ $axios, store, redirect, app, error }) {
   $axios.onRequest(config => {
-    // youtube, azure, footballapi 에는 jwt 포함시키지 않음
+    // youtube, bing, footballapi 에는 jwt 포함시키지 않음
     if (config.url.indexOf('youtube') !== -1
-    || config.url.indexOf('azure') !== -1
+    || config.url.indexOf('bing') !== -1
     || config.url.indexOf('football') !== -1) {
       return;
     } else if (store.state.auth.jwt) {
