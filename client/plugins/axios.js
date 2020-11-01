@@ -31,10 +31,8 @@ export default function({ $axios, store, redirect, app, error }) {
       return;
 
     if (errorCode === 401) {
-      // Token 만료 등의 권한 에러시 로그인 페이지로 리다이렉트
-      redirect(app.localePath({
-        name: 'login'
-      }));
+      // Token 만료 등의 권한 에러시 로그아웃
+      store.$logout();
     } else if (errorCode === 500) {
       // 기타 에러시 bug 페이지로 리다이렉트
       redirect(app.localePath({
