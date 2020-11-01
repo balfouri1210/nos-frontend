@@ -162,7 +162,7 @@ export default {
 
     async loadMoreComments() {
       if (this.isMoreCommentsLoading) return;
-      else if (this.player.comment_count <= this.comments.length) return;
+      else if (this.playerHistory.comment_count <= this.comments.length) return;
 
       this.isMoreCommentsLoading = true;
       try {
