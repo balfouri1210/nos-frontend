@@ -2,17 +2,19 @@
   // COMMENT
   .comment {
     margin: 30px 0 0;
-    padding: 14px 11px;
+    padding: 14px 0;
     border-top: 5px solid rgba(0, 0, 0, 0.03);
     border-bottom: 5px solid rgba(0, 0, 0, 0.03);
   }
 
   &__comment-title {
+    padding: 0 11px;
     font-size: 14px;
     font-weight: 600;
   }
 
   &__add-comment {
+    padding: 0 11px;
   }
 
   &__comment-editor {
@@ -75,7 +77,9 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 4px;
+    padding: 0 11px;
   }
+
   &__comment-count {
     height: 30px;
 
@@ -175,7 +179,8 @@
   }
 
   &__comment {
-    margin-bottom: 18px;
+    padding: 13px 11px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
     &-meta {
       display: flex;
@@ -240,7 +245,7 @@
       ::v-deep a {
         color: #1976d2;
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 400;
         font-style: italic;
       }
     }
@@ -249,6 +254,8 @@
       overflow: visible;
     }
   }
+  &__comment:first-of-type { padding-top: 0; }
+  &__comment:last-of-type { padding-bottom: 0; border-bottom: 0; }
 
   &__edit-opinion {
     position: relative;
@@ -329,7 +336,7 @@
     text-align: center;
 
     button {
-      padding: 16px 0 24px;
+      padding: 16px 0;
       width: 100%;
     }
 
@@ -345,15 +352,17 @@
   .player-modal {
     .comment {
       margin-top: 22px;
-      padding: 0 16px;
+      padding: 0;
       border: 0;
     }
 
     &__comment-title {
+      padding: 0 16px;
       font-size: 18px;
     }
 
     &__add-comment {
+      padding: 0 16px;
     }
 
     &__comment-editor {
@@ -368,6 +377,7 @@
 
     &__comment-option {
       margin: 8px 0 4px;
+      padding: 0 16px;
     }
 
     &__comment-sortby-btn {
@@ -388,6 +398,9 @@
     }
 
     &__comment {
+      padding: 10px 16px;
+      border: 0;
+
       &-user-badge {
         line-height: 16px;
       }
@@ -410,7 +423,9 @@
         }
       }
     }
-
+    &__comment:first-of-type { padding-top: 4px; }
+    &__comment:last-of-type { padding-bottom: 16px; }
+  
     &__opinion-action {
       button {
         font-size: 13px;

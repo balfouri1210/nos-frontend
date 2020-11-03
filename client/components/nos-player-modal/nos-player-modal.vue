@@ -482,9 +482,12 @@
                       </div>
 
                       <!-- Load replies -->
-                      <div class="player-modal__load-reply">
+                      <div
+                        v-if="comment.reply_count"
+                        class="player-modal__load-reply"
+                      >
                         <button
-                          v-if="comment.reply_count && !comment.isReply"
+                          v-if="!comment.isReply"
                           @click="getReplies(comment)"
                         >
                           <i class="material-icon">keyboard_arrow_down</i>
@@ -492,7 +495,7 @@
                         </button>
 
                         <button
-                          v-if="comment.reply_count && comment.isReply"
+                          v-if="comment.isReply"
                           @click="comment.isReply = false"
                         >
                           <i class="material-icon">keyboard_arrow_up</i>
@@ -502,165 +505,165 @@
 
 
                       <!-- REPLIES AREA -->
-                      <div class="player-modal__replies">
-                        <div
-                          v-if="comment.isReply"
-                        >
-                          <nos-skeleton-loader
-                            v-if="!comment.isRepliesLoaded"
-                            :line="comment.reply_count < 5 ? comment.reply_count : 5"
-                          />
+                      <div
+                        v-if="comment.isReply"
+                        class="player-modal__replies"
+                      >
+                        <nos-skeleton-loader
+                          v-if="!comment.isRepliesLoaded"
+                          :line="comment.reply_count < 5 ? comment.reply_count : 5"
+                        />
 
-                          <ul>
-                            <li
-                              v-for="(reply, replyIndex) in comment.replies"
-                              :key="replyIndex"
-                              class="player-modal__reply"
-                            >
-                              <div class="player-modal__reply-meta">
-                                <span class="player-modal__reply-username">{{ reply.username }}</span>
-                                <span class="player-modal__reply-moment">{{ $moment(reply.created_at).fromNow() }}</span>
-                              </div>
-
-                              <div
-                                v-if="!reply.isEditing"
-                                class="player-modal__reply-body"
-                              >
-                                <p
-                                  class="player-modal__reply-content"
-                                  v-html="$options.filters.commentFormatter(reply.content)"
-                                />
-
-                                <!-- Reply more menu -->
-                                <v-menu
-                                  :content-class="'player-modal__v-menu'"
-                                  transition="slide-y-transition"
-                                  bottom
-                                  left
-                                  :offset-y="true"
-                                >
-                                  <template v-slot:activator="{ on }">
-                                    <v-btn
-                                      text
-                                      icon
-                                      v-on="on"
-                                    >
-                                      <v-icon>mdi-dots-vertical</v-icon>
-                                    </v-btn>
-                                  </template>
-
-                                  <v-list v-if="reply.user_id === getId()">
-                                    <v-list-item @click="editReply(reply)">
-                                      <v-list-item-title>
-                                        <v-icon>mdi-pencil</v-icon>Edit
-                                      </v-list-item-title>
-                                    </v-list-item>
-
-                                    <v-list-item @click="deleteReply(comment, reply)">
-                                      <v-list-item-title>
-                                        <v-icon>mdi-delete</v-icon>Delete
-                                      </v-list-item-title>
-                                    </v-list-item>
-                                  </v-list>
-
-                                  <v-list v-else>
-                                    <v-list-item @click="openReportDialog(reply)">
-                                      <v-list-item-title>
-                                        <v-icon>mdi-alert</v-icon>Report
-                                      </v-list-item-title>
-                                    </v-list-item>
-                                  </v-list>
-                                </v-menu>
-                              </div>
-
-                              <!-- Edit Reply -->
-                              <div
-                                v-else
-                                class="player-modal__edit-opinion"
-                              >
-                                <input
-                                  id="reply"
-                                  v-model="reply.editReplyContent"
-                                  type="text"
-                                  name="edit-reply"
-                                  :rules="'required'"
-                                  maxlength="200"
-                                >
-
-                                <div class="player-modal__opinion-action">
-                                  <button
-                                    class="nos-simple-white-btn"
-                                    @click="cancelEditReply(reply)"
-                                  >
-                                    CANCEL
-                                  </button>
-
-                                  <button
-                                    class="nos-simple-black-btn"
-                                    :disabled="!reply.content.trim()"
-                                    @click="saveEditReply(reply)"
-                                  >
-                                    <pulse-loader
-                                      v-if="reply.isEditReplySaving"
-                                      :color="'white'"
-                                      :size="'4px'"
-                                    />
-                                    <span v-else>SAVE</span>
-                                  </button>
-                                </div>
-                              </div>
-
-                              <!-- Reply sub action -->
-                              <div class="player-modal__reply-sub-action">
-                                <button
-                                  :class="{'player-modal--is-voted': reply.vote === 'up'}"
-                                  :disabled="isOpinionVoting"
-                                  @click="votePlayerOpinion(reply, 'up')"
-                                >
-                                  <v-icon>mdi-thumb-up</v-icon>
-                                  <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
-                                </button>
-                                <button
-                                  :class="{'player-modal--is-voted': reply.vote === 'down'}"
-                                  :disabled="isOpinionVoting"
-                                  @click="votePlayerOpinion(reply, 'down')"
-                                >
-                                  <v-icon>mdi-thumb-down</v-icon>
-                                  <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
-                                </button>
-                              </div>
-                            </li>
-                          </ul>
-
-                          <button
-                            v-if="isReadyForMoreRepliesButton(comment)"
-                            class="player-modal__more-replies-btn"
-                            @click="loadMoreReplies(comment)"
+                        <ul>
+                          <li
+                            v-for="(reply, replyIndex) in comment.replies"
+                            :key="replyIndex"
+                            class="player-modal__reply"
                           >
-                            <v-icon>mdi-chat-processing</v-icon>
-                            <span>More Replies</span>
-                          </button>
+                            <div class="player-modal__reply-meta">
+                              <span class="player-modal__reply-username">{{ reply.username }}</span>
+                              <span class="player-modal__reply-moment">{{ $moment(reply.created_at).fromNow() }}</span>
+                            </div>
 
-                          <pulse-loader
-                            v-if="comment.isMoreRepliesLoading"
-                            :color="'#808080'"
-                            :size="'4px'"
-                            :style="{ 'margin': '16px 0' }"
-                          />
-                        </div>
+                            <div
+                              v-if="!reply.isEditing"
+                              class="player-modal__reply-body"
+                            >
+                              <p
+                                class="player-modal__reply-content"
+                                v-html="$options.filters.commentFormatter(reply.content)"
+                              />
 
-                        <div
-                          v-if="comment.addedReply && !comment.isReply"
-                          class="player-modal__added-reply"
+                              <!-- Reply more menu -->
+                              <v-menu
+                                v-if="getJwt()"
+                                :content-class="'player-modal__v-menu'"
+                                transition="slide-y-transition"
+                                bottom
+                                left
+                                :offset-y="true"
+                              >
+                                <template v-slot:activator="{ on }">
+                                  <v-btn
+                                    text
+                                    icon
+                                    v-on="on"
+                                  >
+                                    <v-icon>mdi-dots-vertical</v-icon>
+                                  </v-btn>
+                                </template>
+
+                                <v-list v-if="reply.user_id === getId()">
+                                  <v-list-item @click="editReply(reply)">
+                                    <v-list-item-title>
+                                      <v-icon>mdi-pencil</v-icon>Edit
+                                    </v-list-item-title>
+                                  </v-list-item>
+
+                                  <v-list-item @click="deleteReply(comment, reply)">
+                                    <v-list-item-title>
+                                      <v-icon>mdi-delete</v-icon>Delete
+                                    </v-list-item-title>
+                                  </v-list-item>
+                                </v-list>
+
+                                <v-list v-else>
+                                  <v-list-item @click="openReportDialog(reply)">
+                                    <v-list-item-title>
+                                      <v-icon>mdi-alert</v-icon>Report
+                                    </v-list-item-title>
+                                  </v-list-item>
+                                </v-list>
+                              </v-menu>
+                            </div>
+
+                            <!-- Edit Reply -->
+                            <div
+                              v-else
+                              class="player-modal__edit-opinion"
+                            >
+                              <input
+                                id="reply"
+                                v-model="reply.editReplyContent"
+                                type="text"
+                                name="edit-reply"
+                                :rules="'required'"
+                                maxlength="200"
+                              >
+
+                              <div class="player-modal__opinion-action">
+                                <button
+                                  class="nos-simple-white-btn"
+                                  @click="cancelEditReply(reply)"
+                                >
+                                  CANCEL
+                                </button>
+
+                                <button
+                                  class="nos-simple-black-btn"
+                                  :disabled="!reply.content.trim()"
+                                  @click="saveEditReply(reply)"
+                                >
+                                  <pulse-loader
+                                    v-if="reply.isEditReplySaving"
+                                    :color="'white'"
+                                    :size="'4px'"
+                                  />
+                                  <span v-else>SAVE</span>
+                                </button>
+                              </div>
+                            </div>
+
+                            <!-- Reply sub action -->
+                            <div class="player-modal__reply-sub-action">
+                              <button
+                                :class="{'player-modal--is-voted': reply.vote === 'up'}"
+                                :disabled="isOpinionVoting"
+                                @click="votePlayerOpinion(reply, 'up')"
+                              >
+                                <v-icon>mdi-thumb-up</v-icon>
+                                <span v-if="reply.vote_up_count > 0">{{ reply.vote_up_count }}</span>
+                              </button>
+                              <button
+                                :class="{'player-modal--is-voted': reply.vote === 'down'}"
+                                :disabled="isOpinionVoting"
+                                @click="votePlayerOpinion(reply, 'down')"
+                              >
+                                <v-icon>mdi-thumb-down</v-icon>
+                                <span v-if="reply.vote_down_count > 0">{{ reply.vote_down_count }}</span>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+
+                        <button
+                          v-if="isReadyForMoreRepliesButton(comment)"
+                          class="player-modal__more-replies-btn"
+                          @click="loadMoreReplies(comment)"
                         >
-                          <p class="player-modal__added-reply-username">
-                            {{ comment.addedReply.username }}
-                          </p>
-                          <p
-                            class="player-modal__added-reply-content"
-                            v-html="$options.filters.commentFormatter(comment.addedReply.content)"
-                          />
-                        </div>
+                          <v-icon>mdi-chat-processing</v-icon>
+                          <span>More Replies</span>
+                        </button>
+
+                        <pulse-loader
+                          v-if="comment.isMoreRepliesLoading"
+                          :color="'#808080'"
+                          :size="'4px'"
+                          :style="{ 'margin': '16px 0' }"
+                        />
+                      </div>
+
+                      <div
+                        v-if="comment.addedReply && !comment.isReply"
+                        class="player-modal__added-reply"
+                      >
+                        <p class="player-modal__added-reply-username">
+                          {{ comment.addedReply.username }}
+                        </p>
+                        <p
+                          class="player-modal__added-reply-content"
+                          v-html="$options.filters.commentFormatter(comment.addedReply.content)"
+                        />
                       </div>
                     </li>
                   </ul>

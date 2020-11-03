@@ -24,7 +24,7 @@
   }
 
   &__load-reply {
-    margin: 2px 0 6px;
+    margin-top: 8px;
     color: $nos-main-theme;
     font-size: 13px;
 
@@ -47,7 +47,7 @@
   }
 
   &__reply {
-    margin-bottom: 13px;
+    margin-bottom: 4px;
 
     &-meta {
       margin-bottom: 4px;
@@ -95,7 +95,7 @@
   &__reply-sub-action {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 6px;
     font-style: normal;
 
     button {

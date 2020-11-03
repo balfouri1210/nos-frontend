@@ -96,6 +96,7 @@
     align-items: center;
     min-height: 62px;
     padding: 0 70px 0 14px;
+    font-size: 12px;
 
     ::v-deep .twitter-tweet {
       font-size: 12px;
@@ -225,6 +226,7 @@
     &__twitter {
     min-height: 72px;
     padding: 0 90px 0 18px;
+    font-size: 13px;
 
       ::v-deep .twitter-tweet {
         font-size: 13px;
