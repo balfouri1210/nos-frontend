@@ -402,7 +402,7 @@
 
     &__comment {
       margin-bottom: 2px;
-      padding: 13px 16px 10px;
+      padding: 13px 8px 10px 16px;
       border: 0;
 
       &-user-badge {
@@ -428,7 +428,7 @@
       }
     }
     &__comment:first-of-type { padding-top: 13px; }
-    &__comment:last-of-type { padding-bottom: 10px; }
+    &__comment:last-of-type { padding-bottom: 16px; }
   
     &__opinion-action {
       button {

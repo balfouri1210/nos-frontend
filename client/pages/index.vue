@@ -487,6 +487,7 @@
         :top-player-score="parseInt(topPlayer.score)"
         :player-list-prop="high4Players"
         :need-player-comments-preview="true"
+        :start-rank="2"
       />
 
       <nos-landing-comment-area />
@@ -495,6 +496,7 @@
         :top-player-score="parseInt(topPlayer.score)"
         :player-list-prop="high8Players"
         :need-player-comments-preview="true"
+        :start-rank="6"
       />
 
       <nos-main-event />
@@ -505,6 +507,7 @@
         :need-player-comments-preview="true"
         :activate-load-more="true"
         :previous-player-id-list-prop="previousPlayerIdList"
+        :start-rank="14"
       />
     </div>
 

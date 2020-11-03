@@ -19,6 +19,7 @@
                 class="nos-player__new-comment"
               >NEW</span>
             </div>
+
             <span class="nos-player__temperature"><v-icon>mdi-fire</v-icon>{{ degreeCalculator(player.score) }}</span>
           </div>
 
@@ -69,7 +70,14 @@
                 </transition>
               </div>
             </div>
-          </div> 
+          </div>
+
+          <div class="nos-player__footer">
+            <span
+              class="nos-player__rank"
+              style="color: rgba(0, 0, 0, 0.5)"
+            >Rank. {{ index + startRank }}</span>
+          </div>
         </button>
       </li>
     </ul>

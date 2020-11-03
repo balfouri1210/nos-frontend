@@ -46,6 +46,11 @@ export default {
     activateLoadMore: {
       type: Boolean,
       default: false
+    },
+
+    startRank: {
+      type: Number,
+      default: 0
     }
   },
 

@@ -58,9 +58,11 @@
   }
 
   &__comment-count,
+  &__rank,
   &__temperature {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     font-size: 12px;
     font-weight: 600;
 
@@ -68,6 +70,10 @@
     .v-icon {
       font-size: 12.5px;
     }
+  }
+  &__rank {
+    font-size: 10px;
+    font-weight: 400;
   }
   &__comment-count {
     .v-icon { margin-right: 3px; }
@@ -91,7 +97,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 32px 8px 18px;
+    padding: 36px 8px 30px;
   }
 
   &__upper {
@@ -125,6 +131,17 @@
       margin-left: 4px;
       box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.15);
     }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    padding: 0 8px;
   }
 
   &__comments-preview {
@@ -188,7 +205,9 @@
     &__upper {
       margin-bottom: 16px;
     }
-    &__comment-count, &__temperature {
+    &__comment-count,
+    &__rank,
+    &__temperature {
       font-size: 13px;
       .v-icon { font-size: 14px; }
     }
