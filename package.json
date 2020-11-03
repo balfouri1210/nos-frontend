@@ -1,6 +1,6 @@
 {
   "name": "nos-frontend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "907degrees frontend",
   "main": "index.js",
   "scripts": {
