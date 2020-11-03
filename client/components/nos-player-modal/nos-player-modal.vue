@@ -236,7 +236,17 @@
                       v-for="(comment, commentIndex) in comments"
                       :key="commentIndex"
                       class="player-modal__comment"
+                      :class="{'hot-comment': comment.vote_up_count >= 5}"
                     >
+                      <div
+                        v-if="comment.vote_up_count >= 5"
+                        class="hot-comment__mark"
+                      >
+                        <v-icon>
+                          mdi-fire
+                        </v-icon>
+                      </div>
+
                       <div>
                         <!-- COMMENT ID FOR ADMIN, FAKE COMMENT VOTE -->
                         <div

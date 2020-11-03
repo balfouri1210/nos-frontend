@@ -126,7 +126,17 @@
                       v-for="(comment, commentIndex) in comments"
                       :key="commentIndex"
                       class="player-modal__comment"
+                      :class="{'hot-comment': comment.vote_up_count >= 5}"
                     >
+                      <div
+                        v-if="comment.vote_up_count >= 5"
+                        class="hot-comment__mark"
+                      >
+                        <v-icon>
+                          mdi-fire
+                        </v-icon>
+                      </div>
+
                       <div>
                         <div class="player-modal__comment-meta">
                           <span class="player-modal__comment-username">{{ comment.fake_username || comment.username }}</span>
@@ -186,9 +196,12 @@
 
 
                       <!-- Load replies -->
-                      <div class="player-modal__load-reply">
+                      <div
+                        v-if="comment.reply_count"
+                        class="player-modal__load-reply"
+                      >
                         <button
-                          v-if="comment.reply_count && !comment.isReply"
+                          v-if="!comment.isReply"
                           @click="getReplies(comment)"
                         >
                           <i class="material-icon">keyboard_arrow_down</i>

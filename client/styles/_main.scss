@@ -459,3 +459,24 @@ strong {
   align-items: center;
   justify-content: space-between;
 }
+
+
+.hot-comment {
+  position: relative;
+  background: rgba(244, 153, 30, 0.08);
+
+  &__mark {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    color: $nos-main-theme-deep;
+
+    .v-icon {
+      font-size: 16px;
+      color: $nos-main-theme-deep;
+    }
+  }
+}
