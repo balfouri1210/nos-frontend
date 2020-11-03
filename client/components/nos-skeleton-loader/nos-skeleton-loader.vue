@@ -39,6 +39,7 @@ export default {
   ::v-deep .v-skeleton-loader__list-item-two-line {
     height: unset;
     padding: 0;
+    background: transparent;
   }
 }
 </style>

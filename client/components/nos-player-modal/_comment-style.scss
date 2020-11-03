@@ -2,7 +2,7 @@
   // COMMENT
   .comment {
     margin: 30px 0 0;
-    padding: 14px 0;
+    padding: 14px 0 0;
     border-top: 5px solid rgba(0, 0, 0, 0.03);
     border-bottom: 5px solid rgba(0, 0, 0, 0.03);
   }
@@ -254,7 +254,7 @@
       overflow: visible;
     }
   }
-  &__comment:last-of-type { padding-bottom: 0; border-bottom: 0; }
+  &__comment:last-of-type { border-bottom: 0; }
 
   &__edit-opinion {
     position: relative;
