@@ -179,7 +179,7 @@
   }
 
   &__comment {
-    padding: 13px 11px;
+    padding: 16px 11px 13px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
     &-meta {
@@ -254,7 +254,6 @@
       overflow: visible;
     }
   }
-  // &__comment:first-of-type { padding-top: 0; }
   &__comment:last-of-type { padding-bottom: 0; border-bottom: 0; }
 
   &__edit-opinion {
@@ -403,7 +402,7 @@
 
     &__comment {
       margin-bottom: 2px;
-      padding: 10px 16px;
+      padding: 13px 16px 10px;
       border: 0;
 
       &-user-badge {
@@ -428,7 +427,7 @@
         }
       }
     }
-    &__comment:first-of-type { padding-top: 10px; }
+    &__comment:first-of-type { padding-top: 13px; }
     &__comment:last-of-type { padding-bottom: 10px; }
   
     &__opinion-action {
