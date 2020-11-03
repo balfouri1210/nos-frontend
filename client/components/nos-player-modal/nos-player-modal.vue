@@ -220,7 +220,7 @@
                     v-if="isCommentAdding"
                     :color="'#808080'"
                     :size="'6px'"
-                    :style="{ 'margin': '16px 0' }"
+                    :style="{ 'margin': '16px' }"
                   />
 
                   <pulse-loader
@@ -228,7 +228,7 @@
                     class="centered"
                     :color="'white'"
                     :size="'6px'"
-                    :style="{ 'margin': '16px 0', 'z-index': 20 }"
+                    :style="{ 'margin': '16px', 'z-index': 20 }"
                   />
 
                   <ul class="player-modal__comments">

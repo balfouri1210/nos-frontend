@@ -118,7 +118,7 @@
                     class="centered"
                     :color="'#808080'"
                     :size="'6px'"
-                    :style="{ 'margin': '16px 0' }"
+                    :style="{ 'margin': '16px' }"
                   />
 
                   <ul>
