@@ -4,7 +4,7 @@
     :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
     <div class="nos-notification">
-      <nos-modal-header @closeModal="$emit('closeModal')" />
+      <nos-modal-header @close-modal="$emit('close-modal')" />
 
       <div class="nos-modal__body">
         <v-progress-circular

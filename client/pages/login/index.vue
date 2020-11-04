@@ -45,7 +45,7 @@
             <nuxt-link
               :to="localePath('account-password-reset')"
               class="login__forgot-password"
-              @click.native="$emit('closeModal')"
+              @click.native="$emit('close-modal')"
             >
               Forgot Password?
             </nuxt-link>

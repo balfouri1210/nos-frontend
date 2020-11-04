@@ -3,7 +3,7 @@
     class="nos-modal nos-login-modal"
     :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
-    <nos-modal-header @closeModal="$emit('closeModal')" />
+    <nos-modal-header @close-modal="$emit('close-modal')" />
 
     <div class="nos-modal__body"> 
       <validation-observer v-slot="{ handleSubmit }">
@@ -74,7 +74,7 @@
         <nuxt-link
           :to="localePath('account-password-reset')"
           class="nos-login-modal__forgot-password"
-          @click.native="$emit('closeModal')"
+          @click.native="$emit('close-modal')"
         >
           Forgot Password?
         </nuxt-link>
@@ -82,7 +82,7 @@
         <nuxt-link
           :to="localePath('signup')"
           class="nos-login-modal__signup"
-          @click.native="$emit('closeModal')"
+          @click.native="$emit('close-modal')"
         >
           Signup
         </nuxt-link>

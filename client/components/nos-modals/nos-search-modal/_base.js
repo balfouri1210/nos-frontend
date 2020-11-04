@@ -33,7 +33,7 @@ export default {
     },
 
     selectClub(club) {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
@@ -44,7 +44,7 @@ export default {
     },
 
     selectCountry(country) {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
@@ -55,7 +55,7 @@ export default {
     },
 
     searchPlayerByKeyword() {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
@@ -66,7 +66,7 @@ export default {
     },
 
     selectSearchItem(item) {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
 
       this.$router.push(
         this.localePath({

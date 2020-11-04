@@ -51,7 +51,7 @@ export default {
     },
 
     selectNoti(noti) {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
       this.$router.push(this.localePath({
         name: 'player-playerId-playerName',
         params: {

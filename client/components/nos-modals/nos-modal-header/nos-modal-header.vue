@@ -6,7 +6,7 @@
     <div class="nos-modal-header__logo" />
 
     <button
-      @click="$emit('closeModal')"
+      @click="$emit('close-modal')"
     >
       <v-icon>mdi-close</v-icon>
     </button>

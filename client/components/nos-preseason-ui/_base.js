@@ -44,7 +44,7 @@ export default {
     },
 
     selectSearchItem(item) {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
 
       // 평상시
       this.$router.push(

@@ -87,27 +87,27 @@
         v-if="isLoginModal"
         v-click-outside="clickOutsideHandler"
         @loginSuccess="loginSuccessHandler"
-        @closeModal="isLoginModal = false"
+        @close-modal="isLoginModal = false"
       />
 
       <nos-account-menu-modal
         v-if="isAccountMenuModal"
         v-click-outside="clickOutsideHandler"
         @logoutSuccess="logoutSuccessHandler"
-        @closeModal="isAccountMenuModal = false"
+        @close-modal="isAccountMenuModal = false"
       />
 
       <nos-notification-modal
         v-if="isNotificationModal"
         v-click-outside="clickOutsideHandler"
-        @closeModal="isNotificationModal = false"
+        @close-modal="isNotificationModal = false"
       />
     </div>
 
     <nos-search-modal
       v-if="isSearchModal"
       v-click-outside="clickOutsideHandler"
-      @closeModal="isSearchModal = false"
+      @close-modal="isSearchModal = false"
     />
   </header>
 </template>

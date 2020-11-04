@@ -3,7 +3,7 @@
     class="nos-modal nos-account-menu-modal"
     :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
   >
-    <nos-modal-header @closeModal="$emit('closeModal')" />
+    <nos-modal-header @close-modal="$emit('close-modal')" />
 
     <div class="nos-modal__body">
       <button
@@ -39,7 +39,7 @@ export default {
     },
 
     goToSettings() {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
       this.$router.push(this.localePath('settings'));
     }
   }
