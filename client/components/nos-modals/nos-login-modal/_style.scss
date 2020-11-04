@@ -1,38 +1,81 @@
 .nos-login-modal {
-  .nos-modal__body {
-    padding: 24px 32px 32px;
-  }
-  
-  label {
-    color: white;
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  padding: 0 16px;
+
+  &__content {
+    padding: 32px;
+
+    * {
+      font-weight: 300;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    ::v-deep .nos-input {
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    ::v-deep .nos-input__error-message {
+      top: 44px;
+      left: 12px;
+      margin: 0;
+    }
   }
 
   &__submit {
-    margin-top: 4px;
-  }
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -6px;
+    text-align: right;
 
-  &__submit,
-  &__signup {
-    width: 100%;
-    background: white;
-    border-radius: 10px;
-  }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border: 1px solid rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      float: right;
+    }
 
-  ::v-deep input {
-    border-bottom: 1px solid white;
-    color: white;
+    button:hover {
+      border-color: $nos-main-theme;
+      background: rgba($nos-main-theme, 0.1);
+
+      .v-icon {
+        color: $nos-main-theme;
+      }
+    }
+
+    .v-icon {
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.7);
+    }
   }
 
   &__error-message {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-top: 6px;
-    padding: 7px 6px;
-    border-radius: 6px;
+    margin-top: 16px;
+    padding: 7px 8px;
+    border-radius: 4px;
     background: darkred;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 300;
 
     span {
       display: block;
@@ -43,40 +86,155 @@
       display: flex;
       padding: 0;
     }
-
-    i {
-      margin-top: 3px;
-    }
   }
 
   &__error-icon {
     margin-right: 4px;
   }
+  &__error-icon, &__error-close {
+    margin-top: 3px;
+  }
 
-  &__error-close {
-    background: none !important;
+  &__sub-actions {
+    margin-top: 22px;
+  }
 
-    i {
-      color: white;
+  &__forgot-password,
+  &__create-account {
+    display: inline-block;
+    font-size: 16px;
+  }
+  &__forgot-password {
+    margin-bottom: 8px;
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .nos-login-modal {
+    top: 64px;
+
+    &__content {
+      padding: 56px 100px;
+
+      h2 {
+        font-size: 18px;
+      }
+
+      ::v-deep .nos-input {
+        margin-bottom: 28px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+
+      ::v-deep .nos-input__error-message {
+        top: 48px;
+        left: 16px;
+        font-size: 13px;
+      }
+    }
+
+    &__forgot-password,
+    &__create-account {
+      font-size: 18px;
+    }
+
+    &__error-message {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+    &__error-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+    &__error-icon, &__error-close {
+      font-size: 18px;
+    }
+
+    &__sub-actions {
+      margin-top: 30px;
     }
   }
-
-  &__forgot-password {
-    display: block;
-    padding: 4px 0 !important;
-    font-size: 12px;
-    text-align: right;
-  }
-
-  &__signup {
-    display: block;
-    margin-top: 24px;
-    text-align: center;
-  }
 }
 
-@media only screen and (min-width: $mobile-width) {
-  .nos-login-modal {
-    top: 60px;
-  }
-}
+// .nos-login-modal {
+//   .nos-modal__body {
+//     padding: 24px 32px 32px;
+//   }
+  
+//   label {
+//     color: white;
+//   }
+
+//   &__submit {
+//     margin-top: 4px;
+//   }
+
+//   &__submit,
+//   &__signup {
+//     width: 100%;
+//     background: white;
+//     border-radius: 10px;
+//   }
+
+//   ::v-deep input {
+//     border-bottom: 1px solid white;
+//     color: white;
+//   }
+
+//   &__error-message {
+//     display: flex;
+//     align-items: flex-start;
+//     justify-content: space-between;
+//     margin-top: 6px;
+//     padding: 7px 6px;
+//     border-radius: 6px;
+//     background: darkred;
+//     color: white;
+//     font-size: 14px;
+
+//     span {
+//       display: block;
+//       margin-right: 4px;
+//     }
+
+//     button {
+//       display: flex;
+//       padding: 0;
+//     }
+
+//     i {
+//       margin-top: 3px;
+//     }
+//   }
+
+//   &__error-icon {
+//     margin-right: 4px;
+//   }
+
+//   &__error-close {
+//     background: none !important;
+
+//     i {
+//       color: white;
+//     }
+//   }
+
+//   &__forgot-password {
+//     display: block;
+//     padding: 4px 0 !important;
+//     font-size: 12px;
+//     text-align: right;
+//   }
+
+//   &__signup {
+//     display: block;
+//     margin-top: 24px;
+//     text-align: center;
+//   }
+// }
+
+// @media only screen and (min-width: $mobile-width) {
+//   .nos-login-modal {
+//     top: 60px;
+//   }
+// }

@@ -1,93 +1,95 @@
 <template>
-  <div
-    class="nos-modal nos-login-modal"
-    :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
-  >
-    <nos-modal-header @close-modal="$emit('close-modal')" />
+  <div class="nos-login-modal">
+    <nos-default-modal>
+      <div class="nos-login-modal__content"> 
+        <h2>Login</h2>
 
-    <div class="nos-modal__body"> 
-      <validation-observer v-slot="{ handleSubmit }">
-        <form
-          id="app"
-          @submit.prevent="handleSubmit(onSubmit)"
-        >
-          <div>
-            <label for="email">Email</label>
-            <nos-input
-              id="email"
-              type="email"
-              name="email"
-              :rules="'required'"
-              :value="userInfo.email"
-              @input="userInfo.email = $event"
-            />
-          </div>
-
-          <div>
-            <label for="password">Password</label>
-            <nos-input
-              id="password"
-              type="password"
-              name="password"
-              :rules="'required'"
-              :value="userInfo.password"
-              @input="userInfo.password = $event"
-            />
-          </div>
-
-          <button
-            type="submit"
-            class="nos-login-modal__submit nos-modal__button"
+        <validation-observer v-slot="{ handleSubmit }">
+          <form
+            id="app"
+            @submit.prevent="handleSubmit(onSubmit)"
           >
-            Login
-          </button>
-        </form>
-      </validation-observer>
+            <div>
+              <nos-input
+                id="email"
+                type="email"
+                name="email"
+                :rules="'required'"
+                :value="userInfo.email"
+                :placeholder="'Email'"
+                @input="userInfo.email = $event"
+              />
+            </div>
 
-      <transition
-        name="fade"
-      >
-        <div
-          v-show="errorMessage"
-          class="nos-login-modal__error-message"
+            <div>
+              <nos-input
+                id="password"
+                type="password"
+                name="password"
+                :rules="'required'"
+                :value="userInfo.password"
+                :placeholder="'Pwd'"
+                @input="userInfo.password = $event"
+              />
+            </div>
+
+            <div class="nos-login-modal__submit">
+              <button type="submit">
+                <v-icon>
+                  mdi-arrow-right
+                </v-icon>
+              </button>
+            </div>
+          </form>
+        </validation-observer>
+
+        <transition
+          name="fade"
         >
-          <i
-            class="material-icons nos-login-modal__error-icon"
-          >error</i>
+          <div
+            v-show="errorMessage"
+            class="nos-login-modal__error-message"
+          >
+            <i
+              class="material-icons nos-login-modal__error-icon"
+            >error</i>
 
-          <span>{{ errorMessage }}</span>
+            <span>{{ errorMessage }}</span>
 
-          <div>
-            <button
-              class="nos-login-modal__error-close"
-              @click="errorMessage = null"
-            >
-              <i
-                class="material-icons"
-              >close</i>
-            </button>
+            <div>
+              <button
+                class="nos-login-modal__error-close"
+                @click="errorMessage = null"
+              >
+                <i
+                  class="material-icons"
+                >close</i>
+              </button>
+            </div>
           </div>
+        </transition>
+
+        <div class="nos-login-modal__sub-actions">
+          <nuxt-link
+            :to="localePath('account-password-reset')"
+            class="nos-login-modal__forgot-password"
+            @click.native="$emit('close-modal')"
+          >
+            Forgot Password?
+          </nuxt-link>
+
+          <br>
+
+          <nuxt-link
+            :to="localePath('signup')"
+            class="nos-login-modal__create-account"
+            @click.native="$emit('close-modal')"
+          >
+            Create Account
+          </nuxt-link>
         </div>
-      </transition>
-
-      <div>
-        <nuxt-link
-          :to="localePath('account-password-reset')"
-          class="nos-login-modal__forgot-password"
-          @click.native="$emit('close-modal')"
-        >
-          Forgot Password?
-        </nuxt-link>
-
-        <nuxt-link
-          :to="localePath('signup')"
-          class="nos-login-modal__signup"
-          @click.native="$emit('close-modal')"
-        >
-          Signup
-        </nuxt-link>
       </div>
-    </div>
+    </nos-default-modal>
   </div>
 </template>
 
@@ -97,11 +99,11 @@ import { createNamespacedHelpers } from 'vuex';
 const { mapMutations } = createNamespacedHelpers('auth');
 import jwtDecode from 'jwt-decode';
 import { TOKEN_EXPIRES } from '@/lib/constants';
-import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
+import nosDefaultModal from '../nos-default-modal/nos-default-modal.vue';
 
 export default {
   components: {
-    nosModalHeader
+    nosDefaultModal
   },
 
   data() {
