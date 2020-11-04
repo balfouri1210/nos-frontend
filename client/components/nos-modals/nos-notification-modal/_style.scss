@@ -1,23 +1,32 @@
-.nos-notification {
-  .nos-modal__body {
-    min-height: 48px;
+.nos-notification-modal {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  width: 100%;
+  max-width: 580px;
+  padding: 0 8px;
+
+  &__content {
+    position: relative;
+    min-height: 200px;
     max-height: 300px;
+    padding: 8px 16px;
     overflow: auto;
   }
 
   &__empty {
     width: 100%;
-    color: white;
+    color: black;
     font-size: 20px;
     font-weight: 300;
     text-align: center;
   }
 
   &__item {
-    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 
     button {
-      padding: 3px 8px;
+      padding: 12px 0;
       width: 100%;
       background: white;
       border-radius: 6px;
@@ -31,7 +40,7 @@
   }
 
   &__item:last-of-type {
-    margin-bottom: 0;
+    border: 0;
   }
 
   &__desc {
@@ -47,8 +56,14 @@
   .nos-notification-modal {
     top: 60px;
 
-    .nos-modal__body {
-      max-height: 326px;
+    &__content {
+      max-height: 400px;
+    }
+
+    &__item {
+      button {
+        padding: 12px 8px;
+      }
     }
   }
 }

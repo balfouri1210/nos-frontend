@@ -1,25 +1,16 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapMutations } = createNamespacedHelpers('auth');
-import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
-// import U from '@/lib/util';
+import nosDefaultModal from '../nos-default-modal/nos-default-modal.vue';
 
 export default {
   components: {
-    nosModalHeader
+    nosDefaultModal
   },
   
   data() {
     return {
       notifications: null
     };
-  },
-
-  computed: {
-    progressCircularColor() {
-      const result =
-      this.$store.getters.getIsModalWhiteTone(this.$route) ? '#f07c1a' : 'rgb(255, 255, 255)';
-      return result;
-    }
   },
 
   created() {

@@ -1,21 +1,19 @@
 <template>
-  <div class="nos-modal nos-notification-modal">
-    <div class="nos-notification">
-      <nos-modal-header @close-modal="$emit('close-modal')" />
-
-      <div class="nos-modal__body">
+  <div class="nos-notification-modal">
+    <nos-default-modal>
+      <div class="nos-notification-modal__content">
         <v-progress-circular
           v-if="!notifications"
           class="centered"
           :size="30"
-          :width="3"
-          :color="progressCircularColor"
+          :width="2"
+          :color="'#404040'"
           indeterminate
         />
 
         <p
           v-if="notifications && notifications.length === 0"
-          class="centered nos-notification__empty"
+          class="centered nos-notification-modal__empty"
         >
           No notifications yet!
         </p>
@@ -24,26 +22,31 @@
           <li
             v-for="(noti, index) in notifications"
             :key="index"
-            class="nos-notification__item"
+            class="nos-notification-modal__item"
           >
             <button
               class="nos-modal__button"
               @click="selectNoti(noti)"
             >
               <p>{{ noti.object_name }}</p>
-              <span class="nos-notification__desc">{{ noti.text }}</span>
+              <span class="nos-notification-modal__desc">{{ noti.text }}</span>
             </button>
           </li>
         </ul>
       </div>
-    </div>
+    </nos-default-modal>
   </div>
 </template>
 
 <script>
+import nosDefaultModal from '../nos-default-modal/nos-default-modal.vue';
 import Base from './_base';
 
 export default {
+  components: {
+    nosDefaultModal
+  },
+
   mixins: [Base]
 };
 </script>
