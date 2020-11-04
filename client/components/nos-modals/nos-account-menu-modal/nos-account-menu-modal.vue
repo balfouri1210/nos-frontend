@@ -1,31 +1,31 @@
 <template>
-  <div class="nos-modal nos-account-menu-modal">
-    <nos-modal-header @close-modal="$emit('close-modal')" />
+  <div class="nos-account-menu-modal">
+    <nos-default-modal>
+      <div class="nos-account-menu-modal__content">
+        <button
+          class=""
+          @click="goToSettings"
+        >
+          Settings
+        </button>
 
-    <div class="nos-modal__body">
-      <button
-        class="nos-modal__button"
-        @click="goToSettings"
-      >
-        Settings
-      </button>
-
-      <button
-        class="nos-modal__button"
-        @click="logout"
-      >
-        Logout
-      </button>
-    </div>
+        <button
+          class=""
+          @click="logout"
+        >
+          Logout
+        </button>
+      </div>
+    </nos-default-modal>
   </div>
 </template>
 
 <script>
-import nosModalHeader from '../nos-modal-header/nos-modal-header.vue';
+import nosDefaultModal from '../nos-default-modal/nos-default-modal.vue';
 
 export default {
   components: {
-    nosModalHeader
+    nosDefaultModal
   },
 
   methods: {
