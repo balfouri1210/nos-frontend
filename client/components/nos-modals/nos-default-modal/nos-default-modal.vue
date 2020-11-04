@@ -32,16 +32,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 25;
+    flex: 20;
     background: $nos-main-gradient;
 
     img {
-      width: 60px;
+      width: 40px;
     }
   }
 
   &__right {
-    flex: 75;
+    flex: 80;
   }
 }
 
@@ -49,7 +49,7 @@ export default {
   .nos-default-modal {
     &__left {
       img {
-        width: 80px;
+        width: 60px;
       }
     }
   }
