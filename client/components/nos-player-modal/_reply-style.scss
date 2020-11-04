@@ -132,8 +132,11 @@
   }
 
   &__added-reply {
+    padding: 4px 16px 0;
+
     &-username {
       font-weight: 800;
+      font-size: 13px;
     }
     
     &-content {
@@ -150,6 +153,12 @@
     &__reply {
       &-content {
         font-size: 13px;
+      }
+    }
+
+    &__added-reply {
+      &-username {
+        font-size: 14px;
       }
     }
   }
