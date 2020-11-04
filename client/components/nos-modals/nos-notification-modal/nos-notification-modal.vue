@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="nos-modal nos-notification-modal"
-    :class="{'nos-modal--white-tone': $store.getters.getIsModalWhiteTone($route)}"
-  >
+  <div class="nos-modal nos-notification-modal">
     <div class="nos-notification">
       <nos-modal-header @close-modal="$emit('close-modal')" />
 
