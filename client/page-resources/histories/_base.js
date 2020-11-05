@@ -1,4 +1,5 @@
 import months from '@/lib/months';
+import Cookies from 'js-cookie';
 
 export default {
   transition: 'fade',
@@ -66,6 +67,11 @@ export default {
 
     selectMonth(month) {
       this.selectedMonth = month.num;
+      Cookies.set('nosHistoryMonth', month.num, {
+        expires: 3,
+        sameSite: 'lax'
+      });
+
       this.getHistories();
     },
 

@@ -120,6 +120,8 @@ export const actions = {
       } else if (req.headers.cookie) {
         const cookie = U.cookieParser(req.headers.cookie);
         const jwt = cookie.nosJwt;
+
+        // 계정 관련 쿠키 기반으로 vuex세팅
         if (jwt) {
           commit('auth/mutateJwt', jwt);
 
@@ -129,6 +131,9 @@ export const actions = {
           commit('auth/mutateUsername', decodedJwt.username);
           commit('auth/mutateAuthorization', decodedJwt.authorization);
         }
+
+        // 히스토리 관련 쿠키 기반으로 vuex세팅
+        if (cookie.nosHistoryMonth) commit('mutateHistoryMonth', cookie.nosHistoryMonth);
       }
     } catch (err) {
       console.error(err);
