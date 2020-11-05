@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
 import { createNamespacedHelpers } from 'vuex';
 const { mapMutations, mapActions } = createNamespacedHelpers('auth');
 import jwtDecode from 'jwt-decode';
@@ -116,8 +115,8 @@ export default {
         });
 
         this.mutateJwt(data.token);
-        Cookies.set('nosJwt', data.token, {
-          expires: TOKEN_EXPIRES,
+        this.$cookies.set('nosJwt', data.token, {
+          maxAge: TOKEN_EXPIRES,
           domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
           sameSite: 'lax'
         });

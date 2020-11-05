@@ -2,7 +2,6 @@ import countries from '@/lib/countries';
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapMutations } = createNamespacedHelpers('auth');
 import jwtDecode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import { TOKEN_EXPIRES } from '@/lib/constants';
 
 export default {
@@ -90,8 +89,8 @@ export default {
 
     applyNewJWT(newToken) {
       this.mutateJwt(newToken);
-      Cookies.set('nosJwt', newToken, {
-        expires: TOKEN_EXPIRES,
+      this.$cookies.set('nosJwt', newToken, {
+        maxAge: TOKEN_EXPIRES,
         domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
         sameSite: 'lax'
       });

@@ -108,7 +108,6 @@ export const getters = {
   }
 };
 
-const cookieparser = process.server ? require('cookieparser') : undefined;
 
 export const actions = {
   // nuxtServerInit document
@@ -119,9 +118,10 @@ export const actions = {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        const cookie = cookieparser.parse(req.headers.cookie);
-        console.log(cookie);
-        const jwt = cookie.nosJwt;
+        const jwt = app.$cookies.get('nosJwt');
+        const nosHistoryMonth = app.$cookies.get('nosHistoryMonth');
+
+        console.log(jwt, nosHistoryMonth);
 
         // 계정 관련 쿠키 기반으로 vuex세팅
         if (jwt) {
@@ -135,7 +135,7 @@ export const actions = {
         }
 
         // 히스토리 관련 쿠키 기반으로 vuex세팅
-        if (cookie.nosHistoryMonth) commit('mutateHistoryMonth', cookie.nosHistoryMonth);
+        if (nosHistoryMonth) commit('mutateHistoryMonth', nosHistoryMonth);
       }
     } catch (err) {
       console.error(err);

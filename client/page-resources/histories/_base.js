@@ -1,11 +1,10 @@
 import months from '@/lib/months';
-import Cookies from 'js-cookie';
 
 export default {
   transition: 'fade',
   layout: 'base',
 
-  async asyncData({ $axios, error, $moment, store }) {
+  async asyncData({ $axios, error, $moment, store, req }) {
     try {
       const histories = await $axios.$get('/api/histories', {
         params: {
@@ -72,8 +71,8 @@ export default {
       this.getHistories();
 
       this.$store.commit('mutateHistoryMonth', this.selectedMonth);
-      Cookies.set('nosHistoryMonth', month.num, {
-        expires: 3,
+      this.$cookies.set('nosHistoryMonth', month.num, {
+        maxAge: 60 * 60 * 24 * 3,
         domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
         sameSite: 'lax'
       });

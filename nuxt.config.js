@@ -212,7 +212,8 @@ module.exports = {
 
     ['vue-scrollto/nuxt', { duration: 300 }],
 
-    '@nuxtjs/sentry'
+    '@nuxtjs/sentry',
+    'cookie-universal-nuxt'
   ],
 
   env: {
