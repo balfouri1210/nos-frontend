@@ -85,6 +85,13 @@ export default {
     }
   },
 
+  mounted() {
+    this.$cookies.set('nosFuck', 'fuck', {
+      maxAge: 60 * 60 * 24,
+      domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com'
+    });
+  },
+
   methods: {
     seasonEndHandler() {
       window.location.reload();
