@@ -47,7 +47,7 @@
               :key="index"
             >
               <button
-                class="histories__month"
+                class="histories__month btn-neumorphism"
                 :class="{'histories__month--selected': isMonthSelected(month)}"
                 @click="selectMonth(month)"
               >
