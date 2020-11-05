@@ -5,34 +5,59 @@
     </div>
 
     <div class="histories__header">
-      <div class="histories__year">
-        <button
-          v-if="selectedYear > 2020"
-          @click="decreaseYear"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </button>
-        <h1>{{ selectedYear }}</h1>
-        <button @click="increaseYear">
-          <v-icon>mdi-chevron-right</v-icon>
-        </button>
-      </div>
-
-      <div class="histories__month-wrapper">
-        <ul class="histories__month-list">
-          <li
-            v-for="(month, index) in months"
-            :key="index"
+      <div class="histories__header-content">
+        <div class="histories__year">
+          <button
+            v-if="selectedYear > 2020"
+            class="histories__year-mobile-arrow"
+            @click="decreaseYear"
           >
-            <button
-              class="histories__month"
-              :class="{'histories__month--selected': isMonthSelected(month)}"
-              @click="selectMonth(month)"
+            <v-icon>mdi-chevron-left</v-icon>
+          </button>
+
+          <button
+            class="histories__year-web-arrow"
+            @click="increaseYear"
+          >
+            <v-icon>mdi-chevron-up</v-icon>
+          </button>
+
+          <h1>{{ selectedYear }}</h1>
+
+          <button
+            v-if="selectedYear > 2020"
+            class="histories__year-web-arrow"
+            @click="decreaseYear"
+          >
+            <v-icon>mdi-chevron-down</v-icon>
+          </button>
+
+          <button
+            class="histories__year-mobile-arrow"
+            @click="increaseYear"
+          >
+            <v-icon>mdi-chevron-right</v-icon>
+          </button>
+        </div>
+
+        <div class="histories__month-wrapper">
+          <ul class="histories__month-list">
+            <li
+              v-for="(month, index) in months"
+              :key="index"
             >
-              {{ month.name }}
-            </button>
-          </li>
-        </ul>
+              <button
+                class="histories__month"
+                :class="{'histories__month--selected': isMonthSelected(month)}"
+                @click="selectMonth(month)"
+              >
+                <div>
+                  <span class="histories__month-num">{{ month.num }}</span><span class="histories__month-name">{{ month.name }}</span>
+                </div>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
