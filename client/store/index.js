@@ -1,4 +1,3 @@
-import U from '../lib/util';
 import jwtDecode from 'jwt-decode';
 
 export const state = () => ({
@@ -109,6 +108,8 @@ export const getters = {
   }
 };
 
+const cookieparser = process.server ? require('cookieparser') : undefined;
+
 export const actions = {
   // nuxtServerInit document
   // https://ko.nuxtjs.org/guide/vuex-store/#nuxtserverinit-%EC%95%A1%EC%85%98
@@ -118,7 +119,8 @@ export const actions = {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        const cookie = U.cookieParser(req.headers.cookie);
+        const cookie = cookieparser.parse(req.headers.cookie);
+        console.log(cookie);
         const jwt = cookie.nosJwt;
 
         // 계정 관련 쿠키 기반으로 vuex세팅
