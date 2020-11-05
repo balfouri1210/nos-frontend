@@ -58,21 +58,24 @@ export default {
     decreaseYear() {
       this.selectedYear--;
       this.getHistories();
+      this.$store.commit('mutateHistoryYear', this.selectedYear);
     },
 
     increaseYear() {
       this.selectedYear++;
       this.getHistories();
+      this.$store.commit('mutateHistoryYear', this.selectedYear);
     },
 
     selectMonth(month) {
       this.selectedMonth = month.num;
+      this.getHistories();
+
+      this.$store.commit('mutateHistoryMonth', this.selectedMonth);
       Cookies.set('nosHistoryMonth', month.num, {
         expires: 3,
         sameSite: 'lax'
       });
-
-      this.getHistories();
     },
 
     async getHistories() {
@@ -89,11 +92,6 @@ export default {
       } finally {
         this.isHistoryLoading = false;
       }
-    },
-
-    selectHistory() {
-      this.$store.commit('mutateHistoryYear', this.selectedYear);
-      this.$store.commit('mutateHistoryMonth', this.selectedMonth);
     }
   }
 };
