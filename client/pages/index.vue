@@ -21,8 +21,8 @@
           class="home__guide-introduce"
           @click="showWhatIs907 = !showWhatIs907; showGuide = false"
         >
-          What is 907?
           <span />
+          What is 907?
         </button>
 
         <div class="home__guide-wrapper">
@@ -85,8 +85,8 @@
           class="home__guide-qna"
           @click="showGuide = !showGuide; showWhatIs907 = false"
         >
-          Guide for New users
           <span />
+          Guide for New users
         </button>
 
         <div class="home__guide-wrapper">
