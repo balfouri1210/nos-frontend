@@ -92,6 +92,7 @@ export default {
       this.mutateJwt(newToken);
       Cookies.set('nosJwt', newToken, {
         expires: TOKEN_EXPIRES,
+        domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
         sameSite: 'lax'
       });
 

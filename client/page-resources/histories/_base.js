@@ -74,6 +74,7 @@ export default {
       this.$store.commit('mutateHistoryMonth', this.selectedMonth);
       Cookies.set('nosHistoryMonth', month.num, {
         expires: 3,
+        domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
         sameSite: 'lax'
       });
     },
