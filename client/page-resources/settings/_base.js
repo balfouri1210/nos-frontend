@@ -91,8 +91,7 @@ export default {
       this.mutateJwt(newToken);
       this.$cookies.set('nosJwt', newToken, {
         maxAge: TOKEN_EXPIRES,
-        domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com',
-        sameSite: 'lax'
+        domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com'
       });
 
       const decodedJwt = jwtDecode(newToken);
