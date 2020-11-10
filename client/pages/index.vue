@@ -14,7 +14,6 @@
       </client-only>
 
 
-
       <!-- 907DEGREES CONCEPT and GUIDE FOR NEW USER -->
       <div class="home__guide">
         <button
@@ -25,6 +24,32 @@
           What is 907?
         </button>
 
+        <button
+          class="home__guide-qna"
+          @click="showGuide = !showGuide; showWhatIs907 = false"
+        >
+          <span />
+          Guide for New users
+        </button>
+
+        <a
+          href="https://twitter.com/907degrees"
+          target="_blank"
+          class="home__sns-twitter"
+        >
+          <v-icon>mdi-twitter</v-icon>
+        </a>
+
+        <a
+          href="https://www.instagram.com/907degrees_official"
+          target="_blank"
+          class="home__sns-instagram"
+        >
+          <v-icon>mdi-instagram</v-icon>
+        </a>
+
+
+        <!-- WHAT IS 907 CONTENT -->
         <div class="home__guide-wrapper">
           <div
             v-if="showWhatIs907"
@@ -79,16 +104,9 @@
             </div>
           </div>
         </div>
+        <!-- WHAT IS 907 CONTENT END -->
 
-
-        <button
-          class="home__guide-qna"
-          @click="showGuide = !showGuide; showWhatIs907 = false"
-        >
-          <span />
-          Guide for New users
-        </button>
-
+        <!-- GUIDE FOR NEW USERS CONTENT -->
         <div class="home__guide-wrapper">
           <div
             v-if="showGuide"
@@ -230,6 +248,7 @@
             </div>
           </div>
         </div>
+        <!-- GUIDE FOR NEW USERS CONTENT END -->
       </div>
       <!-- END -->
 
