@@ -118,7 +118,6 @@ export const actions = {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        console.log(req.headers.cookie);
         const jwt = app.$cookies.get('nosJwt');
         const nosHistoryMonth = app.$cookies.get('nosHistoryMonth');
 
