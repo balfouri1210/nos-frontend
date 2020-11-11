@@ -41,13 +41,16 @@
   }
 
   &__replies {
-    margin-top: 4px;
     margin-left: 18px;
     font-size: 13px;
+
+    ::v-deep .nos-skeleton-loader {
+      margin-top: 8px;
+    }
   }
 
   &__reply {
-    margin-bottom: 4px;
+    padding: 7px 0;
 
     &-meta {
       margin-bottom: 4px;
