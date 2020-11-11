@@ -8,6 +8,11 @@ export default {
       default: null
     },
 
+    clubName: {
+      type: String,
+      default: null
+    },
+
     isHeader: {
       type: Boolean,
       default: false

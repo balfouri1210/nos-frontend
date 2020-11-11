@@ -8,7 +8,7 @@
         v-if="isHeader"
         class="fixture-area__header"
       >
-        <span>Fixtures</span>
+        <span>Fixtures - {{ clubName }}</span>
       </div>
 
       <div class="fixture-area__body">
