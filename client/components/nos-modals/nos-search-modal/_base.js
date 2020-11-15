@@ -13,7 +13,7 @@ export default {
       clubs: eplClubs,
       nosImageUrl: process.env.NOS_IMAGE_URL,
       countries,
-      majorCountries: [209, 250, 83, 110, 76, 178, 183, 22, 157, 233, 228, 15, 32, 238, 45, 49, 144, 11, 196, 61, 162, 4, 66, 84, 39, 55]
+      majorCountries: [209, 250, 83, 110, 76, 178, 183, 22, 157, 233, 228, 15, 32, 238, 45, 49, 144, 11, 196, 61, 162, 4, 66, 84, 39, 55, 56]
     };
   },
 
