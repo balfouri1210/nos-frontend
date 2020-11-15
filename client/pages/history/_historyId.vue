@@ -28,6 +28,7 @@
           :need-player-comments-preview="true"
           :activate-load-more="true"
           :previous-player-id-list-prop="previousPlayerIdList"
+          :start-rank="2"
         />
 
         <!-- Nuxt child for player modal -->
