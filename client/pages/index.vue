@@ -41,7 +41,7 @@
         </a>
 
         <a
-          href="https://www.instagram.com/907degrees_official"
+          href="https://www.instagram.com/907degrees"
           target="_blank"
           class="home__sns-instagram"
         >
