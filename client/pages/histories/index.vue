@@ -101,7 +101,6 @@
                 historyId: history.id
               }
             })"
-            @click.native="selectHistory"
           >
             <div class="histories__link-content">
               <div class="histories__period">

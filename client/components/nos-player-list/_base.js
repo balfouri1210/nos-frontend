@@ -121,7 +121,7 @@ export default {
         if (this.$route.name.indexOf('history') === -1) {
           this.totalPlayerCount = (await this.$axios.$get('/api/players/total')).total_player_count;
         } else {
-          this.totalPlayerCount = (await this.$axios.$get(`/api/histories/player/total/${this.historyId}`)).total_player_count;
+          this.totalPlayerCount = (await this.$axios.$get(`/api/histories/${this.historyId}/player/total`)).total_player_count;
         }
       }
     } catch (err) {
@@ -207,7 +207,7 @@ export default {
 
         if (this.isHistorical) {
           // History에서의 Load more player
-          loadedPlayers = await this.$axios.$get(`/api/histories/player/${this.historyId}`, {
+          loadedPlayers = await this.$axios.$get(`/api/histories/${this.historyId}/player`, {
             params: {
               previousPlayerIdList: this.previousPlayerIdList.toString()
             }
