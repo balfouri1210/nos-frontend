@@ -206,7 +206,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `clubId_${selectedClub.nos_team_id}`
+          searchData: `club-${selectedClub.nos_team_id}`
         }
       }));
     },
@@ -215,12 +215,12 @@ export default {
       const result = eplClubs
         .filter(club => club.api_football_team_id === fixture.homeTeam.team_id || club.api_football_team_id === fixture.awayTeam.team_id)
         .map(item => item.id)
-        .join(',');
+        .join('_');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `clubIdList_${result}`
+          searchData: `clubs-${result}`
         }
       }));
     }

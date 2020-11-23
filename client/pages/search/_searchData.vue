@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div v-else-if="targetClubIdList">
+        <div v-else-if="targetClubs">
           <span>Search result</span>
         </div>
 

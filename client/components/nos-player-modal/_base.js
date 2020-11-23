@@ -506,9 +506,13 @@ export default {
         this.$router.push(this.localePath('index'));
       } else if (this.$route.name.indexOf('comment-player') !== -1) {
         this.$router.push(this.localePath('comment'));
-      } else {
-        // search player modal
-        this.$emit('closePlayerModal');
+      } else if (this.$route.name.indexOf('search') !== -1) {
+        this.$router.push(this.localePath({
+          name: 'search-searchData',
+          params: {
+            searchData: this.$route.params.searchData ? this.$route.params.searchData : null
+          }
+        }));
       }
     },
 

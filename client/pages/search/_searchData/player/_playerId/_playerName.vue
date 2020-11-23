@@ -3,7 +3,6 @@
     <nos-player-modal
       :player="player"
       :initial-comments="comments"
-      @closePlayerModal="closePlayerModalHandler"
     />
   </div>
 </template>
@@ -18,17 +17,6 @@ export default {
   },
 
   mixins: [nosPlayerModalMixin],
-
-  methods: {
-    closePlayerModalHandler() {
-      this.$router.push(this.localePath({
-        name: 'search-searchData',
-        params: {
-          searchData: this.$route.params.searchData ? this.$route.params.searchData : null
-        }
-      }));
-    }
-  },
 
   head() {
     return {

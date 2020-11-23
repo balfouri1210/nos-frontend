@@ -30,7 +30,7 @@ export default {
       searchKeyword: null,
       targetCountry: {},
       targetClub: {},
-      targetClubIdList: null,
+      targetClubs: null,
 
       targetPlayer: {},
       targetPlayerComments: [],
@@ -45,16 +45,16 @@ export default {
 
   created() {
     if (this.$route.params.searchData) {
-      const [searchTarget, searchData] = this.$route.params.searchData.split('_');
+      const [searchTarget, searchData] = this.$route.params.searchData.split('-');
 
       if (searchTarget === 'keyword') {
         this.searchKeyword = searchData;
       } else if (searchTarget === 'country') {
         this.setTargetCountry(searchData);
-      } else if (searchTarget === 'clubId') {
+      } else if (searchTarget === 'club') {
         this.setTargetClub(searchData);
-      } else if (searchTarget === 'clubIdList') {
-        this.targetClubIdList = searchData;
+      } else if (searchTarget === 'clubs') {
+        this.targetClubs = searchData;
       }
     }
 
@@ -71,7 +71,7 @@ export default {
               keyword: this.searchKeyword,
               countryId: this.targetCountry.id,
               clubId: this.targetClub.id,
-              clubIdList: this.targetClubIdList
+              clubIdList: this.targetClubs
             }
           })
         ]);

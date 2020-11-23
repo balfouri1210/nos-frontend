@@ -272,7 +272,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `clubId_${clubId}`
+          searchData: `club-${clubId}`
         }
       }));
     },
