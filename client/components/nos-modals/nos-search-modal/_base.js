@@ -49,7 +49,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `country_${country.code.toLowerCase()}-${country.id}`
+          searchData: `country-${country.code.toLowerCase()}_${country.id}`
         }
       }));
     },
@@ -60,7 +60,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `keyword_${this.searchKeyword}`
+          searchData: `keyword-${this.searchKeyword}`
         }
       }));
     },

@@ -86,7 +86,7 @@ export default {
     },
 
     setTargetCountry(searchData) {
-      const countryInfo = searchData.split('-');
+      const countryInfo = searchData.split('_');
       this.targetCountry = countries.find(country => country.id === parseInt(countryInfo[1]));
     },
 
