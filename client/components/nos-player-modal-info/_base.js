@@ -281,7 +281,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `country_${countryCode}-${countryId}`
+          searchData: `country-${countryCode}_${countryId}`
         }
       }));
     },
