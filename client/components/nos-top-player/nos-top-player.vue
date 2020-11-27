@@ -47,7 +47,7 @@
           </h2>
 
           <p class="nos-top-player__meta">
-            {{ $moment.unix(topPlayer.birthday).format('DD / MM / YYYY') }}, {{ topPlayer.height }} cm, <span>{{ topPlayer.country_name }}</span>
+            {{ $moment().diff($moment.unix(topPlayer.birthday).format('YYYY-MM-DD'), 'years') }}, {{ topPlayer.height }} cm, <span>{{ topPlayer.country_name }}</span>
             <img
               :src="`${nosImageUrl}/flags/${topPlayer.country_code.toLowerCase()}.png`"
               :alt="topPlayer.country_code"
