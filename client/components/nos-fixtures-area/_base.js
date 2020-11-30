@@ -76,12 +76,12 @@ export default {
       const result = eplClubs
         .filter(club => club.api_football_team_id === fixture.homeTeam.team_id || club.api_football_team_id === fixture.awayTeam.team_id)
         .map(item => item.id)
-        .join('_');
+        .join('-');
 
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `clubs-${result}`
+          searchData: `clubs_${result}`
         }
       }));
     }

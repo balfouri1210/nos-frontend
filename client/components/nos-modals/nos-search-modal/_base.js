@@ -38,7 +38,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `club-${club.id}`
+          searchData: `club_${club.id}`
         }
       }));
     },
@@ -49,7 +49,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `country-${country.code.toLowerCase()}_${country.id}`
+          searchData: `country_${country.code.toLowerCase()}-${country.id}`
         }
       }));
     },
@@ -60,7 +60,7 @@ export default {
       this.$router.push(this.localePath({
         name: 'search-searchData',
         params: {
-          searchData: `keyword-${this.searchKeyword}`
+          searchData: `keyword_${this.searchKeyword}`
         }
       }));
     },

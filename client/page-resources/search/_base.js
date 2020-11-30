@@ -45,7 +45,7 @@ export default {
 
   created() {
     if (this.$route.params.searchData) {
-      const [searchTarget, searchData] = this.$route.params.searchData.split('-');
+      const [searchTarget, searchData] = this.$route.params.searchData.split('_');
 
       if (searchTarget === 'keyword') {
         this.searchKeyword = searchData;
@@ -86,7 +86,7 @@ export default {
     },
 
     setTargetCountry(searchData) {
-      const countryInfo = searchData.split('_');
+      const countryInfo = searchData.split('-');
       this.targetCountry = countries.find(country => country.id === parseInt(countryInfo[1]));
     },
 
