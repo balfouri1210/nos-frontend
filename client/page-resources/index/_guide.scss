@@ -10,7 +10,6 @@
 
   &-introduce, &-qna {
     position: relative;
-    // padding: 5px 4px;
     height: 32px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -19,11 +18,11 @@
 
     span {
       position: absolute;
-      top: 8px;
-      left: 8px;
+      top: 5px;
+      left: 5px;
       display: block;
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
     }
   }
@@ -59,7 +58,6 @@
   &-introduce-desc {
     width: 100%;
     float: left;
-    // background: linear-gradient(160deg, #ea5514, #f4991e);
 
     .home__guide-backdrop::before {
       background-image: url(https://images.907degrees.com/etc/what_is_907.jpg);
@@ -72,7 +70,6 @@
   &-qna-desc {
     width: 100%;
     float: right;
-    // background: linear-gradient(160deg, #1976d2 10%, #b800f2 90%);
 
     .home__guide-backdrop::before {
       background-image: url(https://images.907degrees.com/etc/guide.jpg);
@@ -189,6 +186,12 @@
       }
     }
 
+    &-introduce, &-qna {
+      span {
+        top: 7px;
+        left: 7px;
+      }
+    }
     &-qna {
       margin-left: 18px;
     }
