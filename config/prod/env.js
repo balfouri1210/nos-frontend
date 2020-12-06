@@ -1,7 +1,8 @@
 const env = {
   STAGE: 'prod',
   NOS_URL: 'https://907degrees.com',
-  NOS_API_URL: 'https://api.907degrees.com',
+  NOS_API_URL: 'http://api.907degrees.com',
+  // api url에 https를 사용하려면 로드밸런서가 필수인데, 사용하게 되면 월 19달러의 추가요금이 들게된다. 그래서 일단은 http로만 설정해놓았다.
   NOS_IMAGE_URL: 'https://images.907degrees.com',
   BING_API_URL: 'https://api.bing.microsoft.com/v7.0/news/search',
 

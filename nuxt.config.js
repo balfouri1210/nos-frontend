@@ -146,7 +146,7 @@ module.exports = {
   },
 
   axios: {
-    https: true,
+    // https: true,
     baseURL: env.NOS_API_URL
   },
 
