@@ -101,6 +101,10 @@ export default {
 
     linkToShare() {
       return `${process.env.NOS_URL}${this.$route.fullPath}`;
+    },
+
+    isAdmin() {
+      return this.$store.getters['auth/getAuthorization'] === 3;
     }
   },
 

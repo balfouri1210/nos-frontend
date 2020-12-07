@@ -43,19 +43,17 @@ export default {
     })[0];
 
     try {
-      if (this.$store.getters['auth/getAuthorization'] !== 3) {
-        [this.lastFixture, this.nextFixture] =
-          await Promise.all([
-            this.getLastFixture(targetClub.api_football_team_id),
-            this.getNextFixture(targetClub.api_football_team_id)
-          ]);
+      [this.lastFixture, this.nextFixture] =
+        await Promise.all([
+          this.getLastFixture(targetClub.api_football_team_id),
+          this.getNextFixture(targetClub.api_football_team_id)
+        ]);
 
-        if (this.lastFixture)
-          this.lastFixture = this.lastFixture.api.fixtures[0];
+      if (this.lastFixture)
+        this.lastFixture = this.lastFixture.api.fixtures[0];
 
-        if (this.nextFixture)
-          this.nextFixture = this.nextFixture.api.fixtures[0];
-      }
+      if (this.nextFixture)
+        this.nextFixture = this.nextFixture.api.fixtures[0];
     } catch (err) {
       console.error(err);
     } finally {

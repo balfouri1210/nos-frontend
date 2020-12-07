@@ -62,7 +62,7 @@
                 <!-- CAUTION !!!!!!!!! -->
                 <!-- FAKE COMMENT FORM -->
                 <div
-                  v-if="$store.getters['auth/getAuthorization'] === 3"
+                  v-if="isAdmin"
                   style="margin-bottom: 16px;"
                 >
                   <div
@@ -250,7 +250,7 @@
                       <div>
                         <!-- COMMENT ID FOR ADMIN, FAKE COMMENT VOTE -->
                         <div
-                          v-if="$store.getters['auth/getAuthorization'] === 3"
+                          v-if="isAdmin"
                           :style="{
                             display: 'flex',
                             alignItems: 'flex-end',
@@ -701,7 +701,10 @@
 
 
           <!-- MODAL RIGHT -->
-          <div class="player-modal__right ">
+          <div
+            v-if="!isAdmin"
+            class="player-modal__right"
+          >
             <nos-fixtures-area
               :club-id="player.club_id"
               :club-name="player.club_name"
