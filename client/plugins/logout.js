@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie';
-
-export default ({ store }, inject) => {
+export default ({ store, app }, inject) => {
   const logout = () => {
     store.commit('auth/clearAuthStore');
-    Cookies.remove('nosJwt');
+    app.$cookies.remove('nosJwt', {
+      domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com'
+    });
   };
 
   inject('logout', logout);
