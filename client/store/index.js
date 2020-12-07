@@ -118,8 +118,8 @@ export const actions = {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        const jwt = app.$cookies.get('nosJwt');
-        const nosHistoryMonth = app.$cookies.get('nosHistoryMonth');
+        const jwt = app.$cookies.get('nos-jwt');
+        const nosHistoryMonth = app.$cookies.get('nos-history-month');
 
         // 계정 관련 쿠키 기반으로 vuex세팅
         if (jwt) {

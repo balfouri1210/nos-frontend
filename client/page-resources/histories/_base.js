@@ -71,7 +71,7 @@ export default {
       this.getHistories();
 
       this.$store.commit('mutateHistoryMonth', this.selectedMonth);
-      this.$cookies.set('nosHistoryMonth', month.num, {
+      this.$cookies.set('nos-history-month', month.num, {
         maxAge: 60 * 60 * 24 * 3,
         domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com'
       });
