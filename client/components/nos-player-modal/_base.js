@@ -9,7 +9,6 @@ import nosYoutubePlayer from '@/components/nos-youtube-player/nos-youtube-player
 import nosLinkShare from '@/components/nos-link-share/nos-link-share.vue';
 import nosTextarea from '@/components/nos-textarea/nos-textarea.vue';
 import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
-// import Cookies from 'js-cookie';
 
 export default {
   props: {

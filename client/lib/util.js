@@ -1,5 +1,4 @@
 import { debounce, isEmpty } from 'lodash';
-// import Cookies from 'js-cookie';
 
 export default {
   debounce,
