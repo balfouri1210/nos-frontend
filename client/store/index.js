@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import cookie from 'cookie';
 
 export const state = () => ({
   serviceStatus: 'normal', // normal, maintenance
@@ -118,8 +119,13 @@ export const actions = {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        const jwt = app.$cookies.get('nos-jwt');
-        const nosHistoryMonth = app.$cookies.get('nos-history-month');
+        // const jwt = app.$cookies.get('nos-jwt');
+        // const nosHistoryMonth = app.$cookies.get('nos-history-month');
+        const parsedCookie = cookie.parse(req.headers.cookie);
+        console.log(parsedCookie);
+        const jwt = parsedCookie['nos-jwt'];
+        const nosHistoryMonth = parsedCookie['nos-history-month'];
+        console.log(jwt, nosHistoryMonth);
 
         // 계정 관련 쿠키 기반으로 vuex세팅
         if (jwt) {
