@@ -47,7 +47,8 @@ resources:
               Cookies:
                 Forward: whitelist
                 WhitelistedNames:
-                  - nosJwt
+                  - nos_jwt
+                  - nos_history_month
               QueryString: false
           Enabled: true
           Origins:

@@ -115,18 +115,12 @@ export const actions = {
   // https://ko.nuxtjs.org/guide/vuex-store/#nuxtserverinit-%EC%95%A1%EC%85%98
   // params: vuexContext, context
   nuxtServerInit ({ commit }, { req, app, redirect, store }) {
-    console.log('nuxt server init');
     try {
       if (store.getters.getServiceStatus === 'maintenance') {
         return redirect(app.localePath('maintenance'));
       } else if (req.headers.cookie) {
-        // const jwt = app.$cookies.get('nosJwt');
-        // const nosHistoryMonth = app.$cookies.get('nosHistoryMonth');
-        const parsedCookie = cookie.parse(req.headers.cookie);
-        console.log(parsedCookie);
-        const jwt = parsedCookie['nosJwt'];
-        const nosHistoryMonth = parsedCookie['nosHistoryMonth'];
-        console.log(jwt, nosHistoryMonth);
+        const jwt = app.$cookies.get('nos_jwt');
+        const nos_history_month = app.$cookies.get('nos_history_month');
 
         // 계정 관련 쿠키 기반으로 vuex세팅
         if (jwt) {
@@ -140,7 +134,7 @@ export const actions = {
         }
 
         // 히스토리 관련 쿠키 기반으로 vuex세팅
-        if (nosHistoryMonth) commit('mutateHistoryMonth', nosHistoryMonth);
+        if (nos_history_month) commit('mutateHistoryMonth', nos_history_month);
       }
     } catch (err) {
       console.error(err);
