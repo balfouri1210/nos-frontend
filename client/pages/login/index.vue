@@ -115,7 +115,7 @@ export default {
         });
 
         this.mutateJwt(data.token);
-        this.$cookies.set('nos-jwt', data.token, {
+        this.$cookies.set('nosJwt', data.token, {
           maxAge: TOKEN_EXPIRES,
           domain: process.env.STAGE === 'local' ? 'localhost' : '.907degrees.com'
         });
