@@ -123,6 +123,7 @@ export const actions = {
         const nos_history_month = app.$cookies.get('nos_history_month');
 
         // 계정 관련 쿠키 기반으로 vuex세팅
+        // !! NOTICE !! 새로운 쿠키 추가할 때 serverless.yml에 whitelist 추가해주는거 잊으면 안된다.
         if (jwt) {
           commit('auth/mutateJwt', jwt);
 
