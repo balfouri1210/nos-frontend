@@ -47,9 +47,9 @@ export default {
         const topPlayer = wholePlayerList[0];
 
         const high4Players = wholePlayerList.slice(1, 5);
-        const high8Players = wholePlayerList.slice(5, 13);
-        const restOfPlayers = wholePlayerList.slice(13, wholePlayerList.length);
-        return { topPlayer, high4Players, high8Players, restOfPlayers };
+        const high6Players = wholePlayerList.slice(5, 11);
+        const restOfPlayers = wholePlayerList.slice(11, wholePlayerList.length);
+        return { topPlayer, high4Players, high6Players, restOfPlayers };
       }
     } catch (err) {
       console.error(err);
@@ -82,7 +82,7 @@ export default {
 
   computed: {
     previousPlayerIdList() {
-      const result = this.high4Players.concat(this.high8Players).map(player => player.id).concat(this.topPlayer.id);
+      const result = this.high4Players.concat(this.high6Players).map(player => player.id).concat(this.topPlayer.id);
       return result;
     }
   },

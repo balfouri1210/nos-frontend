@@ -509,18 +509,17 @@
       <nos-news-headline />
 
 
-      <!-- COMMENT AREA -->
-      <nos-landing-comment-area />
-
-
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"
-        :player-list-prop="high8Players"
+        :player-list-prop="high6Players"
         :need-player-comments-preview="true"
         :start-rank="6"
       />
 
-      <nos-main-event />
+
+      <!-- COMMENT AREA -->
+      <nos-landing-comment-area />
+
 
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"
@@ -530,6 +529,8 @@
         :previous-player-id-list-prop="previousPlayerIdList"
         :start-rank="14"
       />
+
+      <!-- <nos-main-event /> -->
     </div>
 
     <nos-onboarding-ui />
