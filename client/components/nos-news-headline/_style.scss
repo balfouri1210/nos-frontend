@@ -1,0 +1,142 @@
+.nos-news-headline {
+  &__content {
+    width: 100%;
+    overflow: auto;
+
+    ul {
+      display: flex;
+      padding: 4px 0 12px;
+    }
+
+    li {
+      flex-shrink: 0;
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+  }
+  &__content-ul-wrapper {
+    display: inline-block;
+    margin: 2px 4px 0;
+  }
+
+  &__item {
+    position: relative;
+    flex-direction: column;
+    width: 200px;
+    margin-right: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+  }
+  &__item:last-of-type {
+    margin: 0;
+  }
+
+  &__thumbnail {
+    position: relative;
+    width: 100%;
+    flex: 60;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+
+    .nos-news-headline__provider {
+      position: absolute;
+      bottom: -6px;
+      right: 3px;
+    }
+  }
+  &__thumbnail::before {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    padding-bottom: calc(52%);
+    content: '';
+  }
+
+  &__info {
+    position: relative;
+    flex: 40;
+    padding: 12px;
+
+    .nos-news-headline__provider {
+      margin-bottom: 7px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 4px;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  &__published-at {
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+  }
+  &__provider {
+    display: inline-block;
+    padding: 0 7px;
+    border-radius: 4px;
+    background: black;
+    color: white;
+    font-size: 10px;
+    font-weight: 400;
+  }
+
+  &__title--larged {
+    font-size: 14px;
+    line-height: 17px;;
+  }
+
+  .flex-none {
+    flex: unset;
+  }
+}
+
+
+@media screen and (min-width: $mobile-width) {
+  .nos-news-headline {
+    &__content {
+      margin-bottom: 20px;
+    }
+
+    &__content-ul-wrapper {
+      margin: 2px 30px 0;
+    }
+
+    &__item {
+      width: 320px;
+    }
+
+    &__thumbnail {
+      .nos-news-headline__provider {
+        bottom: -6px;
+        right: 6px;
+      }
+    }
+
+    &__info {
+      padding: 18px;
+    }
+
+    &__title {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    &__published-at {
+      text-align: right;
+      font-size: 13px;
+    }
+
+    &__provider {
+      font-size: 13px;
+    }
+  }
+}

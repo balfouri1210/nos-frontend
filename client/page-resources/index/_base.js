@@ -1,6 +1,7 @@
 import nosTopPlayer from '@/components/nos-top-player/nos-top-player.vue';
 import nosPlayerList from '@/components/nos-player-list/nos-player-list.vue';
 import nosCountdown from '@/components/nos-countdown/nos-countdown';
+import nosNewsHeadline from '@/components/nos-news-headline/nos-news-headline';
 import nosPreseasonUi from '@/components/nos-preseason-ui/nos-preseason-ui.vue';
 import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vue';
 import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
@@ -17,6 +18,7 @@ export default {
     nosTopPlayer,
     nosPlayerList,
     nosCountdown,
+    nosNewsHeadline,
     nosPreseasonUi,
     nosOnboardingUi,
     nosMainEvent,

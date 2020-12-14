@@ -20,25 +20,15 @@
           class="home__guide-introduce"
           @click="showWhatIs907 = !showWhatIs907; showGuide = false"
         >
-          <span />
-          What is 907?
+          What is 907 ?
         </button>
 
         <button
           class="home__guide-qna"
           @click="showGuide = !showGuide; showWhatIs907 = false"
         >
-          <span />
           Guide for New users
         </button>
-
-        <a
-          href="https://twitter.com/907degrees"
-          target="_blank"
-          class="home__sns-twitter"
-        >
-          <v-icon>mdi-twitter</v-icon>
-        </a>
 
         <a
           href="https://www.instagram.com/907degrees"
@@ -253,6 +243,7 @@
       <!-- END -->
 
 
+      <!-- PLAYERS -->
       <nos-top-player
         :top-player="topPlayer"
         :need-player-comments-preview="true"
@@ -272,7 +263,7 @@
             class="home__info-selector"
             @click="selectTableMenu"
           >
-            <v-icon>mdi-table-of-contents</v-icon>
+            <v-icon>mdi-equalizer</v-icon>
             <span>Table</span>
           </button>
         </div>
@@ -440,7 +431,6 @@
           </div>
 
 
-
           <!-- LEAGUE TABLE AREA -->
           <div
             v-if="isTable && leagueTable.length > 0"
@@ -502,6 +492,7 @@
         </div>
       </div>
 
+
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"
         :player-list-prop="high4Players"
@@ -509,7 +500,18 @@
         :start-rank="2"
       />
 
+
+      <!-- MAIN NEWS -->
+      <p class="home__section-title">
+        <v-icon>mdi-newspaper-variant</v-icon>
+        Premier League news
+      </p>
+      <nos-news-headline />
+
+
+      <!-- COMMENT AREA -->
       <nos-landing-comment-area />
+
 
       <nos-player-list
         :top-player-score="parseInt(topPlayer.score)"

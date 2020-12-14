@@ -11,36 +11,18 @@
   &-introduce, &-qna {
     position: relative;
     height: 32px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.8);
     border-radius: 6px;
     font-size: 13px;
-    font-weight: 300;
-
-    span {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      display: block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
+    font-weight: 600;
   }
 
   &-introduce {
     flex: 50;
-  
-    span {
-      background: linear-gradient(to right, #ea5514, #f4991e);
-    }
   }
   &-qna {
     flex: 50;
     margin-left: 6px;
-  
-    span {
-      background: linear-gradient(to right, #1976d2 10%, #b800f2 90%);
-    }
   }
   &-wrapper {
     position: absolute;
@@ -177,7 +159,7 @@
       top: 48px;
       width: 100%;
       max-width: 100%;
-      padding: 0 90px 0 2px;
+      padding: 0 42px 0 2px;
     }
 
     &-close {
@@ -186,12 +168,6 @@
       }
     }
 
-    &-introduce, &-qna {
-      span {
-        top: 7px;
-        left: 7px;
-      }
-    }
     &-qna {
       margin-left: 18px;
     }
