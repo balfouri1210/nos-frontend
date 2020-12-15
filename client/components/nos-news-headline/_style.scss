@@ -26,6 +26,10 @@
     margin-right: 6px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
+
+    a {
+      height: 100%;
+    }
   }
   &__item:last-of-type {
     margin: 0;
@@ -63,7 +67,7 @@
   }
 
   &__title {
-    margin-bottom: 4px;
+    margin-bottom: 7px;
     font-weight: 300;
     font-size: 12px;
     line-height: 14px;
@@ -81,7 +85,7 @@
   }
   &__provider {
     display: inline-block;
-    padding: 0 7px;
+    padding: 0 10px;
     border-radius: 4px;
     background: black;
     color: white;
@@ -95,7 +99,14 @@
   }
 
   .flex-none {
-    flex: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .nos-news-headline__provider {
+      width: fit-content;
+    }
   }
 }
 

@@ -502,10 +502,16 @@
 
 
       <!-- MAIN NEWS -->
-      <p class="home__section-title">
-        <v-icon>mdi-newspaper-variant</v-icon>
-        Premier League news
-      </p>
+      <div class="home__section-title">
+        <p>
+          <v-icon>mdi-newspaper-variant</v-icon>
+          Premier League news
+        </p>
+
+        <nuxt-link :to="localePath('news')">
+          More<v-icon>mdi-chevron-right</v-icon>
+        </nuxt-link>
+      </div>
       <nos-news-headline />
 
 

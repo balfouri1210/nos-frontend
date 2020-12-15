@@ -31,37 +31,42 @@
             :key="index"
             class="nos-news-headline__item flex-basic"
           >
-            <div
-              v-if="news.image"
-              class="nos-news-headline__thumbnail"
-              :style="{
-                backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center'
-              }"
+            <a
+              :href="news.url"
+              target="_blank"
             >
-              <span class="nos-news-headline__provider">{{ news.provider[0].name }}</span>
-            </div>
-
-            <div
-              class="nos-news-headline__info"
-              :class="{'flex-none': !news.image}"
-            >
-              <span
-                v-if="!news.image"
-                class="nos-news-headline__provider"
-              >{{ news.provider[0].name }}</span>
-
-              <p
-                class="nos-news-headline__title"
-                :class="{'ellipsis-2': news.image, 'nos-news-headline__title--larged': !news.image}"
+              <div
+                v-if="news.image"
+                class="nos-news-headline__thumbnail"
+                :style="{
+                  backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center'
+                }"
               >
-                {{ news.name }}
-              </p>
+                <span class="nos-news-headline__provider">{{ news.provider[0].name }}</span>
+              </div>
 
-              <span class="nos-news-headline__published-at">{{ $moment(news.datePublished).format('DD MMM YYYY, HH:mm') }}</span>
-            </div>
+              <div
+                class="nos-news-headline__info"
+                :class="{'flex-none': !news.image}"
+              >
+                <span
+                  v-if="!news.image"
+                  class="nos-news-headline__provider"
+                >{{ news.provider[0].name }}</span>
+
+                <p
+                  class="nos-news-headline__title"
+                  :class="{'ellipsis-2': news.image, 'nos-news-headline__title--larged': !news.image}"
+                >
+                  {{ news.name }}
+                </p>
+
+                <span class="nos-news-headline__published-at">{{ $moment(news.datePublished).format('DD MMM YYYY, HH:mm') }}</span>
+              </div>
+            </a>
           </li>
         </ul>
       </div>
