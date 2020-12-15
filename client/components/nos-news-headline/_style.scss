@@ -22,7 +22,7 @@
   &__item {
     position: relative;
     flex-direction: column;
-    width: 200px;
+    width: 192px;
     margin-right: 6px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -62,7 +62,7 @@
     padding: 12px;
 
     .nos-news-headline__provider {
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
   }
 
@@ -106,6 +106,10 @@
 
     .nos-news-headline__provider {
       width: fit-content;
+    }
+
+    .nos-news-headline__published-at {
+      text-align: right;
     }
   }
 }
