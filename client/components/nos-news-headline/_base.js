@@ -58,7 +58,6 @@ export default {
         this.isNewLoadFailed = true;
       } finally {
         this.isNewsLoading = false;
-        console.log(this.newsList);
       }
     },
 
