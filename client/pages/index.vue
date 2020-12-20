@@ -508,9 +508,9 @@
           Premier League news
         </p>
 
-        <!-- <nuxt-link :to="localePath('news')">
+        <nuxt-link :to="localePath('news')">
           More<v-icon>mdi-chevron-right</v-icon>
-        </nuxt-link> -->
+        </nuxt-link>
       </div>
       <nos-news-headline />
 

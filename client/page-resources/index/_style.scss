@@ -391,6 +391,14 @@
       max-width: $web-body-content-width;
       margin: 22px auto 4px;
       padding: 0;
+
+      p {
+        font-size: 16px;
+
+        .v-icon {
+          font-size: 18px;
+        }
+      }
     }
   
 

@@ -1,8 +1,7 @@
 import jwtDecode from 'jwt-decode';
-import cookie from 'cookie';
 
 export const state = () => ({
-  serviceStatus: 'normal', // normal, maintenance
+  serviceStatus: 'maintenance', // normal, maintenance
   comebackTime: '202006280930',
 
   appStatus: 'season',
