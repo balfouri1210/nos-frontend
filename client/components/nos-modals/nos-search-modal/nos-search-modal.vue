@@ -5,23 +5,7 @@
   >
     <div class="nos-search-modal__inner">
       <h2>Club</h2>
-      <ul class="nos-search-modal__clubs">
-        <li
-          v-for="(club, index) in clubs"
-          :key="index"
-        >
-          <button
-            class="btn-neumorphism"
-            @click="selectClub(club)"
-          >
-            <img
-              :src="club.image"
-              :alt="club.name"
-            >
-            <span>{{ club.clean_name }}</span>
-          </button>
-        </li>
-      </ul>
+      <nos-clubs @select-club="selectClub" />
 
       <h2>Country</h2>
       <button

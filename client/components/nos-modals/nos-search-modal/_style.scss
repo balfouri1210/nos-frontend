@@ -17,38 +17,6 @@
     }
   }
 
-  &__clubs {
-    display: grid;
-    list-style: none;
-    grid-template-columns: repeat(10, 1fr);
-    grid-gap: 8px;
-    width: 100%;
-    margin-bottom: 16px !important;
-
-    button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 7px 3px;
-      border-radius: 5px;
-      text-align: center;
-      box-shadow: -3px -3px 13px 0 rgba(255, 255, 255, 0.83), 1px 1px 5px 0 rgba(217, 210, 200, 0.51);
-    }
-    button:hover {
-      background: rgba($nos-main-theme, 0.1);
-    }
-
-    img {
-      width: 20px;
-    }
-
-    span {
-      display: none;
-    }
-  }
-
   &__country {
     width: 100%;
     margin-bottom: 16px;
