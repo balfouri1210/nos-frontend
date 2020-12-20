@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 export const state = () => ({
-  serviceStatus: 'normal', // normal, maintenance
+  serviceStatus: 'maintenance', // normal, maintenance
   comebackTime: '202012260930',
 
   appStatus: 'season',
