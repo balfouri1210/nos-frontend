@@ -6,6 +6,7 @@
     >
       <button
         class="btn-neumorphism"
+        :class="{'nos-clubs--selected': club.id === selectedClubId}"
         @click="$emit('select-club', club)"
       >
         <img
@@ -22,6 +23,13 @@
 import { eplClubs } from '@/lib/constants';
 
 export default {
+  props: {
+    selectedClubId: {
+      type: Number,
+      default: null
+    }
+  },
+
   data() {
     return {
       clubs: eplClubs

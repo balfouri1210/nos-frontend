@@ -2,9 +2,6 @@
   background: rgba(0, 0, 0, 0.02);
 
   &__header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 4px;
     padding: 24px;
     background: white;
@@ -14,7 +11,19 @@
       display: block;
     }
   }
-  &__header-pl-img { height: 34px; }
+  &__header-pl-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.15s ease-out;
+
+    img { height: 28px; }
+  }
+  &__header-pl-btn:hover { background: rgba($nos-main-theme, 0.1)}
   &__header-club-img { height: 50px; margin-right: 12px; }
   &__header-club-name {
     display: flex;
@@ -53,14 +62,51 @@
     font-weight: 300;
   }
 
-  ::v-deep .nos-clubs {
-    padding: 16px;
+  &-selected-target {
+    background: rgba($nos-main-theme, 0.1);
+    border: 1px solid rgba($nos-main-theme, 0.5);
   }
 }
 
 
 @media screen and (min-width: $mobile-width) {
   .news {
+    margin-bottom: 120px;
     background: white;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 136px;
+      margin: 48px 0;
+      padding: 0;
+    }
+    &__header-pl-btn {
+      width: auto;
+      height: 100%;
+      margin: 0 8px 0 0;
+      padding: 24px;
+
+      img { height: 40px; }
+    }
+
+    &__body {
+      ul {
+        display: grid;
+        list-style: none;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-gap: 16px;
+      }
+
+      li {
+        width: 100%;
+      }
+    }
+
+    ::v-deep .nos-clubs {
+      margin: 0;
+      padding: 0;
+    }
   }
 }

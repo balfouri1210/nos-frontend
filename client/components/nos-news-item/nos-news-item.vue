@@ -7,14 +7,17 @@
   >
     <div
       v-if="news.image"
-      class="news-item__thumbnail"
-      :style="{
-        backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center'
-      }"
-    />
+      class="news-item__thumbnail-wrapper"
+    >
+      <div
+        class="news-item__thumbnail"
+        :style="{
+          backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center'
+        }"
+      />
+    </div>
 
     <div class="news-item__info">
       <div style="width: 100%">

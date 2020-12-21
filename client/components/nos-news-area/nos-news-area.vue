@@ -64,7 +64,7 @@
                 {{ news.name }}
               </p>
               <span class="news-item__published-at">
-                {{ $moment.utc(news.datePublished).format('YY-MM-DD HH:mm') }} / {{ news.provider[0].name }}
+                {{ $moment.utc(news.datePublished).format('YY-MM-DD HH:mm') }} / <span style="font-weight: 500">{{ news.provider[0].name }}</span>
               </span>
             </div>
           </a>

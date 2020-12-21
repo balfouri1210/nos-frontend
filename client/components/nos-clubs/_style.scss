@@ -4,7 +4,6 @@
   grid-template-columns: repeat(10, 1fr);
   grid-gap: 8px;
   width: 100%;
-  margin-bottom: 16px !important;
 
   button {
     display: flex;
@@ -27,5 +26,37 @@
 
   span {
     display: none;
+  }
+
+  &--selected {
+    background: rgba($nos-main-theme, 0.2);
+    border: 1px solid rgba($nos-main-theme, 0.5);
+  }
+}
+
+@media screen and (min-width: $mobile-width) {
+  .nos-clubs {
+    button {
+      padding: 8px 6px 4px;
+      box-shadow: -3px -3px 13px 0 rgba(255, 255, 255, 0.83), 3px 3px 7px 0 rgba(217, 210, 200, 0.51);
+      transition: all 0.15s ease-out;
+    }
+
+    img {
+      width: 30px;
+    }
+
+    span {
+      display: -webkit-box;
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 14px;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
   }
 }

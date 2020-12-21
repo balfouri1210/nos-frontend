@@ -1,12 +1,23 @@
 <template>
   <div class="news">
+    <!-- league news -->
     <div>
       <div class="news__header">
-        <img
-          class="news__header-pl-img"
-          src="/leagues/1.png"
-          alt="premier league"
+        <button
+          class="btn-neumorphism news__header-pl-btn"
+          :class="{'news-selected-target': searchTarget === 'league'}"
+          @click="selectSearchTarget('league')"
         >
+          <img
+            src="/leagues/premier_league_logo.svg"
+            alt="premier league"
+          >
+        </button>
+
+        <nos-clubs
+          :selected-club-id="selectedClub.id"
+          @select-club="selectSearchTarget"
+        />
       </div>
 
       <div class="news__body">
@@ -21,26 +32,26 @@
       </div>
     </div>
 
-    <p class="news__clubs-title">
-      Select the club you want and check the news
-    </p>
-    <nos-clubs @select-club="selectClubHandler" />
+    <!-- select club -->
+    <!-- <div class="news__clubs">
+      <p class="news__clubs-title">
+        Select the club you want and check the news
+      </p>
+    </div> -->
 
-    <div
-      v-for="(club, clubIndex) in selectedClubList"
-      :key="clubIndex"
-    >
+    <!-- club news -->
+    <!-- <div v-if="selectedClub">
       <div class="news__header">
         <img
           class="news__header-club-img"
-          :src="club.image"
-          :alt="club.clean_name"
+          :src="selectedClub.image"
+          :alt="selectedClub.clean_name"
         >
 
         <div class="news__header-club-name">
-          <span>{{ club.clean_name }}</span>
+          <span>{{ selectedClub.clean_name }}</span>
           <a
-            :href="club.official_site"
+            :href="selectedClub.official_site"
             target="_blank"
           >
             <v-icon>mdi-open-in-new</v-icon>
@@ -52,14 +63,14 @@
       <div class="news__body">
         <ul>
           <li
-            v-for="(clubNews, newsIndex) in club.newsList"
+            v-for="(clubNews, newsIndex) in selectedClub.newsList"
             :key="newsIndex"
           >
             <nos-news-item :news="clubNews" />
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

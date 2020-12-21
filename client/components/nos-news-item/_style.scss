@@ -3,11 +3,16 @@
   align-items: stretch;
   width: 100%;
   text-align: left;
+  transition: all 0.3s ease-out;
 
-  &__thumbnail {
+  &__thumbnail-wrapper {
     position: relative;
     flex: 45;
     width: 100%;
+    overflow: hidden;
+  }
+  &__thumbnail {
+    background-size: cover;
   }
   &__thumbnail::before {
     display: inline-block;
@@ -36,15 +41,15 @@
     text-overflow: ellipsis;
     font-size: 14px;
     font-weight: 300;
-    line-height: 17px;
+    line-height: 18px;
   }
 
   &__published-at {
     display: block;
     margin-top: 4px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 300;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 1);
     white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
@@ -53,4 +58,67 @@
 }
 .news-item--without-thumbnail {
   padding: 10px 16px;
+}
+
+
+@media screen and (min-width: $mobile-width) {
+  .news-item {
+    display: block;
+
+    &__thumbnail {
+      transition: all 0.3s ease-out;
+    }
+
+    &__info {
+      margin: 0 12px;
+      padding: 12px 0;
+    }
+
+    &__title {
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    &__published-at {
+      position: relative;
+      padding-top: 12px;
+      font-size: 13px;
+    }
+    &__published-at::before {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 30px;
+      height: 2.5px;
+      background: rgba(0, 0, 0, 0.15);
+      content: '';
+    }
+  }
+  .news-item:hover {
+    .news-item__thumbnail {
+      transform: scale(1.07, 1.07);
+    }
+
+    .news-item__title {
+      text-decoration: underline;
+    }
+  }
+  .news-item--without-thumbnail {
+    display: flex;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    .news-item__title {
+      font-size: 19px;
+      line-height: 24px;
+    }
+
+    .news-item__published-at {
+      padding-top: 16px;
+    }
+    .news-item__published-at::before {
+      top: 6px;
+    }
+  }
 }
