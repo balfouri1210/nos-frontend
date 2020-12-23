@@ -101,7 +101,7 @@ export default {
   },
 
   mounted() {
-    this.$logout();
+    this.$store.$logout();
   },
 
   methods: {

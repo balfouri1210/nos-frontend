@@ -128,7 +128,7 @@
     }
 
     &__content-ul-wrapper {
-      margin: 2px 30px 0;
+      margin: 2px 8px 0;
     }
 
     &__item {
@@ -158,6 +158,15 @@
 
     &__provider {
       font-size: 13px;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .nos-news-headline {
+    &__content-ul-wrapper {
+      margin: 4px 34px 2px;
     }
   }
 }

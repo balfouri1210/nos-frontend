@@ -1,13 +1,28 @@
+import nosLoginModal from '@/components/nos-modals/nos-login-modal/nos-login-modal.vue';
+import nosNavigationMobile from '@/components/nos-navigation/mobile.vue';
+import nosNavigationDesktop from '@/components/nos-navigation/desktop.vue';
+import nosNotificationModal from '@/components/nos-modals/nos-notification-modal/nos-notification-modal.vue';
+import nosSearchModal from '@/components/nos-modals/nos-search-modal/nos-search-modal.vue';
 import { createNamespacedHelpers } from 'vuex';
 const { mapGetters, mapActions } = createNamespacedHelpers('auth');
 
 export default {
+  components: {
+    nosLoginModal,
+    nosNavigationMobile,
+    nosNavigationDesktop,
+    nosNotificationModal,
+    nosSearchModal
+  },
+
   data() {
     return {
       isLoginModal: false,
-      isAccountMenuModal: false,
       isNotificationModal: false,
-      isSearchModal: false
+      isSearchModal: false,
+
+      isNavigationDesktop: false,
+      isNavigationMobile: false
     };
   },
 
@@ -49,7 +64,7 @@ export default {
     },
 
     logoutSuccessHandler() {
-      this.isAccountMenuModal = false;
+      this.isNavigationDesktop = false;
     },
 
     closeNotificationModal() {
@@ -58,9 +73,20 @@ export default {
 
     clickOutsideHandler() {
       this.isLoginModal = false;
-      this.isAccountMenuModal = false;
+      this.isNavigationDesktop = false;
       this.isNotificationModal = false;
       this.isSearchModal = false;
+    },
+
+    toggleNavigation() {
+      // console.log('toggle');
+      if (process.client && window.innerWidth < 865) {
+        this.isNavigationMobile = !this.isNavigationMobile;
+        // console.log(this.isNavigationMobile);
+      } else {
+        this.isNavigationDesktop = !this.isNavigationDesktop;
+        // console.log(this.isNavigationDesktop);
+      }
     }
   }
 };

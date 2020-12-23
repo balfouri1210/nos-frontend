@@ -16,6 +16,30 @@ export const TOKEN_EXPIRES = 60 * 60 * 24 * 3;
 // export const VERIFICATION_CODE_EXPIRES = 1000 * 60 * 5;
 // export const PLAYER_LIST_MAX = 100;
 
+export const mainMenus = [
+  {
+    name: 'news',
+    icon: 'mdi-newspaper-variant',
+    routerName: 'news'
+  }, {
+    name: 'comment',
+    icon: 'comment',
+    routerName: 'comment'
+  }, {
+    name: 'history',
+    icon: 'mdi-history',
+    routerName: 'histories'
+  }, {
+    name: 'settings',
+    icon: 'settings',
+    routerName: 'settings'
+  }, {
+    name: 'logout',
+    icon: 'mdi-login-variant',
+    routerName: null
+  }
+];
+
 export const eplClubs = [
   {
     id: 1,
