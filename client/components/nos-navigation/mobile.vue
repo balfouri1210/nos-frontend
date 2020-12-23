@@ -7,23 +7,29 @@
       temporary
       class="navigation-drawer"
     >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group>
-          <v-list-item
-            v-for="(menu, index) in mainMenus.slice(0, 3)"
-            :key="index"
-            :color="'#f4991e'"
-          >
-            <v-list-item-title @click="selectMenu(menu)">
-              <v-icon>{{ menu.icon }}</v-icon>
-              {{ menu.name.toUpperCase() }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
+      <div>
+        <h2 v-if="$store.getters['auth/getJwt']">
+          Hello, {{ $store.getters['auth/getUsername'] }}
+        </h2>
+
+        <v-list
+          nav
+          dense
+        >
+          <v-list-item-group>
+            <v-list-item
+              v-for="(menu, index) in mainMenus.slice(0, 3)"
+              :key="index"
+              :color="'#f4991e'"
+            >
+              <v-list-item-title @click="selectMenu(menu)">
+                <v-icon>{{ menu.icon }}</v-icon>
+                {{ menu.name.toUpperCase() }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </div>
 
       <v-list
         nav
