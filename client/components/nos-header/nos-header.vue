@@ -54,12 +54,6 @@
             </v-badge>
           </button>
 
-          <nuxt-link :to="localePath('histories')">
-            <button>
-              <v-icon>mdi-history</v-icon>
-            </button>
-          </nuxt-link>
-
           <button
             ref="search-button"
             @click="isSearchModal = !isSearchModal"
