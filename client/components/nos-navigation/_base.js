@@ -6,6 +6,7 @@ export default {
         this.$emit('close');
         this.$router.push(this.localePath('index'));
       } else {
+        this.$emit('close');
         this.$router.push(this.localePath(menu.routerName));
       }
     }
