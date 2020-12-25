@@ -31,6 +31,11 @@ export default {
     totalCommentsCount: {
       type: Number,
       default: 0
+    },
+
+    historyId: {
+      type: Number,
+      default: null
     }
   },
 
@@ -103,6 +108,24 @@ export default {
     },
 
     async getComments(sortType, page) {
+      try {
+        this.isCommentLoading = true;
+
+        this.comments = await this.$axios.$get('/api/comments/player', {
+          params: {
+            sortType,
+            commentsPerRequest: this.commentsPerRequest,
+            page: page || 1
+          }
+        });
+      } catch (err) {
+        this.$nuxt.error({ statusCode: 500 });
+      } finally {
+        this.isCommentLoading = false;
+      }
+    },
+
+    async getCommentHistories(sortType, page) {
       try {
         this.isCommentLoading = true;
 

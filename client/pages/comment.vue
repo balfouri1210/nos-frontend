@@ -119,6 +119,7 @@
     </div>
     <!-- Quick comment End -->
 
+
     <div class="comment__content">
       <nos-comment-unit
         :id="'new-comment-unit'"
@@ -149,6 +150,7 @@
         </p>
       </nos-comment-unit>
     </div>
+
 
     <!-- LOGIN POPUP (for Guest) -->
     <transition name="fade">

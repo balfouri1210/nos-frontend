@@ -1,12 +1,14 @@
 import nosTopPlayer from '@/components/nos-top-player/nos-top-player.vue';
 import nosPlayerList from '@/components/nos-player-list/nos-player-list.vue';
+import nosCommentArea from '@/components/nos-comment-area/nos-comment-area.vue';
 
 export default {
   layout: 'wide',
 
   components: {
     nosTopPlayer,
-    nosPlayerList
+    nosPlayerList,
+    nosCommentArea
   },
 
   async asyncData({ $axios, route, error }) {

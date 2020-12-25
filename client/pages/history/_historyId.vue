@@ -20,6 +20,11 @@
           :need-player-comments-preview="true"
         />
 
+
+        <!-- COMMENT AREA -->
+        <nos-comment-area :history-id="$route.params.historyId" />
+
+
         <nos-player-list
           :top-player-score="parseInt(topPlayer.score)"
           :player-list-prop="restOfPlayers"
@@ -31,7 +36,8 @@
           :start-rank="2"
         />
 
-        <!-- Nuxt child for player modal -->
+
+        <!-- NUXT CHILD for PLAYER MODAL -->
         <nuxt-child />
       </div>
     </div>

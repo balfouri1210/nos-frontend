@@ -103,6 +103,7 @@
       </ul>
     </div>
 
+    <!-- PAGINATION -->
     <div
       v-show="pagination && comments.length > 0"
       class="nos-comment-unit__pagination-wrapper"

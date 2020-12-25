@@ -7,7 +7,7 @@ import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vu
 import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
 import { apiFootballRequestHeader, apiFootballLeagueId } from '@/lib/constants';
 import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
-import nosLandingCommentArea from '@/components/nos-landing-comment-area/nos-landing-comment-area.vue';
+import nosCommentArea from '@/components/nos-comment-area/nos-comment-area.vue';
 import { eplClubs } from '@/lib/constants';
 import nosFixtureStat from '@/components/nos-fixture-stat/nos-fixture-stat.vue';
 
@@ -22,7 +22,7 @@ export default {
     nosPreseasonUi,
     nosOnboardingUi,
     nosMainEvent,
-    nosLandingCommentArea,
+    nosCommentArea,
     nosFixtureStat
   },
 

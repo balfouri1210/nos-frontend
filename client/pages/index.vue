@@ -524,7 +524,7 @@
 
 
       <!-- COMMENT AREA -->
-      <nos-landing-comment-area />
+      <nos-comment-area />
 
 
       <nos-player-list
