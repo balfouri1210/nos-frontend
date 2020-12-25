@@ -1,6 +1,5 @@
 <template>
   <div class="news">
-    <!-- league news -->
     <div>
       <div class="news__header">
         <button
@@ -31,46 +30,6 @@
         </ul>
       </div>
     </div>
-
-    <!-- select club -->
-    <!-- <div class="news__clubs">
-      <p class="news__clubs-title">
-        Select the club you want and check the news
-      </p>
-    </div> -->
-
-    <!-- club news -->
-    <!-- <div v-if="selectedClub">
-      <div class="news__header">
-        <img
-          class="news__header-club-img"
-          :src="selectedClub.image"
-          :alt="selectedClub.clean_name"
-        >
-
-        <div class="news__header-club-name">
-          <span>{{ selectedClub.clean_name }}</span>
-          <a
-            :href="selectedClub.official_site"
-            target="_blank"
-          >
-            <v-icon>mdi-open-in-new</v-icon>
-            Official Website
-          </a>
-        </div>
-      </div>
-
-      <div class="news__body">
-        <ul>
-          <li
-            v-for="(clubNews, newsIndex) in selectedClub.newsList"
-            :key="newsIndex"
-          >
-            <nos-news-item :news="clubNews" />
-          </li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 </template>
 
