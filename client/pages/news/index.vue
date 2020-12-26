@@ -19,6 +19,24 @@
         />
       </div>
 
+      <div class="news__sorting">
+        <button
+          class="news__sortby-btn"
+          :class="{'news__sortby-btn--active': newsSortCriteria === 'date'}"
+          @click="setNewsSortCriteria('date')"
+        >
+          <span>Date</span>
+        </button>
+
+        <button
+          class="news__sortby-btn"
+          :class="{'news__sortby-btn--active': !newsSortCriteria}"
+          @click="setNewsSortCriteria()"
+        >
+          <span>Relevance</span>
+        </button>
+      </div>
+
       <div class="news__body">
         <ul>
           <li

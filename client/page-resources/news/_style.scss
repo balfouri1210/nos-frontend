@@ -3,7 +3,7 @@
 
   &__header {
     margin-bottom: 4px;
-    padding: 24px;
+    padding: 24px 24px 18px;
     background: white;
     text-align: center;
 
@@ -48,6 +48,38 @@
     }
   }
 
+
+  &__sorting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0 12px;
+    background: white;
+  }
+  &__sortby-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border: 1px solid rgba(0, 0, 0, 0.72);;
+    border-radius: 12px;
+
+    span {
+      font-size: 12px;
+    }
+  }
+  &__sortby-btn--active {
+    border: 1px solid $nos-main-theme;
+    background: rgba($nos-main-theme, 0.1);
+
+    span {
+      color: $nos-main-theme;
+    }
+  }
+
+
   &__body {
     li {
       margin-bottom: 4px;
@@ -79,7 +111,7 @@
       align-items: center;
       justify-content: center;
       height: 136px;
-      margin: 48px 0;
+      margin: 48px 0 24px;
       padding: 0;
     }
     &__header-pl-btn {
@@ -89,6 +121,19 @@
       padding: 24px;
 
       img { height: 40px; }
+    }
+
+    &__sorting {
+      padding: 8px 0 32px;
+    }
+    &__sortby-btn {
+      width: 140px;
+      padding: 4px 6px;
+      border-radius: 20px;
+
+      span {
+        font-size: 15px;
+      }
     }
 
     &__body {

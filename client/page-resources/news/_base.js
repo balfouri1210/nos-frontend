@@ -10,7 +10,10 @@ export default {
   data() {
     return {
       searchTarget: 'league',
-      selectedClub: {}
+      searchKeyword: 'premier league',
+      selectedClub: {},
+
+      newsSortCriteria: null
     };
   },
 
@@ -42,7 +45,7 @@ export default {
   },
 
   methods: {
-    async getNews(keyword) {
+    async getNews() {
       try {
         this.newsList = (await this.$axios.$get(
           process.env.BING_API_URL, {
@@ -55,9 +58,9 @@ export default {
               category: 'Sports',
               count: 30,
               originalImg: true,
-              sortBy: null,
+              sortBy: this.newsSortCriteria,
               offset: 0,
-              q: keyword
+              q: this.searchKeyword
             }
           })).value;
       } catch (err) {
@@ -67,14 +70,21 @@ export default {
 
     async selectSearchTarget(target) {
       if (target === 'league') {
-        this.searchTarget = 'league';
         this.selectedClub = {};
-        await this.getNews('premier league');
+        this.searchTarget = 'league';
+        this.searchKeyword = 'premier league';
+        await this.getNews();
       } else {
-        this.searchTarget = 'club';
         this.selectedClub = target;
-        await this.getNews(target.clean_name);
+        this.searchTarget = 'club';
+        this.searchKeyword = target.clean_name;
+        await this.getNews();
       }
+    },
+
+    setNewsSortCriteria(criteria) {
+      this.newsSortCriteria = criteria;
+      this.getNews();
     }
   }
 };
