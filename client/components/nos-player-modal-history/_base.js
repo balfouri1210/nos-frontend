@@ -80,12 +80,21 @@ export default {
     ...mapGetters(['getJwt', 'getId', 'getUsername']),
 
     closeModal() {
-      this.$router.push(this.localePath({
-        name: 'history-historyId',
-        params: {
-          historyId: this.history.id
-        }
-      }));
+      if (this.$route.name.indexOf('comment-history') !== -1) {
+        this.$router.push(this.localePath({
+          name: 'comment-history-historyId',
+          params: {
+            historyId: this.history.id,
+          }
+        }));
+      } else {
+        this.$router.push(this.localePath({
+          name: 'history-historyId',
+          params: {
+            historyId: this.history.id
+          }
+        }));
+      }
     },
 
     commentMappingWithUiProperty(comments) {
@@ -203,24 +212,6 @@ export default {
       } catch (err) {
         console.error(err);
         this.isCommentMalfunction = true;
-      }
-    },
-
-    goBack() {
-      if (this.$route.name.indexOf('comment-history') !== -1) {
-        this.$router.push(this.localePath({
-          name: 'comment-history-historyId',
-          params: {
-            historyId: this.history.id,
-          }
-        }));
-      } else {
-        this.$router.push(this.localePath({
-          name: 'history-historyId',
-          params: {
-            historyId: this.history.id
-          }
-        }));
       }
     }
   }

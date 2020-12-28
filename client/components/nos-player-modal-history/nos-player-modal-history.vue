@@ -33,7 +33,7 @@
         <div class="player-modal__content">
           <div class="player-modal__left">
             <header class="player-modal__header">
-              <button @click="goBack">
+              <button @click="closeModal">
                 <v-icon>mdi-arrow-left</v-icon>
                 <span>Leaderboard</span>
               </button>
