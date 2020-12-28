@@ -1,0 +1,162 @@
+.quick-comment {
+  position: relative;
+  margin: 18px auto 12px;
+  padding: 0 12px;
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 300;
+
+    .v-icon {
+      margin-right: 4px;
+      color: black;
+      font-size: 16px;
+    }
+  }
+
+  &__search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    padding: 2px 0;
+
+    .nos-input {
+      width: 100%;
+      padding: 6px 0 6px 12px;
+      border: 1px solid #e4e4e4;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 24px;
+    }
+  
+    .comment__search-form-submit {
+      width: 200px;
+    }
+  }
+
+  .nos-search-modal__suggestion {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    max-height: 320px;
+    padding: 4px 14px;
+    z-index: 5;
+
+    ul {
+      border-radius: 6px;
+      background: white;
+      overflow: auto;
+      box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__content {
+    ::v-deep textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #e4e4e4;
+      border-radius: 6px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+
+  &__player-meta {
+    display: flex;
+    align-items: center;
+    margin: 14px 0 8px;
+    font-size: 14px;
+  }
+  &__club-image {
+    height: 32px;
+    margin-right: 8px;
+  }
+  &__sub-info {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 6px;
+
+    button {
+      width: 78px;
+      padding: 2px 4px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+  &__action-cancel {
+    margin-right: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+  }
+  &__action-add {
+    border: 1px solid $nos-main-theme;
+    background: rgba($nos-main-theme, 0.1);
+    color: $nos-main-theme;
+    transition: all 0.3s ease-out;
+  }
+}
+
+
+@media screen and (min-width: $mobile-width) {
+  .quick-comment {
+    margin: 36px auto 24px;
+    padding: 0;
+
+    &__title {
+      .v-icon {
+        font-size: 18px;
+      }
+    }
+
+    &__search-form {
+      margin-bottom: 18px;
+      padding: 2px 0;
+    }
+
+    &__content {
+      ::v-deep textarea {
+        font-size: 14px;
+      }
+    }
+
+    &__player-meta {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    &__club-image {
+      height: 38px;
+      margin-right: 12px;
+    }
+    &__sub-info {
+      font-size: 13px;
+    }
+
+    &__action {
+      margin-top: 8px;
+
+      button {
+        width: 118px;
+        padding: 5px 4px;
+      }
+    }
+
+    .nos-search-modal__suggestion {
+      padding: 4px 8px;
+    }
+  }
+}

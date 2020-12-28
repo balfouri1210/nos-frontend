@@ -87,13 +87,39 @@ export default {
     }
   },
 
+
   created() {
     this.sortType = this.initialSortType;
     this.getComments(this.initialSortType);
   },
 
+
   methods: {
     ...mapGetters(['getJwt']),
+
+    async getComments() {
+      try {
+        this.isCommentLoading = true;
+
+        const getCommentsParam = {
+          sortType: this.sortType,
+          commentsPerRequest: this.commentsPerRequest,
+          historyId: this.historyId,
+          page: this.currentPage || 1
+        };
+        const getCommentsUrl = this.historyId ? `/api/histories/${this.historyId}/player/comments` : '/api/comments/player';
+
+
+        this.comments = await this.$axios.$get(getCommentsUrl, {
+          params: getCommentsParam
+        });
+        console.log(this.comments);
+      } catch (err) {
+        this.$nuxt.error({ statusCode: 500 });
+      } finally {
+        this.isCommentLoading = false;
+      }
+    },
 
     initiateComments() {
       this.comments = [];
@@ -107,41 +133,6 @@ export default {
       }
     },
 
-    async getComments(sortType, page) {
-      try {
-        this.isCommentLoading = true;
-
-        this.comments = await this.$axios.$get('/api/comments/player', {
-          params: {
-            sortType,
-            commentsPerRequest: this.commentsPerRequest,
-            page: page || 1
-          }
-        });
-      } catch (err) {
-        this.$nuxt.error({ statusCode: 500 });
-      } finally {
-        this.isCommentLoading = false;
-      }
-    },
-
-    async getCommentHistories(sortType, page) {
-      try {
-        this.isCommentLoading = true;
-
-        this.comments = await this.$axios.$get('/api/comments/player', {
-          params: {
-            sortType,
-            commentsPerRequest: this.commentsPerRequest,
-            page: page || 1
-          }
-        });
-      } catch (err) {
-        this.$nuxt.error({ statusCode: 500 });
-      } finally {
-        this.isCommentLoading = false;
-      }
-    },
 
     selectPage(page) {
       this.currentPage = page;
@@ -185,7 +176,7 @@ export default {
   watch: {
     async currentPage() {
       this.currentPageIsChanging = true;
-      await this.getComments(this.sortType, this.currentPage);
+      await this.getComments();
       this.currentPageIsChanging = false;
       this.$emit('newCommentsLoaded');
     }

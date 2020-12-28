@@ -34,7 +34,14 @@
         v-if="moreLink"
         class="nos-comment-unit__more"
       >
-        <nuxt-link :to="localePath('comment')">
+        <nuxt-link
+          :to="localePath({
+            name: 'comment',
+            query: {
+              historyId: $route.params.historyId
+            }
+          })"
+        >
           <span>More</span><v-icon>mdi-chevron-right</v-icon>
         </nuxt-link>
       </div>
@@ -74,6 +81,9 @@
               params: {
                 playerId: comment.player_id,
                 playerName: comment.player_name.toLowerCase().replace(/ /g, '-')
+              },
+              query: {
+                historyId: $route.params.historyId
               }
             })"
           >
@@ -129,6 +139,7 @@
 
       <div class="nos-comment-unit__pagination">
         <button
+          v-if="currentPage !== 1"
           style="margin-right: 12px"
           @click="movePage('prev')"
         >

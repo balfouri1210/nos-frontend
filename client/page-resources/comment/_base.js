@@ -1,89 +1,45 @@
-import { createNamespacedHelpers } from 'vuex';
-const { mapGetters } = createNamespacedHelpers('auth');
+import nosQuickComment from '@/components/nos-quick-comment/nos-quick-comment.vue';
 import nosCommentUnit from '@/components/nos-comment-unit/nos-comment-unit.vue';
-import nosInput from '@/components/nos-input/nos-input.vue';
-import nosTextarea from '@/components/nos-textarea/nos-textarea.vue';
-import U from '@/lib/util';
-import countries from '@/lib/countries';
 
 export default {
   components: {
-    nosCommentUnit,
-    nosInput,
-    nosTextarea
+    nosQuickComment,
+    nosCommentUnit
   },
 
   data() {
     return {
-      searchKeyword: null,
-      isSearching: false,
-      playerList: [],
-      nosImageUrl: process.env.NOS_IMAGE_URL,
-
-      selectedPlayer: null,
-      quickCommentContent: null,
-      isQuickCommentAdding: false,
-      isRequestLoginPopup: false,
-
       totalCommentsCount: 0,
       totalHotCommentsCount: 0,
 
-      newCommentUnitKey: 0 // 컴포넌트 강제 reload를 위한 변수
+      newCommentUnitKey: 0, // 컴포넌트 강제 reload를 위한 변수,
+
+      historyInfo: {}
     };
   },
 
   created() {
     this.getTotalCommentsCount();
+    if (this.$route.query.historyId) this.getHistoryInfo();
   },
 
   methods: {
-    ...mapGetters(['getJwt']),
-
-    searchPlayerByKeyword() {
-      return this.$axios.$get('/api/search', {
-        params: {
-          keyword: this.searchKeyword
-        }
-      }) || [];
-    },
-
-    selectPlayer(player) {
-      this.searchKeyword = null;
-      this.selectedPlayer = player;
-      this.$set(this.selectedPlayer, 'country_name', countries.find(country => {
-        return country.code === this.selectedPlayer.country_code;
-      }).name);
-      this.playerList = [];
-    },
-
-    cancelQuickComment() {
-      this.selectedPlayer = null;
-    },
-
-    async addQuickComment() {
-      if (!this.getJwt()) { this.isRequestLoginPopup = true; return; }
-
+    async getTotalCommentsCount() {
       try {
-        this.isQuickCommentAdding = true;
-        await this.$axios.$post('/api/comments/player', {
-          playerId: this.selectedPlayer.id,
-          content: this.quickCommentContent,
-        });
-        this.quickCommentContent = '';
-        this.$refs.quickCommentRef.reset();
-        this.forceRerender();
+        const getCommentsCountUrl = this.$route.query.historyId ?
+          `/api/histories/${this.$route.query.historyId}/player/comments/count` : '/api/comments/count';
+        const result = await this.$axios.$get(getCommentsCountUrl);
+
+        this.totalCommentsCount = result.totalCommentsCount;
+        this.totalHotCommentsCount = result.totalHotCommentsCount;
       } catch (err) {
         this.$nuxt.error({ statusCode: 500 });
-      } finally {
-        this.isQuickCommentAdding = false;
       }
     },
 
-    async getTotalCommentsCount() {
+    async getHistoryInfo() {
       try {
-        const result = await this.$axios.$get('/api/comments/count');
-        this.totalCommentsCount = result.totalCommentsCount;
-        this.totalHotCommentsCount = result.totalHotCommentsCount;
+        this.historyInfo = await this.$axios.$get(`/api/histories/${this.$route.query.historyId}`);
       } catch (err) {
         this.$nuxt.error({ statusCode: 500 });
       }
@@ -92,22 +48,5 @@ export default {
     forceRerender() {
       this.newCommentUnitKey ++;
     }
-  },
-
-  watch: {
-    searchKeyword: U.debounce(async function() {
-      try {
-        if (this.searchKeyword && this.searchKeyword.length >= 2) {
-          this.isSearching = true;
-          this.playerList = await this.searchPlayerByKeyword();
-        } else {
-          this.playerList = [];
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        this.isSearching = false;
-      }
-    }, 400)
   }
 };

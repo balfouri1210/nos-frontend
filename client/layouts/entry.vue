@@ -21,7 +21,7 @@
           class="nos-entry__logo"
         >
           <img
-            src="https://images.907degrees.com/logos/logo2.svg"
+            src="https://images.907degrees.com/logos/logo_black.svg"
             alt="logo"
           >
         </nuxt-link>
