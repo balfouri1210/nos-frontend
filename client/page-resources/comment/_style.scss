@@ -1,4 +1,8 @@
 .comment {
+  .quick-comment {
+    max-width: $web-body-content-width;
+  }
+
   &__content {
     max-width: $web-body-content-width;
     margin: 0 auto;
@@ -9,8 +13,11 @@
   }
 
   &__history-period {
+    height: 42px;
+    margin-bottom: 16px;
     padding: 8px;
     background: #d57c59;
+    font-size: 14px;
     color: white;
     text-align: center;
   }

@@ -12,28 +12,33 @@ export default {
   },
 
   async asyncData({ $axios, route, error }) {
-    const [wholePlayerList, history] = await Promise.all([
-      $axios.$get(`/api/histories/${route.params.historyId}/player`, {
-        params: {
-          count: 21
-        }
-      }),
-      $axios.$get(`/api/histories/${route.params.historyId}`)
-    ]);
-
-    const topPlayer = wholePlayerList[0];
-    wholePlayerList.shift();
-    const restOfPlayers = wholePlayerList;
-
-    const startDate = history.start_date;
-    const endDate = history.end_date;
-
-    return { topPlayer, restOfPlayers, startDate, endDate };
+    try {
+      const [wholePlayerList, history] = await Promise.all([
+        $axios.$get(`/api/histories/${route.params.historyId}/player`, {
+          params: {
+            count: 21
+          }
+        }),
+        $axios.$get(`/api/histories/${route.params.historyId}`)
+      ]);
+  
+      const topPlayer = wholePlayerList[0];
+      const high4Players = wholePlayerList.slice(1, 5);
+      const restOfPlayers = wholePlayerList.slice(5, wholePlayerList.length);
+  
+      const startDate = history.start_date;
+      const endDate = history.end_date;
+  
+      return { topPlayer, high4Players, restOfPlayers, startDate, endDate };
+    } catch (err) {
+      error({ statusCode: 500 });
+    }
   },
 
   computed: {
     previousPlayerIdList() {
-      return [this.topPlayer.id];
+      const result = this.high4Players.map(player => player.id).concat(this.topPlayer.id);
+      return result;
     }
   },
 

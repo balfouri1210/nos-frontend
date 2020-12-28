@@ -20,10 +20,17 @@
           :need-player-comments-preview="true"
         />
 
+        <nos-player-list
+          :top-player-score="parseInt(topPlayer.score)"
+          :player-list-prop="high4Players"
+          :is-historical="true"
+          :history-id="$route.params.historyId"
+          :need-player-comments-preview="true"
+          :start-rank="2"
+        />
 
         <!-- COMMENT AREA -->
         <nos-comment-area :history-id="$route.params.historyId" />
-
 
         <nos-player-list
           :top-player-score="parseInt(topPlayer.score)"
@@ -33,9 +40,8 @@
           :need-player-comments-preview="true"
           :activate-load-more="true"
           :previous-player-id-list-prop="previousPlayerIdList"
-          :start-rank="2"
+          :start-rank="6"
         />
-
 
         <!-- NUXT CHILD for PLAYER MODAL -->
         <nuxt-child />
@@ -46,6 +52,7 @@
 
 <script>
 import Base from '@/page-resources/history/historyId/_base';
+console.log(Base);
 
 export default {
   mixins: [Base]

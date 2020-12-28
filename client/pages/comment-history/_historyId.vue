@@ -1,6 +1,11 @@
 <template>
   <div class="comment">
-    <nos-quick-comment @quick-comment-added="forceRerender" />
+    <div
+      v-if="$route.params.historyId"
+      class="comment__history-period flex-basic"
+    >
+      {{ $moment(historyInfo.start_date).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(historyInfo.end_date).format('YYYY. MM. DD HH:mm') }}
+    </div>
 
     <div class="comment__content">
       <nos-comment-unit
@@ -42,7 +47,7 @@
 </template>
 
 <script>
-import Base from '@/page-resources/comment/_base';
+import Base from '@/page-resources/comment-history/_base';
 
 export default {
   layout: 'wide',

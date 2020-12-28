@@ -116,7 +116,7 @@
           <p class="npmi__personal-detail-info">
             <span>{{ player.hits | thousandSeparator }}</span>
             <button
-              v-if="$store.getters['auth/getAuthorization'] === 3"
+              v-if="$store.getters['auth/getAuthorization'] === 3 && !isHistorical"
               @click="requestPlayerFakeHits(player)"
             >
               <v-icon>mdi-chevron-up</v-icon>

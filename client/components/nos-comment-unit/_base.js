@@ -54,9 +54,17 @@ export default {
 
   computed: {
     routeName() {
-      if (this.$route.name.indexOf('comment') !== -1) {
+      if (this.$route.name.indexOf('comment-history') !== -1) {
+        // comment-history 페이지에서 클릭
+        return 'comment-history-historyId-player-playerId-playerName';
+      } else if (this.$route.name.indexOf('history') !== -1) {
+        // history 페이지에서 클릭
+        return 'history-historyId-player-playerId-playerName';
+      } else if (this.$route.name.indexOf('comment') !== -1) {
+        // 실시간 comment 페이지에서 클릭
         return 'comment-player-playerId-playerName';
       } else {
+        // 일반 페이지에서 클릭 (랜딩 등)
         return 'index-player-playerId-playerName';
       }
     },
@@ -113,7 +121,6 @@ export default {
         this.comments = await this.$axios.$get(getCommentsUrl, {
           params: getCommentsParam
         });
-        console.log(this.comments);
       } catch (err) {
         this.$nuxt.error({ statusCode: 500 });
       } finally {

@@ -3,6 +3,7 @@
     <nos-comment-unit
       :initial-sort-type="'date'"
       :more-link="true"
+      :history-id="Number.parseInt($route.params.historyId)"
     >
       <p>
         <v-icon>mdi-octagram</v-icon>
@@ -13,6 +14,7 @@
     <nos-comment-unit
       :initial-sort-type="'vote'"
       :more-link="true"
+      :history-id="Number.parseInt($route.params.historyId)"
     >
       <p>
         <v-icon>mdi-fire</v-icon>

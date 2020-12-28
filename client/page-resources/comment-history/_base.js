@@ -1,9 +1,7 @@
-import nosQuickComment from '@/components/nos-quick-comment/nos-quick-comment.vue';
 import nosCommentUnit from '@/components/nos-comment-unit/nos-comment-unit.vue';
 
 export default {
   components: {
-    nosQuickComment,
     nosCommentUnit
   },
 
@@ -26,7 +24,7 @@ export default {
   methods: {
     async getTotalCommentsCount() {
       try {
-        const result = await this.$axios.$get('/api/comments/count');
+        const result = await this.$axios.$get(`/api/histories/${this.$route.params.historyId}/player/comments/count`);
         this.totalCommentsCount = result.totalCommentsCount;
         this.totalHotCommentsCount = result.totalHotCommentsCount;
       } catch (err) {

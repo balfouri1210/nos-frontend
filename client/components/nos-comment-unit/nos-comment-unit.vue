@@ -36,8 +36,8 @@
       >
         <nuxt-link
           :to="localePath({
-            name: 'comment',
-            query: {
+            name: $route.params.historyId ? 'comment-history-historyId' : 'comment',
+            params: {
               historyId: $route.params.historyId
             }
           })"
@@ -79,11 +79,9 @@
             :to="localePath({
               name: routeName,
               params: {
+                historyId: $route.params.historyId,
                 playerId: comment.player_id,
                 playerName: comment.player_name.toLowerCase().replace(/ /g, '-')
-              },
-              query: {
-                historyId: $route.params.historyId
               }
             })"
           >

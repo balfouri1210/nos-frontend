@@ -3,6 +3,7 @@
     <nos-comment-unit
       :more-link="true"
       :sort-type-selector="true"
+      :history-id="Number.parseInt($route.params.historyId)"
     >
       <p>Comments</p>
     </nos-comment-unit>
