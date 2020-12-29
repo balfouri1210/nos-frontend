@@ -214,5 +214,16 @@ export default {
         this.isCommentMalfunction = true;
       }
     }
+  },
+
+  // Scroll lock
+  beforeCreate() {
+    if (process.client)
+      document.body.style.overflow = 'hidden';
+  },
+  
+  beforeDestroy() {
+    if (process.client)
+      document.body.style.overflow = 'unset';
   }
 };

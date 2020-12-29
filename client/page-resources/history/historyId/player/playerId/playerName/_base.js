@@ -3,16 +3,5 @@ import nosPlayerModalHistory from '@/components/nos-player-modal-history/nos-pla
 export default {
   components: {
     nosPlayerModalHistory
-  },
-
-  // Scroll lock
-  beforeCreate() {
-    if (process.client)
-      document.body.style.overflow = 'hidden';
-  },
-
-  beforeDestroy() {
-    if (process.client)
-      document.body.style.overflow = 'unset';
   }
 };
