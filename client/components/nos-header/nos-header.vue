@@ -70,7 +70,6 @@
           </button>
 
           <button
-            v-if="isLoggedIn"
             ref="account-menu-button"
             @click="toggleNavigation"
           >

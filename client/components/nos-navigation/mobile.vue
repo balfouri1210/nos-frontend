@@ -32,6 +32,7 @@
       </div>
 
       <v-list
+        v-if="getJwt()"
         nav
         dense
       >

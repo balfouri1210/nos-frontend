@@ -1,5 +1,10 @@
+import { createNamespacedHelpers } from 'vuex';
+const { mapGetters } = createNamespacedHelpers('auth');
+
 export default {
   methods: {
+    ...mapGetters(['getJwt']),
+
     selectMenu(menu) {
       if (menu.name === 'logout') {
         this.$store.$logout();

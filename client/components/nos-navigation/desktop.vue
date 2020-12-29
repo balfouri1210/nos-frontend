@@ -2,14 +2,27 @@
   <div class="nos-account-menu-modal">
     <nos-default-modal>
       <div class="nos-account-menu-modal__content">
-        <button
-          v-for="(menu, index) in mainMenus"
-          :key="index"
-          @click="selectMenu(menu)"
-        >
-          <v-icon>{{ menu.icon }}</v-icon>
-          {{ menu.name.toUpperCase() }}
-        </button>
+        <div>
+          <button
+            v-for="(menu, index) in mainMenus.slice(0, 3)"
+            :key="index"
+            @click="selectMenu(menu)"
+          >
+            <v-icon>{{ menu.icon }}</v-icon>
+            {{ menu.name.toUpperCase() }}
+          </button>
+        </div>
+
+        <div v-if="getJwt()">
+          <button
+            v-for="(menu, index) in mainMenus.slice(3, 5)"
+            :key="index"
+            @click="selectMenu(menu)"
+          >
+            <v-icon>{{ menu.icon }}</v-icon>
+            {{ menu.name.toUpperCase() }}
+          </button>
+        </div>
       </div>
     </nos-default-modal>
   </div>
