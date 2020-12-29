@@ -16,7 +16,7 @@
         <span>{{ goBackWord }}</span>
       </nuxt-link>
 
-      <p>
+      <p v-if="!isEmpty(history)">
         <span style="font-weight: 600">Period : </span>
         {{ $moment(history.start_date).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(history.end_date).format('YYYY. MM. DD HH:mm') }}
       </p>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import U from '@/lib/util';
+
 export default {
   props: {
     history: {
@@ -50,6 +52,12 @@ export default {
     fixedPosition: {
       type: Boolean,
       default: false
+    }
+  },
+
+  methods: {
+    isEmpty(obj) {
+      return U.isEmpty(obj, true);
     }
   }
 };
