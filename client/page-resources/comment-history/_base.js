@@ -1,7 +1,9 @@
+import nosHistoryPeriod from '@/components/nos-history-period/nos-history-period.vue';
 import nosCommentUnit from '@/components/nos-comment-unit/nos-comment-unit.vue';
 
 export default {
   components: {
+    nosHistoryPeriod,
     nosCommentUnit
   },
 
@@ -12,13 +14,13 @@ export default {
 
       newCommentUnitKey: 0, // 컴포넌트 강제 reload를 위한 변수,
 
-      historyInfo: {}
+      history: {}
     };
   },
 
   created() {
     this.getTotalCommentsCount();
-    if (this.$route.params.historyId) this.getHistoryInfo();
+    if (this.$route.params.historyId) this.getHistory();
   },
 
   methods: {
@@ -32,9 +34,9 @@ export default {
       }
     },
 
-    async getHistoryInfo() {
+    async getHistory() {
       try {
-        this.historyInfo = await this.$axios.$get(`/api/histories/${this.$route.params.historyId}`);
+        this.history = await this.$axios.$get(`/api/histories/${this.$route.params.historyId}`);
       } catch (err) {
         this.$nuxt.error({ statusCode: 500 });
       }

@@ -1,16 +1,12 @@
 <template>
   <div id="history-page">
     <div class="history">
-      <div class="history__period">
-        <div class="history__period-content">
-          <nuxt-link :to="localePath('histories')">
-            <v-icon>mdi-keyboard-backspace</v-icon>
-            <span>Histories</span>
-          </nuxt-link>
-
-          <p>{{ $moment(startDate).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(endDate).format('YYYY. MM. DD HH:mm') }}</p>
-        </div>
-      </div>
+      <nos-history-period
+        :history="history"
+        :go-back-word="'Histories'"
+        :go-back-route-name="'histories'"
+        :fixed-position="true"
+      />
 
       <div class="history__body">
         <nos-top-player

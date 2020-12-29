@@ -1,6 +1,7 @@
 import nosTopPlayer from '@/components/nos-top-player/nos-top-player.vue';
 import nosPlayerList from '@/components/nos-player-list/nos-player-list.vue';
 import nosCommentArea from '@/components/nos-comment-area/nos-comment-area.vue';
+import nosHistoryPeriod from '@/components/nos-history-period/nos-history-period.vue';
 
 export default {
   layout: 'wide',
@@ -8,7 +9,8 @@ export default {
   components: {
     nosTopPlayer,
     nosPlayerList,
-    nosCommentArea
+    nosCommentArea,
+    nosHistoryPeriod
   },
 
   async asyncData({ $axios, route, error }) {
@@ -25,11 +27,8 @@ export default {
       const topPlayer = wholePlayerList[0];
       const high4Players = wholePlayerList.slice(1, 5);
       const restOfPlayers = wholePlayerList.slice(5, wholePlayerList.length);
-  
-      const startDate = history.start_date;
-      const endDate = history.end_date;
-  
-      return { topPlayer, high4Players, restOfPlayers, startDate, endDate };
+
+      return { topPlayer, high4Players, restOfPlayers, history };
     } catch (err) {
       error({ statusCode: 500 });
     }
@@ -44,16 +43,16 @@ export default {
 
   head() {
     return {
-      title: `907Degrees - History: ${this.$moment(this.startDate).format(
+      title: `907Degrees - History: ${this.$moment(this.history.start_date).format(
         'YYYY. MM. DD HH:mm'
-      )} ~ ${this.$moment(this.endDate).format('YYYY. MM. DD HH:mm')}`,
+      )} ~ ${this.$moment(this.history.end_date).format('YYYY. MM. DD HH:mm')}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `History of ${this.$moment(this.startDate).format(
+          content: `History of ${this.$moment(this.history.start_date).format(
             'YYYY. MM. DD HH:mm'
-          )} ~ ${this.$moment(this.endDate).format('YYYY. MM. DD HH:mm')}`
+          )} ~ ${this.$moment(this.history.end_date).format('YYYY. MM. DD HH:mm')}`
         }
       ]
     };

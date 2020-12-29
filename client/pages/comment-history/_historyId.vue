@@ -1,11 +1,11 @@
 <template>
   <div class="comment">
-    <div
-      v-if="$route.params.historyId"
-      class="comment__history-period flex-basic"
-    >
-      {{ $moment(historyInfo.start_date).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(historyInfo.end_date).format('YYYY. MM. DD HH:mm') }}
-    </div>
+    <nos-history-period
+      :history="history"
+      :go-back-word="'History'"
+      :go-back-route-name="'history-historyId'"
+      :go-back-route-params="{ historyId: history.id }"
+    />
 
     <div class="comment__content">
       <nos-comment-unit
