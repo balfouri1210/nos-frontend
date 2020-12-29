@@ -52,7 +52,6 @@
 
 <script>
 import Base from '@/page-resources/history/historyId/_base';
-console.log(Base);
 
 export default {
   mixins: [Base]
