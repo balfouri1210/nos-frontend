@@ -138,6 +138,11 @@
     color: $color-primary;
   }
 }
+.nos-top-player:hover {
+  .nos-top-player__name {
+    text-decoration: underline;
+  }
+}
 
 @media screen and (min-width: $mobile-width) {
   .nos-top-player {

@@ -37,15 +37,17 @@
             >
               <div
                 v-if="news.image"
-                class="nos-news-headline__thumbnail"
-                :style="{
-                  backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center'
-                }"
+                class="nos-news-headline__thumbnail-wrapper"
               >
-                <span class="nos-news-headline__provider">{{ news.provider[0].name }}</span>
+                <div
+                  class="nos-news-headline__thumbnail"
+                  :style="{
+                    backgroundImage: `url('${news.image.contentUrl}'), url('${news.image.thumbnail.contentUrl}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center center'
+                  }"
+                />
               </div>
 
               <div
@@ -53,7 +55,6 @@
                 :class="{'flex-none': !news.image}"
               >
                 <span
-                  v-if="!news.image"
                   class="nos-news-headline__provider"
                 >{{ news.provider[0].name }}</span>
 

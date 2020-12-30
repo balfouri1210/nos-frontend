@@ -91,12 +91,6 @@
           @close-modal="isNotificationModal = false"
         />
 
-        <nos-search-modal
-          v-if="isSearchModal"
-          v-click-outside="clickOutsideHandler"
-          @close-modal="isSearchModal = false"
-        />
-
         <!-- DESKTOP NAVIGATION -->
         <nos-navigation-desktop
           v-if="isNavigationDesktop"
@@ -107,6 +101,12 @@
       </div>
     </div>
 
+    <!-- SEARCH MODAL -->
+    <nos-search-modal
+      v-if="isSearchModal"
+      v-click-outside="clickOutsideHandler"
+      @close-modal="isSearchModal = false"
+    />
 
     <!-- MOBILE NAVIGATION -->
     <nos-navigation-mobile

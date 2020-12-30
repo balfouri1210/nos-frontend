@@ -142,6 +142,11 @@
       font-family: 'Open Sans', sans-serif;
     }
   }
+  .news-item:hover {
+    .news-item__title {
+      text-decoration: underline;
+    }
+  }
 
   &__load-failed {
     width: 80%;
