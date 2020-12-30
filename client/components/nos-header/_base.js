@@ -79,13 +79,10 @@ export default {
     },
 
     toggleNavigation() {
-      // console.log('toggle');
       if (process.client && window.innerWidth < 865) {
         this.isNavigationMobile = !this.isNavigationMobile;
-        // console.log(this.isNavigationMobile);
       } else {
         this.isNavigationDesktop = !this.isNavigationDesktop;
-        // console.log(this.isNavigationDesktop);
       }
     }
   }

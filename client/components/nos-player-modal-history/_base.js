@@ -124,14 +124,13 @@ export default {
     },
 
     async sortCommentBy(sortType) {
-      // this.comments = [];
       this.isCommentsLoading = true;
       this.commentSortType = sortType;
 
       try {
         switch (sortType) {
         case 'date' :
-          this.comments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.player.id}/comments`, {
+          this.comments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.playerHistory.id}/comments`, {
             params: { sortType: 'date' }
           });
           this.commentMappingWithUiProperty(this.comments);
@@ -139,12 +138,13 @@ export default {
 
         case 'like' :
         default :
-          this.comments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.player.id}/comments`, {
+          this.comments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.playerHistory.id}/comments`, {
             params: { sortType: 'like' }
           });
           this.commentMappingWithUiProperty(this.comments);
           break;
         }
+
         this.isCommentsLoading = false;
       } catch (err) {
         console.error(err);
@@ -158,7 +158,7 @@ export default {
 
       this.isMoreCommentsLoading = true;
       try {
-        const moreComments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.player.id}/comments`, {
+        const moreComments = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.playerHistory.id}/comments`, {
           params: {
             sortType: this.commentSortType,
             minId: this.comments[this.comments.length - 1].id,
@@ -183,7 +183,7 @@ export default {
 
       try {
         parentComment.replies = await this.$axios.$get(
-          `/api/histories/${this.history.id}/player/${this.player.id}/replies`, {
+          `/api/histories/${this.history.id}/player/${this.playerHistory.id}/replies`, {
             params: {
               parentCommentId: parentComment.id
             }
@@ -201,7 +201,7 @@ export default {
       if (parentComment.reply_count <= parentComment.replies.length) return;
       this.$set(parentComment, 'isMoreRepliesLoading', true);
       try {
-        const moreReplise = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.player.id}/replies`, {
+        const moreReplise = await this.$axios.$get(`/api/histories/${this.history.id}/player/${this.playerHistory.id}/replies`, {
           params: {
             maxId: parentComment.replies[parentComment.replies.length - 1].id,
             parentCommentId: parentComment.id
