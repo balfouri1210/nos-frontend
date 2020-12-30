@@ -96,7 +96,7 @@
     border: 0;
   }
   &__comment:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba($nos-main-theme, 0.08);
   }
 
   &__meta {

@@ -20,7 +20,7 @@
       >
         <p>
           <v-icon>mdi-octagram</v-icon>
-          New Comments
+          Sort by Date
         </p>
       </nos-comment-unit>
 

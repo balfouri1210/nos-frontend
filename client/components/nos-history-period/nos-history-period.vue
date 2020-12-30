@@ -109,9 +109,14 @@ export default {
 @media screen and (min-width: $mobile-width) {
   .nos-history-period {
     top: $web-header-height;
+    height: 52px;
 
     &__content {
+      font-size: 16px;
+
       a {
+        top: 5px;
+
         span {
           display: inline-block;
         }

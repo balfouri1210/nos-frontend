@@ -113,6 +113,7 @@
     height: 100%;
 
     .nos-news-headline__provider {
+      position: relative;
       width: fit-content;
     }
 
@@ -142,7 +143,7 @@
       }
 
       .nos-news-headline__title {
-        text-decoration: underline;
+        color: $nos-main-theme-deep;
       }
     }
 

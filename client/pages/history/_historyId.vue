@@ -3,7 +3,7 @@
     <div class="history">
       <nos-history-period
         :history="history"
-        :go-back-word="'Histories'"
+        :go-back-word="'History List'"
         :go-back-route-name="'histories'"
         :fixed-position="true"
       />
