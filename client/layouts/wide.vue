@@ -1,8 +1,25 @@
 <template>
   <div class="nos">
     <v-app>
-      <nos-header />
-      <nuxt class="nos-layout-wide" />
+      <nos-header @reload="reloadHandler" />
+
+      <nuxt
+        v-if="!nuxtCompRerendering"
+        class="nos-layout-wide"
+      />
+
+      <div
+        v-else
+        class="nos__progress-circular"
+      >
+        <v-progress-circular
+          :size="50"
+          :width="3"
+          color="#EB6217"
+          indeterminate
+        />
+      </div>
+
       <nos-footer />
     </v-app>
   </div>
@@ -16,19 +33,23 @@ export default {
   components: {
     nosHeader,
     nosFooter
-  }
+  },
 
-  // mounted() {
-  //   // 解决ios丢失上一级url问题
-  //   window.history.replaceState(
-  //     null,
-  //     null,
-  //     `${this.$router.options.base}${this.$route.fullPath}`.replace(
-  //       /\/\//g,
-  //       '/'
-  //     )
-  //   );
-  // }
+  data() {
+    return {
+      nuxtCompRerendering: false
+    };
+  },
+
+  methods: {
+    reloadHandler() {
+      this.nuxtCompRerendering = true;
+
+      setTimeout(() => {
+        this.nuxtCompRerendering = false;
+      }, 1000);
+    }
+  }
 };
 </script>
 

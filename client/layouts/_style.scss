@@ -11,6 +11,13 @@
   .nos-layout-preseason {
     padding-top: $mobile-header-height;
   }
+
+  &__progress-circular {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .nos-entry {
@@ -60,6 +67,7 @@
 }
 
 .nos-layout-wide {
+  position: relative;
   width: 100%;
 }
 
