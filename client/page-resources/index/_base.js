@@ -10,6 +10,7 @@ import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
 import nosCommentArea from '@/components/nos-comment-area/nos-comment-area.vue';
 import { eplClubs } from '@/lib/constants';
 import nosFixtureStat from '@/components/nos-fixture-stat/nos-fixture-stat.vue';
+import nosIndexGuide from '@/components/nos-index-guide/nos-index-guide.vue';
 
 export default {
   layout: 'wide',
@@ -23,7 +24,8 @@ export default {
     nosOnboardingUi,
     nosMainEvent,
     nosCommentArea,
-    nosFixtureStat
+    nosFixtureStat,
+    nosIndexGuide
   },
 
   fetch({ store }) {
@@ -61,8 +63,6 @@ export default {
     return {
       playerCommentsPreview: [],
 
-      showWhatIs907: false,
-      showGuide: false,
       isFixtures: false,
       isTable: false,
 
