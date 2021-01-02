@@ -87,9 +87,34 @@ export default {
     }
   },
 
+  created() {
+    this.$nuxt.$on('reload', () => {
+      this.initiatePlayerList();
+    });
+  },
+
   methods: {
     seasonEndHandler() {
       window.location.reload();
+    },
+
+    async initiatePlayerList() {
+      // index에서 헤더의 로고를 클릭시 player list 초기화 (재로딩)
+      try {
+        const wholePlayerList = await this.$axios.$get('/api/players', {
+          params: {
+            count: 21
+          }
+        });
+
+        this.topPlayer = wholePlayerList[0];
+        this.high4Players = wholePlayerList.slice(1, 5);
+        this.high6Players = wholePlayerList.slice(5, 11);
+        this.restOfPlayers = wholePlayerList.slice(11, wholePlayerList.length);
+      } catch (err) {
+        console.error(err);
+        this.$nuxt.error({ statusCode: 500 });
+      }
     },
 
     selectFixtureMenu() {

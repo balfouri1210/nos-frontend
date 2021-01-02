@@ -42,7 +42,7 @@ export default {
 
     goToHome() {
       if (this.$route.name.indexOf('index') !== -1) {
-        this.$emit('reload');
+        this.$nuxt.$emit('reload');
       } else {
         this.$router.push(this.localePath('index'));
       }

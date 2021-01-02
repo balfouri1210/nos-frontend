@@ -122,6 +122,7 @@ export default {
           params: getCommentsParam
         });
       } catch (err) {
+        console.error(err);
         this.$nuxt.error({ statusCode: 500 });
       } finally {
         this.isCommentLoading = false;
