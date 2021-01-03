@@ -17,6 +17,7 @@
         />
 
         <nos-player-list
+          v-if="high4Players.length > 0"
           :top-player-score="parseInt(topPlayer.score)"
           :player-list-prop="high4Players"
           :is-historical="true"
@@ -29,6 +30,7 @@
         <nos-comment-area :history-id="$route.params.historyId" />
 
         <nos-player-list
+          v-if="restOfPlayers.length > 0"
           :top-player-score="parseInt(topPlayer.score)"
           :player-list-prop="restOfPlayers"
           :is-historical="true"

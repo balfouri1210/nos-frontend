@@ -136,13 +136,13 @@ export default {
       if (this.isHistorical) {
         return this.$axios.$get(`/api/histories/${this.historyId}/player/comments/preview`, {
           params: {
-            playerIdList: playerIdList.toString()
+            playerIdList: playerIdList.toString() || null
           }
         });
       } else {
         return this.$axios.$get('/api/comments/preview/player', {
           params: {
-            playerIdList: playerIdList.toString()
+            playerIdList: playerIdList.toString() || null
           }
         });
       }

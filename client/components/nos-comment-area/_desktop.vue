@@ -44,7 +44,7 @@ export default {
     display: flex;
     justify-content: space-between;
     max-width: $web-body-content-width;
-    margin: 0 auto 16px;
+    margin: 16px auto;
 
     .nos-comment-unit {
       display: flex;

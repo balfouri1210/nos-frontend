@@ -23,7 +23,7 @@ export default {
         }),
         $axios.$get(`/api/histories/${route.params.historyId}`)
       ]);
-  
+
       const topPlayer = wholePlayerList[0];
       const high4Players = wholePlayerList.slice(1, 5);
       const restOfPlayers = wholePlayerList.slice(5, wholePlayerList.length);
