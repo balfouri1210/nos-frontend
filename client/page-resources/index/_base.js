@@ -61,6 +61,7 @@ export default {
 
   data() {
     return {
+      nosImageUrl: process.env.NOS_IMAGE_URL,
       playerCommentsPreview: [],
 
       isFixtures: false,
@@ -76,7 +77,8 @@ export default {
 
       leagueTable: [],
 
-      nosImageUrl: process.env.NOS_IMAGE_URL
+      playerListRenderKey: 0,
+      playerListReRendering: false
     };
   },
 
@@ -88,8 +90,10 @@ export default {
   },
 
   created() {
-    this.$nuxt.$on('reload', () => {
-      this.initiatePlayerList();
+    this.$nuxt.$on('reload', async () => {
+      this.playerListReRendering = true;
+      await this.initiatePlayerList();
+      this.reRenderPlayerList();
     });
   },
 
@@ -250,6 +254,11 @@ export default {
           searchData: `clubs_${result}`
         }
       }));
+    },
+
+    reRenderPlayerList() {
+      this.playerListRenderKey ++;
+      this.playerListReRendering = false;
     }
   }
 };
