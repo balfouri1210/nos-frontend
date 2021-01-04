@@ -21,17 +21,6 @@
         class="player-modal__content-container"
         @click.stop
       >
-        <!-- <nos-youtube-player
-            v-if="isYoutubePlayer"
-            :video-id="selectedYoutubeVideoId"
-            @closeYoutubeVideo="isYoutubePlayer = false"
-          />
-
-          <div
-            v-if="isYoutubePlayer"
-            class="player-modal__airbag"
-          /> -->
-
         <div class="player-modal__content">
           <div class="player-modal__left">
             <header class="player-modal__header">
