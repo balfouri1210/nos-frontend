@@ -8,7 +8,7 @@
       >
         <div
           style="width: 100%"
-          v-text="metaData.html"
+          v-html="metaData.html"
         />
       </div>
 
@@ -58,13 +58,13 @@
         <div
           v-if="expanded"
           style="width: 100%"
-          v-text="metaData.html"
+          v-html="metaData.html"
         />
 
         <div
           v-if="!expanded"
           class="twitter-collapsed"
-          v-text="metaData.manipulatedHtml"
+          v-html="metaData.manipulatedHtml"
         />
 
         <button

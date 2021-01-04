@@ -299,7 +299,7 @@
                             <p
                               class="player-modal__comment-content"
                               :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
-                              v-text="$options.filters.commentFormatter(comment.content)"
+                              v-html="$options.filters.commentFormatter(comment.content)"
                             />
 
                             <!-- Link Preview -->
@@ -530,7 +530,7 @@
                             >
                               <p
                                 class="player-modal__reply-content"
-                                v-text="$options.filters.commentFormatter(reply.content)"
+                                v-html="$options.filters.commentFormatter(reply.content)"
                               />
 
                               <!-- Reply more menu -->
@@ -661,7 +661,7 @@
                         </p>
                         <p
                           class="player-modal__added-reply-content"
-                          v-text="$options.filters.commentFormatter(comment.addedReply.content)"
+                          v-html="$options.filters.commentFormatter(comment.addedReply.content)"
                         />
                       </div>
                     </li>

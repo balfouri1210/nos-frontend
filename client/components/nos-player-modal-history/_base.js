@@ -3,7 +3,6 @@ const { mapGetters } = createNamespacedHelpers('auth');
 import nosPlayerModalInfo from '@/components/nos-player-modal-info/nos-player-modal-info.vue';
 import nosSkeletonLoader from '@/components/nos-skeleton-loader/nos-skeleton-loader.vue';
 import nosNewsArea from '@/components/nos-news-area/nos-news-area.vue';
-import nosYoutubeArea from '@/components/nos-youtube-area/nos-youtube-area.vue';
 import nosLinkShare from '@/components/nos-link-share/nos-link-share.vue';
 import nosLinkPreview from '@/components/nos-link-preview/nos-link-preview';
 
@@ -12,7 +11,6 @@ export default {
     nosSkeletonLoader,
     nosPlayerModalInfo,
     nosNewsArea,
-    nosYoutubeArea,
     nosLinkShare,
     nosLinkPreview
   },
