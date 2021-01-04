@@ -125,7 +125,7 @@
             <div class="youtube-area__video-info">
               <p
                 class="video-info__title"
-                v-html="video.title"
+                v-text="video.title"
               />
               <span class="video-info__channel-title">
                 {{ video.channelTitle }}

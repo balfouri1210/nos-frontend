@@ -134,7 +134,7 @@
                             <p
                               class="player-modal__comment-content"
                               :class="{ 'player-modal__comment-content--expanded': comment.expanded }"
-                              v-html="$options.filters.commentFormatter(comment.content)"
+                              v-text="$options.filters.commentFormatter(comment.content)"
                             />
 
                             <!-- Link Preview -->
