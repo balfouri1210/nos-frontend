@@ -68,6 +68,10 @@ Vue.filter('commentFormatter', function(value) {
   const replacePattern2 = /(^|[^/])(www\.[\S]+(\b|$))/gim;
   formattedText = formattedText.replace(replacePattern2, '$1<a href="http://$2" style="color: #1976d2" target="_blank">$2</a>');
 
+  // Remove all script tags from the content to prevent XSS attack
+  const replacePattern3 = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  formattedText = formattedText.replace(replacePattern3, '');
+
   formattedText = formattedText.replace(/\n/g, '<br>');
 
   return formattedText;
