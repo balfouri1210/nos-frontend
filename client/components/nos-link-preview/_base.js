@@ -48,14 +48,21 @@ export default {
 
   methods: {
     async requestMetadata(link) {
-      this.metaData = await this.$axios.$get('https://og-crawler.907degrees.com/link', {
+      // this.metaData = await this.$axios.$get('https://og-crawler.907degrees.com/link', {
+      //   params: {
+      //     url: link
+      //   }
+      // });
+
+      // if (this.metaData.statusCode !== 500)
+      //   this.setLinkType(link);
+
+      this.metaData = await this.$axios.$get(`https://graph.facebook.com/v8.0/instagram_oembed?url=${link}&omitscript=true&hidecaption=&maxwidth=640&access_token=646892209357886|_RQ6A8eDdvhsM8A2aYSLtArvghY`, {
         params: {
-          url: link
+          origin: '*'
         }
       });
-
-      if (this.metaData.statusCode !== 500)
-        this.setLinkType(link);
+      console.log(this.metaData);
     },
 
     setLinkType(link) {
