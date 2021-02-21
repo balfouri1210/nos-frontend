@@ -52,20 +52,27 @@
                 class="nos-player__comments-preview"
               >
                 <transition name="fade">
-                  <ul v-if="player.commentsPreview.length > 0">
-                    <li
-                      v-for="(comment, commentIndex) in player.commentsPreview"
-                      :key="commentIndex"
-                    >
-                      <p>" {{ comment.content }} "</p>
-                    </li>
-                  </ul>
+                  <div v-if="player.commentsPreview.length > 0">
+                    <ul>
+                      <li
+                        v-for="(comment, commentIndex) in player.commentsPreview"
+                        :key="commentIndex"
+                      >
+                        <p>" {{ comment.content }} "</p>
+                      </li>
+                    </ul>
+
+                    <span class="nos-player__show-more">
+                      Show more
+                    </span>
+                  </div>
+
 
                   <div
                     v-else
                     class="nos-player__no-comments"
                   >
-                    <p>... No comments yet</p>
+                    <p>... How was {{ player.known_as }} this week?</p>
                   </div>
                 </transition>
               </div>
