@@ -144,20 +144,21 @@ export const actions = {
   updateAppStatus({ commit }) {
     let durationToEvent;
 
-    // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
-    // '돌아오는' 요일의 날짜를 구하고 싶으면, 위 기준에 각각 7을 더하면 된다. 돌아오는 금요일: 5 + 7 = 12
-
-    // if (this.$moment.utc().day() === 5) {
     const now = this.$moment.utc();
 
+    // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
+    // '돌아오는' 요일의 날짜를 구하고 싶으면, 위 기준에 각각 7을 더하면 된다. 돌아오는 금요일: 5 + 7 = 12
     var d = new Date();
     d.setDate(d.getDate() + (5 + 7 - d.getDay()) % 7);
     d = d.toISOString();
 
     let criterionTime;
     if (this.$moment.utc().day() === 5) {
+      // 금요일일 때는 오늘 18시를 기준시로 설정한다.
+      // 이렇게 안해주면 금요일일 때 다음주 금요일 18시로 기준시가 설정되어버림.
       criterionTime = `${this.$moment.utc().format('YYYYMMDD')}1800`;
     } else {
+      // 금요일이 아닐 때는 '돌아오는 금요일' 18시를 기준시로 설정한다.
       criterionTime = `${this.$moment(d).format('YYYYMMDD')}1800`;
     }
 
@@ -175,13 +176,12 @@ export const actions = {
         commit('mutateAppStatus', 'lastStage');
       }
     } else if (now.isBefore(seasonStartMoment)) {
-      // 프리시즌일 경우
-      durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
-      commit('mutateAppStatus', 'preseason');
-      commit('mutateSeasonEnd', null);
-      commit('mutateSeasonStart', seasonStartMoment);
-      commit('mutateDurationToEvent', durationToEvent);
+      // 프리시즌일 경우 (광고보고 들어오는 사람들이 preseason UI를 보지않도록 유저가 모일 때 까지는 preseason 해제한다. 20210221)
+      // durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
+      // commit('mutateAppStatus', 'preseason');
+      // commit('mutateSeasonEnd', null);
+      // commit('mutateSeasonStart', seasonStartMoment);
+      // commit('mutateDurationToEvent', durationToEvent);
     }
-    // }
   }
 };
