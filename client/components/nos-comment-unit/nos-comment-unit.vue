@@ -120,14 +120,17 @@
         v-if="totalPages > pagesPerLoad"
         class="nos-comment-unit__page-navigation"
       >
-        <button @click="changecurrentPageGroup('prev')">
+        <button
+          v-if="currentPage > 7"
+          style="margin-right: 36px"
+          @click="changecurrentPageGroup('prev')"
+        >
           <v-icon>mdi-chevron-double-left</v-icon>
           <span>Prev 7 pages</span>
         </button>
 
         <button
           v-if="!isLastBigPage"
-          style="margin-left: 36px"
           @click="changecurrentPageGroup('next')"
         >
           <span>Next 7 pages</span>

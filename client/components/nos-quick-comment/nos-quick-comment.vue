@@ -2,7 +2,7 @@
   <div class="quick-comment">
     <p class="quick-comment__title">
       <v-icon>mdi-comment-flash-outline</v-icon>
-      Leave Quick Comment
+      Search player and Leave Quick Comment
     </p>
     <validation-observer v-slot="{ handleSubmit }">
       <form
