@@ -62,7 +62,7 @@
           </p>
         </div>
 
-        <div class="about__image-container">
+        <!-- <div class="about__image-container">
           <div class="about__weekly-flow1" />
           <div class="about__linker">
             <v-icon>mdi-chevron-down</v-icon>
@@ -76,6 +76,68 @@
             <p>After 6hours,<br>New Leaderboard</p> 
           </div>
           <div class="about__weekly-flow3" />
+        </div> -->
+
+        <div class="nos-player">
+          <div class="nos-player__header">
+            <div class="nos-player__header-left">
+              <span class="nos-player__comment-count">
+                <v-icon>mdi-message-processing-outline</v-icon>
+                12
+              </span>
+
+              <span class="nos-player__new-comment">NEW</span>
+            </div>
+
+            <span class="nos-player__temperature"><v-icon>mdi-fire</v-icon>907</span>
+          </div>
+
+          <div class="nos-player__body">
+            <div>
+              <div class="nos-player__upper">
+                <img
+                  src="https://cdn.footystats.org/img/teams/england-manchester-united-fc.png"
+                  alt="Bruno Fernandes"
+                  class="nos-player__emblem"
+                >
+
+                <div>
+                  <h2 class="nos-player__name">
+                    Bruno Fernandes
+                  </h2>
+
+                  <p class="nos-player__meta">
+                    26, 179cm,
+                    <img :src="`${nosImageUrl}/flags/pt.png`">
+                  </p>
+                </div>
+              </div>
+
+              <div class="nos-player__comments-preview">
+                <transition name="fade">
+                  <div>
+                    <ul>
+                      <li>
+                        <p>" Great Performance! "</p>
+                        <p>" He is on fire everytime 🔥"</p>
+                      </li>
+                    </ul>
+
+                    <span class="nos-player__show-more">
+                      Show more
+                    </span>
+                  </div>
+                </transition>
+              </div>
+            </div>
+          </div>
+
+          <div class="nos-player__footer">
+            <span
+              class="nos-player__rank"
+              style="color: rgba(0, 0, 0, 0.5)"
+            >Rank. 1</span>
+          </div>
         </div>
       </div> 
 
@@ -99,21 +161,10 @@
         </div>
 
         <div class="about__dummy-item">
-          <div
-            :style="{
-              display: 'flex',
-              alignItems: 'center',
-              position: 'absolute',
-              top: '6px',
-              right: '12px',
-            }"
-          >
-            <v-icon style="margin-right: 2px; color: red; font-size: 18px">
-              mdi-fire
-            </v-icon>
-            <span style="color: red">
-              867</span>
-          </div>
+          <v-icon style="margin-right: 2px; color: #EB6217;">
+            mdi-fire
+          </v-icon>
+          <span style="color: #EB6217; font-weight: 600">867</span>
         </div>
       </div>
 
