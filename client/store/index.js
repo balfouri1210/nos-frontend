@@ -4,7 +4,7 @@ export const state = () => ({
   serviceStatus: 'normal', // normal, maintenance
   comebackTime: '202012260930',
 
-  appStatus: 'season',
+  appStatus: 'season', // season, lastStage, preseason
   isLoading: false,
   seasonEnd: null,
   seasonStart: null,
@@ -142,46 +142,56 @@ export const actions = {
   },
 
   updateAppStatus({ commit }) {
-    let durationToEvent;
+    const NOW = this.$moment.utc();
+    const YYYYMMDDHHmm = 'YYYYMMDDHHmm';
+    const YYYYMMDD = 'YYYYMMDD';
 
-    const now = this.$moment.utc();
+    const seasonEndMoment = this.$moment.utc(getCriterionTime(this.$moment), YYYYMMDDHHmm).subtract(2, 'minutes');
+    const seasonStartMoment = this.$moment.utc(getCriterionTime(this.$moment), YYYYMMDDHHmm).add(3, 'minutes');
 
-    // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
-    // '돌아오는' 요일의 날짜를 구하고 싶으면, 위 기준에 각각 7을 더하면 된다. 돌아오는 금요일: 5 + 7 = 12
-    var d = new Date();
-    d.setDate(d.getDate() + (5 + 7 - d.getDay()) % 7);
-    d = d.toISOString();
-
-    let criterionTime;
-    if (this.$moment.utc().day() === 5) {
-      // 금요일일 때는 오늘 18시를 기준시로 설정한다.
-      // 이렇게 안해주면 금요일일 때 다음주 금요일 18시로 기준시가 설정되어버림.
-      criterionTime = `${this.$moment.utc().format('YYYYMMDD')}1800`;
-    } else {
-      // 금요일이 아닐 때는 '돌아오는 금요일' 18시를 기준시로 설정한다.
-      criterionTime = `${this.$moment(d).format('YYYYMMDD')}1800`;
-    }
-
-    const seasonEndMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm');
-    const seasonStartMoment = this.$moment.utc(criterionTime, 'YYYYMMDDHHmm').add(6, 'hours');
-
-    if (now.isBefore(seasonEndMoment)) {
-      durationToEvent = this.$moment.duration(seasonEndMoment.diff(now)).asMilliseconds() - 1000;
+    if (NOW.isBefore(seasonEndMoment)) {
+      const durationToEvent = this.$moment.duration(seasonEndMoment.diff(NOW)).asMilliseconds() - 1000;
       commit('mutateSeasonEnd', seasonEndMoment);
       commit('mutateSeasonStart', null);
       commit('mutateDurationToEvent', durationToEvent);
-
+  
       if (durationToEvent < 1000 * 60 * 60 * 24) {
         // 시즌종료까지 남은시간이 24시간 이내일 경우
         commit('mutateAppStatus', 'lastStage');
       }
-    } else if (now.isBefore(seasonStartMoment)) {
+    } else {
       // 프리시즌일 경우 (광고보고 들어오는 사람들이 preseason UI를 보지않도록 유저가 모일 때 까지는 preseason 해제한다. 20210221)
-      // durationToEvent = this.$moment.duration(seasonStartMoment.diff(now)).asMilliseconds() - 1000;
-      // commit('mutateAppStatus', 'preseason');
-      // commit('mutateSeasonEnd', null);
-      // commit('mutateSeasonStart', seasonStartMoment);
-      // commit('mutateDurationToEvent', durationToEvent);
+      const durationToEvent = this.$moment.duration(seasonStartMoment.diff(NOW)).asMilliseconds() - 1000;
+      commit('mutateAppStatus', 'preseason');
+      commit('mutateSeasonEnd', null);
+      commit('mutateSeasonStart', seasonStartMoment);
+      commit('mutateDurationToEvent', durationToEvent);
     }
+
+
+    function getCriterionTime(moment) {
+      // 기준시 설정 문제는 여기에서 도움을 받았다.
+      // https://stackoverflow.com/questions/34979051/find-next-instance-of-a-given-weekday-ie-monday-with-moment-js
+
+      // sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6
+      const dayINeed = 5;
+      const criterionHourMin = 1800;
+      const today = moment().utc().isoWeekday();
+
+      // if we haven't yet passed the day of the week that I need:
+      if (today < dayINeed) { 
+        // 오늘이 월화수목에 속할 경우, '이번주' 금요일 18시로 기준시 설정
+        return `${moment().utc().isoWeekday(dayINeed).format(YYYYMMDD)}${criterionHourMin}`;
+      } else {
+        if (today === dayINeed && moment.utc().format('HHmm') < criterionHourMin) {
+          // 금요일 18시 이전에는 오늘 18시로 기준시 설정
+          return `${moment.utc().format(YYYYMMDD)}${criterionHourMin}`;
+        } else {
+          // 금요일 18시 이후에는 '다음주' 금요일 18시로 기준시 설정.
+          return `${moment().utc().add(1, 'weeks').isoWeekday(dayINeed).format(YYYYMMDD)}${criterionHourMin}`;
+        }
+      }
+    }
+
   }
 };
