@@ -56,7 +56,7 @@
           </p>
 
           <p>
-            * The Leaderboard resets every <span style="color: #f4991e">Friday at 18:00 UTC</span>, for the next 6 hours we prepare a new leaderboard.
+            * The Leaderboard resets every <span style="color: #f4991e">Friday at 18:00 UTC</span>, for the next 5 minutes we prepare a new leaderboard.
             During the pre-season, users can search the players they are interested in and show interest.
             The purpose of the pre-season is to prevent the ranking forming by the few users right after the reset.
           </p>
