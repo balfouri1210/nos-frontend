@@ -1,9 +1,6 @@
 <template>
   <div class="main-event">
-    <button
-      class="flex-basic"
-      @click="showDialog = true"
-    >
+    <button @click="showDialog = true">
       <span>Send your Feedback 👉</span><span style="margin-left: 6px">Get Amazon Giftcard!</span>
     </button>
 
