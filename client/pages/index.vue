@@ -305,6 +305,8 @@
         <!-- COMMENT AREA -->
         <nos-comment-area />
 
+        <nos-main-event />
+
 
         <nos-player-list
           :top-player-score="parseInt(topPlayer.score)"

@@ -15,10 +15,10 @@
     padding: 8px 16px;
   }
 
-  p {
+  span {
     color: white;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 1px;
+    font-weight: 400;
   }
 
   &__dialog {
@@ -27,11 +27,18 @@
     }
     .main-event__desc {
       padding: 10px 28px 18px;
+      text-align: center;
       
       p {
         font-size: 13px;
         font-weight: 300;
       }
+    }
+
+    img {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 12px;
     }
   }
 
@@ -58,7 +65,7 @@
       width: 30px;
     }
 
-    p {
+    span {
       font-size: 16px;
     }
 

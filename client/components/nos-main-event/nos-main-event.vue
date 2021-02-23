@@ -1,9 +1,10 @@
 <template>
   <div class="main-event">
     <button
+      class="flex-basic"
       @click="showDialog = true"
     >
-      <p>Waiting for your feedback!</p>
+      <span>Send your Feedback 👉</span><span style="margin-left: 6px">Get Amazon Giftcard!</span>
     </button>
 
     <!-- SHOW ALL OF VOTES -->
@@ -16,20 +17,24 @@
         <v-card-title>Welcome!</v-card-title>
         <v-divider />
         <div class="main-event__desc">
+          <img
+            src="/amazon-giftcard.png"
+            alt="amazon giftcard"
+          >
+
           <p>
-            907Degrees has just been released and I've been making this space alone.
+            907Degrees is a very early stage website and I've been making this website alone.
             I'd like to communicate with as many users as possible.
-            If you like 907Degrees or want to experience better football community, please consider sending a feedback to
+            If you like 907Degrees or want to experience a better football community, please send your feedback to
             <a
               href="mailto:support@907degrees.com"
               style="color: #f4991e"
             >support@907degrees.com</a>.
+            Any opinions are welcome!
           </p>
 
           <p>
-            I'll give a special badge
-            <span class="main-event__user-badge">1°c</span>
-            to those who have given a great feedback.
+            I'll give <span style="font-weight: 600">£10 Amazon Giftcard</span> to <span style="font-weight: 600">10 users</span> who have given a great feedback.
           </p>
         </div>
 
