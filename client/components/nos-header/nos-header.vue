@@ -55,6 +55,7 @@
           </button>
 
           <button
+            v-if="$store.getters['getAppStatus'] !== 'preseason'"
             ref="search-button"
             @click="isSearchModal = !isSearchModal"
           >

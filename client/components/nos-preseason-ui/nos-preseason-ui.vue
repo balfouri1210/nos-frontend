@@ -33,7 +33,7 @@
       </client-only>
 
       <div class="preseason__content">
-        <p class="preseason__ment">
+        <!-- <p class="preseason__ment">
           Search players and Show your interest
         </p>
 
@@ -87,17 +87,17 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
 
         <p class="preseason__ment">
-          Want to check on the previous leaderboard?
+          Would you like to check previous leaderboard?
         </p>
 
         <nuxt-link
           class="preseason__link"
           :to="localePath('histories')"
         >
-          Go to Histories
+          <span>Go to Histories</span>
         </nuxt-link>
       </div>
     </div>

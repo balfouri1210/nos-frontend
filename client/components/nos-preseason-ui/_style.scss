@@ -92,25 +92,28 @@
   }
 
   &__ment {
-    margin: 16px 0 6px;
+    margin: 16px 0 10px;
     color: white;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
-    text-align: left;
+    line-height: 22px;
+    text-align: center;
   }
 
   &__link {
     display: block;
     width: 100%;
-    border: 2px solid white;
     border-radius: 6px;
-    background: rgba(white, 0.8);
+    border: 2px solid white;
+    background: rgba(white, 1);
     line-height: 40px;
     text-align: center;
-    transition: all 0.3s ease-out;
+    transition: all 0.2s ease-out;
+    font-weight: 600
   }
   &__link:hover {
-    background: rgba(white, 0.9);
+    background: rgba(white, 1);
+    text-decoration: underline;
   }
 }
 
