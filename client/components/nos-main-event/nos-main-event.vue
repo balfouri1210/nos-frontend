@@ -1,7 +1,7 @@
 <template>
   <div class="main-event">
     <button @click="showDialog = true">
-      <span>Send your Feedback 👉</span><span style="margin-left: 6px">Get Amazon Giftcard!</span>
+      <span>Send your Feedback & Get Amazon Giftcard!</span>
     </button>
 
     <!-- SHOW ALL OF VOTES -->
