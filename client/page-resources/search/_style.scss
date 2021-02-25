@@ -1,33 +1,39 @@
 .search {
   &__header {
     display: block;
-    padding: 10px 8px 12px;
+    padding: 16px 12px 14px;
 
-    h2 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
-
-    span {
-      display: inline-block;
-      margin-right: 6px;
-      font-weight: 300;
-
-      img {
-        width: 17px;
-        height: 12px;
-        margin-left: 2px;
-        box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.15);
+    &-keyword {
+      h2 {
+        font-size: 16px;
+      }
+  
+      span {
+        display: inline-block;
+        margin-right: 6px;
+        font-weight: 300;
+  
+        img {
+          width: 17px;
+          height: 12px;
+          margin-left: 2px;
+          box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.15);
+        }
       }
     }
+
+    &-club {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
-  &__header-club {
+
+  &__club-name {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 6px 0 18px;
 
     img {
       width: 40px;
@@ -42,6 +48,27 @@
     }
   }
 
+  &__club-standing {
+    margin-left: 32px;
+  }
+
+  &__forme {
+    margin-top: 4px;
+
+    &-item {
+      width: 24px;
+      height: 24px;
+      margin-right: 4px;
+      border-radius: 6px;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .forme-w { background: #13cf00; }
+    .forme-d { background: #76766f; }
+    .forme-l { background: #c30108; }
+  }
+
   &__fixtures-area {
     width: 100%;
     max-width: 490px;
@@ -49,13 +76,8 @@
     z-index: 10;
   }
 
-  &__squad {
-    margin-bottom: 2px;
-    padding: 3px 8px;
-    background: black;
-    font-size: 15px;
-    color: white;
-    text-align: center;
+  &__body {
+    min-height: 80vh;
   }
 
   &__progress-circular {
@@ -88,7 +110,9 @@
     &__header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      max-width: 1024px;
+      margin: 0 auto;
       padding: 18px 0 0;
 
       h2 {
@@ -105,16 +129,8 @@
       }
     }
 
-    &__body {
-      padding: 0 16px;
-    }
-
     &__fixtures-area {
       margin: 0;
-    }
-
-    &__squad {
-      margin-top: 24px;
     }
 
     &__empty {
@@ -128,16 +144,17 @@
 @media screen and (min-width: 1024px) {
   .search {
     &__header {
-      padding: 20px 0 6px;
+      padding: 40px 0 36px;
+    }
+
+    &__club {
+      img {
+        width: 50px;
+      }
     }
 
     &__body {
       margin-bottom: 100px;
-    }
-
-    &__squad {
-      padding: 6px 8px;
-      border-radius: 4px;
     }
   }
 }

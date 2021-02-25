@@ -2,35 +2,64 @@
   <div class="search">
     <div class="search__body">
       <div class="search__header">
-        <h2 v-if="searchKeyword || !isEmpty(targetCountry)">
-          <span>Search result for</span>
-          <span v-if="searchKeyword">"{{ searchKeyword }}"</span>
+        <div
+          v-if="searchKeyword || !isEmpty(targetCountry)"
+          class="search__header-keyword"
+        >
+          <h2 class="flex-basic">
+            <span>Search result for</span>
+            <span v-if="searchKeyword">"{{ searchKeyword }}"</span>
 
-          <span v-else-if="!isEmpty(targetCountry)">
-            {{ targetCountry.name }}
-            <img
-              :src="`${nosImageUrl}/flags/${targetCountry.code.toLowerCase()}.png`"
-              :alt="targetCountry.code"
-            >
-          </span>
-        </h2>
+            <span v-else-if="!isEmpty(targetCountry)">
+              {{ targetCountry.name }}
+              <img
+                :src="`${nosImageUrl}/flags/${targetCountry.code.toLowerCase()}.png`"
+                :alt="targetCountry.code"
+              >
+            </span>
+          </h2>
+        </div>
 
         <div
           v-else-if="!isEmpty(targetClub)"
           class="search__header-club"
         >
-          <img
-            :src="targetClub.image"
-            :alt="targetClub.clean_name"
+          <div class="search__club-name">
+            <img
+              :src="targetClub.image"
+              :alt="targetClub.clean_name"
+            >
+
+            <div>
+              <h2>{{ targetClub.clean_name }}</h2>
+
+              <a
+                :href="targetClub.official_site"
+                target="_blank"
+              >Official Website</a>
+            </div>
+          </div>
+
+          <div
+            v-if="clubStanding.forme"
+            class="search__club-standing"
           >
-
-          <div>
-            <h2>{{ targetClub.clean_name }}</h2>
-
-            <a
-              :href="targetClub.official_site"
-              target="_blank"
-            >Official Website</a>
+            <p>League: {{ clubStanding.rank | rankFormatter }}</p>
+            <div class="search__forme flex-basic">
+              <div
+                v-for="(forme, index) in clubStanding.forme.split('')"
+                :key="index"
+              >
+                <span
+                  :class="{
+                    'forme-w': forme === 'W',
+                    'forme-d': forme === 'D',
+                    'forme-l': forme === 'L'
+                  }"
+                  class="search__forme-item flex-basic"
+                >{{ forme }}</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -38,20 +67,18 @@
           <span>Search result</span>
         </div>
 
-        <div
+        <!-- <div
           v-if="!isEmpty(targetClub)"
           class="search__fixtures-area"
         >
           <nos-fixtures-area :club-id="parseInt(targetClub.id)" />
-        </div>
+        </div> -->
       </div>
 
-      <h2
+      <nos-news-headline
         v-if="!isEmpty(targetClub)"
-        class="search__squad"
-      >
-        Squad
-      </h2>
+        :news-keyword="targetClub.clean_name"
+      />
 
       <nos-player-list
         v-if="searchPlayerList.length > 0"
@@ -92,6 +119,7 @@
 import Base from '@/page-resources/search/_base';
 
 export default {
+  layout: 'wide',
   mixins: [Base]
 };
 </script>

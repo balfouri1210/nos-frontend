@@ -76,3 +76,16 @@ Vue.filter('commentFormatter', function(value) {
 
   return formattedText;
 });
+
+Vue.filter('rankFormatter', function(rank) {
+  let formattedRank;
+
+  switch (rank) {
+  case 1: formattedRank = '1st'; break;
+  case 2: formattedRank = '2nd'; break;
+  case 3: formattedRank = '3rd'; break;
+  default: formattedRank = `${rank}th`; break;
+  }
+
+  return formattedRank;
+});
