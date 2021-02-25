@@ -1,10 +1,3 @@
-export const apiFootballRequestHeader = {
-  headers: {
-    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-    'x-rapidapi-key': process.env.RAPID_API_KEY
-  }
-};
-
 export const apiFootballLeagueId = {
   epl1920: 524,
   epl2021: 2790,
@@ -40,6 +33,9 @@ export const mainMenus = [
   }
 ];
 
+// 매 시즌 업데이트 해줘야함.
+// 서버에 매번 요청하는게 비효율적이라서 프론트에 박아놨는데
+// 캐싱으로 개선해야 할듯.
 export const eplClubs = [
   {
     id: 1,

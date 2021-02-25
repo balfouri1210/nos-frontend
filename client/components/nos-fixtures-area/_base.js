@@ -1,4 +1,4 @@
-import { eplClubs, apiFootballRequestHeader } from '@/lib/constants';
+import { eplClubs } from '@/lib/constants';
 import nosFixtureStat from '@/components/nos-fixture-stat/nos-fixture-stat.vue';
 
 export default {
@@ -63,11 +63,11 @@ export default {
 
   methods: {
     getLastFixture(apiFootballTeamId) {
-      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/last/1`, apiFootballRequestHeader);
+      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/last/1`);
     },
 
     getNextFixture(apiFootballTeamId) {
-      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`, apiFootballRequestHeader);
+      return this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/team/${apiFootballTeamId}/next/1`);
     },
 
     goToFixturePlayers(fixture) {
