@@ -1,4 +1,4 @@
-import { eplClubs, apiFootballRequestHeader } from '@/lib/constants';
+import { eplClubs } from '@/lib/constants';
 
 export default {
   props: {
@@ -26,8 +26,8 @@ export default {
       try {
         const [fixtureInfo, fixtureEvents]
           = await Promise.all([
-            this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/statistics/fixture/${this.fixture.fixture_id}`, apiFootballRequestHeader),
-            this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/events/${this.fixture.fixture_id}`, apiFootballRequestHeader)
+            this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/statistics/fixture/${this.fixture.fixture_id}`),
+            this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/events/${this.fixture.fixture_id}`)
           ]);
 
         this.fixtureInfo = fixtureInfo.api.statistics;

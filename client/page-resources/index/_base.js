@@ -5,7 +5,7 @@ import nosNewsHeadline from '@/components/nos-news-headline/nos-news-headline';
 import nosPreseasonUi from '@/components/nos-preseason-ui/nos-preseason-ui.vue';
 import nosOnboardingUi from '@/components/nos-onboarding-ui/nos-onboarding-ui.vue';
 import nosMainEvent from '@/components/nos-main-event/nos-main-event.vue';
-import { apiFootballRequestHeader, apiFootballLeagueId } from '@/lib/constants';
+import { apiFootballLeagueId } from '@/lib/constants';
 import { premierLeagueSchedule, faCupSchedule } from '@/lib/schedules';
 import nosCommentArea from '@/components/nos-comment-area/nos-comment-area.vue';
 import { eplClubs } from '@/lib/constants';
@@ -175,7 +175,7 @@ export default {
 
       try {
         this.fixtures =
-          (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`, apiFootballRequestHeader)).api.fixtures;
+          (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/fixtures/league/${leagueId}/${this.$moment(this.selectedLeagueSchedule[this.targetScheduleIndex]).format('YYYY-MM-DD')}`)).api.fixtures;
 
         if (!this.fixtures) return;
 
@@ -219,7 +219,7 @@ export default {
       this.isTableLoading = true;
 
       try {
-        this.leagueTable = (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/leagueTable/${apiFootballLeagueId.epl2021}`, apiFootballRequestHeader)).api.standings[0];
+        this.leagueTable = (await this.$axios.$get(`${process.env.API_FOOTBALL_API_URL}/leagueTable/${apiFootballLeagueId.epl2021}`)).api.standings[0];
       } catch (err) {
         console.error(err);
       } finally {
