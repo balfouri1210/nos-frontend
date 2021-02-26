@@ -2,7 +2,7 @@
   <div class="account-activation">
     <div v-if="isAccountActivated">
       <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-      <h1>Thanks for join us!</h1>
+      <h1>Welcome!</h1>
       <span>Your account has been activated Successfully!</span>
     </div>
 
