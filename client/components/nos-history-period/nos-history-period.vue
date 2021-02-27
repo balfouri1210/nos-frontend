@@ -18,7 +18,7 @@
 
       <p v-if="!isEmpty(history)">
         <span style="font-weight: 600">Period : </span>
-        {{ $moment(history.start_date).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment(history.end_date).format('YYYY. MM. DD HH:mm') }}
+        {{ $moment.utc(history.start_date).format('YYYY. MM. DD HH:mm') }} ~ {{ $moment.utc(history.end_date).format('YYYY. MM. DD HH:mm') }}
       </p>
     </div>
   </div>
