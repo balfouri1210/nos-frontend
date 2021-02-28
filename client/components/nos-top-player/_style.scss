@@ -87,6 +87,8 @@
     word-break: break-all;
   }
   &__meta {
+    display: flex;
+    align-items: center;
     margin-top: 4px;
     font-size: 13px;
     font-weight: 300;

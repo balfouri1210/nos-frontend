@@ -47,6 +47,7 @@
           </h2>
 
           <p class="nos-top-player__meta">
+            <nos-position-badge :position="topPlayer.position" />
             {{ $moment().diff($moment.unix(topPlayer.birthday).format('YYYY-MM-DD'), 'years') }}, {{ topPlayer.height }} cm, <span>{{ topPlayer.country_name }}</span>
             <img
               :src="`${nosImageUrl}/flags/${topPlayer.country_code.toLowerCase()}.png`"

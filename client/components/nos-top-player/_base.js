@@ -1,4 +1,10 @@
+import nosPositionBadge from '../nos-position-badge/nos-position-badge.vue';
+
 export default {
+  components: {
+    nosPositionBadge
+  },
+
   props: {
     topPlayer: {
       type: Object,

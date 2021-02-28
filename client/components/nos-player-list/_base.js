@@ -1,4 +1,10 @@
+import nosPositionBadge from '../nos-position-badge/nos-position-badge.vue';
+
 export default {
+  components: {
+    nosPositionBadge
+  },
+
   props: {
     // 선수들의 온도를 계산할 때 필요 (기준값)
     topPlayerScore: {
