@@ -44,7 +44,7 @@ export default {
     selectNoti(noti) {
       this.$emit('close-modal');
       this.$router.push(this.localePath({
-        name: 'player-playerId-playerName',
+        name: 'index-player-playerId-playerName',
         params: {
           playerId: noti.object_id,
           playerName: noti.object_name.toLowerCase().replace(/ /g, '-')
