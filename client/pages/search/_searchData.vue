@@ -47,7 +47,7 @@
             <p>League: {{ clubStanding.rank | rankFormatter }}</p>
             <div class="search__forme flex-basic">
               <div
-                v-for="(forme, index) in clubStanding.forme.split('')"
+                v-for="(forme, index) in clubStanding.forme.split('').reverse()"
                 :key="index"
               >
                 <span
