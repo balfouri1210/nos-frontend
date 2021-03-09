@@ -65,9 +65,17 @@
           <button
             v-if="!isLoggedIn"
             ref="login-button"
+            class="nos-header__login"
             @click="isLoginModal = true"
           >
-            <v-icon>mdi-login-variant</v-icon>
+            <v-chip
+              color="#f4991e"
+              text-color="white"
+              small
+              style="cursor: pointer"
+            >
+              Login
+            </v-chip>
           </button>
 
           <button

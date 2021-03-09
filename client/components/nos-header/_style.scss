@@ -86,6 +86,18 @@
     }
   }
 
+  &__login {
+    .v-chip {
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &__login:hover {
+    .v-chip {
+      background: #EB6217 !important;
+    }
+  }
+
   &__notification-btn {
     ::v-deep .v-badge__badge {
       border: 1px solid $nos-main-theme !important;
