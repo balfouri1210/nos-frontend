@@ -74,6 +74,7 @@
           v-for="(comment, index) in comments"
           :key="index"
           class="nos-comment-unit__comment"
+          :class="{'nos-comment-unit__real-comment': comment.user_id !== 3}"
         >
           <nuxt-link
             :to="localePath({

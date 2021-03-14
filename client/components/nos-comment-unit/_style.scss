@@ -98,6 +98,9 @@
   &__comment:hover {
     background: rgba($nos-main-theme, 0.08);
   }
+  &__real-comment {
+    background: rgba($nos-main-theme-deep, 1);
+  }
 
   &__meta {
     display: flex;

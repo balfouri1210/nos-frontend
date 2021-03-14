@@ -121,6 +121,7 @@ export default {
         this.comments = await this.$axios.$get(getCommentsUrl, {
           params: getCommentsParam
         });
+        console.log;
       } catch (err) {
         console.error(err);
         this.$nuxt.error({ statusCode: 500 });
