@@ -126,13 +126,17 @@ export default {
     },
 
     async getClubStanding(targetClubFootballApiId) {
-      const clubStanding = await this.$axios.$get('/api/clubs/standings', {
-        params: {
-          leagueId: apiFootballLeagueId.epl2021
-        }
-      });
+      try {
+        const clubStanding = await this.$axios.$get('/api/clubs/standings', {
+          params: {
+            leagueId: apiFootballLeagueId.epl2021
+          }
+        });
 
-      this.clubStanding = clubStanding[0].find(club => club.team_id === targetClubFootballApiId);
+        this.clubStanding = clubStanding[0].find(club => club.team_id === targetClubFootballApiId);
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     isEmpty(obj) {

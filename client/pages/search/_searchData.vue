@@ -40,25 +40,28 @@
             </div>
           </div>
 
-          <div
-            v-if="clubStanding.forme"
-            class="search__club-standing"
-          >
-            <p>League: {{ clubStanding.rank | rankFormatter }}</p>
-            <div class="search__forme flex-basic">
-              <div
-                v-for="(forme, index) in clubStanding.forme.split('').reverse()"
-                :key="index"
-              >
-                <span
-                  :class="{
-                    'forme-w': forme === 'W',
-                    'forme-d': forme === 'D',
-                    'forme-l': forme === 'L'
-                  }"
-                  class="search__forme-item flex-basic"
-                >{{ forme }}</span>
+          <div class="search__club-standing">
+            <div v-if="clubStanding.forme">
+              <p>League: {{ clubStanding.rank | rankFormatter }}</p>
+              <div class="search__forme flex-basic">
+                <div
+                  v-for="(forme, index) in clubStanding.forme.split('').reverse()"
+                  :key="index"
+                >
+                  <span
+                    :class="{
+                      'forme-w': forme === 'W',
+                      'forme-d': forme === 'D',
+                      'forme-l': forme === 'L'
+                    }"
+                    class="search__forme-item flex-basic"
+                  >{{ forme }}</span>
+                </div>
               </div>
+            </div>
+
+            <div v-else>
+              Oops, we have some problems!
             </div>
           </div>
         </div>
