@@ -74,7 +74,7 @@
           v-for="(comment, index) in comments"
           :key="index"
           class="nos-comment-unit__comment"
-          :class="{'nos-comment-unit__real-comment': comment.user_id !== 3}"
+          :class="{'nos-comment-unit__real-comment': comment.user_id !== 3 && $store.getters['auth/getAuthorization'] === 3}"
         >
           <nuxt-link
             :to="localePath({
