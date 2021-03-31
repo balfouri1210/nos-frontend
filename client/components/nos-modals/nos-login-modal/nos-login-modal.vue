@@ -144,7 +144,6 @@ export default {
 
         this.$emit('loginSuccess');
       } catch (err) {
-        console.error(err);
         if (err.response) {
           switch (err.response.data.code) {
           case 'u003':
