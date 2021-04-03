@@ -126,7 +126,7 @@
 
         <validation-observer
           v-else
-          v-slot="{ handleSubmit, invalid }"
+          v-slot="{ invalid }"
           ref="passwordForm"
         >
           <div class="settings__item">
@@ -222,7 +222,7 @@
 
         <validation-observer
           v-if="isDeleteForm"
-          v-slot="{ handleSubmit, invalid }"
+          v-slot="{ invalid }"
           ref="deleteAccountForm"
         >
           <div class="settings__item">
